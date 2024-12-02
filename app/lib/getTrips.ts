@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { contentfulClient } from "../_utils/contentful";
+import { TypePaquete } from "../_types/contentful/Paquete";
 
 export async function getTrips(destino: string) {
     try {
@@ -19,7 +20,7 @@ export async function getTrips(destino: string) {
             'fields.destino.sys.id': destinationSysId,
         });
 
-        return response.items;
+        return response.items as unknown as TypePaquete[];
     } catch (error) {
         console.error(error);
         return notFound();

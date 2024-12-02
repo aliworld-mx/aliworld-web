@@ -1,7 +1,16 @@
 import Link from "next/link"
 import { BreadcrumbList, WithContext } from "schema-dts"
 
-export const Breadcrumbs = ({ breadcrumbs }: { breadcrumbs: any[] }) => {
+interface Bradcrumb {
+    name: string
+    href: string
+}
+
+interface BreadcrumbProps {
+    breadcrumbs: Bradcrumb[]
+}
+
+export const Breadcrumbs = ({ breadcrumbs }: BreadcrumbProps) => {
     const structuredData: WithContext<BreadcrumbList> = {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
@@ -18,7 +27,7 @@ export const Breadcrumbs = ({ breadcrumbs }: { breadcrumbs: any[] }) => {
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
             <ol role="list" className="flex space-x-2">
                 {breadcrumbs.map((breadcrumb, breadcrumbIdx) => (
-                    <li key={breadcrumb.id}>
+                    <li key={breadcrumb.href}>
                         <div className="flex items-center text-sm">
                             <Link href={breadcrumb.href} className="font-medium text-gray-500 hover:text-gray-900">
                                 {breadcrumb.name}

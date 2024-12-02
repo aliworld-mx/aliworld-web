@@ -1,10 +1,13 @@
 
+import { PageProps } from '@/.next/types/app/page';
 import { FAQs } from '@/app/_components/FAQs';
 import { TripGrid } from '@/app/_components/TripGrid'
 import { getTrips } from '@/app/lib/getTrips';
 import { OfferCatalog, WithContext } from 'schema-dts';
 
-export default async function DestinosPage({ params }: ({ params: { destino: string } })) {
+export const revalidate = 3600;
+
+export default async function DestinosPage({ params }: PageProps) {
     const { destino } = await params;
     const trips = await getTrips(destino);
 
@@ -15,7 +18,7 @@ export default async function DestinosPage({ params }: ({ params: { destino: str
         url: `https://www.aliworld.mx/paquetes/${destino}`,
         itemListElement: trips.map((trip) => {
             const { id, nombre, imagen, precio, moneda, dias, ciudades } = trip.fields;
-            const { url } = imagen?.fields?.file;
+            const { url } = imagen.fields.file!;
             const imageUrl = `https:${url}`;
 
             return {
@@ -48,5 +51,3 @@ export default async function DestinosPage({ params }: ({ params: { destino: str
         </>
     )
 }
-
-export const revalidate = 60 * 120; 

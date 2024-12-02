@@ -1,3 +1,4 @@
+import { TypePaquete } from "../_types/contentful/Paquete";
 import { contentfulClient } from "../_utils/contentful";
 
 export async function getAllTrips() {
@@ -6,7 +7,7 @@ export async function getAllTrips() {
             content_type: 'paquete',
         });
 
-        return response.items;
+        return response.items as unknown as TypePaquete[];
     } catch (error) {
         console.error(error);
     }

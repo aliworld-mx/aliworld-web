@@ -10,12 +10,15 @@ import { Breadcrumbs } from '@/app/_components/Breadcrumbs'
 import { Itinerary } from '@/app/_components/Itinerary'
 import { Hotels } from '@/app/_components/Hotels'
 import { Trip, WithContext } from 'schema-dts'
+import { PageProps } from '@/.next/types/app/page'
 
-export default async function ExperienciaPage({ params }: ({ params: { experiencia: string } })) {
+export const revalidate = 3600;
+
+export default async function ExperienciaPage({ params }: PageProps) {
     const { experiencia } = await params;
     const experience = await getTrip(experiencia);
     const { nombre, precio, dias, noches, imagen, moneda, precios, destino, ciudades, paises, itinerario, hoteles } = experience.fields;
-    const { url } = imagen.fields.file;
+    const { url } = imagen.fields.file!;
     const imageUrl = `https:${url}`;
 
     const structuredData: WithContext<Trip> = {
@@ -24,14 +27,29 @@ export default async function ExperienciaPage({ params }: ({ params: { experienc
         name: nombre,
         url: `https://www.aliworld.mx/experiencia/${experiencia}`,
         image: imageUrl,
-        price: precio,
-        priceCurrency: moneda,
-        validFrom: '2024-12-01',
-        duration: `P${dias}D`,
-        destination: ciudades?.map((ciudad) => ({
-            '@type': 'City',
-            name: ciudad.fields.nombre
-        }))
+        provider: {
+            '@type': 'Organization',
+            name: 'Mega Travel',
+        },
+        itinerary: {
+            '@type': 'ItemList',
+            itemListElement: itinerario.split('\n').map((item, index) => ({
+                '@type': 'Trip',
+                position: index + 1,
+                item: {
+                    '@type': 'Trip',
+                    name: item
+                }
+            }))
+        },
+        offers: {
+            '@type': 'Offer',
+            price: precio,
+            priceCurrency: moneda,
+            validFrom: '2024-12-01',
+            availability: 'InStock',
+            url: `https://www.aliworld.mx/experiencia/${experiencia}`
+        }
     };
 
     const breadcrumbs = [
@@ -76,16 +94,16 @@ export default async function ExperienciaPage({ params }: ({ params: { experienc
                             <p className="text-lg text-gray-900 sm:text-xl">{toMoney(precio)} {moneda} + Impuestos + Suplementos</p>
                         </div>
                         <div className='space-y-4'>
-                        <p className="text-gray-600 text-sm">Por adulto en habitación doble</p>
-                        <p className="text-gray-700 text-base">Países que se visitan: {paises.map(pais => pais.fields.nombre).join(', ')}</p>
-                        <p className="text-gray-700 text-base">Ruta de Ciudades que se visitan: {ciudades.map(ciudad => ciudad.fields.nombre).join(', ')}</p>
+                            <p className="text-gray-600 text-sm">Por adulto en habitación doble</p>
+                            <p className="text-gray-700 text-base">Países que se visitan: {paises.map(pais => pais.fields.nombre).join(', ')}</p>
+                            <p className="text-gray-700 text-base">Ruta de Ciudades que se visitan: {ciudades.map(ciudad => ciudad.fields.nombre).join(', ')}</p>
                         </div>
                     </section>
                 </div>
 
                 <div className="mt-10 lg:col-start-2 lg:row-span-2 lg:mt-0 lg:self-center">
                     <Image
-                        alt={imagen.fields.description}
+                        alt={imagen.fields.description ?? nombre}
                         priority={true}
                         src={imageUrl}
                         width={800}
@@ -147,4 +165,3 @@ export default async function ExperienciaPage({ params }: ({ params: { experienc
     )
 }
 
-export const revalidate = 60 * 30; 

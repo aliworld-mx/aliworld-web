@@ -5,6 +5,8 @@ import Benefits from '../_components/Benefits';
 import { FAQs } from '../_components/FAQs';
 import { ItemList, WithContext } from 'schema-dts';
 
+export const revalidate = 3600;
+
 export default async function PaquetesPage() {
     const destinations = await getDestinations();
 
@@ -15,7 +17,7 @@ export default async function PaquetesPage() {
         url: 'https://www.aliworld.mx/paquetes',
         itemListElement: destinations.map((destination, index) => {
             const { id, nombre, imagen, descripcion } = destination.fields;
-            const { url } = imagen?.fields?.file;
+            const { url } = imagen.fields.file!;
             const imageUrl = `https:${url}`;
 
             return {
@@ -44,13 +46,13 @@ export default async function PaquetesPage() {
                     <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                         {destinations?.map((destination) => {
                             const { id, nombre, descripcion, imagen } = destination.fields;
-                            const { url } = imagen?.fields.file;
+                            const { url } = imagen.fields.file!;
                             const imageUrl = `https:${url}`;
 
                             return (
                                 <Link key={id} href={`paquetes/${id}`} className="group">
                                     <Image
-                                        alt={imagen.fields.description}
+                                        alt={imagen.fields.description ?? nombre}
                                         src={imageUrl}
                                         width={400}
                                         height={800}
@@ -72,5 +74,3 @@ export default async function PaquetesPage() {
         </>
     )
 }
-
-export const revalidate = 60 * 120; 

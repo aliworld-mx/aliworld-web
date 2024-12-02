@@ -19,6 +19,7 @@ import { PercentBadgeIcon } from '@heroicons/react/20/solid';
 import Benefits from './_components/Benefits';
 import { WithContext, TravelAgency } from 'schema-dts';
 import { getMetadata } from './lib/getMetadata';
+import { TypePaquete } from './_types/contentful/Paquete';
 
 const favorites = [
   {
@@ -47,6 +48,8 @@ const favorites = [
       "Model wearing women's burgundy red crewneck artwork tee with small white triangle overlapping larger black triangle.",
   },
 ]
+
+export const revalidate = 3600;
 
 export default async function InicioPage() {
   const metadataInfo = await getMetadata('5KAGiplsyhBFj5JOtEe5eC');
@@ -81,7 +84,7 @@ export default async function InicioPage() {
       {
         '@type': 'OfferCatalog',
         name: 'Paquetes de viaje',
-        itemListElement: (metadataInfo?.fields.paquetes as any[])?.map((paquete) => ({
+        itemListElement: (metadataInfo?.fields.paquetes as unknown as TypePaquete[])?.map((paquete) => ({
           '@type': 'Offer',
           itemOffered: {
             '@type': 'Trip',
@@ -444,5 +447,3 @@ export default async function InicioPage() {
     </div>
   )
 }
-
-export const revalidate = 60 * 120;

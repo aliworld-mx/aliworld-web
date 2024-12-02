@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { contentfulClient } from "../_utils/contentful";
+import { TypeDestino } from "../_types/contentful/Destino";
 
 export async function getDestinations() {
     try {
@@ -11,7 +12,7 @@ export async function getDestinations() {
             throw new Error('No se encontraron destinos');
         }
 
-        return response.items;
+        return response.items as unknown as TypeDestino[];
     } catch (error) {
         console.error(error);
         return notFound();

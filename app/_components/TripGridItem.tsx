@@ -1,10 +1,15 @@
 import Image from "next/image";
 import { toMoney } from "../_utils/toMoney";
 import Link from "next/link";
+import { TypePaquete } from "../_types/contentful/Paquete";
 
-export const TripGridItem = ({ trip }) => {
+interface TripGridItemProps {
+    trip: TypePaquete;
+};
+
+export const TripGridItem = ({ trip }: TripGridItemProps) => {
     const { id, imagen, nombre, paises, precio, dias } = trip.fields;
-    const { url } = imagen.fields.file;
+    const { url } = imagen.fields.file!;
     const imageUrl = `https:${url}`;
 
     return (
@@ -13,7 +18,7 @@ export const TripGridItem = ({ trip }) => {
             className="group relative flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white col-span-1 hover:cursor-pointer"
         >
             <Image
-                alt={imagen.fields.description}
+                alt={imagen.fields.description ?? nombre}
                 src={imageUrl}
                 width={300}
                 height={300}

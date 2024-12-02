@@ -6,6 +6,7 @@ import { useState } from "react"
 import { TripGridItem } from "./TripGridItem"
 import { classNames } from "../_utils/classNames"
 import { getDestinationNameBySlug } from "../_utils/getDestinationNameBySlug"
+import { TypePaquete } from "../_types/contentful/Paquete"
 
 const sortOptions = [
     { name: 'Reciente', href: '#', current: true },
@@ -65,7 +66,7 @@ const filters = [
     },
 ]
 
-export const TripGrid = ({ destination, trips }: Readonly<{ destination: string, trips: any[] }>) => {
+export const TripGrid = ({ destination, trips }: Readonly<{ destination: string, trips: TypePaquete[] }>) => {
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
 
     return (
@@ -279,7 +280,7 @@ export const TripGrid = ({ destination, trips }: Readonly<{ destination: string,
                         </form>
 
                         {/* Product grid */}
-                        <div className="lg:col-span-3 grid grid-cols-1 gap-3 sm:grid-cols-3">{trips.map((trip) => <TripGridItem key={trip.id} trip={trip} />)}</div>
+                        <div className="lg:col-span-3 grid grid-cols-1 gap-3 sm:grid-cols-3">{trips.map((trip) => <TripGridItem key={trip.fields.id} trip={trip} />)}</div>
                     </div>
                 </section>
             </main>
