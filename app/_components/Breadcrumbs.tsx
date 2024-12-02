@@ -1,0 +1,42 @@
+import Link from "next/link"
+import { BreadcrumbList, WithContext } from "schema-dts"
+
+export const Breadcrumbs = ({ breadcrumbs }: { breadcrumbs: any[] }) => {
+    const structuredData: WithContext<BreadcrumbList> = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: breadcrumbs.map((breadcrumb, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            name: breadcrumb.name,
+            item: `https://www.aliworld.mx${breadcrumb.href}`,
+        })),
+    }
+
+    return (
+        <nav aria-label="Breadcrumb" className="mb-10">
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
+            <ol role="list" className="flex space-x-2">
+                {breadcrumbs.map((breadcrumb, breadcrumbIdx) => (
+                    <li key={breadcrumb.id}>
+                        <div className="flex items-center text-sm">
+                            <Link href={breadcrumb.href} className="font-medium text-gray-500 hover:text-gray-900">
+                                {breadcrumb.name}
+                            </Link>
+                            {breadcrumbIdx !== breadcrumbs.length - 1 ? (
+                                <svg
+                                    fill="currentColor"
+                                    viewBox="0 0 20 20"
+                                    aria-hidden="true"
+                                    className="ml-2 size-5 shrink-0 text-sky-500"
+                                >
+                                    <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z" />
+                                </svg>
+                            ) : null}
+                        </div>
+                    </li>
+                ))}
+            </ol>
+        </nav>
+    )
+}

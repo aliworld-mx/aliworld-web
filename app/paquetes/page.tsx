@@ -1,0 +1,76 @@
+import Image from 'next/image'
+import Link from 'next/link';
+import { getDestinations } from '../lib/getDestinations';
+import Benefits from '../_components/Benefits';
+import { FAQs } from '../_components/FAQs';
+import { ItemList, WithContext } from 'schema-dts';
+
+export default async function PaquetesPage() {
+    const destinations = await getDestinations();
+
+    const structuredData: WithContext<ItemList> = {
+        '@context': 'https://schema.org',
+        '@type': 'ItemList',
+        name: "Listado de Destinos de Viaje",
+        url: 'https://www.aliworld.mx/paquetes',
+        itemListElement: destinations.map((destination, index) => {
+            const { id, nombre, imagen, descripcion } = destination.fields;
+            const { url } = imagen?.fields?.file;
+            const imageUrl = `https:${url}`;
+
+            return {
+                '@type': 'ListItem',
+                position: index + 1,
+                item: {
+                    "@type": "Place",
+                    "name": nombre as string,
+                    "url": `https://www.aliworld.mx/paquetes/${id}`,
+                    "image": imageUrl as string,
+                    "description": descripcion as string
+                }
+            }
+        })
+    };
+
+    return (
+        <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+            />
+            <div className="bg-white">
+                <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+                    <h1 className="text-4xl mb-5 font-bold tracking-tight text-gray-900">Tu aventura te espera. Elige tu destino</h1>
+                    <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+                        {destinations?.map((destination) => {
+                            const { id, nombre, descripcion, imagen } = destination.fields;
+                            const { url } = imagen?.fields.file;
+                            const imageUrl = `https:${url}`;
+
+                            return (
+                                <Link key={id} href={`paquetes/${id}`} className="group">
+                                    <Image
+                                        alt={imagen.fields.description}
+                                        src={imageUrl}
+                                        width={400}
+                                        height={800}
+                                        className="aspect-square w-full overflow-hidden rounded-lg object-cover sm:aspect-[2/3] filter-none sm:filter sm:grayscale hover:filter-none "
+                                    />
+
+                                    <div className="mt-4 flex items-center justify-between text-base font-medium text-gray-900">
+                                        <h3>{nombre}</h3>
+                                    </div>
+                                    <p className="mt-1 text-sm italic text-gray-500">{descripcion}</p>
+                                </Link>
+                            )
+                        })}
+                    </div>
+                </div>
+            </div>
+            <Benefits />
+            <FAQs />
+        </>
+    )
+}
+
+export const revalidate = 60 * 120; 
