@@ -65,6 +65,12 @@ export default async function InicioPage() {
     paymentAccepted: 'Credit Card',
     telephone: '+52-33-1433-1600',
     keywords: 'viajes, paquetes, turismo, aventura',
+    sameAs: [
+      'https://www.facebook.com/aliworld.viajes/',
+      'https://www.instagram.com/aliworld.viajes/',
+      'https://www.tiktok.com/@aliworld.viajes',
+      'https://www.threads.net/@aliworld.viajes'
+    ],
     email: 'contacto@aliworld.mx',
     address: {
       '@type': 'PostalAddress',
@@ -72,12 +78,12 @@ export default async function InicioPage() {
       addressLocality: 'Zapopan',
       addressRegion: 'Jalisco',
       postalCode: '45130',
-      addressCountry: 'Mexico',
+      addressCountry: 'MX',
     },
     areaServed: [
       {
         '@type': 'Country',
-        name: 'Mexico',
+        name: 'MX',
       },
     ],
     hasOfferCatalog: [
@@ -95,9 +101,16 @@ export default async function InicioPage() {
             priceCurrency: paquete.fields?.moneda,
             validFrom: '2024-12-01',
             duration: `P${paquete.fields?.dias}D`,
-            destination: {
-              '@type': 'Country',
-              name: paquete.fields?.destino?.fields?.nombre,
+            itinerary: {
+              '@type': 'ItemList',
+              itemListElement: paquete.fields?.ciudades.map((ciudad, index) => ({
+                '@type': 'Trip',
+                position: index + 1,
+                item: {
+                  '@type': 'Place',
+                  name: ciudad.fields?.nombre,
+                },
+              })),
             },
             offers: {
               '@type': 'Offer',

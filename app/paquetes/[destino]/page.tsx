@@ -34,7 +34,7 @@ export default async function DestinosPage({ params }: PageProps) {
                     duration: `P${dias}D`,
                     destination: ciudades?.map((ciudad) => ({
                         '@type': 'City',
-                        name: ciudad.fields.nombre
+                        name: ciudad.fields?.nombre
                     }))
                 }
             }

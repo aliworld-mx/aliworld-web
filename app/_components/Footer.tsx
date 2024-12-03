@@ -23,9 +23,10 @@ const footerNavigation = {
     sociales: [
         { name: 'Contactanos', href: '/contacto' },
         { name: 'WhatsApp', href: '#' },
-        { name: 'Facebook', href: '#' },
-        { name: 'Instagram', href: '#' },
-        { name: 'TikTok', href: '#' },
+        { name: 'Facebook', href: 'https://www.facebook.com/aliworld.viajes/' },
+        { name: 'Instagram', href: 'https://www.instagram.com/aliworld.viajes/' },
+        { name: 'TikTok', href: 'https://www.tiktok.com/@aliworld.viajes' },
+        { name: 'Threads', href: 'https://www.threads.net/@aliworld.viajes' },
         { name: 'Youtube', href: '#' },
     ],
 }
@@ -58,7 +59,7 @@ export const Footer = () => (
                             <ul role="list" className="mt-6 space-y-6">
                                 {footerNavigation.sociales.map((item) => (
                                     <li key={item.name} className="text-sm">
-                                        <Link href={item.href} className="text-gray-500 hover:text-gray-600">
+                                        <Link href={item.href} target="_blank" className="text-gray-500 hover:text-gray-600">
                                             {item.name}
                                         </Link>
                                     </li>
@@ -70,7 +71,7 @@ export const Footer = () => (
                             <ul role="list" className="mt-6 space-y-6">
                                 {footerNavigation.empresa.map((item) => (
                                     <li key={item.name} className="text-sm">
-                                        <Link href={item.href} className="text-gray-500 hover:text-gray-600">
+                                        <Link href={item.href} target="_blank" className="text-gray-500 hover:text-gray-600">
                                             {item.name}
                                         </Link>
                                     </li>

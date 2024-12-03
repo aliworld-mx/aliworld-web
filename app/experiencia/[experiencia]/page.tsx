@@ -33,14 +33,14 @@ export default async function ExperienciaPage({ params }: PageProps) {
         },
         itinerary: {
             '@type': 'ItemList',
-            itemListElement: itinerario.split('\n').map((item, index) => ({
+            itemListElement: ciudades.map((ciudad, index) => ({
                 '@type': 'Trip',
                 position: index + 1,
                 item: {
-                    '@type': 'Trip',
-                    name: item
-                }
-            }))
+                    '@type': 'Place',
+                    name: ciudad.fields?.nombre,
+                },
+            })),
         },
         offers: {
             '@type': 'Offer',
@@ -96,7 +96,7 @@ export default async function ExperienciaPage({ params }: PageProps) {
                         <div className='space-y-4'>
                             <p className="text-gray-600 text-sm">Por adulto en habitación doble</p>
                             <p className="text-gray-700 text-base">Países que se visitan: {paises.map(pais => pais.fields.nombre).join(', ')}</p>
-                            <p className="text-gray-700 text-base">Ruta de Ciudades que se visitan: {ciudades.map(ciudad => ciudad.fields.nombre).join(', ')}</p>
+                            <p className="text-gray-700 text-base">Ruta de Ciudades que se visitan: {ciudades.map(ciudad => ciudad.fields?.nombre).join(', ')}</p>
                         </div>
                     </section>
                 </div>
