@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { Footer } from "./_components/Footer";
 import { Navigation } from "./_components/Navigation";
+import { Analytics } from "@vercel/analytics/react"
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -33,6 +34,7 @@ export default function RootLayout({
         <Navigation />
         {children}
         <Footer />
+        <Analytics />
       </body>
     </html>
   );
