@@ -4,8 +4,40 @@ import { getDestinations } from '../lib/getDestinations';
 import Benefits from '../_components/Benefits';
 import { FAQs } from '../_components/FAQs';
 import { ItemList, WithContext } from 'schema-dts';
+import { Metadata } from 'next';
+import { Breadcrumbs } from '../_components/Breadcrumbs';
 
 export const revalidate = 3600;
+
+export const metadata: Metadata = {
+    title: 'Paquetes | Aliworld',
+    description: 'Descubre los mejores paquetes de viaje a todo el mundo al mejor precio. ¡Reserva ya!',
+    openGraph: {
+        type: 'website',
+        url: 'https://www.aliworld.mx/paquetes',
+        title: "Aliworld - Paquetes de viaje a todo el mundo al mejor precio",
+        siteName: 'Aliworld',
+        description: "Encuentra los mejores paquetes de viaje a todo el mundo al mejor precio. ¡Reserva ya!",
+    },
+    alternates: {
+        canonical: 'https://www.aliworld.mx/paquetes',
+    },
+    generator: 'Next.js',
+    keywords: ['viajes', 'paquetes', 'cruceros', 'hoteles', 'reservaciones', 'aliworld'],
+    robots: 'index, follow',
+}
+
+const breadcrumbs = [
+    {
+        name: 'Inicio',
+        href: '/',
+    },
+
+    {
+        name: 'Destinos',
+        href: '/paquetes',
+    },
+]
 
 export default async function PaquetesPage() {
     const destinations = await getDestinations();
@@ -41,7 +73,8 @@ export default async function PaquetesPage() {
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
             />
             <div className="bg-white">
-                <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+                <Breadcrumbs breadcrumbs={breadcrumbs} />
+                <div className="mx-auto max-w-2xl px-4 pb-16 sm:px-6 lg:max-w-7xl lg:px-8">
                     <h1 className="text-4xl mb-5 font-bold tracking-tight text-gray-900">Tu aventura te espera. Elige tu destino</h1>
                     <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                         {destinations?.map((destination) => {

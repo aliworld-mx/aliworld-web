@@ -5,80 +5,87 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { Fragment, useState } from "react";
 import { DollarPrice } from "./DollarPrice";
+import { TypeNavegacion } from "../_types/contentful/Navegacion";
+import Image from "next/image";
+import AliworldLogo from '../../public/aliworld-color.svg';
 
-const navigation = {
-    categories: [
-        {
-            id: 'experiencias',
-            name: 'Experiencias',
-            featured: [
-                {
-                    name: 'Promociones',
-                    href: '#',
-                    imageSrc: 'https://tailwindui.com/plus/img/ecommerce-images/mega-menu-category-01.jpg',
-                    imageAlt: 'Models sitting back to back, wearing Basic Tee in black and bone.',
-                },
-                {
-                    name: 'Favoritos',
-                    href: '#',
-                    imageSrc: 'https://tailwindui.com/plus/img/ecommerce-images/mega-menu-category-02.jpg',
-                    imageAlt: 'Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.',
-                },
-            ],
-            sections: [
-                {
-                    id: 'destinos',
-                    name: 'Destinos',
-                    items: [
-                        { name: 'Europa', href: '/paquetes/europa' },
-                        { name: 'Asia', href: '/paquetes/asia' },
-                        { name: 'Caribe', href: '/paquetes/caribe' },
-                        { name: 'África', href: '/paquetes/africa' },
-                        { name: 'México', href: '/paquetes/mexico' },
-                        { name: 'Sudamérica', href: '/paquetes/sudamerica' },
-                        { name: 'Centroamérica', href: '/paquetes/centroamerica' },
-                        { name: 'Medio Oriente', href: '/paquetes/medio-oriente' },
-                        { name: 'Estados Unidos', href: '/paquetes/estados-unidos' },
-                        { name: 'Canadá', href: '/paquetes/canada' },
-                        { name: 'Pacífico', href: '/paquetes/pacifico' },
-                        { name: 'Cruceros', href: '/paquetes/cruceros' },
-                        { name: 'Ver todos', href: '/paquetes' },
-                    ],
-                },
-                {
-                    id: 'paises',
-                    name: 'Paises',
-                    items: [
-                        { name: 'Francia', href: '/paquetes/europa?pais=francia' },
-                        { name: 'Japón', href: '/paquetes/asia?pais=japon' },
-                        { name: 'Corea del Sur', href: 'paquetes/asia?pais=corea-del-sur' },
-                        { name: 'España', href: '/paquetes/europa?pais=españa' },
-                        { name: 'Belgica', href: '/paquetes/europa?pais=belgica' },
-                        { name: 'Italia', href: '/paquetes/europa?pais=italia' },
-                        { name: 'Inglaterra', href: '/paquetes/europa?pais=inglaterra' },
-                    ],
-                },
-                {
-                    id: 'ciudades',
-                    name: 'Ciudades',
-                    items: [
-                        { name: 'Paris', href: '/paquetes/europa?ciudad=paris' },
-                        { name: 'Tokio', href: 'paquetes/asia?ciudad=tokio' },
-                        { name: 'Madrid', href: '/paquetes/europa?ciudad=madrid' },
-                        { name: 'Amsterdam', href: '/paquetes/europa?ciudad=amsterdam' },
-                        { name: 'Londres', href: '/paquetes/europa?ciudad=londres' },
-                    ],
-                },
-            ],
-        },
-    ],
-    pages: [
-        { name: 'Contacto', href: '/contacto' },
-    ],
-};
+interface NavigationProps {
+    navigationData?: TypeNavegacion;
+}
 
-export const Navigation = () => {
+export const Navigation = ({ navigationData }: NavigationProps) => {
     const [open, setOpen] = useState(false);
+
+    const navigation = {
+        categories: [
+            {
+                id: 'experiencias',
+                name: 'Experiencias',
+                featured: [
+                    {
+                        name: 'Promociones',
+                        href: '/promociones',
+                        imageSrc: `https://${navigationData?.fields.promocion?.fields?.file?.url}`,
+                        imageAlt: navigationData?.fields.promocion.fields?.description,
+                    },
+                    {
+                        name: 'Favoritos',
+                        href: '/favoritos',
+                        imageSrc: `https://${navigationData?.fields.favorito?.fields?.file?.url}`,
+                        imageAlt: navigationData?.fields.favorito.fields?.description,
+                    },
+                ],
+                sections: [
+                    {
+                        id: 'destinos',
+                        name: 'Destinos',
+                        items: [
+                            { name: 'Europa', href: '/paquetes/europa' },
+                            { name: 'Asia', href: '/paquetes/asia' },
+                            { name: 'Caribe', href: '/paquetes/caribe' },
+                            { name: 'África', href: '/paquetes/africa' },
+                            { name: 'México', href: '/paquetes/mexico' },
+                            { name: 'Sudamérica', href: '/paquetes/sudamerica' },
+                            { name: 'Centroamérica', href: '/paquetes/centroamerica' },
+                            { name: 'Medio Oriente', href: '/paquetes/medio-oriente' },
+                            { name: 'Estados Unidos', href: '/paquetes/estados-unidos' },
+                            { name: 'Canadá', href: '/paquetes/canada' },
+                            { name: 'Pacífico', href: '/paquetes/pacifico' },
+                            { name: 'Cruceros', href: '/paquetes/cruceros' },
+                            { name: 'Ver todos', href: '/paquetes' },
+                        ],
+                    },
+                    {
+                        id: 'paises',
+                        name: 'Paises',
+                        items: [
+                            { name: 'Francia', href: '/paquetes/europa?pais=francia' },
+                            { name: 'Japón', href: '/paquetes/asia?pais=japon' },
+                            { name: 'Corea del Sur', href: 'paquetes/asia?pais=corea-del-sur' },
+                            { name: 'España', href: '/paquetes/europa?pais=españa' },
+                            { name: 'Belgica', href: '/paquetes/europa?pais=belgica' },
+                            { name: 'Italia', href: '/paquetes/europa?pais=italia' },
+                            { name: 'Inglaterra', href: '/paquetes/europa?pais=inglaterra' },
+                        ],
+                    },
+                    {
+                        id: 'ciudades',
+                        name: 'Ciudades',
+                        items: [
+                            { name: 'Paris', href: '/paquetes/europa?ciudad=paris' },
+                            { name: 'Tokio', href: 'paquetes/asia?ciudad=tokio' },
+                            { name: 'Madrid', href: '/paquetes/europa?ciudad=madrid' },
+                            { name: 'Amsterdam', href: '/paquetes/europa?ciudad=amsterdam' },
+                            { name: 'Londres', href: '/paquetes/europa?ciudad=londres' },
+                        ],
+                    },
+                ],
+            },
+        ],
+        pages: [
+            { name: 'Contacto', href: '/contacto' },
+        ],
+    };
 
     return (
         <>
@@ -125,17 +132,19 @@ export const Navigation = () => {
                                         <div className="grid grid-cols-2 gap-x-4">
                                             {category.featured.map((item) => (
                                                 <div key={item.name} className="group relative text-sm">
-                                                    <img
-                                                        alt={item.imageAlt}
+                                                    <Image
+                                                        alt={item.imageAlt ?? item.name}
                                                         src={item.imageSrc}
+                                                        width={300}
+                                                        height={300}
                                                         className="aspect-square w-full rounded-lg bg-gray-100 object-cover group-hover:opacity-75"
                                                     />
-                                                    <a href={item.href} className="mt-6 block font-medium text-gray-900">
+                                                    <Link href={item.href} className="mt-6 block font-medium text-gray-900">
                                                         <span aria-hidden="true" className="absolute inset-0 z-10" />
                                                         {item.name}
-                                                    </a>
-                                                    <p aria-hidden="true" className="mt-1">
-                                                        Shop now
+                                                    </Link>
+                                                    <p aria-hidden="true" className="mt-1 text-sky-600">
+                                                        Ver todo
                                                     </p>
                                                 </div>
                                             ))}
@@ -211,10 +220,12 @@ export const Navigation = () => {
                         <div className="ml-4 flex lg:ml-0">
                             <Link href="/">
                                 <span className="sr-only">Aliworld</span>
-                                <img
-                                    alt=""
-                                    src="https://tailwindui.com/plus/img/logos/mark.svg?color=sky&shade=600"
-                                    className="h-8 w-auto"
+                                <Image
+                                    alt="Logo de Aliworld"
+                                    src={AliworldLogo}
+                                    width={224}
+                                    height={112}
+                                    className="h-20 sm:h-28 w-auto"
                                 />
                             </Link>
                         </div>
@@ -245,17 +256,19 @@ export const Navigation = () => {
                                                         <div className="col-start-2 grid grid-cols-2 gap-x-8">
                                                             {category.featured.map((item) => (
                                                                 <div key={item.name} className="group relative text-base sm:text-sm">
-                                                                    <img
-                                                                        alt={item.imageAlt}
+                                                                    <Image
+                                                                        alt={item.imageAlt ?? item.name}
                                                                         src={item.imageSrc}
+                                                                        width={300}
+                                                                        height={300}
                                                                         className="aspect-square w-full rounded-lg bg-gray-100 object-cover group-hover:opacity-75"
                                                                     />
                                                                     <CloseButton as={Link} href={item.href} className="mt-6 block font-medium text-gray-900">
                                                                         <span aria-hidden="true" className="absolute inset-0 z-10" />
                                                                         {item.name}
                                                                     </CloseButton>
-                                                                    <p aria-hidden="true" className="mt-1">
-                                                                        Shop now
+                                                                    <p aria-hidden="true" className="mt-1 text-sky-600">
+                                                                        Ver Todo
                                                                     </p>
                                                                 </div>
                                                             ))}

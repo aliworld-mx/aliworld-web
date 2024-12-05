@@ -19,6 +19,8 @@ export default async function sitemap() {
         '/destinos/canada',
         '/destinos/pacifico',
         '/destinos/cruceros',
+        '/favoritos',
+        '/promociones',
         '/contacto',
     ]
 

@@ -33,7 +33,7 @@ export const TripGridItem = ({ trip }: TripGridItemProps) => {
                 </h3>
                 <p className="text-sm text-gray-500">{dias} Días</p>
                 <div className="flex flex-1 flex-col justify-end">
-                    <p className="text-sm text-gray-500">Visitando: {paises.map((pais) => pais.fields.nombre).join(", ")}</p>
+                    <p className="text-sm text-gray-500">Visitando: {paises.map((pais) => pais.fields?.nombre).join(", ")}</p>
                     <p className="text-base font-medium text-gray-900">Desde {toMoney(precio)}USD</p>
                 </div>
             </div>

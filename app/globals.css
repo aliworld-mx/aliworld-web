@@ -23,6 +23,7 @@ body {
 table {
   border-collapse: collapse;
   width: 100%;
+  max-width: 100%;
   margin-top: 2rem;
   margin-bottom: 2rem;
 }
@@ -36,13 +37,10 @@ th {
 td {
   padding: 8px;
   border-bottom: 1px solid var(--foreground);
+  min-width: 70px;
 }
 
 th, td, tr, span, p {
   color: rgb(55 65 81);
+  white-space: 'normal';
 }
-
-td {
-  white-space: nowrap;
-}
-

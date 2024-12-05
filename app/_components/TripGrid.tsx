@@ -5,7 +5,6 @@ import { XMarkIcon, PlusIcon, MinusIcon, ChevronDownIcon, FunnelIcon } from "@he
 import { useState } from "react"
 import { TripGridItem } from "./TripGridItem"
 import { classNames } from "../_utils/classNames"
-import { getDestinationNameBySlug } from "../_utils/getDestinationNameBySlug"
 import { TypePaquete } from "../_types/contentful/Paquete"
 
 const sortOptions = [
@@ -66,7 +65,7 @@ const filters = [
     },
 ]
 
-export const TripGrid = ({ destination, trips }: Readonly<{ destination: string, trips: TypePaquete[] }>) => {
+export const TripGrid = ({ header, trips }: Readonly<{ header: string, trips: TypePaquete[] }>) => {
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
 
     return (
@@ -161,8 +160,8 @@ export const TripGrid = ({ destination, trips }: Readonly<{ destination: string,
             </Dialog>
 
             <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
-                    <h1 className="text-4xl font-bold tracking-tight text-gray-900">{`Nuestros Paquetes a ${getDestinationNameBySlug(destination)}`}</h1>
+                <div className="flex items-baseline justify-between border-b border-gray-200 py-6">
+                    <h1 className="text-4xl font-bold tracking-tight text-gray-900">{header}</h1>
 
                     <div className="flex items-center">
                         <Menu as="div" className="relative inline-block text-left">

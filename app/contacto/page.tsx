@@ -6,6 +6,26 @@ import WhatsAppIcon from '../../public/icons/whatsapp.svg';
 import Benefits from '../_components/Benefits';
 import { FAQs } from '../_components/FAQs';
 import { ContactPage, WithContext } from 'schema-dts';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'Contacto | Aliworld',
+    description: '¿Tienes dudas? ¿Quieres que un ejecutivo te ayude a decidir la mejor experiencia para ti? Contactanos.',
+    openGraph: {
+        type: 'website',
+        url: 'https://www.aliworld.mx/contacto',
+        title: 'Contacto | Aliworld',
+        siteName: 'Aliworld',
+        description: '¿Tienes dudas? ¿Quieres que un ejecutivo te ayude a decidir la mejor experiencia para ti? Contactanos.',
+    },
+    alternates: {
+        canonical: 'https://www.aliworld.mx/contacto',
+    },
+    generator: 'Next.js',
+    keywords: ['viajes', 'paquetes', 'cruceros', 'hoteles', 'reservaciones', 'aliworld'],
+    robots: 'index, follow',
+};
+
 
 export default function ContactoPage() {
     const structuredData: WithContext<ContactPage> = {
@@ -41,7 +61,7 @@ export default function ContactoPage() {
                                 Estamos para atenderte via WhatsApp de lunes a viernes de 9:00 a 18:00. Envíanos un mensaje y te responderemos lo antes posible.
                             </p>
                             <p className="mt-4 text-sm/6 font-semibold">
-                                <Link target='_blank' href="#" className="text-sky-600">
+                                <Link target='_blank' href="https://wa.me/523314331600?text=Hola%2C%20tengo%20una%20consulta%20sobre%20Aliworld" className="text-sky-600">
                                     Enviar Mensaje <span aria-hidden="true">&rarr;</span>
                                 </Link>
                             </p>
@@ -57,9 +77,9 @@ export default function ContactoPage() {
                                 ¿Necesitas ayuda con tu reserva? Escríbenos en Facebook y te ayudaremos a resolver tus dudas.
                             </p>
                             <p className="mt-4 text-sm/6 font-semibold">
-                                <a href="#" className="text-sky-600">
+                                <Link href='https://www.facebook.com/aliworld.viajes' target='_blank' className="text-sky-600">
                                     Visitar perfil <span aria-hidden="true">&rarr;</span>
-                                </a>
+                                </Link>
                             </p>
                         </div>
                     </div>
@@ -73,9 +93,9 @@ export default function ContactoPage() {
                                 Envíanos un correo con tus dudas o comentarios y te responderemos lo antes posible.
                             </p>
                             <p className="mt-4 text-sm/6 font-semibold">
-                                <a href="#" className="text-sky-600">
+                                <Link href="mailto:contacto@aliworld.mx" className="text-sky-600">
                                     Enviar correo <span aria-hidden="true">&rarr;</span>
-                                </a>
+                                </Link>
                             </p>
                         </div>
                     </div>

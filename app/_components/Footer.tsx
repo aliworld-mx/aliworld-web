@@ -16,18 +16,17 @@ const footerNavigation = {
         { name: 'Cruceros', href: '/paquetes/cruceros' },
     ],
     empresa: [
-        { name: 'Politica de Devoluciones', href: '#' },
+        { name: 'Politica de Cancelaciones', href: '#' },
         { name: 'Terminos y Condiciones', href: '#' },
         { name: 'Politica de Privacidad', href: '#' },
     ],
     sociales: [
         { name: 'Contactanos', href: '/contacto' },
-        { name: 'WhatsApp', href: '#' },
+        { name: 'WhatsApp', href: 'https://wa.me/523325371347?text=Hola%2C%20tengo%20una%20consulta%20sobre%20Aliworld' },
         { name: 'Facebook', href: 'https://www.facebook.com/aliworld.viajes/' },
         { name: 'Instagram', href: 'https://www.instagram.com/aliworld.viajes/' },
         { name: 'TikTok', href: 'https://www.tiktok.com/@aliworld.viajes' },
         { name: 'Threads', href: 'https://www.threads.net/@aliworld.viajes' },
-        { name: 'Youtube', href: '#' },
     ],
 }
 

@@ -11,8 +11,41 @@ import { Itinerary } from '@/app/_components/Itinerary'
 import { Hotels } from '@/app/_components/Hotels'
 import { Trip, WithContext } from 'schema-dts'
 import { PageProps } from '@/.next/types/app/page'
+import { Metadata } from 'next'
 
 export const revalidate = 3600;
+
+export const generateMetadata = async ({ params }: PageProps): Promise<Metadata> => {
+    const { experiencia } = await params;
+    const experience = await getTrip(experiencia);
+    const { nombre, imagen, destino } = experience.fields;
+    const { url } = imagen.fields.file!;
+    const imageUrl = `https:${url}`;
+
+    return {
+        title: `${nombre} - ${destino.fields.nombre} | Aliworld`,
+        description: `Descubre ${nombre} en ${destino.fields.nombre}`,
+        openGraph: {
+            type: 'website',
+            url: `https://www.aliworld.mx/experiencia/${experiencia}`,
+            title: `${nombre} - ${destino.fields.nombre} | Aliworld`,
+            images: [
+                {
+                    url: imageUrl,
+                    alt: nombre,
+                },
+            ],
+            siteName: 'Aliworld',
+            description: `Descubre ${nombre} en ${destino.fields.nombre}`,
+        },
+        alternates: {
+            canonical: `https://www.aliworld.mx/experiencia/${experiencia}`,
+        },
+        generator: 'Next.js',
+        keywords: ['viajes', 'paquetes', 'cruceros', 'hoteles', 'reservaciones', 'aliworld'],
+        robots: 'index, follow',
+    }
+}
 
 export default async function ExperienciaPage({ params }: PageProps) {
     const { experiencia } = await params;
@@ -69,10 +102,10 @@ export default async function ExperienciaPage({ params }: PageProps) {
 
     return (
         <div className="bg-white">
+            <Breadcrumbs breadcrumbs={breadcrumbs} />
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
-            <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
+            <div className="mx-auto max-w-2xl px-4 py-12 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
                 <div className="lg:max-w-lg lg:self-start">
-                    <Breadcrumbs breadcrumbs={breadcrumbs} />
                     <div className='mt-4 ml-auto flex items-center justify-around rounded-full w-60 bg-sky-600 text-white px-2 py-3'>
                         <div className="flex items-center">
                             <SunIcon aria-hidden="true" className="size-5 shrink-0 text-yellow-200" />
