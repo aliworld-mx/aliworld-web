@@ -25,13 +25,13 @@ export const Navigation = ({ navigationData }: NavigationProps) => {
                     {
                         name: 'Promociones',
                         href: '/promociones',
-                        imageSrc: `https://${navigationData?.fields.promocion?.fields?.file?.url}`,
+                        imageSrc: `https:${navigationData?.fields.promocion?.fields?.file?.url}`,
                         imageAlt: navigationData?.fields.promocion.fields?.description,
                     },
                     {
                         name: 'Favoritos',
                         href: '/favoritos',
-                        imageSrc: `https://${navigationData?.fields.favorito?.fields?.file?.url}`,
+                        imageSrc: `https:${navigationData?.fields.favorito?.fields?.file?.url}`,
                         imageAlt: navigationData?.fields.favorito.fields?.description,
                     },
                 ],

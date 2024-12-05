@@ -162,7 +162,7 @@ export default async function InicioPage() {
                       className="relative flex h-80 w-56 flex-col overflow-hidden rounded-lg p-6 hover:opacity-75 xl:w-auto"
                     >
                       <span aria-hidden="true" className="absolute inset-0">
-                        <Image width={220} height={320} alt={destination?.fields?.imagen?.fields?.description ?? "Destino"} src={`https://${destination?.fields.imagen?.fields?.file?.url}`} className="size-full object-cover" />
+                        <Image width={220} height={320} alt={destination?.fields?.imagen?.fields?.description ?? "Destino"} src={`https:${destination?.fields.imagen?.fields?.file?.url}`} className="size-full object-cover" />
                       </span>
                       <span
                         aria-hidden="true"
@@ -202,7 +202,7 @@ export default async function InicioPage() {
                 <div key={favorite.fields?.id} className="group relative">
                   <Image
                     alt={favorite.fields?.imagen?.fields?.description ?? favorite.fields?.nombre}
-                    src={`https://${favorite.fields?.imagen?.fields?.file?.url}`}
+                    src={`https:${favorite.fields?.imagen?.fields?.file?.url}`}
                     width={300}
                     height={300}
                     className="w-full rounded-lg object-fit group-hover:opacity-75"
