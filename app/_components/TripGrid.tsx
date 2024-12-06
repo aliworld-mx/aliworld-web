@@ -1,72 +1,113 @@
 'use client'
 
-import { Dialog, DialogBackdrop, DialogPanel, Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/react"
-import { XMarkIcon, PlusIcon, MinusIcon, ChevronDownIcon, FunnelIcon } from "@heroicons/react/24/outline"
-import { useState } from "react"
+import { Dialog, DialogBackdrop, DialogPanel, Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/react"
+import { XMarkIcon, ChevronDownIcon, FunnelIcon } from "@heroicons/react/24/outline"
+import { useEffect, useMemo, useState } from "react"
 import { TripGridItem } from "./TripGridItem"
 import { classNames } from "../_utils/classNames"
 import { TypePaquete } from "../_types/contentful/Paquete"
+import ComboBox from "./Inputs/ComboBox"
+import { ComboBoxOption } from "../_types/input/ComboBoxOption"
+import { useSearchParams } from "next/navigation"
 
 const sortOptions = [
-    { name: 'Reciente', href: '#', current: true },
-    { name: 'Precio: Menor A Mayor', href: '#', current: false },
-    { name: 'Precio: Mayor a Menor', href: '#', current: false },
-    { name: 'Días: Menor A Mayor', href: '#', current: false },
-    { name: 'Días: Mayor a Menor', href: '#', current: false },
+    { name: 'Reciente' },
+    { name: 'Precio - Menor a Mayor' },
+    { name: 'Precio - Mayor a Menor' },
+    { name: 'Días - Menor a Mayor' },
+    { name: 'Días - Mayor a Menor' },
 ]
 
-const filters = [
-    {
-        id: 'countries',
-        name: 'Países',
-        options: [
-            { value: 'white', label: 'White', checked: false },
-            { value: 'beige', label: 'Beige', checked: false },
-            { value: 'blue', label: 'Blue', checked: true },
-            { value: 'brown', label: 'Brown', checked: false },
-            { value: 'green', label: 'Green', checked: false },
-            { value: 'purple', label: 'Purple', checked: false },
-        ],
-    },
-    {
-        id: 'cities',
-        name: 'Ciudades',
-        options: [
-            { value: 'white', label: 'White', checked: false },
-            { value: 'beige', label: 'Beige', checked: false },
-            { value: 'blue', label: 'Blue', checked: true },
-            { value: 'brown', label: 'Brown', checked: false },
-            { value: 'green', label: 'Green', checked: false },
-            { value: 'purple', label: 'Purple', checked: false },
-        ],
-    },
-    {
-        id: 'duration',
-        name: 'Duración (días)',
-        options: [
-            { value: 'new-arrivals', label: 'New Arrivals', checked: false },
-            { value: 'sale', label: 'Sale', checked: false },
-            { value: 'travel', label: 'Travel', checked: true },
-            { value: 'organization', label: 'Organization', checked: false },
-            { value: 'accessories', label: 'Accessories', checked: false },
-        ],
-    },
-    {
-        id: 'price',
-        name: 'Precio',
-        options: [
-            { value: '2l', label: '2L', checked: false },
-            { value: '6l', label: '6L', checked: false },
-            { value: '12l', label: '12L', checked: false },
-            { value: '18l', label: '18L', checked: false },
-            { value: '20l', label: '20L', checked: false },
-            { value: '40l', label: '40L', checked: true },
-        ],
-    },
-]
+const generateFilters = (trips: TypePaquete[]) => {
+    const paises = trips.flatMap((trip) => trip.fields.paises.map((pais) => pais.fields.nombre));
+    const paisesUnicos = Array.from(new Set(paises));
+    const ciudades = trips.flatMap((trip) => trip.fields.ciudades.map((ciudad) => ciudad.fields?.nombre ?? ""));
+    const ciudadesUnicas = Array.from(new Set(ciudades));
+    const duraciones = trips.map((trip) => trip.fields.dias);
+    const duracionMinima = Math.min(...duraciones);
+    const duracionMaxima = Math.max(...duraciones);
+    const precios = trips.map((trip) => trip.fields.precio);
+    const precioMinimo = Math.min(...precios);
+    const precioMaximo = Math.max(...precios);
+
+    return {
+        paises: paisesUnicos.map((pais) => ({ id: pais, label: pais })),
+        ciudades: ciudadesUnicas.map((ciudad) => ({ id: ciudad, label: ciudad })),
+        duracion: [duracionMinima, duracionMaxima],
+        precio: [precioMinimo, precioMaximo],
+    }
+}
 
 export const TripGrid = ({ header, trips }: Readonly<{ header: string, trips: TypePaquete[] }>) => {
-    const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
+    const searchParams = useSearchParams();
+    const countryParam = searchParams.get('pais');
+    const cityParam = searchParams.get('ciudad');
+    const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+    const [filteredTrips, setFilteredTrips] = useState(trips);
+    const [order, setOrder] = useState('Reciente');
+    const [country, setCountry] = useState<ComboBoxOption[]>([]);
+    const [city, setCity] = useState<ComboBoxOption[]>([]);
+
+    const filters = useMemo(() => generateFilters(trips), [trips]);
+
+    const orderBy = (tripsArray: TypePaquete[], orderValue: string = order) => {
+        const tripsArrayCopy = [...tripsArray];
+        switch (orderValue) {
+            case 'Precio - Menor a Mayor':
+                tripsArrayCopy.sort((a, b) => {
+                    if (a.fields.precio === b.fields.precio) return 0;
+                    return a.fields.precio < b.fields.precio ? -1 : 1;
+                });
+                break;
+            case 'Precio - Mayor a Menor':
+                tripsArrayCopy.sort((a, b) => {
+                    if (a.fields.precio === b.fields.precio) return 0;
+                    return a.fields.precio > b.fields.precio ? -1 : 1;
+                });
+                break;
+            case 'Días - Menor a Mayor':
+                tripsArrayCopy.sort((a, b) => {
+                    if (a.fields.dias === b.fields.dias) return 0;
+                    return a.fields.dias < b.fields.dias ? -1 : 1;
+                });
+                break;
+            case 'Días - Mayor a Menor':
+                tripsArrayCopy.sort((a, b) => {
+                    if (a.fields.dias === b.fields.dias) return 0;
+                    return a.fields.dias > b.fields.dias ? -1 : 1;
+                });
+                break;
+            default:
+                tripsArrayCopy.sort((a, b) => {
+                    if (a.sys.updatedAt === b.sys.updatedAt) return 0;
+                    return new Date(a.sys.updatedAt) > new Date(b.sys.updatedAt) ? -1 : 1;
+                });
+                break;
+        }
+        setOrder(orderValue);
+        setFilteredTrips(tripsArrayCopy);
+    };
+
+    useEffect(() => {
+        if (countryParam) {
+            const selectedCountries = countryParam.split(',').map((pais) => ({ id: pais, label: pais }));
+            setCountry(selectedCountries);
+        }
+    }, [countryParam]);
+
+    useEffect(() => {
+        if (cityParam) {
+            const selectedCities = cityParam.split(',').map((ciudad) => ({ id: ciudad, label: ciudad }));
+            setCity(selectedCities);
+        }
+    }, [cityParam]);
+
+    useEffect(() => {
+        let filtered = trips;
+        filtered = filtered.filter((trip) => country.length === 0 || country.some((option) => trip.fields.paises.some((pais) => pais.fields.nombre === option.id)));
+        filtered = filtered.filter((trip) => city.length === 0 || city.some((option) => trip.fields.ciudades.some((ciudad) => ciudad.fields?.nombre === option.id)));
+        orderBy(filtered);
+    }, [country, city, trips]);
 
     return (
         <div>
@@ -96,78 +137,23 @@ export const TripGrid = ({ header, trips }: Readonly<{ header: string, trips: Ty
 
                         {/* Filters */}
                         <form className="mt-4 border-t border-gray-200">
-                            {filters.map((section) => (
-                                <Disclosure key={section.id} as="div" className="border-t border-gray-200 px-4 py-6">
-                                    <h3 className="-mx-2 -my-3 flow-root">
-                                        <DisclosureButton className="group flex w-full items-center justify-between bg-white px-2 py-3 text-gray-400 hover:text-gray-500">
-                                            <span className="font-medium text-gray-900">{section.name}</span>
-                                            <span className="ml-6 flex items-center">
-                                                <PlusIcon aria-hidden="true" className="size-5 group-data-[open]:hidden" />
-                                                <MinusIcon aria-hidden="true" className="size-5 [.group:not([data-open])_&]:hidden" />
-                                            </span>
-                                        </DisclosureButton>
-                                    </h3>
-                                    <DisclosurePanel className="pt-6">
-                                        <div className="space-y-6">
-                                            {section.options.map((option, optionIdx) => (
-                                                <div key={option.value} className="flex gap-3">
-                                                    <div className="flex h-5 shrink-0 items-center">
-                                                        <div className="group grid size-4 grid-cols-1">
-                                                            <input
-                                                                defaultValue={option.value}
-                                                                id={`filter-mobile-${section.id}-${optionIdx}`}
-                                                                name={`${section.id}[]`}
-                                                                type="checkbox"
-                                                                className="col-start-1 row-start-1 appearance-none rounded border border-gray-300 bg-white checked:border-sky-600 checked:bg-sky-600 indeterminate:border-sky-600 indeterminate:bg-sky-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto"
-                                                            />
-                                                            <svg
-                                                                fill="none"
-                                                                viewBox="0 0 14 14"
-                                                                className="pointer-events-none col-start-1 row-start-1 size-3.5 self-center justify-self-center stroke-white group-has-[:disabled]:stroke-gray-950/25"
-                                                            >
-                                                                <path
-                                                                    d="M3 8L6 11L11 3.5"
-                                                                    strokeWidth={2}
-                                                                    strokeLinecap="round"
-                                                                    strokeLinejoin="round"
-                                                                    className="opacity-0 group-has-[:checked]:opacity-100"
-                                                                />
-                                                                <path
-                                                                    d="M3 7H11"
-                                                                    strokeWidth={2}
-                                                                    strokeLinecap="round"
-                                                                    strokeLinejoin="round"
-                                                                    className="opacity-0 group-has-[:indeterminate]:opacity-100"
-                                                                />
-                                                            </svg>
-                                                        </div>
-                                                    </div>
-                                                    <label
-                                                        htmlFor={`filter-mobile-${section.id}-${optionIdx}`}
-                                                        className="min-w-0 flex-1 text-gray-500"
-                                                    >
-                                                        {option.label}
-                                                    </label>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </DisclosurePanel>
-                                </Disclosure>
-                            ))}
+                            <div className="space-y-8 p-4">
+                                <ComboBox name="pais" label="Paises" options={filters.ciudades} value={country} onChange={setCountry} multiple={true} />
+                                <ComboBox name="ciudad" label="Ciudades" options={filters.ciudades} value={city} onChange={setCity} multiple={true} />
+                            </div>
                         </form>
                     </DialogPanel>
                 </div>
             </Dialog>
 
             <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div className="flex items-baseline justify-between border-b border-gray-200 py-6">
+                <div className="flex flex-col gap-4 sm:flex-row items-baseline justify-between border-b border-gray-200 py-6">
                     <h1 className="text-4xl font-bold tracking-tight text-gray-900">{header}</h1>
-
                     <div className="flex items-center">
                         <Menu as="div" className="relative inline-block text-left">
                             <div>
                                 <MenuButton className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
-                                    Ordenar
+                                    Ordenar: {order}
                                     <ChevronDownIcon
                                         aria-hidden="true"
                                         className="-mr-1 ml-1 size-5 shrink-0 text-gray-400 group-hover:text-gray-500"
@@ -182,15 +168,15 @@ export const TripGrid = ({ header, trips }: Readonly<{ header: string, trips: Ty
                                 <div className="py-1">
                                     {sortOptions.map((option) => (
                                         <MenuItem key={option.name}>
-                                            <a
-                                                href={option.href}
+                                            <span
+                                                onClick={() => orderBy(filteredTrips, option.name)}
                                                 className={classNames(
-                                                    option.current ? 'font-medium text-gray-900' : 'text-gray-500',
+                                                    option.name === order ? 'font-medium text-gray-900' : 'text-gray-500',
                                                     'block px-4 py-2 text-sm data-[focus]:bg-gray-100 data-[focus]:outline-none',
                                                 )}
                                             >
                                                 {option.name}
-                                            </a>
+                                            </span>
                                         </MenuItem>
                                     ))}
                                 </div>
@@ -214,72 +200,19 @@ export const TripGrid = ({ header, trips }: Readonly<{ header: string, trips: Ty
 
                 <section aria-labelledby="trips-heading" className="pb-24 pt-6">
                     <h2 id="trips-heading" className="sr-only">
-                        Destinos
+                        Paquetes
                     </h2>
 
                     <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
                         {/* Filters */}
                         <form className="hidden lg:block">
-                            {filters.map((section) => (
-                                <Disclosure key={section.id} as="div" className="border-b border-gray-200 py-6">
-                                    <h3 className="-my-3 flow-root">
-                                        <DisclosureButton className="group flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500">
-                                            <span className="font-medium text-gray-900">{section.name}</span>
-                                            <span className="ml-6 flex items-center">
-                                                <PlusIcon aria-hidden="true" className="size-5 group-data-[open]:hidden" />
-                                                <MinusIcon aria-hidden="true" className="size-5 [.group:not([data-open])_&]:hidden" />
-                                            </span>
-                                        </DisclosureButton>
-                                    </h3>
-                                    <DisclosurePanel className="pt-6">
-                                        <div className="space-y-4">
-                                            {section.options.map((option, optionIdx) => (
-                                                <div key={option.value} className="flex gap-3">
-                                                    <div className="flex h-5 shrink-0 items-center">
-                                                        <div className="group grid size-4 grid-cols-1">
-                                                            <input
-                                                                defaultValue={option.value}
-                                                                defaultChecked={option.checked}
-                                                                id={`filter-${section.id}-${optionIdx}`}
-                                                                name={`${section.id}[]`}
-                                                                type="checkbox"
-                                                                className="col-start-1 row-start-1 appearance-none rounded border border-gray-300 bg-white checked:border-sky-600 checked:bg-sky-600 indeterminate:border-sky-600 indeterminate:bg-sky-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto"
-                                                            />
-                                                            <svg
-                                                                fill="none"
-                                                                viewBox="0 0 14 14"
-                                                                className="pointer-events-none col-start-1 row-start-1 size-3.5 self-center justify-self-center stroke-white group-has-[:disabled]:stroke-gray-950/25"
-                                                            >
-                                                                <path
-                                                                    d="M3 8L6 11L11 3.5"
-                                                                    strokeWidth={2}
-                                                                    strokeLinecap="round"
-                                                                    strokeLinejoin="round"
-                                                                    className="opacity-0 group-has-[:checked]:opacity-100"
-                                                                />
-                                                                <path
-                                                                    d="M3 7H11"
-                                                                    strokeWidth={2}
-                                                                    strokeLinecap="round"
-                                                                    strokeLinejoin="round"
-                                                                    className="opacity-0 group-has-[:indeterminate]:opacity-100"
-                                                                />
-                                                            </svg>
-                                                        </div>
-                                                    </div>
-                                                    <label htmlFor={`filter-${section.id}-${optionIdx}`} className="text-sm text-gray-600">
-                                                        {option.label}
-                                                    </label>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </DisclosurePanel>
-                                </Disclosure>
-                            ))}
+                            <div className="space-y-4 gap-y-4">
+                                <ComboBox name="pais" label="Paises" options={filters.paises} value={country} onChange={setCountry} multiple={true} />
+                                <ComboBox name="ciudad" label="Ciudades" options={filters.ciudades} value={city} onChange={setCity} multiple={true} />
+                            </div>
                         </form>
 
-                        {/* Product grid */}
-                        <div className="lg:col-span-3 grid grid-cols-1 gap-3 sm:grid-cols-3">{trips.map((trip) => <TripGridItem key={trip.fields.id} trip={trip} />)}</div>
+                        <div className="lg:col-span-3 grid grid-cols-1 gap-3 sm:grid-cols-3">{filteredTrips.map((trip) => <TripGridItem key={trip.fields.id} trip={trip} />)}</div>
                     </div>
                 </section>
             </main>

@@ -26,7 +26,6 @@ export const metadata: Metadata = {
     robots: 'index, follow',
 };
 
-
 export default function ContactoPage() {
     const structuredData: WithContext<ContactPage> = {
         "@context": "https://schema.org",

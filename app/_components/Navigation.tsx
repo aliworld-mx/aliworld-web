@@ -59,24 +59,24 @@ export const Navigation = ({ navigationData }: NavigationProps) => {
                         id: 'paises',
                         name: 'Paises',
                         items: [
-                            { name: 'Francia', href: '/paquetes/europa?pais=francia' },
-                            { name: 'Japón', href: '/paquetes/asia?pais=japon' },
-                            { name: 'Corea del Sur', href: 'paquetes/asia?pais=corea-del-sur' },
-                            { name: 'España', href: '/paquetes/europa?pais=españa' },
-                            { name: 'Belgica', href: '/paquetes/europa?pais=belgica' },
-                            { name: 'Italia', href: '/paquetes/europa?pais=italia' },
-                            { name: 'Inglaterra', href: '/paquetes/europa?pais=inglaterra' },
+                            { name: 'Francia', href: '/paquetes/europa?pais=Francia' },
+                            { name: 'Japón', href: '/paquetes/asia?pais=Japon' },
+                            { name: 'España', href: '/paquetes/europa?pais=España' },
+                            { name: 'Belgica', href: '/paquetes/europa?pais=Belgica' },
+                            { name: 'Italia', href: '/paquetes/europa?pais=Italia' },
+                            { name: 'Inglaterra', href: '/paquetes/europa?pais=Inglaterra' },
                         ],
                     },
                     {
                         id: 'ciudades',
                         name: 'Ciudades',
                         items: [
-                            { name: 'Paris', href: '/paquetes/europa?ciudad=paris' },
-                            { name: 'Tokio', href: 'paquetes/asia?ciudad=tokio' },
-                            { name: 'Madrid', href: '/paquetes/europa?ciudad=madrid' },
-                            { name: 'Amsterdam', href: '/paquetes/europa?ciudad=amsterdam' },
-                            { name: 'Londres', href: '/paquetes/europa?ciudad=londres' },
+                            { name: 'Paris', href: '/paquetes/europa?ciudad=Paris' },
+                            { name: 'Tokio', href: 'paquetes/asia?ciudad=Tokio' },
+                            { name: 'Madrid', href: '/paquetes/europa?ciudad=Madrid' },
+                            { name: 'Amsterdam', href: '/paquetes/europa?ciudad=Amsterdam' },
+                            { name: 'Londres', href: '/paquetes/europa?ciudad=Londres' },
+                            { name: 'Cancún', href: '/paquetes/europa?ciudad=Cancun' },
                         ],
                     },
                 ],
@@ -139,10 +139,10 @@ export const Navigation = ({ navigationData }: NavigationProps) => {
                                                         height={300}
                                                         className="aspect-square w-full rounded-lg bg-gray-100 object-cover group-hover:opacity-75"
                                                     />
-                                                    <Link href={item.href} className="mt-6 block font-medium text-gray-900">
+                                                    <CloseButton as={Link} href={item.href} className="mt-6 block font-medium text-gray-900">
                                                         <span aria-hidden="true" className="absolute inset-0 z-10" />
                                                         {item.name}
-                                                    </Link>
+                                                    </CloseButton>
                                                     <p aria-hidden="true" className="mt-1 text-sky-600">
                                                         Ver todo
                                                     </p>
@@ -161,9 +161,9 @@ export const Navigation = ({ navigationData }: NavigationProps) => {
                                                 >
                                                     {section.items.map((item) => (
                                                         <li key={item.name} className="flow-root">
-                                                            <Link href={item.href} className="-m-2 block p-2 text-gray-500">
+                                                            <CloseButton as={Link} href={item.href} className="-m-2 block p-2 text-gray-500">
                                                                 {item.name}
-                                                            </Link>
+                                                            </CloseButton>
                                                         </li>
                                                     ))}
                                                 </ul>
@@ -225,7 +225,7 @@ export const Navigation = ({ navigationData }: NavigationProps) => {
                                     src={AliworldLogo}
                                     width={224}
                                     height={112}
-                                    className="h-20 sm:h-28 w-auto"
+                                    className="h-16 sm:h-28 w-auto"
                                 />
                             </Link>
                         </div>

@@ -5,13 +5,13 @@ import { PriceTable } from '@/app/_components/PriceTable'
 import Image from 'next/image'
 import { PriceDisclaimer } from '@/app/_components/PriceDisclaimer'
 import Benefits from '@/app/_components/Benefits'
-import { Newsletter } from '@/app/_components/Newsletter'
 import { Breadcrumbs } from '@/app/_components/Breadcrumbs'
 import { Itinerary } from '@/app/_components/Itinerary'
 import { Hotels } from '@/app/_components/Hotels'
 import { Trip, WithContext } from 'schema-dts'
-import { PageProps } from '@/.next/types/app/page'
 import { Metadata } from 'next'
+import { PageProps } from '@/.next/types/app/page'
+import { FAQs } from '@/app/_components/FAQs'
 
 export const revalidate = 3600;
 
@@ -147,7 +147,7 @@ export default async function ExperienciaPage({ params }: PageProps) {
                 <div className="mt-10 lg:col-start-1 lg:row-start-2 lg:max-w-lg lg:self-start">
                     <section aria-labelledby="options-heading">
                         <h2 id="options-heading" className="sr-only">
-                            Product options
+                            Información del paquete
                         </h2>
 
                         <div className="mt-10">
@@ -193,7 +193,7 @@ export default async function ExperienciaPage({ params }: PageProps) {
             </div>
             <Hotels hoteles={hoteles} />
             <Benefits />
-            <Newsletter />
+            <FAQs />
         </div>
     )
 }

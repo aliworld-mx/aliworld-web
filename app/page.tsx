@@ -11,6 +11,7 @@ import { Metadata } from 'next';
 import { getFavorites } from './lib/getFavorites';
 import { toMoney } from './_utils/toMoney';
 import { getDestinations } from './lib/getDestinations';
+import { FAQs } from './_components/FAQs';
 
 export const revalidate = 3600;
 
@@ -114,7 +115,6 @@ export default async function InicioPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      {/* Decorative image and overlay */}
       <div aria-hidden="true" className="absolute inset-0 overflow-hidden">
         <Image
           alt="El Pabellon Dorado en Kyoto, Japón"
@@ -125,8 +125,8 @@ export default async function InicioPage() {
         />
       </div>
       <div aria-hidden="true" className="absolute inset-0 bg-gray-900 opacity-50" />
-      <div className="relative mx-auto flex max-w-3xl flex-col items-center px-6 my-32 text-center sm:my-64 lg:px-0">
-        <h1 className="text-4xl font-bold tracking-tight text-white lg:text-6xl">Encuentra tu próximo destino</h1>
+      <div className="relative mx-auto flex max-w-3xl flex-col items-center py-12 px-6 h-screen mb-[-64px] text-center lg:px-0">
+        <h1 className="text-4xl font-bold tracking-tight mt-32 sm:mt-64 text-white lg:text-6xl">Encuentra tu próximo destino</h1>
         <p className="mt-4 text-xl text-white">
           Viajar es una de las mejores experiencias que puedes tener, descubre los mejores destinos y vive una gran aventura.
         </p>
@@ -140,7 +140,7 @@ export default async function InicioPage() {
 
       <main className='bg-white'>
         {/* Category section */}
-        <section aria-labelledby="category-heading" className="py-32 sm:py-48 xl:mx-auto xl:max-w-7xl xl:px-8">
+        <section aria-labelledby="category-heading" className="py-12 sm:py-24 xl:mx-auto xl:max-w-7xl xl:px-8">
           <div className="px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 xl:px-0">
             <h2 id="category-heading" className="text-2xl font-bold tracking-tight text-gray-900">
               Buscar por Destino
@@ -153,7 +153,7 @@ export default async function InicioPage() {
 
           <div className="mt-4 flow-root">
             <div className="-my-2">
-              <div className="relative box-content h-80 overflow-x-auto py-2 xl:overflow-visible">
+              <div className="relative box-content h-80 overflow-x-auto py-2 xl:overflow-visible overflow-y-hidden">
                 <div className="absolute flex space-x-8 px-4 sm:px-6 lg:px-8 xl:relative xl:grid xl:grid-cols-5 xl:gap-x-8 xl:space-x-0 xl:px-0">
                   {destinations?.slice(0, 5).map((destination) => (
                     <Link
@@ -177,16 +177,15 @@ export default async function InicioPage() {
           </div>
 
           <div className="mt-6 px-4 sm:hidden">
-            <a href="#" className="block text-sm font-semibold text-sky-600 hover:text-sky-500">
-              Browse all categories
+            <Link href="/destinos" className="block text-sm font-semibold text-sky-600 hover:text-sky-500">
+              Ver todos los destinos
               <span aria-hidden="true"> &rarr;</span>
-            </a>
+            </Link>
           </div>
         </section>
-        <Benefits />
         {/* Favorites section */}
         <section aria-labelledby="favorites-heading" className='bg-white'>
-          <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
+          <div className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 sm:pb-24 lg:px-8">
             <div className="sm:flex sm:items-baseline sm:justify-between">
               <h2 id="favorites-heading" className="text-2xl font-bold tracking-tight text-gray-900">
                 Nuestros favoritos
@@ -252,6 +251,8 @@ export default async function InicioPage() {
             </Link>
           </div>
         </div>
+        <Benefits />
+        <FAQs />
       </main>
     </>
   )

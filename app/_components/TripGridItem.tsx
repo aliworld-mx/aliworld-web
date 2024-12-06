@@ -8,7 +8,7 @@ interface TripGridItemProps {
 };
 
 export const TripGridItem = ({ trip }: TripGridItemProps) => {
-    const { id, imagen, nombre, paises, precio, dias } = trip.fields;
+    const { id, imagen, nombre, paises, precio, dias, ciudades, moneda } = trip.fields;
     const { url } = imagen.fields.file!;
     const imageUrl = `https:${url}`;
 
@@ -32,9 +32,10 @@ export const TripGridItem = ({ trip }: TripGridItemProps) => {
                     </Link>
                 </h3>
                 <p className="text-sm text-gray-500">{dias} Días</p>
-                <div className="flex flex-1 flex-col justify-end">
-                    <p className="text-sm text-gray-500">Visitando: {paises.map((pais) => pais.fields?.nombre).join(", ")}</p>
-                    <p className="text-base font-medium text-gray-900">Desde {toMoney(precio)}USD</p>
+                <div className="flex flex-1 flex-col justify-end gap-y-4">
+                    <p className="text-sm text-gray-500">Paises: {paises.map((pais) => pais.fields?.nombre).join(", ")}</p>
+                    <p className="text-sm text-gray-500">Ciudades: {ciudades.map((ciudad) => ciudad.fields?.nombre).join(", ")}</p>
+                    <p className="text-base font-medium text-gray-900">Desde {toMoney(precio)} {moneda} + Impuestos</p>
                 </div>
             </div>
         </div>

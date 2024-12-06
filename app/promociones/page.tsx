@@ -5,6 +5,7 @@ import { TripGrid } from '@/app/_components/TripGrid'
 import { Metadata } from 'next';
 import { OfferCatalog, WithContext } from 'schema-dts';
 import { getPromos } from '../lib/getPromos';
+import { Suspense } from 'react';
 
 export const revalidate = 3600;
 
@@ -76,7 +77,9 @@ export default async function PromosPage() {
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
             <div className="bg-white">
                 <Breadcrumbs breadcrumbs={breadcrumbs} />
-                <TripGrid header='Nuestros paquetes con descuento' trips={promos?.fields.paquetes ?? []} />
+                <Suspense>
+                    <TripGrid header='Nuestros paquetes con descuento' trips={promos?.fields.paquetes ?? []} />
+                </Suspense>
             </div>
             <FAQs />
         </>

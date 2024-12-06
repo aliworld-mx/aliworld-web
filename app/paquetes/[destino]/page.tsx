@@ -1,12 +1,13 @@
 
-import { PageProps } from '@/.next/types/app/page';
 import { Breadcrumbs } from '@/app/_components/Breadcrumbs';
 import { FAQs } from '@/app/_components/FAQs';
 import { TripGrid } from '@/app/_components/TripGrid'
 import { getDestinationNameBySlug } from '@/app/_utils/getDestinationNameBySlug';
 import { getTrips } from '@/app/lib/getTrips';
 import { Metadata } from 'next';
+import { PageProps } from '@/.next/types/app/page'
 import { OfferCatalog, WithContext } from 'schema-dts';
+import { Suspense } from 'react';
 
 export const revalidate = 3600;
 
@@ -89,7 +90,9 @@ export default async function DestinosPage({ params }: PageProps) {
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
             <div className="bg-white">
                 <Breadcrumbs breadcrumbs={breadcrumbs} />
-                <TripGrid header={`Nuestros Paquetes a ${getDestinationNameBySlug(destino)}`} trips={trips} />
+                <Suspense>
+                    <TripGrid header={`Nuestros Paquetes a ${getDestinationNameBySlug(destino)}`} trips={trips} />
+                </Suspense>
             </div>
             <FAQs />
         </>
