@@ -12,6 +12,7 @@ import { Trip, WithContext } from 'schema-dts'
 import { Metadata } from 'next'
 import { PageProps } from '@/.next/types/app/page'
 import { FAQs } from '@/app/_components/FAQs'
+import { QuotationForm } from '@/app/_components/QuotationForm'
 
 export const revalidate = 3600;
 
@@ -50,7 +51,7 @@ export const generateMetadata = async ({ params }: PageProps): Promise<Metadata>
 export default async function ExperienciaPage({ params }: PageProps) {
     const { experiencia } = await params;
     const experience = await getTrip(experiencia);
-    const { nombre, precio, dias, noches, imagen, moneda, precios, destino, ciudades, paises, itinerario, hoteles } = experience.fields;
+    const { nombre, precio, dias, noches, imagen, moneda, precios, destino, ciudades, paises, itinerario, hoteles, salidas } = experience.fields;
     const { url } = imagen.fields.file!;
     const imageUrl = `https:${url}`;
 
@@ -124,7 +125,7 @@ export default async function ExperienciaPage({ params }: PageProps) {
                             Información del paquete
                         </h2>
                         <div className="flex items-center">
-                            <p className="text-lg text-gray-900 sm:text-xl">{toMoney(precio)} {moneda} + Impuestos + Suplementos</p>
+                            <p className="text-lg text-gray-900 sm:text-xl">{toMoney(precio)} {moneda} + Impuestos</p>
                         </div>
                         <div className='space-y-4'>
                             <p className="text-gray-600 text-sm">Por adulto en habitación doble</p>
@@ -149,14 +150,8 @@ export default async function ExperienciaPage({ params }: PageProps) {
                         <h2 id="options-heading" className="sr-only">
                             Información del paquete
                         </h2>
-
                         <div className="mt-10">
-                            <button
-                                type="submit"
-                                className="flex w-full items-center justify-center rounded-md border border-transparent bg-sky-600 px-8 py-3 text-base font-medium text-white hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 focus:ring-offset-gray-50"
-                            >
-                                Cotizar
-                            </button>
+                            <QuotationForm packageId={experiencia} departures={salidas} />
                         </div>
                         <div className="mt-6 text-center">
                             <div className="group inline-flex text-base font-medium">
@@ -164,7 +159,7 @@ export default async function ExperienciaPage({ params }: PageProps) {
                                     aria-hidden="true"
                                     className="mr-2 size-6 shrink-0 text-sky-500 group-hover:text-sky-700"
                                 />
-                                <span className="text-gray-500 hover:text-gray-700">Pagos con Tarjeta de Credito y Debito</span>
+                                <span className="text-gray-500 hover:text-gray-700">Pagos Seguros con Tarjeta de Credito y Debito</span>
                             </div>
                         </div>
                     </section>

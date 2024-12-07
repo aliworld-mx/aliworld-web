@@ -3,6 +3,7 @@ import { ContentfulAsset, ContentfulEntry } from "./ContentfulEntry";
 import { TypeDestino } from "./Destino";
 import { TypePais } from "./Pais";
 import { TypeCiudad } from "./Ciudad";
+import { TypeSalida } from "./Salida";
 
 export interface TypePaqueteFields {
     fields: {
@@ -27,6 +28,7 @@ export interface TypePaqueteFields {
         toursOpcionales: EntryFields.Text;
         hoteles: EntryFields.Text;
         visas: EntryFields.Text;
+        salidas: TypeSalida[];
     }
 }
 
