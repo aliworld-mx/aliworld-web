@@ -8,8 +8,6 @@ const mailjet = Mailjet.apiConnect(
 export async function POST(request: Request) {
   const { to, subject, text, html } = await request.json();
 
-    console.log(to, subject, text, html);
-
   try {
     // Configuración del correo
     const requestMail = mailjet
