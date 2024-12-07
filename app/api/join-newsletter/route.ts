@@ -86,7 +86,7 @@ const newsLetterEmail = `<!DOCTYPE html>
       <p>Estamos emocionados de tenerte en nuestra comunidad de viajeros apasionados. Ahora recibirás las últimas noticias, promociones exclusivas y los mejores consejos para tus próximas aventuras.</p>
       <p>¿Listo para tu próximo viaje? ¡Explora los destinos más increíbles que hemos seleccionado para ti!</p>
       <div class="cta">
-        <a href="https://www.aliworld.mx/destinos" target="_blank">Descubre destinos</a>
+        <a href="https://www.aliworld.mx/paquetes" target="_blank">Descubre destinos</a>
       </div>
       <p>Gracias por confiar en <strong>Aliworld</strong>. Estamos aquí para ayudarte a planificar experiencias inolvidables.</p>
       <p>¡Buen viaje!</p>
