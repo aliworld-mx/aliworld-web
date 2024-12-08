@@ -6,19 +6,19 @@ export default async function sitemap() {
         '/',
     ]
     const p1keys = [
-        '/destinos',
-        '/destinos/asia',
-        '/destinos/europa',
-        '/destinos/caribe',
-        '/destinos/africa',
-        '/destinos/mexico',
-        '/destinos/sudamerica',
-        '/destinos/centroamerica',
-        '/destinos/medio-oriente',
-        '/destinos/estados-unidos',
-        '/destinos/canada',
-        '/destinos/pacifico',
-        '/destinos/cruceros',
+        '/paquetes',
+        '/paquetes/asia',
+        '/paquetes/europa',
+        '/paquetes/caribe',
+        '/paquetes/africa',
+        '/paquetes/mexico',
+        '/paquetes/sudamerica',
+        '/paquetes/centroamerica',
+        '/paquetes/medio-oriente',
+        '/paquetes/estados-unidos',
+        '/paquetes/canada',
+        '/paquetes/pacifico',
+        '/paquetes/cruceros',
         '/favoritos',
         '/promociones',
         '/contacto',
@@ -31,7 +31,7 @@ export default async function sitemap() {
     const trips = await getAllTrips();
 
     const tripUrls = trips?.map((trip: TypePaquete) => ({
-        url: `https://www.aliworld.mx/experiencias/${trip.fields.id}`,
+        url: `https://www.aliworld.mx/experiencia/${trip.fields.id}`,
         lastModified: trip.sys.updatedAt,
         priority: 0.60,
     })) as { url: string, lastModified: string, priority: number }[];
