@@ -29,6 +29,7 @@ export interface TypePaqueteFields {
         hoteles: EntryFields.Text;
         visas: EntryFields.Text;
         salidas: TypeSalida[];
+        salidasDiarias: EntryFields.Boolean;
     }
 }
 

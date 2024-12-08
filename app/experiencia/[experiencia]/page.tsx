@@ -53,17 +53,9 @@ export const generateMetadata = async ({ params }: PageProps): Promise<Metadata>
 export default async function ExperienciaPage({ params }: PageProps) {
     const { experiencia } = await params;
     const experience = await getTrip(experiencia);
-    const { nombre, precio, dias, noches, imagen, moneda, precios, destino, ciudades, paises, itinerario, hoteles, salidas, notas, visas, incluye, noIncluye, toursOpcionales } = experience.fields;
+    const { nombre, precio, dias, noches, imagen, moneda, precios, destino, ciudades, paises, itinerario, hoteles, salidas, notas, visas, incluye, noIncluye, toursOpcionales, salidasDiarias } = experience.fields;
     const { url } = imagen.fields.file!;
     const imageUrl = `https:${url}`;
-
-    console.log({
-        notas,
-        visas,
-        incluye,
-        noIncluye,
-        toursOpcionales
-    })
 
     const structuredData: WithContext<Trip> = {
         '@context': 'https://schema.org',
@@ -139,6 +131,7 @@ export default async function ExperienciaPage({ params }: PageProps) {
                         </div>
                         <div className='space-y-4'>
                             <p className="text-gray-600 text-sm">Por adulto en habitación doble</p>
+                            {salidasDiarias && <p className="text-gray-700 font-bold text-base">Salidas Diarias</p>}
                             <p className="text-gray-700 text-base">Países que se visitan: {paises.map(pais => pais.fields.nombre).join(', ')}</p>
                             <p className="text-gray-700 text-base">Ruta de Ciudades que se visitan: {ciudades.map(ciudad => ciudad.fields?.nombre).join(', ')}</p>
                         </div>
@@ -161,7 +154,7 @@ export default async function ExperienciaPage({ params }: PageProps) {
                             Información del paquete
                         </h2>
                         <div className="mt-10">
-                            <QuotationForm packageId={experiencia} departures={salidas} />
+                            <QuotationForm packageId={experiencia} departures={salidas} dailyDepartures={salidasDiarias} />
                         </div>
                         <div className="mt-6 text-center">
                             <div className="group inline-flex text-base font-medium">

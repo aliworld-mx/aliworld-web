@@ -10,9 +10,10 @@ import { toDate } from '../_utils/toDate'
 interface QuotationFormProps {
     packageId: number
     departures: TypeSalida[];
+    dailyDepartures?: boolean;
 }
 
-export const QuotationForm = ({ packageId, departures }: QuotationFormProps) => {
+export const QuotationForm = ({ packageId, departures, dailyDepartures }: QuotationFormProps) => {
     const [isOpen, setIsOpen] = useState(false)
     const [isSent, setIsSent] = useState(false)
     const [isSending, setIsSending] = useState(false)
@@ -27,10 +28,11 @@ export const QuotationForm = ({ packageId, departures }: QuotationFormProps) => 
         nombre: '',
         apellido: '',
         telefono: '',
+        fechaSalida: '',
         salida: salidas?.[0]?.id ?? '',
     })
 
-   
+
     const handleChange = (e: any) => {
         const { name, value } = e.target
         setFormData((prevData) => ({ ...prevData, [name]: value }))
@@ -44,7 +46,7 @@ export const QuotationForm = ({ packageId, departures }: QuotationFormProps) => 
         setHabitaciones(habitaciones.filter((_, i) => i !== index))
     }
 
-   
+
     const handleSubmit = async (e: any) => {
         setIsSending(true)
         e.preventDefault()
@@ -57,7 +59,7 @@ export const QuotationForm = ({ packageId, departures }: QuotationFormProps) => 
             Teléfono: ${formData.telefono}<br>
             Nombre: ${formData.nombre}<br>
             Apellido: ${formData.apellido}<br>
-            Salida: ${salidas?.find((s) => s.id === formData.salida)?.title}<br>
+            Salida: ${formData.fechaSalida ?? salidas?.find((s) => s.id === formData.salida)?.title}<br>
             Habitaciones:<br> ${habitaciones.map((h, i) => `Habitación ${i + 1}: ${h.adultos} adultos, ${h.menores} menores`).join('<br>')}
             `,
         };
@@ -76,7 +78,7 @@ export const QuotationForm = ({ packageId, departures }: QuotationFormProps) => 
             } else {
                 alert('Hubo un error al enviar el correo');
             }
-           
+
         } catch (error: any) {
             alert('Error al enviar el correo');
             console.warn(error);
@@ -163,23 +165,38 @@ export const QuotationForm = ({ packageId, departures }: QuotationFormProps) => 
                                         </div>
 
                                         {/* Salida */}
-                                        <div>
-                                            <label htmlFor="salida" className="block text-sm font-medium text-gray-700">Salida</label>
-                                            <select
-                                                id="salida"
-                                                name="salida"
-                                                value={formData.salida}
-                                                onChange={handleChange}
-                                                className="mt-2 block w-full rounded-md border-gray-300 text-gray-700 shadow-sm focus:border-sky-500 focus:ring focus:ring-sky-500 focus:ring-opacity-50"
-                                            >
-                                                {salidas?.map((salida) => (
-                                                    <option key={salida.id} value={salida.id} className='text-gray-700'>
-                                                        {salida.title}
-                                                    </option>
-                                                ))}
-                                            </select>
-                                        </div>
-
+                                        {salidas?.length >= 1 && (
+                                            <div>
+                                                <label htmlFor="salida" className="block text-sm font-medium text-gray-700">Salida</label>
+                                                <select
+                                                    id="salida"
+                                                    name="salida"
+                                                    value={formData.salida}
+                                                    onChange={handleChange}
+                                                    className="mt-2 block w-full rounded-md border-gray-300 text-gray-700 shadow-sm focus:border-sky-500 focus:ring focus:ring-sky-500 focus:ring-opacity-50"
+                                                >
+                                                    {salidas?.map((salida) => (
+                                                        <option key={salida.id} value={salida.id} className='text-gray-700'>
+                                                            {salida.title}
+                                                        </option>
+                                                    ))}
+                                                </select>
+                                            </div>
+                                        )}
+                                        {dailyDepartures && (
+                                            <div>
+                                                <label htmlFor="fechaSalida" className="block text-sm font-medium text-gray-700">Fecha de Salida</label>
+                                                <input
+                                                    type="date"
+                                                    id="fechaSalida"
+                                                    name="fechaSalida"
+                                                    value={formData.fechaSalida}
+                                                    onChange={handleChange}
+                                                    className="mt-2 block w-full rounded-md text-gray-700 border-gray-300 shadow-sm focus:border-sky-500 focus:ring focus:ring-sky-500 focus:ring-opacity-50"
+                                                    required
+                                                />
+                                            </div>
+                                        )}
                                         {/* Habitaciones */}
                                         <div>
                                             <label className="block text-sm font-lg font-bold text-gray-700">Habitaciones</label>
