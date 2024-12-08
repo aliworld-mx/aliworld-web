@@ -71,7 +71,7 @@ export const Navigation = ({ navigationData }: NavigationProps) => {
                         id: 'ciudades',
                         name: 'Ciudades',
                         items: [
-                            { name: 'Paris', href: '/paquetes/europa?ciudad=Paris' },
+                            { name: 'París', href: '/paquetes/europa?ciudad=París' },
                             { name: 'Tokio', href: 'paquetes/asia?ciudad=Tokio' },
                             { name: 'Madrid', href: '/paquetes/europa?ciudad=Madrid' },
                             { name: 'Amsterdam', href: '/paquetes/europa?ciudad=Amsterdam' },
