@@ -46,7 +46,7 @@ export default function ContactoPage() {
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
             <div className="isolate bg-white px-6 py-24 sm:py-32 lg:px-8">
                 <div className="mx-auto max-w-2xl sm:text-center">
-                    <h2 className="text-balance text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">Contactanos</h2>
+                    <h2 className="text-balance text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">Contáctanos</h2>
                     <p className="mt-2 text-lg/8 text-gray-600">¿Tienes dudas? ¿Quieres que un ejecutivo te ayude a decidir la mejor experiencia para ti?</p>
                 </div>
                 <div className="mx-auto mt-20 max-w-lg space-y-16">
@@ -57,7 +57,7 @@ export default function ContactoPage() {
                         <div>
                             <h3 className="text-base/7 font-semibold text-gray-900">WhatsApp</h3>
                             <p className="mt-2 text-base/7 text-gray-600">
-                                Estamos para atenderte via WhatsApp de lunes a viernes de 9:00 a 18:00. Envíanos un mensaje y te responderemos lo antes posible.
+                                Estamos para atenderte vía WhatsApp de lunes a viernes de 9:00 a 18:00. Envíanos un mensaje y te responderemos lo antes posible.
                             </p>
                             <p className="mt-4 text-sm/6 font-semibold">
                                 <Link target='_blank' href="https://wa.me/523314331600?text=Hola%2C%20tengo%20una%20consulta%20sobre%20Aliworld" className="text-sky-600">

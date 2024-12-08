@@ -25,10 +25,10 @@ export default function Benefits() {
                 <div className="mx-auto max-w-2xl px-4 lg:max-w-none">
                     <div className="max-w-3xl">
                         <h2 className="text-4xl font-bold tracking-tight text-white">
-                            ¿Que nos hace diferentes?
+                            ¿Qué nos hace diferentes?
                         </h2>
                         <p className="mt-4 text-gray-100">
-                            Nuestra misión es hacer de cada viaje una experiencia inolvidable. Que tu corazón se quede en cada lugar que visites y que cada recuerdo sea un tesoro que atesorares por siempre.
+                            Nuestra misión es hacer de cada viaje una experiencia inolvidable. Que tu corazón se quede en cada lugar que visites y que cada recuerdo sea un momento mágico.
                         </p>
                     </div>
                     <div className="mt-16 grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-3">

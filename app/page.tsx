@@ -242,7 +242,7 @@ export default async function InicioPage() {
             <PercentBadgeIcon className="h-12 w-12 text-white" />
             <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Promociones</h2>
             <p className="mt-3 text-xl text-white">
-              Viajar es una de las mejores experiencias que puedes tener, descubre los mejores destinos y vive una gran aventura. Visita nuestra sección de promociones y encuentra el viaje de tus sueños al mejor precio.
+              No hay nada mejor que conocer la ciudad de tus sueños, y que mejor que con un descuento. Visita nuestra sección de promociones y encuentra el viaje de tus sueños al mejor precio.
             </p>
             <Link href="/promociones"
               className="mt-8 block w-full rounded-md border border-transparent bg-white px-8 py-3 text-base font-medium text-gray-900 hover:bg-gray-100 sm:w-auto"
