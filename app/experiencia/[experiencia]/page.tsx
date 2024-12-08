@@ -1,4 +1,4 @@
-import { SunIcon, MoonIcon, CreditCardIcon, CalendarDaysIcon, CurrencyDollarIcon } from '@heroicons/react/20/solid'
+import { SunIcon, MoonIcon, CreditCardIcon, CalendarDaysIcon, CurrencyDollarIcon, XMarkIcon, CheckIcon } from '@heroicons/react/20/solid'
 import { getTrip } from '@/app/lib/getTrip'
 import { toMoney } from '@/app/_utils/toMoney'
 import { PriceTable } from '@/app/_components/PriceTable'
@@ -13,6 +13,8 @@ import { Metadata } from 'next'
 import { PageProps } from '@/.next/types/app/page'
 import { FAQs } from '@/app/_components/FAQs'
 import { QuotationForm } from '@/app/_components/QuotationForm'
+import { IncludedDetails } from '@/app/_components/IncludedDetails'
+import { NotIncludedDetails } from '@/app/_components/NotIncludedDetails'
 
 export const revalidate = 3600;
 
@@ -51,9 +53,17 @@ export const generateMetadata = async ({ params }: PageProps): Promise<Metadata>
 export default async function ExperienciaPage({ params }: PageProps) {
     const { experiencia } = await params;
     const experience = await getTrip(experiencia);
-    const { nombre, precio, dias, noches, imagen, moneda, precios, destino, ciudades, paises, itinerario, hoteles, salidas } = experience.fields;
+    const { nombre, precio, dias, noches, imagen, moneda, precios, destino, ciudades, paises, itinerario, hoteles, salidas, notas, visas, incluye, noIncluye, toursOpcionales } = experience.fields;
     const { url } = imagen.fields.file!;
     const imageUrl = `https:${url}`;
+
+    console.log({
+        notas,
+        visas,
+        incluye,
+        noIncluye,
+        toursOpcionales
+    })
 
     const structuredData: WithContext<Trip> = {
         '@context': 'https://schema.org',
@@ -175,14 +185,28 @@ export default async function ExperienciaPage({ params }: PageProps) {
                         </div>
                     </section>
                 </div>
-                <div className="mt-10 lg:col-start-2 lg:max-w-lg lg:self-start">
+                <div className="mt-10 space-y-12 lg:col-start-2 lg:max-w-lg lg:self-start">
                     <section aria-labelledby="tariff-heading">
                         <h2 id="tariff-heading" className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl flex flex-row items-center gap-x-3">
                             <CurrencyDollarIcon className="size-8 shrink-0 text-sky-500" aria-hidden="true" />
                             Tarifas
                         </h2>
                         <PriceTable precios={precios} />
-                        <PriceDisclaimer />
+                        {moneda === 'USD' && <PriceDisclaimer />}
+                    </section>
+                    <section aria-labelledby="include-heading">
+                        <h2 id="include-heading" className="text-2xl font-bold mb-6 tracking-tight text-gray-900 sm:text-3xl flex flex-row items-center gap-x-3">
+                            <CheckIcon className="size-8 shrink-0 text-sky-500" aria-hidden="true" />
+                            Incluye
+                        </h2>
+                        <IncludedDetails incluye={incluye} />
+                    </section>
+                    <section aria-labelledby="not-include-heading">
+                        <h2 id="not-include-heading" className="text-2xl font-bold mb-6 tracking-tight text-gray-900 sm:text-3xl flex flex-row items-center gap-x-3">
+                            <XMarkIcon className="size-8 shrink-0 text-sky-500" aria-hidden="true" />
+                            No Incluye
+                        </h2>
+                        <NotIncludedDetails noIncluye={noIncluye} />
                     </section>
                 </div>
             </div>
