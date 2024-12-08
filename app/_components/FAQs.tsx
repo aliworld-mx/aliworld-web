@@ -15,7 +15,7 @@ const faqs = [
     {
         question: "¿Cuales son los métodos de pago?",
         answer:
-            "Aceptamos tarjetas de crédito y débito, transferencias y depositos. Para más información, contactanos.",
+            "Se le envia un link de pago al cliente donde aceptamos tarjetas de crédito y débito. Para más información, contactanos.",
     },
     {
         question: "¿Puedo cancelar mi reservación?",

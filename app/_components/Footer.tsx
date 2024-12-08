@@ -66,7 +66,7 @@ export const Footer = () => (
                                 ))}
                             </ul>
                         </div>
-                        <div>
+                        {/* <div>
                             <h3 className="text-sm font-medium text-gray-900 underline decoration-sky-600">Empresa</h3>
                             <ul role="list" className="mt-6 space-y-6">
                                 {footerNavigation.empresa.map((item) => (
@@ -77,7 +77,7 @@ export const Footer = () => (
                                     </li>
                                 ))}
                             </ul>
-                        </div>
+                        </div>*/ }
                     </div>
                 </div>
                 <Newsletter />
