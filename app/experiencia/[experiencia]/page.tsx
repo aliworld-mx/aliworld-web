@@ -115,7 +115,7 @@ export default async function ExperienciaPage({ params }: PageProps) {
         <div className="bg-white">
             <Breadcrumbs breadcrumbs={breadcrumbs} />
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
-            <div className="mx-auto max-w-2xl px-4 py-12 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
+            <div className="mx-auto max-w-2xl px-4 pt-6 pb-12 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
                 <div className="lg:max-w-lg lg:self-start">
                     <div className='mt-4 ml-auto flex items-center justify-around rounded-full w-60 bg-sky-600 text-white px-2 py-3'>
                         <div className="flex items-center">
@@ -174,7 +174,7 @@ export default async function ExperienciaPage({ params }: PageProps) {
                         </div>
                     </section>
                 </div>
-                <div className="mt-10 lg:col-start-1 lg:max-w-lg lg:self-start">
+                <div className="mt-10 px-4 lg:px-0 lg:col-start-1 lg:max-w-lg lg:self-start">
                     <section aria-labelledby="itinerary-heading">
                         <h2 id="itinerary-heading" className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl flex flex-row items-center gap-x-3">
                             <CalendarDaysIcon className="size-8 shrink-0 text-sky-500" aria-hidden="true" />
@@ -185,7 +185,7 @@ export default async function ExperienciaPage({ params }: PageProps) {
                         </div>
                     </section>
                 </div>
-                <div className="mt-10 space-y-12 lg:col-start-2 lg:max-w-lg lg:self-start">
+                <div className="mt-10 px-4 lg:px-0 space-y-12 lg:col-start-2 lg:max-w-lg lg:self-start">
                     <section aria-labelledby="tariff-heading">
                         <h2 id="tariff-heading" className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl flex flex-row items-center gap-x-3">
                             <CurrencyDollarIcon className="size-8 shrink-0 text-sky-500" aria-hidden="true" />

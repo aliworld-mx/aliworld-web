@@ -3,7 +3,7 @@ interface NotIncludedDetailsProps {
 }
 
 export const NotIncludedDetails = ({ noIncluye }: NotIncludedDetailsProps) => {
-    if (!noIncluye) {
+    if (!noIncluye || noIncluye === 'No incluye no disponible') {
         return null;
     }
 
