@@ -53,7 +53,7 @@ export const generateMetadata = async ({ params }: PageProps): Promise<Metadata>
 export default async function ExperienciaPage({ params }: PageProps) {
     const { experiencia } = await params;
     const experience = await getTrip(experiencia);
-    const { nombre, precio, dias, noches, imagen, moneda, precios, destino, ciudades, paises, itinerario, hoteles, salidas, notas, visas, incluye, noIncluye, toursOpcionales, salidasDiarias } = experience.fields;
+    const { nombre, precio, dias, noches, imagen, moneda, precios, destino, ciudades, paises, itinerario, hoteles, salidas, incluye, noIncluye, salidasDiarias } = experience.fields;
     const { url } = imagen.fields.file!;
     const imageUrl = `https:${url}`;
 
