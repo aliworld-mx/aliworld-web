@@ -19,7 +19,7 @@ const sortOptions = [
 ]
 
 const generateFilters = (trips: TypePaquete[]) => {
-    const paises = trips.flatMap((trip) => trip.fields.paises.map((pais) => pais.fields.nombre));
+    const paises = trips.flatMap((trip) => trip.fields.paises.map((pais) => pais.fields?.nombre ?? ""));
     const paisesUnicos = Array.from(new Set(paises));
     const ciudades = trips.flatMap((trip) => trip.fields.ciudades.map((ciudad) => ciudad.fields?.nombre ?? ""));
     const ciudadesUnicas = Array.from(new Set(ciudades));

@@ -5,6 +5,7 @@ import { Footer } from "./_components/Footer";
 import { Navigation } from "./_components/Navigation";
 import { Analytics } from "@vercel/analytics/react"
 import { getNavigation } from "./lib/getNavigation";
+import Scroll from "./_components/Scroll";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -48,6 +49,7 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <Scroll />
         <Navigation navigationData={navigationData} />
         {children}
         <Footer />
