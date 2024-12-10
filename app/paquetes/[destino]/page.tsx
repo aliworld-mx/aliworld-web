@@ -16,14 +16,14 @@ export const generateMetadata = async ({ params }: PageProps): Promise<Metadata>
     const formattedDestination = getDestinationNameBySlug(destino);
 
     return {
-        title: `Paquetes de ${formattedDestination} | Aliworld`,
-        description: `Descubre los paquetes de ${formattedDestination}`,
+        title: `Paquetes de Viaje a ${formattedDestination} | Aliworld`,
+        description: `Descubre los paquetes de viaje a ${formattedDestination}`,
         openGraph: {
             type: 'website',
             url: `https://www.aliworld.mx/paquetes/${destino}`,
-            title: `Paquetes de ${formattedDestination} | Aliworld`,
+            title: `Paquetes de Viaje a ${formattedDestination} | Aliworld`,
             siteName: 'Aliworld',
-            description: `Descubre los paquetes de ${formattedDestination}`,
+            description: `Descubre los paquetes de viaje a ${formattedDestination}`,
         },
         alternates: {
             canonical: `https://www.aliworld.mx/paquetes/${destino}`,
@@ -42,7 +42,7 @@ export default async function DestinosPage({ params }: PageProps) {
     const structuredData: WithContext<OfferCatalog> = {
         '@context': 'https://schema.org',
         '@type': 'OfferCatalog',
-        name: `Paquetes de ${formattedDestination}`,
+        name: `Paquetes de Viaje a ${formattedDestination}`,
         url: `https://www.aliworld.mx/paquetes/${destino}`,
         itemListElement: trips.map((trip) => {
             const { id, nombre, imagen, precio, moneda, dias, ciudades } = trip.fields;
