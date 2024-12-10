@@ -1,9 +1,9 @@
 'use client';
 
-import { PopoverGroup, Popover, PopoverButton, PopoverPanel, Dialog, DialogBackdrop, DialogPanel, Tab, TabGroup, TabList, TabPanel, TabPanels, CloseButton } from "@headlessui/react";
+import { PopoverGroup, Popover, PopoverButton, PopoverPanel, Dialog, DialogBackdrop, DialogPanel, CloseButton } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import { DollarPrice } from "./DollarPrice";
 import { TypeNavegacion } from "../_types/contentful/Navegacion";
 import Image from "next/image";
@@ -83,6 +83,9 @@ export const Navigation = ({ navigationData }: NavigationProps) => {
             },
         ],
         pages: [
+            { name: 'Hoteles', href: '/hoteles' },
+            { name: 'Vuelos', href: '/vuelos' },
+            { name: 'Actividades y Transporte', href: '/actividades' },
             { name: 'Contacto', href: '/contacto' },
         ],
     };
@@ -111,78 +114,79 @@ export const Navigation = ({ navigationData }: NavigationProps) => {
                                 <XMarkIcon aria-hidden="true" className="size-6" />
                             </button>
                         </div>
-
-                        {/* Links */}
-                        <TabGroup className="mt-2">
-                            <div className="border-b border-gray-200">
-                                <TabList className="-mb-px flex space-x-8 px-4">
-                                    {navigation.categories.map((category) => (
-                                        <Tab
-                                            key={category.name}
-                                            className="flex-1 whitespace-nowrap border-b-2 border-transparent px-1 py-4 text-base font-medium text-gray-900 data-[selected]:border-sky-600 data-[selected]:text-sky-600"
-                                        >
-                                            {category.name}
-                                        </Tab>
-                                    ))}
-                                </TabList>
-                            </div>
-                            <TabPanels as={Fragment}>
-                                {navigation.categories.map((category) => (
-                                    <TabPanel key={category.name} className="space-y-10 px-4 pb-8 pt-10">
-                                        <div className="grid grid-cols-2 gap-x-4">
-                                            {category.featured.map((item) => (
-                                                <div key={item.name} className="group relative text-sm">
-                                                    <Image
-                                                        alt={item.imageAlt ?? item.name}
-                                                        src={item.imageSrc}
-                                                        width={300}
-                                                        height={300}
-                                                        className="aspect-square w-full rounded-lg bg-gray-100 object-cover group-hover:opacity-75"
-                                                    />
-                                                    <CloseButton as={Link} href={item.href} className="mt-6 block font-medium text-gray-900">
-                                                        <span aria-hidden="true" className="absolute inset-0 z-10" />
-                                                        {item.name}
-                                                    </CloseButton>
-                                                    <p aria-hidden="true" className="mt-1 text-sky-600">
-                                                        Ver todo
-                                                    </p>
-                                                </div>
-                                            ))}
-                                        </div>
-                                        {category.sections.map((section) => (
-                                            <div key={section.name}>
-                                                <p id={`${category.id}-${section.id}-heading-mobile`} className="font-medium text-gray-900">
-                                                    {section.name}
-                                                </p>
-                                                <ul
-                                                    role="list"
-                                                    aria-labelledby={`${category.id}-${section.id}-heading-mobile`}
-                                                    className="mt-6 flex flex-col space-y-6"
-                                                >
-                                                    {section.items.map((item) => (
-                                                        <li key={item.name} className="flow-root">
-                                                            <CloseButton as={Link} href={item.href} className="-m-2 block p-2 text-gray-500">
-                                                                {item.name}
-                                                            </CloseButton>
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            </div>
-                                        ))}
-                                    </TabPanel>
-                                ))}
-                            </TabPanels>
-                        </TabGroup>
-
+                        <div className="px-4 py-6 flex flex-row">
+                            <DollarPrice />
+                        </div>
                         <div className="space-y-6 border-t border-gray-200 px-4 py-6">
                             {navigation.pages.map((page) => (
                                 <div key={page.name} className="flow-root">
-                                    <Link href={page.href} className="-m-2 block p-2 font-medium text-gray-900">
+                                    <CloseButton as={Link} href={page.href} className="-m-2 block p-2 font-medium text-gray-900">
                                         {page.name}
-                                    </Link>
+                                    </CloseButton>
                                 </div>
                             ))}
                         </div>
+                        {/* Links */}
+                        <div className="mt-2">
+                            <div className="border-t border-gray-200">
+                                <div className="-mb-px flex space-x-8 px-4">
+                                    {navigation.categories.map((category) => (
+                                        <div
+                                            key={category.name}
+                                            className="flex-1 whitespace-nowrap border-b-2 border-transparent px-1 py-4 text-base font-medium text-gray-900"
+                                        >
+                                            {category.name}
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                            {navigation.categories.map((category) => (
+                                <div key={category.name} className="space-y-10 px-4 pb-8 pt-10">
+                                    <div className="grid grid-cols-2 gap-x-4">
+                                        {category.featured?.map((item) => (
+                                            <div key={item.name} className="group relative text-sm">
+                                                <Image
+                                                    alt={item.imageAlt ?? item.name}
+                                                    src={item.imageSrc}
+                                                    width={300}
+                                                    height={300}
+                                                    className="aspect-square w-full rounded-lg bg-gray-100 object-cover group-hover:opacity-75"
+                                                />
+                                                <CloseButton as={Link} href={item.href} className="mt-6 block font-medium text-gray-900">
+                                                    <span aria-hidden="true" className="absolute inset-0 z-10" />
+                                                    {item.name}
+                                                </CloseButton>
+                                                <p aria-hidden="true" className="mt-1 text-sky-600">
+                                                    Ver todo
+                                                </p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    {category.sections.map((section) => (
+                                        <div key={section.name}>
+                                            <p id={`${category.id}-${section.id}-heading-mobile`} className="font-medium text-gray-900">
+                                                {section.name}
+                                            </p>
+                                            <ul
+                                                role="list"
+                                                aria-labelledby={`${category.id}-${section.id}-heading-mobile`}
+                                                className="mt-6 flex flex-col space-y-6"
+                                            >
+                                                {section.items.map((item) => (
+                                                    <li key={item.name} className="flow-root">
+                                                        <CloseButton as={Link} href={item.href} className="-m-2 block p-2 text-gray-500">
+                                                            {item.name}
+                                                        </CloseButton>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    ))}
+                                </div>
+                            ))}
+                        </div>
+
+
 
                         {/* <div className="space-y-6 border-t border-gray-200 px-4 py-6">
                             <div className="flow-root">
@@ -197,9 +201,7 @@ export const Navigation = ({ navigationData }: NavigationProps) => {
                             </div>
                         </div> */}
 
-                        <div className="border-t border-gray-200 px-4 py-6 flex flex-row">
-                            <DollarPrice />
-                        </div>
+
                     </DialogPanel>
                 </div>
             </Dialog>
@@ -254,7 +256,7 @@ export const Navigation = ({ navigationData }: NavigationProps) => {
                                                 <div className="mx-auto max-w-7xl px-8">
                                                     <div className="grid grid-cols-2 gap-x-8 gap-y-10 py-16">
                                                         <div className="col-start-2 grid grid-cols-2 gap-x-8">
-                                                            {category.featured.map((item) => (
+                                                            {category.featured?.map((item) => (
                                                                 <div key={item.name} className="group relative text-base sm:text-sm">
                                                                     <Image
                                                                         alt={item.imageAlt ?? item.name}

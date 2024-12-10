@@ -12,6 +12,7 @@ import { getFavorites } from './lib/getFavorites';
 import { toMoney } from './_utils/toMoney';
 import { getDestinations } from './lib/getDestinations';
 import { FAQs } from './_components/FAQs';
+import { Partners } from './_components/Partners';
 
 export const revalidate = 3600;
 
@@ -252,6 +253,7 @@ export default async function InicioPage() {
           </div>
         </div>
         <Benefits />
+        <Partners />
         <FAQs />
       </main>
     </>

@@ -16,6 +16,11 @@ const footerNavigation = {
         { name: 'Pacífico', href: '/paquetes/pacifico' },
         { name: 'Cruceros', href: '/paquetes/cruceros' },
     ],
+    reservaciones: [
+        { name: 'Hoteles', href: '/hoteles' },
+        { name: 'Actividades y Transporte', href: '/actividades' },
+        { name: 'Vuelos', href: '/vuelos' },
+    ],
     empresa: [
         { name: 'Politica de Cancelaciones', href: '#' },
         { name: 'Terminos y Condiciones', href: '#' },
@@ -66,10 +71,10 @@ export const Footer = () => (
                                 ))}
                             </ul>
                         </div>
-                        {/* <div>
-                            <h3 className="text-sm font-medium text-gray-900 underline decoration-sky-600">Empresa</h3>
+                        <div>
+                            <h3 className="text-sm font-medium text-gray-900 underline decoration-sky-600">Reservaciones</h3>
                             <ul role="list" className="mt-6 space-y-6">
-                                {footerNavigation.empresa.map((item) => (
+                                {footerNavigation.reservaciones.map((item) => (
                                     <li key={item.name} className="text-sm">
                                         <Link href={item.href} target="_blank" className="text-gray-500 hover:text-gray-600">
                                             {item.name}
@@ -77,7 +82,7 @@ export const Footer = () => (
                                     </li>
                                 ))}
                             </ul>
-                        </div>*/ }
+                        </div>
                     </div>
                 </div>
                 <Newsletter />

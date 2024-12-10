@@ -44,7 +44,7 @@ export default function ContactoPage() {
     return (
         <>
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
-            <div className="isolate bg-white px-6 py-24 sm:py-32 lg:px-8">
+            <div className="isolate bg-white px-6 py-24 lg:px-8">
                 <div className="mx-auto max-w-2xl sm:text-center">
                     <h2 className="text-balance text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">Contáctanos</h2>
                     <p className="mt-2 text-lg/8 text-gray-600">¿Tienes dudas? ¿Quieres que un ejecutivo te ayude a decidir la mejor experiencia para ti?</p>
