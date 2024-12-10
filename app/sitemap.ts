@@ -22,6 +22,9 @@ export default async function sitemap() {
         '/favoritos',
         '/promociones',
         '/contacto',
+        '/hoteles',
+        '/actividades',
+        '/vuelos',
     ]
 
     function getUrl(key: string) {
