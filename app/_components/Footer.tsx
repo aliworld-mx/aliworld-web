@@ -75,7 +75,7 @@ export const Footer = () => (
                             <h3 className="text-sm font-medium text-gray-900 underline decoration-sky-600">Reservaciones</h3>
                             <ul role="list" className="mt-6 space-y-6">
                                 {footerNavigation.reservaciones.map((item) => (
-                                    <li key={item.name} className="text-sm">
+                                    <li key={item.name} className="text-sm list-none">
                                         <Link href={item.href} target="_blank" className="text-gray-500 hover:text-gray-600">
                                             {item.name}
                                         </Link>
