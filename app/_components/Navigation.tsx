@@ -225,8 +225,8 @@ export const Navigation = ({ navigationData }: NavigationProps) => {
                                 <Image
                                     alt="Logo de Aliworld"
                                     src={AliworldLogo}
-                                    width={300}
-                                    height={150}
+                                    width={224}
+                                    height={112}
                                     className="h-24 sm:h-28 w-auto"
                                 />
                             </Link>
