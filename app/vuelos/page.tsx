@@ -4,6 +4,7 @@ import Image from "next/image";
 import vuelosImage from "../../public/vuelos.jpg";
 import { Partners } from "../_components/Partners";
 import { ExpediaBenefits } from "../_components/Expedia/ExpediaBenefits";
+import HotelQuotation from "../_components/HotelQuotation";
 
 
 export const metadata: Metadata = {
@@ -60,6 +61,7 @@ export default function VuelosPage() {
                     </div>
                 </div>
             </div>
+            <HotelQuotation />
             <Partners />
             <ExpediaBenefits />
         </div>

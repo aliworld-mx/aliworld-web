@@ -5,6 +5,7 @@ import klookAliworldLogo from "../../public/klookAli.png";
 import { KlookSearchWidget } from "../_components/Klook/KlookSearchWidget";
 import { Partners } from "../_components/Partners";
 import { KlookBenefits } from "../_components/Klook/KlookBenefits";
+import HotelQuotation from "../_components/HotelQuotation";
 
 export const metadata: Metadata = {
     title: 'Actividades y Transporte | Aliworld',
@@ -59,8 +60,9 @@ export default function ActividadesPage() {
                     className="w-full sm:w-1/2 object-cover mx-auto"
                 />
             </div>
-            <Partners />
             <KlookBenefits />
+            <Partners />
+            <HotelQuotation />
         </div>
     )
 }
