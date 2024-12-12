@@ -13,6 +13,8 @@ import { toMoney } from './_utils/toMoney';
 import { getDestinations } from './lib/getDestinations';
 import { FAQs } from './_components/FAQs';
 import { Partners } from './_components/Partners';
+import Socials from './_components/Socials';
+import HotelQuotation from './_components/HotelQuotation';
 
 export const revalidate = 3600;
 
@@ -252,6 +254,8 @@ export default async function InicioPage() {
             </Link>
           </div>
         </div>
+        <HotelQuotation />
+        <Socials />
         <Benefits />
         <Partners />
         <FAQs />

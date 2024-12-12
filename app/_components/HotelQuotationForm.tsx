@@ -1,33 +1,23 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { Dialog, DialogPanel, DialogTitle } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
-import { TypeSalida } from '../_types/contentful/Salida'
-import { toDate } from '../_utils/toDate'
 
-
-interface QuotationFormProps {
-    packageId: number
-    departures: TypeSalida[];
-    dailyDepartures?: boolean;
-}
-
-export const QuotationForm = ({ packageId, departures, dailyDepartures }: QuotationFormProps) => {
+export const HotelQuotationForm = () => {
     const [isOpen, setIsOpen] = useState(false)
     const [isSent, setIsSent] = useState(false)
     const [isSending, setIsSending] = useState(false)
     const [habitaciones, setHabitaciones] = useState([{ adultos: 2, menores: 0 }])
-    const salidas = useMemo(() => departures?.map((salida) => ({
-        id: salida.fields.id,
-        title: toDate(salida.fields.fecha),
-    })), [departures]);
 
     const [formData, setFormData] = useState({
         correo: '',
         telefono: '',
         fechaSalida: '',
-        salida: salidas?.[0]?.id ?? '',
+        noches: '',
+        destino: '',
+        descripcion: '',
+        presupuesto: '',
     })
 
 
@@ -51,11 +41,15 @@ export const QuotationForm = ({ packageId, departures, dailyDepartures }: Quotat
 
         const emailData = {
             to: 'contacto@aliworld.mx',
-            subject: `Solicitud de Cotización - ${packageId}`,
+            subject: `Solicitud de Cotización Hotel - ${formData.destino}`,
             html: `
             Correo: ${formData.correo}<br>
             Teléfono: ${formData.telefono}<br>
-            Salida: ${formData.fechaSalida ?? salidas?.find((s) => s.id === formData.salida)?.title}<br>
+            Fecha de Salida: ${formData.fechaSalida}<br>
+            Noches: ${formData.noches}<br>
+            Destino: ${formData.destino}<br>
+            Presupuesto total: ${formData.presupuesto}<br>
+            Descripción: ${formData.descripcion}<br>
             Habitaciones:<br> ${habitaciones.map((h, i) => `Habitación ${i + 1}: ${h.adultos} adultos, ${h.menores} menores`).join('<br>')}
             `,
         };
@@ -88,7 +82,7 @@ export const QuotationForm = ({ packageId, departures, dailyDepartures }: Quotat
         <div>
             <button
                 onClick={() => setIsOpen(true)}
-                className="flex w-full items-center justify-center rounded-md border border-transparent bg-sky-600 px-8 py-3 text-base font-medium text-white hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+                className="flex mt-6 mx-auto items-center justify-center rounded-md border border-transparent bg-white px-8 py-3 text-base font-medium text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 focus:ring-offset-gray-50"
             >
                 Cotizar
             </button>
@@ -115,11 +109,11 @@ export const QuotationForm = ({ packageId, departures, dailyDepartures }: Quotat
                                                 name="correo"
                                                 value={formData.correo}
                                                 onChange={handleChange}
-                                                className="mt-2 block w-full rounded-md text-gray-700 border-gray-300 shadow-sm focus:border-sky-500 focus:ring focus:ring-sky-500 focus:ring-opacity-50"
+                                                className="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring focus:ring-sky-500 focus:ring-opacity-50"
                                                 required
                                             />
                                         </div>
-                                        {/* Teléfono */}
+                                        {/* Telefono */}
                                         <div>
                                             <label htmlFor="telefono" className="block text-sm font-medium text-gray-700">Teléfono</label>
                                             <input
@@ -128,43 +122,76 @@ export const QuotationForm = ({ packageId, departures, dailyDepartures }: Quotat
                                                 name="telefono"
                                                 value={formData.telefono}
                                                 onChange={handleChange}
+                                                className="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring focus:ring-sky-500 focus:ring-opacity-50"
+                                                required
+                                            />
+                                        </div>
+                                        {/* Fecha de Salida */}
+                                        <div>
+                                            <label htmlFor="fechaSalida" className="block text-sm font-medium text-gray-700">Fecha de Salida</label>
+                                            <input
+                                                type="date"
+                                                id="fechaSalida"
+                                                name="fechaSalida"
+                                                value={formData.fechaSalida}
+                                                onChange={handleChange}
                                                 className="mt-2 block w-full rounded-md text-gray-700 border-gray-300 shadow-sm focus:border-sky-500 focus:ring focus:ring-sky-500 focus:ring-opacity-50"
                                                 required
                                             />
                                         </div>
-                                        {/* Salida */}
-                                        {salidas?.length >= 1 && (
-                                            <div>
-                                                <label htmlFor="salida" className="block text-sm font-medium text-gray-700">Salida</label>
-                                                <select
-                                                    id="salida"
-                                                    name="salida"
-                                                    value={formData.salida}
-                                                    onChange={handleChange}
-                                                    className="mt-2 block w-full rounded-md  border-gray-300 text-gray-700 shadow-sm focus:border-sky-500 focus:ring focus:ring-sky-500 focus:ring-opacity-50"
-                                                >
-                                                    {salidas?.map((salida) => (
-                                                        <option key={salida.id} value={salida.id} className='text-gray-700'>
-                                                            {salida.title}
-                                                        </option>
-                                                    ))}
-                                                </select>
-                                            </div>
-                                        )}
-                                        {dailyDepartures && (
-                                            <div>
-                                                <label htmlFor="fechaSalida" className="block text-sm font-medium text-gray-700">Fecha de Salida</label>
-                                                <input
-                                                    type="date"
-                                                    id="fechaSalida"
-                                                    name="fechaSalida"
-                                                    value={formData.fechaSalida}
-                                                    onChange={handleChange}
-                                                    className="mt-2 block w-full rounded-md text-gray-700 border-gray-300 shadow-sm focus:border-sky-500 focus:ring focus:ring-sky-500 focus:ring-opacity-50"
-                                                    required
-                                                />
-                                            </div>
-                                        )}
+                                        {/* Noches */}
+                                        <div>
+                                            <label htmlFor="noches" className="block text-sm font-medium text-gray-700">Noches</label>
+                                            <input
+                                                type="number"
+                                                id="noches"
+                                                name="noches"
+                                                value={formData.noches}
+                                                onChange={handleChange}
+                                                className="mt-2 block w-full rounded-md text-gray-700 border-gray-300 shadow-sm focus:border-sky-500 focus:ring focus:ring-sky-500 focus:ring-opacity-50"
+                                                required
+                                            />
+                                        </div>
+                                        {/* Destino */}
+                                        <div>
+                                            <label htmlFor="destino" className="block text-sm font-medium text-gray-700">Destino (Ciudad o Municipio)</label>
+                                            <input
+                                                type="text"
+                                                id="destino"
+                                                name="destino"
+                                                value={formData.destino}
+                                                onChange={handleChange}
+                                                className="mt-2 block w-full rounded-md text-gray-700 border-gray-300 shadow-sm focus:border-sky-500 focus:ring focus:ring-sky-500 focus:ring-opacity-50"
+                                                required
+                                            />
+                                        </div>
+                                        {/* Presupuesto */}
+                                        <div>
+                                            <label htmlFor="presupuesto" className="block text-sm font-medium text-gray-700">Presupuesto (Total en Pesos Mexicanos)</label>
+                                            <input
+                                                type="number"
+                                                id="presupuesto"
+                                                name="presupuesto"
+                                                value={formData.presupuesto}
+                                                onChange={handleChange}
+                                                className="mt-2 block w-full rounded-md text-gray-700 border-gray-300 shadow-sm focus:border-sky-500 focus:ring focus:ring-sky-500 focus:ring-opacity-50"
+                                                required
+                                            />
+                                        </div>
+                                        {/* Descripcion */}
+                                        <div>
+                                            <label htmlFor="descripcion" className="block text-sm font-medium text-gray-700">Platicanos un poco de tu idea de viaje</label>
+                                            <textarea
+                                                id="descripcion"
+                                                name="descripcion"
+                                                rows={4}
+                                                value={formData.descripcion}
+                                                onChange={handleChange}
+                                                className="mt-2 block w-full rounded-md text-gray-700 border-gray-300 shadow-sm focus:border-sky-500 focus:ring focus:ring-sky-500 focus:ring-opacity-50"
+                                                required
+                                            />
+                                        </div>
+
                                         {/* Habitaciones */}
                                         <div>
                                             <label className="block text-sm font-lg font-bold text-gray-700">Habitaciones</label>
