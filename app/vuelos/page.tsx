@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     robots: 'index, follow',
 };
 
-export const revalidate = 36000;
+export const revalidate = 1;
 
 export default function VuelosPage() {
     return (
