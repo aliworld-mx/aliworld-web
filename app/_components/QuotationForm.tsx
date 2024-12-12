@@ -55,7 +55,7 @@ export const QuotationForm = ({ packageId, departures, dailyDepartures }: Quotat
             html: `
             Correo: ${formData.correo}<br>
             Teléfono: ${formData.telefono}<br>
-            Salida: ${formData.fechaSalida ?? salidas?.find((s) => s.id === formData.salida)?.title}<br>
+            Salida: ${formData.fechaSalida ? salidas?.find((s) => s.id === formData.salida)?.title : salidas[0].title}<br>
             Habitaciones:<br> ${habitaciones.map((h, i) => `Habitación ${i + 1}: ${h.adultos} adultos, ${h.menores} menores`).join('<br>')}
             `,
         };
