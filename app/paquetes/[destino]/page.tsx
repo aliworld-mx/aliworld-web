@@ -8,6 +8,7 @@ import { Metadata } from 'next';
 import { PageProps } from '@/.next/types/app/page'
 import { OfferCatalog, WithContext } from 'schema-dts';
 import { Suspense } from 'react';
+import HotelQuotation from '@/app/_components/HotelQuotation';
 
 export const revalidate = 3600;
 
@@ -94,6 +95,7 @@ export default async function DestinosPage({ params }: PageProps) {
                     <TripGrid header={`Nuestros Paquetes a ${getDestinationNameBySlug(destino)}`} trips={trips} />
                 </Suspense>
             </div>
+            <HotelQuotation />
             <FAQs />
         </>
     )
