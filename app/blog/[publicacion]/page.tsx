@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
             description: descripcion,
             images: [
                 {
-                    url: `https://${portada.fields.file?.url}`,
+                    url: `https:${portada.fields.file?.url}`,
                     width: 1200,
                     height: 600,
                     alt: titulo,
@@ -60,7 +60,7 @@ export default async function BlogPost({ params }: PageProps) {
         '@type': 'BlogPosting',
         headline: `${titulo} - Aliworld`,
         description: descripcion,
-        image: `https://${portada.fields.file?.url}`,
+        image: `https:${portada.fields.file?.url}`,
         author: {
             '@type': 'Organization',
             name: 'Aliworld',

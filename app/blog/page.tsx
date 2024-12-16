@@ -30,7 +30,7 @@ export default async function BlogPage() {
                                     <div className="relative w-full">
                                         <Image
                                             alt={descripcion}
-                                            src={`https://${portada.fields?.file?.url}`}
+                                            src={`https:${portada.fields?.file?.url}`}
                                             width={800}
                                             height={450}
                                             className="aspect-video w-full rounded-2xl bg-gray-100 object-cover sm:aspect-[2/1] lg:aspect-[3/2]"
