@@ -133,8 +133,8 @@ export default async function BlogPost({ params }: PageProps) {
                         </article>
                     </div>
                 </div>
-                <Catalog />
                 <Socials />
+                <Catalog />
             </div>
         </>
     );

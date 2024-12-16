@@ -1,5 +1,7 @@
 import Image from "next/image";
 import { getBlogPosts } from "../lib/getBlogPosts";
+import { Catalog } from "../_components/Catalog";
+import Socials from "../_components/Socials";
 
 export default async function BlogPage() {
     const posts = await getBlogPosts();
@@ -62,6 +64,8 @@ export default async function BlogPage() {
                     })}
                 </div>
             </div>
+            <Socials />
+            <Catalog />
         </div>
     )
 }
