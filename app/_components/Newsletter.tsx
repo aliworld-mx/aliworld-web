@@ -28,7 +28,7 @@ export const Newsletter = () => {
 
     return (
         <div className="mt-16 md:mt-16 xl:mt-0">
-            <h3 className="text-sm font-medium text-gray-900">Suscribete a nuestro boletin</h3>
+            <h3 className="text-sm font-medium text-gray-900">Suscríbete a nuestro boletin</h3>
             <p className="mt-6 text-sm text-gray-500">Recibe promociones, ideas de viajes y tips a tu correo.</p>
             {isSent ? (
                 <p className="mt-2 text-sm text-sky-600">¡Gracias por suscribirte!</p>
