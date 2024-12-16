@@ -8,14 +8,14 @@ import { KlookBenefits } from "../_components/Klook/KlookBenefits";
 import HotelQuotation from "../_components/HotelQuotation";
 
 export const metadata: Metadata = {
-    title: 'Actividades y Transporte | Aliworld',
-    description: 'Paquetes para parques temáticos, tours, transporte y más. Aliworld te ofrece las mejores experiencias para tus vacaciones.',
+    title: 'Actividades | Aliworld',
+    description: 'Paquetes para parques temáticos, tours, museos, transporte y más. Aliworld te ofrece las mejores experiencias para tus vacaciones.',
     openGraph: {
         type: 'website',
         url: 'https://www.aliworld.mx/actividades',
-        title: 'Actividades y Transporte | Aliworld',
+        title: 'Actividades | Aliworld',
         siteName: 'Aliworld',
-        description: 'Paquetes para parques temáticos, tours, transporte y más. Aliworld te ofrece las mejores experiencias para tus vacaciones.',
+        description: 'Paquetes para parques temáticos, tours, museos, transporte y más. Aliworld te ofrece las mejores experiencias para tus vacaciones.',
     },
     alternates: {
         canonical: 'https://www.aliworld.mx/actividades',
@@ -43,9 +43,9 @@ export default function ActividadesPage() {
 
             <div className="relative mx-auto -mt-12 max-w-7xl px-4 pb-16 sm:px-6 sm:pb-24 lg:px-8">
                 <div className="mx-auto max-w-2xl text-center lg:max-w-4xl">
-                    <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Actividades y Transporte</h1>
+                    <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Actividades</h1>
                     <p className="mt-4 text-gray-500">
-                        Aliworld trabaja con Klook para ofrecerte las mejores experiencias en parques temáticos, tours, transporte y más. Encuentra la actividad perfecta para tus vacaciones. Desde boletos para Disneyland hasta pases de tren en Europa. Todo en un solo lugar y con los mejores precios.
+                        Aliworld trabaja con Klook para ofrecerte las mejores experiencias en parques temáticos, tours, museos, transporte y más. Encuentra la actividad perfecta para tus vacaciones. Desde boletos para Disneyland hasta pases de tren en Europa. Todo en un solo lugar y con los mejores precios.
                     </p>
                 </div>
 

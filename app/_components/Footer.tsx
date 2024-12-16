@@ -18,7 +18,7 @@ const footerNavigation = {
     ],
     reservaciones: [
         { name: 'Hoteles', href: '/hoteles' },
-        { name: 'Actividades y Transporte', href: '/actividades' },
+        { name: 'Actividades', href: '/actividades' },
         { name: 'Vuelos', href: '/vuelos' },
     ],
     empresa: [
