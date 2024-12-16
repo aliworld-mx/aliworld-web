@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { getBlogPosts } from "../lib/getBlogPosts";
 
 export default async function BlogPage() {
@@ -24,12 +25,14 @@ export default async function BlogPage() {
                         } = post.fields;
 
                         return (
-                            <a href={`/blog/${slug}`}>
+                            <a href={`/blog/${slug}`} key={slug}>
                                 <article key={slug} className="flex flex-col items-start justify-between">
                                     <div className="relative w-full">
-                                        <img
-                                            alt=""
-                                            src={portada.fields?.file?.url}
+                                        <Image
+                                            alt={descripcion}
+                                            src={`https://${portada.fields?.file?.url}`}
+                                            width={800}
+                                            height={450}
                                             className="aspect-video w-full rounded-2xl bg-gray-100 object-cover sm:aspect-[2/1] lg:aspect-[3/2]"
                                         />
                                         <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10" />
