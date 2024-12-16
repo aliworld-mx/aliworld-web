@@ -1,14 +1,18 @@
+import { PageProps } from '@/.next/types/app/blog/[publicacion]/page';
 import BackButton from '@/app/_components/Buttons/BackButton';
 import { Catalog } from '@/app/_components/Catalog';
 import Socials from '@/app/_components/Socials';
 import { getBlogPost } from '@/app/lib/getBlogPost';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { BLOCKS, INLINES } from '@contentful/rich-text-types';
+import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import type { BlogPosting, WithContext } from 'schema-dts';
 
-export async function generateMetadata({ params }: { params: { publicacion: string } }) {
+export const revalidate = 36000;
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
     const { publicacion } = await params;
     const post = await getBlogPost(publicacion);
     const {
@@ -41,7 +45,7 @@ export async function generateMetadata({ params }: { params: { publicacion: stri
     };
 }
 
-export default async function BlogPost({ params }: { params: { publicacion: string } }) {
+export default async function BlogPost({ params }: PageProps) {
     const { publicacion } = await params;
     const post = await getBlogPost(publicacion);
     const {
