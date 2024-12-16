@@ -68,7 +68,7 @@ export default async function BlogPost({ params }: { params: { publicacion: stri
         },
         publisher: {
             '@type': 'Organization',
-            name: 'abigail',
+            name: 'Aliworld',
             logo: {
                 '@type': 'ImageObject',
                 url: 'https://www.aliworld.mx/aliworld-color.svg',
