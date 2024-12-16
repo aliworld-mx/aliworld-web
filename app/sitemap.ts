@@ -1,5 +1,7 @@
 import { TypePaquete } from "./_types/contentful/Paquete";
+import { TypePublicacion } from "./_types/contentful/Publicacion";
 import { getAllTrips } from "./lib/getAllTrips";
+import { getBlogPosts } from "./lib/getBlogPosts";
 
 export default async function sitemap() {
     const p0Keys = [
@@ -25,6 +27,7 @@ export default async function sitemap() {
         '/hoteles',
         '/actividades',
         '/vuelos',
+        '/blog'
     ]
 
     function getUrl(key: string) {
@@ -39,9 +42,13 @@ export default async function sitemap() {
         priority: 0.60,
     })) as { url: string, lastModified: string, priority: number }[];
 
-    if (!trips) {
-        return [];
-    }
+    const posts = await getBlogPosts();
+
+    const postUrl = posts?.map((post: TypePublicacion) => ({
+        url: `https://www.aliworld.mx/blog/${post.fields.slug}`,
+        lastModified: post.sys.updatedAt,
+        priority: 0.40,
+    })) as { url: string, lastModified: string, priority: number }[];
 
     return [
         ...p0Keys.map((key) => ({
@@ -55,5 +62,6 @@ export default async function sitemap() {
             priority: 0.80
         })),
         ...tripUrls,
+        ...postUrl,
     ];
 }
