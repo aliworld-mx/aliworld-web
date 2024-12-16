@@ -86,6 +86,7 @@ export const Navigation = ({ navigationData }: NavigationProps) => {
             { name: 'Hoteles', href: '/hoteles' },
             { name: 'Vuelos', href: '/vuelos' },
             { name: 'Actividades', href: '/actividades' },
+            { name: 'Blog', href: '/blog' },
             { name: 'Contacto', href: '/contacto' },
         ],
     };

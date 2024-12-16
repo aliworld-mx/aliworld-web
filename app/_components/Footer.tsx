@@ -20,6 +20,7 @@ const footerNavigation = {
         { name: 'Hoteles', href: '/hoteles' },
         { name: 'Actividades', href: '/actividades' },
         { name: 'Vuelos', href: '/vuelos' },
+        { name: 'Recomendaciones', href: '/blog' },
     ],
     empresa: [
         { name: 'Politica de Cancelaciones', href: '#' },
