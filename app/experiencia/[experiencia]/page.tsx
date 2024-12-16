@@ -132,7 +132,7 @@ export default async function ExperienciaPage({ params }: PageProps) {
                         <div className='space-y-4'>
                             <p className="text-gray-600 text-sm">Por adulto en habitación doble</p>
                             {salidasDiarias && <p className="text-gray-700 font-bold text-base">Salidas Diarias</p>}
-                            <p className="text-gray-700 text-base">Países que se visitan: {paises.map(pais => pais.fields.nombre).join(', ')}</p>
+                            <p className="text-gray-700 text-base">Países que se visitan: {paises.map(pais => pais.fields?.nombre ?? '').join(', ')}</p>
                             <p className="text-gray-700 text-base">Ruta de Ciudades que se visitan: {ciudades.map(ciudad => ciudad.fields?.nombre).join(', ')}</p>
                         </div>
                     </section>
