@@ -95,7 +95,7 @@ export const QuotationForm = ({ packageId, departures, dailyDepartures }: Quotat
             <Dialog open={isOpen} onClose={() => setIsOpen(false)} className="relative z-50">
                 <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
                 <div className="fixed inset-0 z-50 overflow-y-auto">
-                    <div className="flex min-h-full items-center justify-center p-12 text-center">
+                    <div className="flex min-h-full items-center justify-center p-4 sm:p-12 text-center">
                         <DialogPanel className="w-full max-w-lg transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                             <DialogTitle className="text-2xl font-semibold text-gray-900">Formulario de Cotización</DialogTitle>
                             {isSent ? (

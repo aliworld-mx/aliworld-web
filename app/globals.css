@@ -46,6 +46,7 @@ td {
   padding: 8px;
   border-bottom: 1px solid var(--foreground);
   min-width: 70px;
+  font-size: 12px;
 }
 
 th, td, tr, span, p {

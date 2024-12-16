@@ -19,8 +19,8 @@ export const Navigation = ({ navigationData }: NavigationProps) => {
     const navigation = {
         categories: [
             {
-                id: 'experiencias',
-                name: 'Experiencias',
+                id: 'paquetes',
+                name: 'Paquetes',
                 featured: [
                     {
                         name: 'Promociones',

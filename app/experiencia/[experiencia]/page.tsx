@@ -1,20 +1,15 @@
-import { SunIcon, MoonIcon, CreditCardIcon, CalendarDaysIcon, CurrencyDollarIcon, XMarkIcon, CheckIcon } from '@heroicons/react/20/solid'
+import { SunIcon, MoonIcon, CreditCardIcon } from '@heroicons/react/20/solid'
 import { getTrip } from '@/app/lib/getTrip'
 import { toMoney } from '@/app/_utils/toMoney'
-import { PriceTable } from '@/app/_components/PriceTable'
 import Image from 'next/image'
-import { PriceDisclaimer } from '@/app/_components/PriceDisclaimer'
 import Benefits from '@/app/_components/Benefits'
 import { Breadcrumbs } from '@/app/_components/Breadcrumbs'
-import { Itinerary } from '@/app/_components/Itinerary'
-import { Hotels } from '@/app/_components/Hotels'
 import { Trip, WithContext } from 'schema-dts'
 import { Metadata } from 'next'
 import { PageProps } from '@/.next/types/app/page'
 import { FAQs } from '@/app/_components/FAQs'
 import { QuotationForm } from '@/app/_components/QuotationForm'
-import { IncludedDetails } from '@/app/_components/IncludedDetails'
-import { NotIncludedDetails } from '@/app/_components/NotIncludedDetails'
+import ExperienceTabs from '@/app/_components/Experiences/ExperienceTabs'
 
 export const revalidate = 3600;
 
@@ -53,7 +48,7 @@ export const generateMetadata = async ({ params }: PageProps): Promise<Metadata>
 export default async function ExperienciaPage({ params }: PageProps) {
     const { experiencia } = await params;
     const experience = await getTrip(experiencia);
-    const { nombre, precio, dias, noches, imagen, moneda, precios, destino, ciudades, paises, itinerario, hoteles, salidas, incluye, noIncluye, salidasDiarias } = experience.fields;
+    const { nombre, precio, dias, noches, imagen, moneda, destino, ciudades, paises, salidas, salidasDiarias } = experience.fields;
     const { url } = imagen.fields.file!;
     const imageUrl = `https:${url}`;
 
@@ -167,43 +162,8 @@ export default async function ExperienciaPage({ params }: PageProps) {
                         </div>
                     </section>
                 </div>
-                <div className="mt-10 px-4 lg:px-0 lg:col-start-1 lg:max-w-lg lg:self-start">
-                    <section aria-labelledby="itinerary-heading">
-                        <h2 id="itinerary-heading" className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl flex flex-row items-center gap-x-3">
-                            <CalendarDaysIcon className="size-8 shrink-0 text-sky-500" aria-hidden="true" />
-                            Itinerario
-                        </h2>
-                        <div className='text-gray-900 mt-6'>
-                            <Itinerary itinerario={itinerario} />
-                        </div>
-                    </section>
-                </div>
-                <div className="mt-10 px-4 lg:px-0 space-y-12 lg:col-start-2 lg:max-w-lg lg:self-start">
-                    <section aria-labelledby="tariff-heading">
-                        <h2 id="tariff-heading" className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl flex flex-row items-center gap-x-3">
-                            <CurrencyDollarIcon className="size-8 shrink-0 text-sky-500" aria-hidden="true" />
-                            Tarifas
-                        </h2>
-                        <PriceTable precios={precios} />
-                        {moneda === 'USD' && <PriceDisclaimer />}
-                    </section>
-                    <section aria-labelledby="include-heading">
-                        <h2 id="include-heading" className="text-2xl font-bold mb-6 tracking-tight text-gray-900 sm:text-3xl flex flex-row items-center gap-x-3">
-                            <CheckIcon className="size-8 shrink-0 text-sky-500" aria-hidden="true" />
-                            Incluye
-                        </h2>
-                        <IncludedDetails incluye={incluye} />
-                    </section>
-                    <section aria-labelledby="not-include-heading">
-                        <h2 id="not-include-heading" className="text-2xl font-bold mb-6 tracking-tight text-gray-900 sm:text-3xl flex flex-row items-center gap-x-3">
-                            <XMarkIcon className="size-8 shrink-0 text-sky-500" aria-hidden="true" />
-                            No Incluye
-                        </h2>
-                        <NotIncludedDetails noIncluye={noIncluye} />
-                    </section>
-                </div>
             </div>
-            <Hotels hoteles={hoteles} />
+            <ExperienceTabs experience={experience} />
             <Benefits />
             <FAQs />
         </div>

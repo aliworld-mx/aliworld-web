@@ -15,6 +15,7 @@ import { FAQs } from './_components/FAQs';
 import { Partners } from './_components/Partners';
 import Socials from './_components/Socials';
 import HotelQuotation from './_components/HotelQuotation';
+import { Catalog } from './_components/Catalog';
 
 export const revalidate = 3600;
 
@@ -254,6 +255,7 @@ export default async function InicioPage() {
             </Link>
           </div>
         </div>
+        <Catalog />
         <HotelQuotation />
         <Socials />
         <Benefits />
