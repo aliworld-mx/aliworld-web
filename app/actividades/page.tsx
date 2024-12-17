@@ -6,6 +6,7 @@ import { KlookSearchWidget } from "../_components/Klook/KlookSearchWidget";
 import { Partners } from "../_components/Partners";
 import { KlookBenefits } from "../_components/Klook/KlookBenefits";
 import HotelQuotation from "../_components/HotelQuotation";
+import ActivitiesRow from "../_components/ActivitiesRow";
 
 export const metadata: Metadata = {
     title: 'Actividades | Aliworld',
@@ -27,7 +28,7 @@ export const metadata: Metadata = {
 
 export const revalidate = 36000;
 
-export default function ActividadesPage() {
+export default async function ActividadesPage() {
     return (
         <div className="bg-white">
             <div aria-hidden="true" className="relative">
@@ -60,6 +61,9 @@ export default function ActividadesPage() {
                     className="w-full sm:w-1/2 object-cover mx-auto"
                 />
             </div>
+            <ActivitiesRow header="Maravillate con los Parques de Disney" tag='disney' show={3} />
+            <ActivitiesRow header="Vive aventuras sorprendentes en México" tag='mexico' show={3} />
+            <ActivitiesRow header="Descubre todo lo que Japón tiene para ti" tag='japon' show={3} />
             <KlookBenefits />
             <Partners />
             <HotelQuotation />
