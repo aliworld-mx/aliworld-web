@@ -21,7 +21,7 @@ export default async function ActivitiesRow({ header, tag, show = -1 }: Activiti
                     <h3 className="text-balance text-2xl font-semibold tracking-tight text-gray-900 mb-0">
                         {header}
                     </h3>
-                    {show > -1 && (<Link href="/actividades/${tag}" className="block text-sm font-semibold text-sky-600 hover:text-sky-500">
+                    {show > -1 && (<Link href={`/actividades/${tag}`} className="block text-sm font-semibold text-sky-600 hover:text-sky-500">
                         Ver todas
                         <span aria-hidden="true"> &rarr;</span>
                     </Link>)}
