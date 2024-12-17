@@ -17,11 +17,14 @@ export default async function ActivitiesRow({ header, tag, show = -1 }: Activiti
     return (
         <div className="bg-white py-12">
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
-                <div className="flex flex-row justify-between">
+                <div className="flex flex-row justify-between items-center">
                     <h3 className="text-balance text-2xl font-semibold tracking-tight text-gray-900 mb-0">
                         {header}
                     </h3>
-                    {show > -1 && <Link href={`/actividades/${tag}`} className="text-sky-600">Ver todas</Link>}
+                    {show > -1 && (<Link href="/actividades/${tag}" className="block text-sm font-semibold text-sky-600 hover:text-sky-500">
+                        Ver todas
+                        <span aria-hidden="true"> &rarr;</span>
+                    </Link>)}
                 </div>
                 <div className="mx-auto mt-8 grid max-w-2xl auto-rows-fr grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
                     {filteredActivities.map((activity) => {
