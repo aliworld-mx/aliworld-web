@@ -61,7 +61,6 @@ export default async function BlogPage() {
             const {
                 titulo,
                 descripcion,
-                fecha,
                 portada,
                 slug,
                 etiquetas,
@@ -72,7 +71,7 @@ export default async function BlogPage() {
                 headline: titulo,
                 description: descripcion,
                 image: `https:${portada.fields?.file?.url}`,
-                datePublished: fecha,
+                datePublished: post.sys.createdAt,
                 dateModified: post.sys.updatedAt,
                 author: {
                     '@type': 'Organization',
