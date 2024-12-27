@@ -60,7 +60,7 @@ export default async function ExperienciaPage({ params }: PageProps) {
         image: imageUrl,
         provider: {
             '@type': 'Organization',
-            name: 'Mega Travel',
+            name: 'Aliworld',
         },
         itinerary: {
             '@type': 'ItemList',

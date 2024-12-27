@@ -4,6 +4,7 @@ import { Catalog } from "../_components/Catalog";
 import Socials from "../_components/Socials";
 import { Metadata } from "next";
 import { Blog, WithContext } from "schema-dts";
+import Link from "next/link";
 
 export const revalidate = 36000;
 
@@ -98,9 +99,9 @@ export default async function BlogPage() {
             <div className="bg-white py-24 sm:py-32">
                 <div className="mx-auto max-w-7xl px-6 lg:px-8">
                     <div className="mx-auto max-w-2xl text-center">
-                        <h2 className="text-balance text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">
-                            Nuestras Recomendaciones
-                        </h2>
+                        <h1 className="text-balance text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">
+                            Blog de Viajes
+                        </h1>
                         <p className="mt-2 text-lg/8 text-gray-600">Descubre nuevos lugares y actividades para planear en tu siguiente viaje.</p>
                     </div>
                     <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
@@ -115,7 +116,7 @@ export default async function BlogPage() {
                             } = post.fields;
 
                             return (
-                                <a href={`/blog/${slug}`} key={slug}>
+                                <Link href={`/blog/${slug}`} key={slug}>
                                     <article key={slug} className="flex flex-col items-start justify-between">
                                         <div className="relative w-full">
                                             <Image
@@ -147,7 +148,7 @@ export default async function BlogPage() {
                                             </div>
                                         </div>
                                     </article>
-                                </a>
+                                </Link>
                             )
                         })}
                     </div>

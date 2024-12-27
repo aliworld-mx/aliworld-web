@@ -25,8 +25,6 @@ export const metadata: Metadata = {
     robots: 'index, follow',
 };
 
-export const revalidate = 36000;
-
 export default function HotelesPage() {
     return (
         <div className="bg-white">

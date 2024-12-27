@@ -27,7 +27,6 @@ export const metadata: Metadata = {
     robots: 'index, follow',
 }
 
-
 const breadcrumbs = [
     {
         name: 'Inicio',

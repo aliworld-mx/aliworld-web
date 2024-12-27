@@ -27,7 +27,7 @@ export const Breadcrumbs = ({ breadcrumbs }: BreadcrumbProps) => {
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
             <ol role="list" className="flex space-x-2">
                 {breadcrumbs.map((breadcrumb, breadcrumbIdx) => (
-                    <li key={breadcrumb.href}>
+                    <li key={breadcrumb.href} className="list-none">
                         <div className="flex items-center text-sm">
                             <Link href={breadcrumb.href} className="font-medium text-gray-500 hover:text-gray-900">
                                 {breadcrumb.name}
