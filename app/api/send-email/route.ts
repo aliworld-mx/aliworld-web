@@ -13,7 +13,7 @@ export async function POST(request: Request) {
     const requestMail = mailjet
       .post('send')
       .request({
-        FromEmail: 'noreply@aliworld.mx',
+        FromEmail: 'info@aliworld.mx',
         FromName: 'Aliworld',
         Subject: subject,
         'Text-part': text,
