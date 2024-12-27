@@ -16,14 +16,14 @@ const features = [
     {
         name: 'Hoteles',
         description: 'Reserva tu hotel con beneficios exclusivos. ¡Encuentra el mejor precio!',
-        href: '/hoteles',
+        href: 'https://reservas.aliworld.mx/',
         imageSrc: hotelesImage,
         imageAlt: 'Fotografía del hotel Park Inn en Berlín.',
     },
     {
         name: 'Vuelos',
         description: 'Busca entre la mayor variedad de vuelos nacionales e internacionales.',
-        href: '/vuelos',
+        href: 'https://reservas.aliworld.mx/',
         imageSrc: vuelosImage,
         imageAlt: 'Fotografía del océano desde un avión.',
     },
@@ -41,10 +41,7 @@ export const Catalog = () => {
         <div className="bg-white">
             <div className="mx-auto max-w-2xl px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:px-8">
                 <div className="max-w-3xl">
-                    <h2 id="features-heading" className="font-medium text-gray-500">
-                        Nuestro Catálogo
-                    </h2>
-                    <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Somos tu mejor opción para cualquier plan</p>
+                    <h2 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Somos tu mejor opción para cualquier plan</h2>
                     <p className="mt-4 text-gray-500">
                         Paquetes de viaje completos alrededor del mundo, hospedaje en los mejores hoteles, vuelos nacionales e internacionales y actividades para toda la familia.
                     </p>
