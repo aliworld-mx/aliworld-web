@@ -35,12 +35,13 @@ export const Newsletter = () => {
             ) : (
                 <form className="mt-2 flex sm:max-w-md" onSubmit={onSubmitNewsletter}>
                     <label htmlFor="email" className="sr-only">
-                        Correo Electronico
+                        Correo Electrónico
                     </label>
                     <input
                         id="email"
-                        type="text"
+                        type="email"
                         name="email"
+                        placeholder="Correo Electrónico"
                         required
                         autoComplete="email"
                         className="w-full min-w-0 appearance-none rounded-md border border-gray-300 bg-white px-4 py-2 text-base text-sky-500 placeholder-gray-500 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
