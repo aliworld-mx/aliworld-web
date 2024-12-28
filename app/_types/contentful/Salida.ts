@@ -3,7 +3,7 @@ import { ContentfulEntry } from "./ContentfulEntry";
 
 export interface TypeSalidaFields {
     fields: {
-        id: EntryFields.Symbol;
+        nombre: EntryFields.Symbol;
         fecha: EntryFields.Date;
         suplemento: EntryFields.Symbol;
     }

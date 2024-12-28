@@ -5,6 +5,7 @@ import { Dialog, DialogPanel, DialogTitle } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { TypeSalida } from '../_types/contentful/Salida'
 import { toDate } from '../_utils/toDate'
+import { sortArrayByDate } from '../_utils/sortByDate'
 
 
 interface QuotationFormProps {
@@ -18,9 +19,9 @@ export const QuotationForm = ({ packageId, departures, dailyDepartures }: Quotat
     const [isSent, setIsSent] = useState(false)
     const [isSending, setIsSending] = useState(false)
     const [habitaciones, setHabitaciones] = useState([{ adultos: 2, menores: 0 }])
-    const salidas = useMemo(() => departures?.map((salida) => ({
-        id: salida.fields.id,
-        title: toDate(salida.fields.fecha),
+    const salidas = useMemo(() => sortArrayByDate(departures ?? []).map((salida) => ({
+        id: salida.fields?.nombre,
+        title: toDate(salida.fields?.fecha),
     })), [departures]);
 
     const [formData, setFormData] = useState({
@@ -29,7 +30,6 @@ export const QuotationForm = ({ packageId, departures, dailyDepartures }: Quotat
         fechaSalida: '',
         salida: salidas?.[0]?.id ?? '',
     })
-
 
     const handleChange = (e: any) => {
         const { name, value } = e.target

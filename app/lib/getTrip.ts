@@ -13,7 +13,20 @@ export async function getTrip(id: string) {
             throw new Error('No se encontró el paquete');
         }
 
-        return response.items[0] as unknown as TypePaquete;
+        const entry = response.items[0];
+
+        const salidasResponse = await contentfulClient.getEntries({
+            content_type: 'salida',
+            query: entry.fields.id as string,
+        });
+
+        return {
+            ...entry,
+            fields: {
+                ...entry.fields,
+                salidas: salidasResponse.items,
+            }
+        } as unknown as TypePaquete;
     } catch (error) {
         console.error(error);
         return notFound();
