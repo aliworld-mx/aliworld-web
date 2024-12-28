@@ -20,7 +20,7 @@ export const Socials = () => (
                 <div className="mx-auto grid w-full max-w-xl grid-cols-2 items-center gap-y-12 sm:gap-y-14 lg:mx-0 lg:max-w-none lg:pl-8">
                     <Link href="https://www.facebook.com/aliworld.viajes/">
                         <div className='flex flex-row text-gray-800 rounded-lg justify-center gap-x-6 items-center'>
-                            <h4 className='font-bold'>Facebook</h4>
+                            <h4 className='font-bold hover:underline'>Facebook</h4>
                             <Image
                                 alt="Facebook Logo"
                                 src={facebookLogo}
@@ -32,7 +32,7 @@ export const Socials = () => (
                     </Link>
                     <Link href="https://www.instagram.com/aliworld.viajes/">
                         <div className='flex flex-row text-gray-800 rounded-lg justify-center gap-x-6 items-center'>
-                            <h4 className='font-bold'>Instagram</h4>
+                            <h4 className='font-bold hover:underline'>Instagram</h4>
                             <Image
                                 alt="Instagram Logo"
                                 src={instagramLogo}
@@ -44,7 +44,7 @@ export const Socials = () => (
                     </Link>
                     <Link href="https://www.tiktok.com/@aliworld.viajes">
                         <div className='flex flex-row text-gray-800 rounded-lg justify-center gap-x-6 items-center'>
-                            <h4 className='font-bold'>TikTok</h4>
+                            <h4 className='font-bold hover:underline'>TikTok</h4>
                             <Image
                                 alt="TikTok Logo"
                                 src={tiktokLogo}
@@ -56,7 +56,7 @@ export const Socials = () => (
                     </Link>
                     <Link href="https://www.threads.net/@aliworld.viajes">
                         <div className='flex flex-row text-gray-800 rounded-lg justify-center gap-x-6 items-center'>
-                            <h4 className='font-bold'>Threads</h4>
+                            <h4 className='font-bold hover:underline'>Threads</h4>
                             <Image
                                 alt="Threads Logo"
                                 src={threadsLogo}

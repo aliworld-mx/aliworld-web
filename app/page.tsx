@@ -14,8 +14,8 @@ import { getDestinations } from './lib/getDestinations';
 import { FAQs } from './_components/FAQs';
 import { Partners } from './_components/Partners';
 import Socials from './_components/Socials';
-import HotelQuotation from './_components/HotelQuotation';
 import { Catalog } from './_components/Catalog';
+import { ExpediaBenefits } from './_components/Expedia/ExpediaBenefits';
 
 export const revalidate = 3600;
 
@@ -119,28 +119,76 @@ export default async function InicioPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <div aria-hidden="true" className="absolute inset-0 overflow-hidden">
-        <Image
-          alt="El Pabellon Dorado en Kyoto, Japón"
-          src={heroImage}
-          width={1920}
-          height={1080}
-          className="size-full object-cover"
-        />
+      <div className="relative bg-white">
+        <div className="mx-auto max-w-7xl">
+          <div className="relative z-10 pt-14 lg:w-full lg:max-w-2xl">
+            <svg
+              viewBox="0 0 100 100"
+              preserveAspectRatio="none"
+              aria-hidden="true"
+              className="absolute inset-y-0 right-8 hidden h-full w-80 translate-x-1/2 transform fill-white lg:block"
+            >
+              <polygon points="0,0 90,0 50,100 0,100" />
+            </svg>
+
+            <div className="relative px-6 pb-32 pt-6 sm:py-32 lg:px-8 lg:pr-0">
+              <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-xl">
+                <h1 className="text-pretty text-5xl font-semibold tracking-tight text-gray-900 sm:text-7xl">
+                  Reserva tu próximo viaje con Aliworld
+                </h1>
+                <p className="mt-8 text-pretty text-lg font-medium text-gray-500 sm:text-xl/8">
+                  Descubre los mejores destinos y vive una gran aventura con Aliworld. Desde entradas a parques temáticos hasta paquetes de viaje completos, tenemos todo lo que necesitas para tu próximo viaje.
+                </p>
+                <div className="mt-10 flex flex-col sm:flex-row items-center gap-6">
+                  <Link
+                    href="/paquetes"
+                    className="rounded-md bg-sky-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600"
+                  >
+                    Ver Paquetes de Viaje
+                  </Link>
+                  <Link href="https://reservas.aliworld.mx" className="text-sm/6 font-semibold text-gray-900">
+                    Reservar Hoteles y Vuelos <span aria-hidden="true">→</span>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="bg-gray-50 lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
+          <Image
+            alt="El Pabellon Dorado en Kyoto, Japón"
+            src={heroImage}
+            width={1920}
+            height={1080}
+            className="aspect-[3/2] object-cover lg:aspect-auto lg:size-full"
+          />
+        </div>
       </div>
-      <div aria-hidden="true" className="absolute inset-0 bg-gray-900 opacity-50" />
+      {/*<div aria-hidden="true" className="absolute inset-0 bg-gray-900 opacity-50" />
       <div className="relative mx-auto flex max-w-3xl flex-col items-center py-12 px-6 h-screen mb-[-64px] text-center lg:px-0">
         <h1 className="text-4xl font-bold tracking-tight mt-32 sm:mt-64 text-white lg:text-6xl">Encuentra tu próximo destino</h1>
         <p className="mt-4 text-xl text-white">
           Viajar es una de las mejores experiencias que puedes tener, descubre los mejores destinos y vive una gran aventura.
         </p>
         <Link
-          href="paquetes"
+          href="/paquetes"
           className="mt-8 inline-block rounded-md border border-transparent bg-white px-8 py-3 text-base font-medium text-gray-900 hover:bg-gray-100"
         >
-          Ver Destinos
+          Ver Paquetes de Viaje
         </Link>
-      </div>
+        <Link
+          href="/hoteles"
+          className="mt-8 inline-block rounded-md border border-transparent bg-white px-8 py-3 text-base font-medium text-gray-900 hover:bg-gray-100"
+        >
+          Reservar Hoteles
+        </Link>
+        <Link
+          href="/vuelos"
+          className="mt-8 inline-block rounded-md border border-transparent bg-white px-8 py-3 text-base font-medium text-gray-900 hover:bg-gray-100"
+        >
+          Reservar Vuelos
+        </Link>
+      </div>*/}
 
       <main className='bg-white'>
         {/* Category section */}
@@ -181,7 +229,7 @@ export default async function InicioPage() {
           </div>
 
           <div className="mt-6 px-4 sm:hidden">
-            <Link href="/destinos" className="block text-sm font-semibold text-sky-600 hover:text-sky-500">
+            <Link href="/paquetes" className="block text-sm font-semibold text-sky-600 hover:text-sky-500">
               Ver todos los destinos
               <span aria-hidden="true"> &rarr;</span>
             </Link>
@@ -256,7 +304,7 @@ export default async function InicioPage() {
           </div>
         </div>
         <Catalog />
-        <HotelQuotation />
+        <ExpediaBenefits />
         <Socials />
         <Benefits />
         <Partners />

@@ -5,7 +5,6 @@ import klookAliworldLogo from "../../public/klookAli.png";
 import { KlookSearchWidget } from "../_components/Klook/KlookSearchWidget";
 import { Partners } from "../_components/Partners";
 import { KlookBenefits } from "../_components/Klook/KlookBenefits";
-import HotelQuotation from "../_components/HotelQuotation";
 import ActivitiesRow from "../_components/ActivitiesRow";
 
 export const metadata: Metadata = {
@@ -49,24 +48,22 @@ export default async function ActividadesPage() {
                         Aliworld trabaja con Klook para ofrecerte las mejores experiencias en parques temáticos, tours, museos, transporte y más. Encuentra la actividad perfecta para tus vacaciones. Desde boletos para Disneyland hasta pases de tren en Europa. Todo en un solo lugar y con los mejores precios.
                     </p>
                 </div>
-
-                <dl className="mx-auto mt-16">
-                    <KlookSearchWidget />
-                </dl>
                 <Image
                     alt="Klook y Aliworld partners"
                     src={klookAliworldLogo}
                     width={800}
                     height={200}
-                    className="w-full sm:w-1/2 object-cover mx-auto"
+                    className="w-full mt-12 sm:w-1/2 object-cover mx-auto"
                 />
             </div>
             <ActivitiesRow header="Maravillate con los Parques de Disney" tag='disney' show={3} />
             <ActivitiesRow header="Vive aventuras sorprendentes en México" tag='mexico' show={3} />
             <ActivitiesRow header="Descubre todo lo que Japón tiene para ti" tag='japon' show={3} />
+            <div className="mx-auto mt-16 max-w-7xl px-4 pb-16 sm:px-6 sm:pb-24 lg:px-8">
+                <KlookSearchWidget />
+            </div>
             <KlookBenefits />
             <Partners />
-            <HotelQuotation />
         </div>
     )
 }

@@ -1,21 +1,19 @@
 import { Metadata } from "next";
-import { ExpediaFlightsSearchWidget } from "../_components/Expedia/ExpediaFlightsSearchWidget"
 import Image from "next/image";
 import vuelosImage from "../../public/vuelos.jpg";
 import { Partners } from "../_components/Partners";
 import { ExpediaBenefits } from "../_components/Expedia/ExpediaBenefits";
-import HotelQuotation from "../_components/HotelQuotation";
-
+import Link from "next/link";
 
 export const metadata: Metadata = {
     title: 'Reserva Vuelos | Aliworld',
-    description: 'Reserva tu vuelo con beneficios exclusivos. Aliworld esta afiliada con Expedia para ofrece las mejores tarifas en vuelos nacionales e internacionales.',
+    description: 'Aliworld cuenta con una amplia variedad de vuelos nacionales e internacionales. Reserva con nosotros y disfruta de beneficios exclusivos. ¡Encuentra la mejor tarifa en vuelos con Aliworld!',
     openGraph: {
         type: 'website',
         url: 'https://www.aliworld.mx/vuelos',
         title: 'Reserva Vuelos | Aliworld',
         siteName: 'Aliworld',
-        description: 'Reserva tu vuelo con beneficios exclusivos. Aliworld esta afiliada con Expedia para ofrece las mejores tarifas en vuelos nacionales e internacionales.',
+        description: 'Aliworld cuenta con una amplia variedad de vuelos nacionales e internacionales. Reserva con nosotros y disfruta de beneficios exclusivos. ¡Encuentra la mejor tarifa en vuelos con Aliworld!',
     },
     alternates: {
         canonical: 'https://www.aliworld.mx/vuelos',
@@ -41,10 +39,12 @@ export default function VuelosPage() {
                                         Reserva tus vuelos con la mejor tarifa
                                     </h1>
                                     <p className="mt-4 text-xl text-gray-600">
-                                        Aliworld esta afiliada con Expedia para ofrecerte las mejores tarifas en vuelos nacionales e internacionales. Usa el buscador para encontrar el vuelo que mejor se adapte a tus necesidades y se te redirigirá a la página de Expedia para completar tu compra.
+                                        Aliworld cuenta con una amplia variedad de vuelos nacionales e internacionales. Reserva con nosotros y disfruta de beneficios exclusivos. ¡Encuentra la mejor tarifa en vuelos con Aliworld!
                                     </p>
-                                    <div className="mt-6">
-                                        <ExpediaFlightsSearchWidget />
+                                    <div className="mt-12 flex justify-center">
+                                        <Link href="https://reservas.aliworld.mx/" className="inline-block px-6 py-3 text-sm font-medium text-white bg-sky-600 rounded-lg hover:bg-sky-700">
+                                            Reservar ahora
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
@@ -61,9 +61,8 @@ export default function VuelosPage() {
                     </div>
                 </div>
             </div>
-            <HotelQuotation />
-            <Partners />
             <ExpediaBenefits />
+            <Partners />
         </div>
     )
 }

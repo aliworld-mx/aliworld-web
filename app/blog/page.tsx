@@ -5,6 +5,8 @@ import Socials from "../_components/Socials";
 import { Metadata } from "next";
 import { Blog, WithContext } from "schema-dts";
 import Link from "next/link";
+import { ExpediaBenefits } from "../_components/Expedia/ExpediaBenefits";
+import { KlookBenefits } from "../_components/Klook/KlookBenefits";
 
 export const revalidate = 36000;
 

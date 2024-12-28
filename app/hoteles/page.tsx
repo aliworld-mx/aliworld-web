@@ -1,21 +1,19 @@
 import { Metadata } from "next";
-import { ExpediaHotelsSearchWidget } from "../_components/Expedia/ExpediaHotelsSearchWidget"
-import { HotelesSearchWidget } from "../_components/Hoteles/HotelesSearchWidget"
 import Image from "next/image";
 import hotelesImage from "../../public/hoteles.jpg";
 import { Partners } from "../_components/Partners";
 import { ExpediaBenefits } from "../_components/Expedia/ExpediaBenefits";
-import HotelQuotation from "../_components/HotelQuotation";
+import Link from "next/link";
 
 export const metadata: Metadata = {
     title: 'Reserva Hoteles | Aliworld',
-    description: 'Reserva tu hotel con beneficios exclusivos. Aliworld esta afiliada con Expedia y Hoteles.com para ofrece las mejores tarifas en reserva de hoteles alrededor del mundo.',
+    description: 'Reserva tu hotel con beneficios exclusivos. Aliworld cuenta con un amplio catálogo de hoteles alrededor del mundo. Encuentra el mejor precio y beneficios exclusivos en tu próxima reservación. Además, puedes pagar con criptomonedas o tarjetas de crédito y débito. ¡Reserva ahora y disfruta de beneficios exclusivos!',
     openGraph: {
         type: 'website',
         url: 'https://www.aliworld.mx/hoteles',
         title: 'Reserva Hoteles | Aliworld',
         siteName: 'Aliworld',
-        description: 'Reserva tu hotel con beneficios exclusivos. Aliworld esta afiliada con Expedia y Hoteles.com para ofrece las mejores tarifas en reserva de hoteles alrededor del mundo.',
+        description: 'Reserva tu hotel con beneficios exclusivos. Aliworld cuenta con un amplio catálogo de hoteles alrededor del mundo. Encuentra el mejor precio y beneficios exclusivos en tu próxima reservación. Además, puedes pagar con criptomonedas o tarjetas de crédito y débito. ¡Reserva ahora y disfruta de beneficios exclusivos!',
     },
     alternates: {
         canonical: 'https://www.aliworld.mx/hoteles',
@@ -36,16 +34,15 @@ export default function HotelesPage() {
                             <div className="mx-auto max-w-2xl py-24 lg:max-w-none">
                                 <div className="lg:pr-16">
                                     <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl xl:text-6xl">
-                                        Reserva tu hotel con beneficios exclusivos
+                                        Reserva tu hotel al mejor precio
                                     </h1>
                                     <p className="mt-4 text-xl text-gray-600">
-                                        Aliworld esta afiliada con Expedia y Hoteles.com para ofrecerte las mejores tarifas en reserva de hoteles alrededor del mundo. Usa el buscador para encontrar el hotel que mejor se adapte a tus necesidades y se te redirigirá a la página de Expedia o Hoteles.com para completar tu reserva.
+                                        Aliworld cuenta con un amplio catálogo de hoteles alrededor del mundo. Encuentra el mejor precio y beneficios exclusivos en tu próxima reservación. Además, puedes pagar con criptomonedas o tarjetas de crédito y débito. ¡Reserva ahora y disfruta de beneficios exclusivos!
                                     </p>
-                                    <div className="mt-12">
-                                        <ExpediaHotelsSearchWidget />
-                                    </div>
-                                    <div className="mt-6">
-                                        <HotelesSearchWidget />
+                                    <div className="mt-12 flex justify-center">
+                                        <Link href="https://reservas.aliworld.mx/" className="inline-block px-6 py-3 text-sm font-medium text-white bg-sky-600 rounded-lg hover:bg-sky-700">
+                                            Reservar ahora
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
@@ -62,7 +59,6 @@ export default function HotelesPage() {
                     </div>
                 </div>
             </div>
-            <HotelQuotation />
             <Partners />
             <ExpediaBenefits />
         </div>

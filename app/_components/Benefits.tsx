@@ -38,7 +38,7 @@ export default function Benefits() {
                                     <incentive.icon className="w-12 h-12 text-white" aria-hidden="true" />
                                 </div>
                                 <div className="mt-4 sm:ml-6 sm:mt-0 lg:ml-0 lg:mt-6">
-                                    <h3 className="text-sm font-medium text-white">{incentive.name}</h3>
+                                    <h3 className="text-sm font-bold text-white">{incentive.name}</h3>
                                     <p className="mt-2 text-sm text-gray-100">{incentive.description}</p>
                                 </div>
                             </div>
