@@ -85,12 +85,12 @@ export default async function BlogPost({ params }: PageProps) {
     const options = {
         renderNode: {
             [BLOCKS.EMBEDDED_ASSET]: (node: any) => {
-                const { url, description } = node.data.target.fields.file;
+                const { url } = node.data.target.fields.file;
                 const imageUrl = `https:${url}`;
                 return (
-                    <figure>
-                        <Image className='py-8 rounded-3xl w-full' src={imageUrl} width={1265} height={712} alt={description} />
-                        <figcaption>{description}</figcaption>
+                    <figure className='py-8'>
+                        <Image className='rounded-3xl w-full' src={imageUrl} width={1265} height={712} alt={node.data.target.fields.description} />
+                        <figcaption className='text-gray-500 ml-3 mt-2'>{node.data.target.fields.description}</figcaption>
                     </figure>
                 );
             },

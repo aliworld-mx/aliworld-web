@@ -138,9 +138,9 @@ export default async function ExperienciaPage({ params }: PageProps) {
                         alt={imagen.fields.description ?? nombre}
                         priority={true}
                         src={imageUrl}
-                        width={800}
-                        height={800}
-                        className="aspect-square w-full rounded-lg object-cover" />
+                        width={592}
+                        height={332}
+                        className="w-full rounded-lg object-cover" />
                 </div>
 
                 <div className="mt-10 lg:col-start-1 lg:row-start-2 lg:max-w-lg lg:self-start">
