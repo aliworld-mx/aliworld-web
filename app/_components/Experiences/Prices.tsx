@@ -14,7 +14,7 @@ interface PricesProps {
 
 export const Prices = ({ precios, moneda, incluye, noIncluye, active = true }: PricesProps) => {
     return (
-        <div className={classNames(active ? "mx-auto mt-10 max-w-7xl pb-24 sm:pb-32" : "hidden")}>
+        <div className={classNames(active ? "mx-auto mt-10 max-w-7xl pb-24 sm:pb-32 space-y-12" : "hidden")}>
             <section aria-labelledby="tariff-heading">
                 <h2 id="tariff-heading" className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl flex flex-row items-center gap-x-3">
                     <CurrencyDollarIcon className="size-8 shrink-0 text-sky-500" aria-hidden="true" />
