@@ -6,6 +6,7 @@ import { Navigation } from "./_components/Navigation";
 import { Analytics } from "@vercel/analytics/react"
 import { getNavigation } from "./lib/getNavigation";
 import Scroll from "./_components/Scroll";
+import Script from "next/script";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -58,8 +59,8 @@ export default async function RootLayout({
           ttq.page();
 }(window, document, 'ttq');`}
         </script>
-        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11526773841">
-        </script>
+        <Script id='google-analytics' async src="https://www.googletagmanager.com/gtag/js?id=AW-11526773841">
+        </Script>
         <script>
           {`window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
