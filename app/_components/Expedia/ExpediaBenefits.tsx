@@ -13,10 +13,10 @@ const incentives = [
         description: "La mayoría de las reservaciones de hoteles en Aliworld son reembolsables y no tienen cargos por cancelación. Además, puedes modificar tu reservación en línea o comunicarte con el equipo de soporte para obtener ayuda. *Ver términos y condiciones en la página de reservación al escoger su hotel.",
     },
     {
-        name: 'Paga en tu moneda local o con criptomonedas',
+        name: 'Paga en tu moneda local o con criptomonedas*',
         icon: <BanknotesIcon className="text-white size-12" />,
         description:
-            "Aliworld permite pagar con criptomonedas o tarjetas de crédito y débito. Además, puedes ver los precios en tu moneda local para evitar sorpresas en el tipo de cambio.",
+            "Aliworld permite pagar con criptomonedas o tarjetas de crédito y débito. Además, puedes ver los precios en tu moneda local para evitar sorpresas en el tipo de cambio. *Solo para reservaciones de hoteles.",
     },
 ]
 
