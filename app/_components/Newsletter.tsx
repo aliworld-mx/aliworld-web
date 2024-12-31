@@ -11,6 +11,14 @@ export const Newsletter = () => {
         setIsSending(true);
         const formData = new FormData(event.currentTarget);
         const email = formData.get("email") as string;
+        if (!email) {
+            setIsSending(false);
+            return;
+        } 
+        if (!email.includes("@")) {
+            setIsSending(false);
+            return;
+        }
 
         const response = await fetch("/api/join-newsletter", {
             method: "POST",
