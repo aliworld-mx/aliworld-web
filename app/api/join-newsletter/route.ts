@@ -46,7 +46,7 @@ const newsLetterEmail = `<!DOCTYPE html>
     }
     .cta {
       text-align: center;
-      margin: 20px 0;
+      margin: 32px 0;
     }
     .cta a {
       text-decoration: none;
@@ -86,7 +86,10 @@ const newsLetterEmail = `<!DOCTYPE html>
       <p>Estamos emocionados de tenerte en nuestra comunidad de viajeros apasionados. Ahora recibirás las últimas noticias, promociones exclusivas y los mejores consejos para tus próximas aventuras.</p>
       <p>¿Listo para tu próximo viaje? ¡Explora los destinos más increíbles que hemos seleccionado para ti!</p>
       <div class="cta">
-        <a href="https://www.aliworld.mx/paquetes" target="_blank">Descubre destinos</a>
+        <a href="https://www.aliworld.mx/paquetes" target="_blank">Descubre paquetes de viaje</a>
+      </div>
+      <div class="cta">
+        <a href="https://reservas.aliworld.mx" target="_blank">Reserva hoteles y vuelos</a>
       </div>
       <p>Gracias por confiar en <strong>Aliworld</strong>. Estamos aquí para ayudarte a planificar experiencias inolvidables.</p>
       <p>¡Buen viaje!</p>
