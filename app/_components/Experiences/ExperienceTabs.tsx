@@ -6,20 +6,26 @@ import { ChangeEvent, useMemo, useState } from 'react'
 import { Prices } from './Prices'
 import { Itinerary } from './Itinerary'
 import { Hotels } from './Hotels'
+import { Notes } from './Notes'
+import { OptionalTours } from './OptionalTours'
+import { Visa } from './Visa'
 
 interface ExperienceTabsProps {
   experience: TypePaquete
 }
 
 export default function ExperienceTabs({ experience }: ExperienceTabsProps) {
-  const { moneda, precios, itinerario, incluye, noIncluye, hoteles } = experience.fields;
+  const { moneda, precios, itinerario, incluye, noIncluye, hoteles, notas, visas, toursOpcionales } = experience.fields;
   const [activeTab, setActiveTab] = useState('Itinerario');
   const tabs = useMemo(() => {
     const tabsArray = ['Itinerario']
     if (precios) tabsArray.push('Precios');
     if (hoteles) tabsArray.push('Hoteles');
+    if (notas) tabsArray.push('Notas');
+    if (visas) tabsArray.push('Visas');
+    if (toursOpcionales) tabsArray.push('Tours opcionales');
     return tabsArray
-  }, [precios, hoteles])
+  }, [precios, hoteles, notas, visas, toursOpcionales])
 
   const onChangeTab = (event: ChangeEvent<HTMLSelectElement>) => {
     setActiveTab(event.target.value)
@@ -63,6 +69,9 @@ export default function ExperienceTabs({ experience }: ExperienceTabsProps) {
       <Itinerary itinerario={itinerario} active={activeTab === 'Itinerario'} />
       <Prices precios={precios} moneda={moneda} incluye={incluye} noIncluye={noIncluye} active={activeTab === 'Precios'} />
       <Hotels hoteles={hoteles} active={activeTab === 'Hoteles'} />
+      <Notes notas={notas} active={activeTab === 'Notas'} />
+      <OptionalTours tours={toursOpcionales} active={activeTab === 'Tours opcionales'} />
+      <Visa visas={visas} active={activeTab === 'Visas'} />
     </div>
   )
 }

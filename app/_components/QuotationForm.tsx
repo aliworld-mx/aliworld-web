@@ -17,7 +17,6 @@ interface QuotationFormProps {
 export const QuotationForm = ({ packageId, departures, dailyDepartures }: QuotationFormProps) => {
     const [isOpen, setIsOpen] = useState(false)
     const [isSent, setIsSent] = useState(false)
-    const [isSending, setIsSending] = useState(false)
     const [habitaciones, setHabitaciones] = useState([{ adultos: 2, menores: 0 }])
     const salidas = useMemo(() => sortArrayByDate(departures ?? []).map((salida) => ({
         id: salida.fields?.nombre,
@@ -44,44 +43,19 @@ export const QuotationForm = ({ packageId, departures, dailyDepartures }: Quotat
         setHabitaciones(habitaciones.filter((_, i) => i !== index))
     }
 
-
     const handleSubmit = async (e: any) => {
-        setIsSending(true)
         e.preventDefault()
 
-        const emailData = {
-            to: 'contacto@aliworld.mx',
-            subject: `Solicitud de Cotización - ${packageId}`,
-            html: `
-            Correo: ${formData.correo}<br>
-            Teléfono: ${formData.telefono}<br>
-            Salida: ${formData.fechaSalida ? salidas?.find((s) => s.id === formData.salida)?.title : salidas[0].title}<br>
-            Habitaciones:<br> ${habitaciones.map((h, i) => `Habitación ${i + 1}: ${h.adultos} adultos, ${h.menores} menores`).join('<br>')}
-            `,
-        };
+        const reservationData = `
+            Paquete: ${packageId}
+            Correo: ${formData.correo}
+            Teléfono: ${formData.telefono}
+            Salida: ${formData.fechaSalida ? salidas?.find((s) => s.id === formData.salida)?.title : salidas[0].title}
+            Habitaciones: ${habitaciones.map((h, i) => `Habitación ${i + 1}: ${h.adultos} adultos, ${h.menores} menores`).join(' ')}
+            `;
 
-        try {
-            const response = await fetch('/api/send-email', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(emailData),
-            });
-
-            if (response.ok) {
-                setIsSent(true)
-            } else {
-                alert('Hubo un error al enviar el correo');
-            }
-
-        } catch (error: any) {
-            alert('Error al enviar el correo');
-            console.warn(error);
-        }
-        finally {
-            setIsSending(false)
-        }
+        window.open(`https://wa.me/523314331600?text=${encodeURIComponent(reservationData)}`, '_blank')
+        setIsSent(true)
     };
 
     return (
@@ -114,19 +88,6 @@ export const QuotationForm = ({ packageId, departures, dailyDepartures }: Quotat
                                                 id="correo"
                                                 name="correo"
                                                 value={formData.correo}
-                                                onChange={handleChange}
-                                                className="mt-2 block w-full rounded-md text-gray-700 border-gray-300 shadow-sm focus:border-sky-500 focus:ring focus:ring-sky-500 focus:ring-opacity-50"
-                                                required
-                                            />
-                                        </div>
-                                        {/* Teléfono */}
-                                        <div>
-                                            <label htmlFor="telefono" className="block text-sm font-medium text-gray-700">Teléfono</label>
-                                            <input
-                                                type="text"
-                                                id="telefono"
-                                                name="telefono"
-                                                value={formData.telefono}
                                                 onChange={handleChange}
                                                 className="mt-2 block w-full rounded-md text-gray-700 border-gray-300 shadow-sm focus:border-sky-500 focus:ring focus:ring-sky-500 focus:ring-opacity-50"
                                                 required
@@ -227,16 +188,14 @@ export const QuotationForm = ({ packageId, departures, dailyDepartures }: Quotat
                                                 type="button"
                                                 onClick={() => setIsOpen(false)}
                                                 className="px-4 py-2 bg-white rounded-md text-gray-700"
-                                                disabled={isSending}
                                             >
                                                 Cancelar
                                             </button>
                                             <button
                                                 type="submit"
                                                 className="px-4 py-2 bg-sky-600 text-white rounded-md"
-                                                disabled={isSending}
                                             >
-                                                Enviar
+                                                Pedir Cotización
                                             </button>
                                         </div>
                                     </div>
