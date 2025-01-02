@@ -107,6 +107,18 @@ const newsLetterEmail = `<!DOCTYPE html>
 export async function POST(request: Request) {
   const { email } = await request.json();
 
+  if (!email) {
+    return new Response(JSON.stringify({ error: 'Email is required' }), {
+      status: 400,
+    });
+  }
+
+  if (!email.includes('@')) {
+    return new Response(JSON.stringify({ error: 'Invalid email' }), {
+      status: 400,
+    });
+  }
+
   try {
     // Configuración del correo
     const requestMail = mailjet
