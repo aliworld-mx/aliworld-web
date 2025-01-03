@@ -34,6 +34,7 @@ const footerNavigation = {
         { name: 'Instagram', href: 'https://www.instagram.com/aliworld.viajes/' },
         { name: 'TikTok', href: 'https://www.tiktok.com/@aliworld.viajes' },
         { name: 'Threads', href: 'https://www.threads.net/@aliworld.viajes' },
+        { name: 'YouTube', href: 'https://www.youtube.com/@aliworld.viajes' },
     ],
 }
 
