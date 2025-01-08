@@ -17,12 +17,12 @@ export default async function ActivitiesRow({ header, tag, show = -1 }: Activiti
     return (
         <div className="bg-white py-12">
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
-                <div className="flex flex-row justify-between items-center">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-y-4">
                     <h3 className="text-balance text-2xl font-semibold tracking-tight text-gray-900 mb-0">
                         {header}
                     </h3>
                     {show > -1 && (<Link href={`/actividades/${tag}`} className="block text-sm font-semibold text-sky-600 hover:text-sky-500">
-                        Ver todas
+                        Ver todas las actividades
                         <span aria-hidden="true"> &rarr;</span>
                     </Link>)}
                 </div>

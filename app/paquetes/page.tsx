@@ -75,7 +75,7 @@ export default async function PaquetesPage() {
             <div className="bg-white">
                 <Breadcrumbs breadcrumbs={breadcrumbs} />
                 <div className="mx-auto max-w-2xl px-4 pb-16 sm:px-6 lg:max-w-7xl lg:px-8">
-                    <h1 className="text-4xl mb-5 font-bold tracking-tight text-gray-900">Tu aventura te espera. Elige tu destino</h1>
+                    <h1 className="text-2xl mb-5 font-bold tracking-tight text-gray-900">Selecciona uno de nuestros destinos y descubre los paquetes de viaje que hemos preparado para ti.</h1>
                     <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                         {destinations?.map((destination) => {
                             const { id, nombre, descripcion, imagen } = destination.fields;

@@ -59,6 +59,7 @@ export default async function ActividadesPage() {
             <ActivitiesRow header="Maravillate con los Parques de Disney" tag='disney' show={3} />
             <ActivitiesRow header="Vive aventuras sorprendentes en México" tag='mexico' show={3} />
             <ActivitiesRow header="Descubre todo lo que Japón tiene para ti" tag='japon' show={3} />
+            <ActivitiesRow header="Actividades únicas en Ámsterdam" tag='amsterdam' show={3} />
             <div className="mx-auto mt-16 max-w-7xl px-4 pb-16 sm:px-6 sm:pb-24 lg:px-8">
                 <KlookSearchWidget />
             </div>
