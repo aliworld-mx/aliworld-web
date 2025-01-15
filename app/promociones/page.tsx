@@ -6,6 +6,7 @@ import { Metadata } from 'next';
 import { OfferCatalog, WithContext } from 'schema-dts';
 import { getPromos } from '../lib/getPromos';
 import { Suspense } from 'react';
+import HotelQuotation from '../_components/HotelQuotation';
 
 export const revalidate = 3600;
 
@@ -81,6 +82,7 @@ export default async function PromosPage() {
                     <TripGrid header='Nuestros paquetes con descuento' trips={promos?.fields.paquetes ?? []} />
                 </Suspense>
             </div>
+            <HotelQuotation />
             <FAQs />
         </>
     )

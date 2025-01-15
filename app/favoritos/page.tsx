@@ -6,6 +6,7 @@ import { Metadata } from 'next';
 import { OfferCatalog, WithContext } from 'schema-dts';
 import { getFavorites } from '../lib/getFavorites';
 import { Suspense } from 'react';
+import HotelQuotation from '../_components/HotelQuotation';
 
 export const revalidate = 3600;
 
@@ -82,6 +83,7 @@ export default async function FavoritosPage() {
                     <TripGrid header='Nuestros paquetes favoritos' trips={favorites?.fields.paquetes ?? []} />
                 </Suspense>
             </div>
+            <HotelQuotation />
             <FAQs />
         </>
     )

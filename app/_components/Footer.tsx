@@ -91,7 +91,7 @@ export const Footer = () => (
             </div>
 
             <div className="border-t border-gray-200 py-10">
-                <p className="text-sm text-gray-500">2024 Aliworld</p>
+                <p className="text-sm text-gray-500">2025 Aliworld</p>
             </div>
         </div>
     </footer>

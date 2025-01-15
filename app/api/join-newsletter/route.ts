@@ -97,7 +97,7 @@ const newsLetterEmail = `<!DOCTYPE html>
     </div>
     <div class="footer">
       <p>¿Tienes preguntas? <a href="https://www.aliworld.mx/contacto" target="_blank">Contáctanos</a></p>
-      <p>&copy; 2024 Aliworld. Todos los derechos reservados.</p>
+      <p>&copy; 2025 Aliworld. Todos los derechos reservados.</p>
     </div>
   </div>
 </body>

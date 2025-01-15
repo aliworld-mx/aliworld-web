@@ -125,7 +125,7 @@ export default async function ExperienciaPage({ params }: PageProps) {
                             <p className="text-lg text-gray-900 sm:text-xl">{toMoney(precio)} {moneda} + Impuestos</p>
                         </div>
                         <div className='space-y-4'>
-                            <p className="text-gray-600 text-sm">Por adulto en habitación doble</p>
+                            <p className="text-gray-600 text-sm">Por adulto</p>
                             {salidasDiarias && <p className="text-gray-700 font-bold text-base">Salidas Diarias</p>}
                             <p className="text-gray-700 text-base">Países que se visitan: {paises.map(pais => pais.fields?.nombre ?? '').join(', ')}</p>
                             <p className="text-gray-700 text-base">Ruta de Ciudades que se visitan: {ciudades.map(ciudad => ciudad.fields?.nombre).join(', ')}</p>
@@ -157,7 +157,7 @@ export default async function ExperienciaPage({ params }: PageProps) {
                                     aria-hidden="true"
                                     className="mr-2 size-6 shrink-0 text-sky-500 group-hover:text-sky-700"
                                 />
-                                <span className="text-gray-500 hover:text-gray-700">Pagos Seguros con Tarjeta de Credito y Debito</span>
+                                <span className="text-gray-500 hover:text-gray-700">Pagos seguros con tarjeta de crédito y débito</span>
                             </div>
                         </div>
                     </section>
