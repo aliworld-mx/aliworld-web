@@ -5,6 +5,7 @@ export async function getAllTrips() {
     try {
         const response = await contentfulClient.getEntries({
             content_type: 'paquete',
+            limit: 500,
         });
 
         return response.items as unknown as TypePaquete[];
