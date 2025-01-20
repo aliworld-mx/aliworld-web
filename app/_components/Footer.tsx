@@ -28,7 +28,6 @@ const footerNavigation = {
         { name: 'Politica de Privacidad', href: '#' },
     ],
     sociales: [
-        { name: 'Contáctanos', href: '/contacto' },
         { name: 'WhatsApp', href: 'https://wa.me/523325371347?text=Hola%2C%20tengo%20una%20consulta%20sobre%20Aliworld' },
         { name: 'Facebook', href: 'https://www.facebook.com/aliworld.viajes/' },
         { name: 'Instagram', href: 'https://www.instagram.com/aliworld.viajes/' },

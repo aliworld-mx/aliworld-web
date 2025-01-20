@@ -27,14 +27,14 @@ export const Prices = ({ precios, moneda, incluye, noIncluye, active = true }: P
                     <CheckIcon className="size-8 shrink-0 text-sky-500" aria-hidden="true" />
                     El Viaje Incluye
                 </h2>
-                <div className="text-gray-900" dangerouslySetInnerHTML={{ __html: incluye }} />
+                <div className="text-gray-900 [&>ul]:px-5" dangerouslySetInnerHTML={{ __html: incluye }} />
             </section>
             <section aria-labelledby="not-include-heading">
                 <h2 id="not-include-heading" className="text-2xl font-bold mb-6 tracking-tight text-gray-900 sm:text-3xl flex flex-row items-center gap-x-3">
                     <XMarkIcon className="size-8 shrink-0 text-sky-500" aria-hidden="true" />
                     El Viaje No Incluye
                 </h2>
-                <div className="text-gray-900" dangerouslySetInnerHTML={{ __html: noIncluye }} />
+                <div className="text-gray-900 [&>ul]:px-5" dangerouslySetInnerHTML={{ __html: noIncluye }} />
             </section>
             <section aria-labelledby="disclaimer-heading">
                 <h2 id="disclaimer-heading" className="text-2xl font-bold mb-6 tracking-tight text-gray-900 sm:text-3xl flex flex-row items-center gap-x-3">

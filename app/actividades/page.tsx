@@ -6,6 +6,7 @@ import { KlookSearchWidget } from "../_components/Klook/KlookSearchWidget";
 import { Partners } from "../_components/Partners";
 import { KlookBenefits } from "../_components/Klook/KlookBenefits";
 import ActivitiesRow from "../_components/ActivitiesRow";
+import HotelQuotation from "../_components/HotelQuotation";
 
 export const metadata: Metadata = {
     title: 'Actividades | Aliworld',
@@ -65,6 +66,7 @@ export default async function ActividadesPage() {
             </div>
             <KlookBenefits />
             <Partners />
+            <HotelQuotation />
         </div>
     )
 }

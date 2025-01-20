@@ -8,7 +8,7 @@ import Image from "next/image";
 const features = [
     {
         name: 'Paquetes de Viaje',
-        description: 'Paquetes con tour guiado, hospedaje y transporte incluido.',
+        description: 'Paquetes en tour con guía, vuelos, hospedaje y transporte incluido.',
         href: '/paquetes',
         imageSrc: paquetesImage,
         imageAlt: 'Fotografía de la Torre Eiffel en París.',

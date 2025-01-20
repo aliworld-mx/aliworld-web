@@ -17,7 +17,7 @@ export const Notes = ({ notas, active = true }: NotesProps) => {
                     Notas
                 </h2>
             </section>
-            <div dangerouslySetInnerHTML={{ __html: notas }} />
+            <div className="group [&_ul]:list-disc [&_ul]:px-5 [&_ul]:text-gray-700" dangerouslySetInnerHTML={{ __html: notas }} />
         </div>
     )
 }

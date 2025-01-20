@@ -30,6 +30,7 @@ export interface TypePaqueteFields {
         visas: EntryFields.Text;
         salidas: TypeSalida[];
         salidasDiarias: EntryFields.Boolean;
+        diasDeSalidas: EntryFields.Symbol;
     }
 }
 

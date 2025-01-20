@@ -10,6 +10,8 @@ import { PageProps } from '@/.next/types/app/page'
 import { FAQs } from '@/app/_components/FAQs'
 import { QuotationForm } from '@/app/_components/QuotationForm'
 import ExperienceTabs from '@/app/_components/Experiences/ExperienceTabs'
+import { Partners } from '@/app/_components/Partners'
+import HotelQuotation from '@/app/_components/HotelQuotation'
 
 export const revalidate = 3600;
 
@@ -48,9 +50,11 @@ export const generateMetadata = async ({ params }: PageProps): Promise<Metadata>
 export default async function ExperienciaPage({ params }: PageProps) {
     const { experiencia } = await params;
     const experience = await getTrip(experiencia);
-    const { nombre, precio, dias, noches, imagen, moneda, destino, ciudades, paises, salidas, salidasDiarias } = experience.fields;
+    const { nombre, precio, dias, noches, imagen, moneda, destino, ciudades, paises, salidas, salidasDiarias, diasDeSalidas } = experience.fields;
     const { url } = imagen.fields.file!;
     const imageUrl = `https:${url}`;
+
+    console.log(experience.fields.diasDeSalidas);
 
     const structuredData: WithContext<Trip> = {
         '@context': 'https://schema.org',
@@ -126,7 +130,8 @@ export default async function ExperienciaPage({ params }: PageProps) {
                         </div>
                         <div className='space-y-4'>
                             <p className="text-gray-600 text-sm">Por adulto</p>
-                            {salidasDiarias && <p className="text-gray-700 font-bold text-base">Salidas Diarias</p>}
+                            {(salidasDiarias && !diasDeSalidas) && <p className="text-gray-700 font-bold text-base">Salidas Diarias</p>}
+                            {diasDeSalidas && <p className="text-gray-700 font-bold text-base">{diasDeSalidas}</p>}
                             <p className="text-gray-700 text-base">Países que se visitan: {paises.map(pais => pais.fields?.nombre ?? '').join(', ')}</p>
                             <p className="text-gray-700 text-base">Ruta de Ciudades que se visitan: {ciudades.map(ciudad => ciudad.fields?.nombre).join(', ')}</p>
                         </div>
@@ -165,6 +170,8 @@ export default async function ExperienciaPage({ params }: PageProps) {
             </div>
             <ExperienceTabs experience={experience} />
             <Benefits />
+            <Partners />
+            <HotelQuotation />
             <FAQs />
         </div>
     )

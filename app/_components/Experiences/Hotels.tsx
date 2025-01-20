@@ -17,7 +17,7 @@ export const Hotels = ({ hoteles, active = true }: HotelsProps) => {
                     Hoteles
                 </h2>
             </section>
-            <div dangerouslySetInnerHTML={{ __html: hoteles }} />
+            <div className="[ul]:px-5" dangerouslySetInnerHTML={{ __html: hoteles }} />
         </div>
     )
 }
