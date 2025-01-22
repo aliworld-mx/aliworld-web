@@ -47,9 +47,7 @@ export const QuotationForm = ({ packageId, departures, dailyDepartures }: Quotat
         e.preventDefault()
 
         const reservationData = `
-            Paquete: ${packageId}
-            Correo: ${formData.correo}
-            Teléfono: ${formData.telefono}
+            Paquete: https://www.aliworld.mx/experiencia/${packageId}
             Salida: ${formData.fechaSalida ? salidas?.find((s) => s.id === formData.salida)?.title : salidas[0].title}
             Habitaciones: ${habitaciones.map((h, i) => `Habitación ${i + 1}: ${h.adultos} adultos, ${h.menores} menores`).join(' ')}
             `;
@@ -80,20 +78,6 @@ export const QuotationForm = ({ packageId, departures, dailyDepartures }: Quotat
                             ) : (
                                 <form onSubmit={handleSubmit} className="mt-4">
                                     <div className="space-y-6">
-                                        {/* Correo */}
-                                        <div>
-                                            <label htmlFor="correo" className="block text-sm font-medium text-gray-700">Correo</label>
-                                            <input
-                                                type="email"
-                                                id="correo"
-                                                name="correo"
-                                                value={formData.correo}
-                                                onChange={handleChange}
-                                                className="mt-2 block w-full rounded-md text-gray-700 border-gray-300 shadow-sm focus:border-sky-500 focus:ring focus:ring-sky-500 focus:ring-opacity-50"
-                                                required
-                                            />
-                                        </div>
-                                        {/* Salida */}
                                         {salidas?.length >= 1 && (
                                             <div>
                                                 <label htmlFor="salida" className="block text-sm font-medium text-gray-700">Salida</label>
@@ -126,7 +110,6 @@ export const QuotationForm = ({ packageId, departures, dailyDepartures }: Quotat
                                                 />
                                             </div>
                                         )}
-                                        {/* Habitaciones */}
                                         <div>
                                             <label className="block text-sm font-lg font-bold text-gray-700">Habitaciones</label>
                                             {habitaciones.map((habitacion, index) => (
