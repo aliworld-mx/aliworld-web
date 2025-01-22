@@ -54,8 +54,6 @@ export default async function ExperienciaPage({ params }: PageProps) {
     const { url } = imagen.fields.file!;
     const imageUrl = `https:${url}`;
 
-    console.log(experience.fields.diasDeSalidas);
-
     const structuredData: WithContext<Trip> = {
         '@context': 'https://schema.org',
         '@type': 'Trip',
