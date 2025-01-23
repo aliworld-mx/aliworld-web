@@ -37,7 +37,7 @@ export default async function sitemap() {
     const trips = await getAllTrips();
 
     const tripUrls = trips?.map((trip: TypePaquete) => ({
-        url: `https://www.aliworld.mx/experiencia/${trip.fields.id}`,
+        url: `https://www.aliworld.mx/paquetes/${trip.fields?.destino.fields.id}/${trip.fields.slug}`,
         lastModified: trip.sys.updatedAt,
         priority: 0.60,
     })) as { url: string, lastModified: string, priority: number }[];

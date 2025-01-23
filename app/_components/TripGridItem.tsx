@@ -8,7 +8,7 @@ interface TripGridItemProps {
 };
 
 export const TripGridItem = ({ trip }: TripGridItemProps) => {
-    const { id, imagen, nombre, paises, precio, dias, ciudades, moneda } = trip.fields;
+    const { id, slug, imagen, nombre, paises, precio, dias, ciudades, moneda, destino } = trip.fields;
     const { url } = imagen.fields.file!;
     const imageUrl = `https:${url}`;
 
@@ -26,7 +26,7 @@ export const TripGridItem = ({ trip }: TripGridItemProps) => {
             />
             <div className="flex flex-1 flex-col space-y-2 p-4">
                 <h3 className="text-sm font-medium text-gray-900">
-                    <Link href={`/experiencia/${id}`}>
+                    <Link href={`/paquetes/${destino.fields.id}/${slug}`}>
                         <span aria-hidden="true" className="absolute inset-0" />
                         {nombre}
                     </Link>

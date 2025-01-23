@@ -6,27 +6,14 @@ export async function getTrip(id: string) {
     try {
         const response = await contentfulClient.getEntries({
             content_type: 'paquete',
-            'fields.id': id,
+            'fields.slug': id,
         });
 
         if (response.total === 0) {
             throw new Error('No se encontró el paquete');
         }
 
-        const entry = response.items[0];
-
-        const salidasResponse = await contentfulClient.getEntries({
-            content_type: 'salida',
-            query: entry.fields.id as string,
-        });
-
-        return {
-            ...entry,
-            fields: {
-                ...entry.fields,
-                salidas: salidasResponse.items,
-            }
-        } as unknown as TypePaquete;
+        return response.items[0] as unknown as TypePaquete;
     } catch (error) {
         console.error(error);
         return notFound();

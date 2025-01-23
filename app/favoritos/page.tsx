@@ -49,7 +49,7 @@ export default async function FavoritosPage() {
         name: `Paquetes de viaje favoritos`,
         url: `https://www.aliworld.mx/favoritos`,
         itemListElement: favorites?.fields?.paquetes.map((trip) => {
-            const { id, nombre, imagen, precio, moneda, dias, ciudades } = trip.fields;
+            const { slug, destino, nombre, imagen, precio, moneda, dias, ciudades } = trip.fields;
             const { url } = imagen.fields.file!;
             const imageUrl = `https:${url}`;
 
@@ -58,7 +58,7 @@ export default async function FavoritosPage() {
                 itemOffered: {
                     '@type': 'Trip',
                     name: nombre as string,
-                    url: `https://www.aliworld.mx/experiencia/${id}`,
+                    url: `https://www.aliworld.mx/paquetes/${destino.fields.id}/${slug}`,
                     image: imageUrl as string,
                     price: precio as number,
                     priceCurrency: moneda as string,
@@ -72,7 +72,6 @@ export default async function FavoritosPage() {
             }
         })
     };
-
 
     return (
         <>

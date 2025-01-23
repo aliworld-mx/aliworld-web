@@ -23,7 +23,7 @@ export const Breadcrumbs = ({ breadcrumbs }: BreadcrumbProps) => {
     }
 
     return (
-        <nav aria-label="Breadcrumb" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-6 pt-12">
+        <nav aria-label="Breadcrumb" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-6 pt-6">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
             <ol role="list" className="flex space-x-2">
                 {breadcrumbs.map((breadcrumb, breadcrumbIdx) => (

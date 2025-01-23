@@ -17,7 +17,7 @@ import Socials from './_components/Socials';
 import { Catalog } from './_components/Catalog';
 import { ExpediaBenefits } from './_components/Expedia/ExpediaBenefits';
 
-export const revalidate = 3600;
+export const revalidate = 36000;
 
 export const metadata: Metadata = {
   title: 'Aliworld - Paquetes de viaje a todo el mundo al mejor precio',
@@ -83,7 +83,7 @@ export default async function InicioPage() {
           itemOffered: {
             '@type': 'Trip',
             name: paquete.fields?.nombre,
-            url: `https://www.aliworld.mx/experiencia/${paquete.fields?.id}`,
+            url: `https://www.aliworld.mx/paquetes/${paquete.fields?.destino.fields.nombre}/${paquete.fields?.slug}`,
             image: paquete.fields?.imagen?.fields.file?.url,
             price: paquete.fields?.precio,
             priceCurrency: paquete.fields?.moneda,
@@ -105,7 +105,7 @@ export default async function InicioPage() {
               price: paquete.fields?.precio,
               priceCurrency: paquete.fields?.moneda,
               availability: 'InStock',
-              url: `https://www.aliworld.mx/experiencia/${paquete.fields?.id}`,
+              url: `https://www.aliworld.mx/paquetes/${paquete.fields?.destino.fields.nombre}/${paquete.fields?.slug}`,
             },
           },
         })),
@@ -164,34 +164,7 @@ export default async function InicioPage() {
           />
         </div>
       </div>
-      {/*<div aria-hidden="true" className="absolute inset-0 bg-gray-900 opacity-50" />
-      <div className="relative mx-auto flex max-w-3xl flex-col items-center py-12 px-6 h-screen mb-[-64px] text-center lg:px-0">
-        <h1 className="text-4xl font-bold tracking-tight mt-32 sm:mt-64 text-white lg:text-6xl">Encuentra tu próximo destino</h1>
-        <p className="mt-4 text-xl text-white">
-          Viajar es una de las mejores experiencias que puedes tener, descubre los mejores destinos y vive una gran aventura.
-        </p>
-        <Link
-          href="/paquetes"
-          className="mt-8 inline-block rounded-md border border-transparent bg-white px-8 py-3 text-base font-medium text-gray-900 hover:bg-gray-100"
-        >
-          Ver Paquetes de Viaje
-        </Link>
-        <Link
-          href="/hoteles"
-          className="mt-8 inline-block rounded-md border border-transparent bg-white px-8 py-3 text-base font-medium text-gray-900 hover:bg-gray-100"
-        >
-          Reservar Hoteles
-        </Link>
-        <Link
-          href="/vuelos"
-          className="mt-8 inline-block rounded-md border border-transparent bg-white px-8 py-3 text-base font-medium text-gray-900 hover:bg-gray-100"
-        >
-          Reservar Vuelos
-        </Link>
-      </div>*/}
-
       <main className='bg-white'>
-        {/* Category section */}
         <section aria-labelledby="category-heading" className="py-12 sm:py-24 xl:mx-auto xl:max-w-7xl xl:px-8">
           <div className="px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 xl:px-0">
             <h2 id="category-heading" className="text-2xl font-bold tracking-tight text-gray-900">
@@ -235,7 +208,6 @@ export default async function InicioPage() {
             </Link>
           </div>
         </section>
-        {/* Favorites section */}
         <section aria-labelledby="favorites-heading" className='bg-white'>
           <div className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 sm:pb-24 lg:px-8">
             <div className="sm:flex sm:items-baseline sm:justify-between">
@@ -259,7 +231,7 @@ export default async function InicioPage() {
                     className="w-full rounded-lg object-fit group-hover:opacity-75"
                   />
                   <h3 className="mt-4 text-base font-semibold text-gray-900">
-                    <Link href={`/experiencia/${favorite.fields?.id}`}>
+                    <Link href={`/paquetes/${favorite.fields.destino.fields.id}/${favorite.fields.slug}`}>
                       <span className="absolute inset-0" />
                       {favorite.fields?.nombre}
                     </Link>
@@ -278,7 +250,6 @@ export default async function InicioPage() {
           </div>
         </section>
 
-        {/* CTA section */}
         <div className="relative bg-gray-800 px-6 py-32 sm:px-12 sm:py-40 lg:px-16">
           <div className="absolute inset-0 overflow-hidden">
             <Image

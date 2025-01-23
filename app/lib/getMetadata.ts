@@ -4,7 +4,8 @@ export async function getMetadata(metadataId: string) {
     try {
         const response = await contentfulClient.getEntries({
             content_type: 'metadata',
-            "sys.id": metadataId
+            "sys.id": metadataId,
+            include: 3,
         });
 
         if (response.total === 0) {

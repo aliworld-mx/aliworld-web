@@ -16,10 +16,11 @@ interface ExperienceTabsProps {
 
 export default function ExperienceTabs({ experience }: ExperienceTabsProps) {
   const { moneda, precios, itinerario, incluye, noIncluye, hoteles, notas, visas, toursOpcionales } = experience.fields;
-  const [activeTab, setActiveTab] = useState('Itinerario');
+  const [activeTab, setActiveTab] = useState('Precios y Salidas');
   const tabs = useMemo(() => {
-    const tabsArray = ['Itinerario']
-    if (precios) tabsArray.push('Precios');
+    const tabsArray = []
+    if (precios) tabsArray.push('Precios y Salidas');
+    tabsArray.push('Itinerario')
     if (hoteles) tabsArray.push('Hoteles');
     if (notas) tabsArray.push('Notas');
     if (visas) tabsArray.push('Visas');
@@ -66,8 +67,8 @@ export default function ExperienceTabs({ experience }: ExperienceTabsProps) {
           </nav>
         </div>
       </div>
+      <Prices precios={precios} moneda={moneda} incluye={incluye} noIncluye={noIncluye} active={activeTab === 'Precios y Salidas'} />
       <Itinerary itinerario={itinerario} active={activeTab === 'Itinerario'} />
-      <Prices precios={precios} moneda={moneda} incluye={incluye} noIncluye={noIncluye} active={activeTab === 'Precios'} />
       <Hotels hoteles={hoteles} active={activeTab === 'Hoteles'} />
       <Notes notas={notas} active={activeTab === 'Notas'} />
       <OptionalTours tours={toursOpcionales} active={activeTab === 'Tours opcionales'} />
