@@ -3,12 +3,13 @@ import { contentfulClient } from "../_utils/contentful";
 
 export async function getAllTrips() {
     try {
-        const response = await contentfulClient.getEntries({
+        const entries = await contentfulClient.getEntries({
             content_type: 'paquete',
-            limit: 500,
+            include: 1,
+            select: ['fields.slug', 'fields.destino', 'sys.updatedAt'],
         });
 
-        return response.items as unknown as TypePaquete[];
+        return entries.items as unknown as TypePaquete[];
     } catch (error) {
         console.error(error);
     }

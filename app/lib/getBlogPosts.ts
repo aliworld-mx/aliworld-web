@@ -6,6 +6,7 @@ export async function getBlogPosts() {
         const response = await contentfulClient.getEntries({
             content_type: 'publicacion',
             limit: 500,
+            select: ['fields.titulo', 'fields.descripcion', 'fields.portada', 'fields.slug', 'fields.etiquetas', 'sys.updatedAt', 'sys.createdAt'],
         });
 
         return response.items as unknown as TypePublicacion[];
