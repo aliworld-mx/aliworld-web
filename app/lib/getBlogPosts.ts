@@ -5,6 +5,7 @@ export async function getBlogPosts() {
     try {
         const response = await contentfulClient.getEntries({
             content_type: 'publicacion',
+            limit: 500,
         });
 
         return response.items as unknown as TypePublicacion[];
