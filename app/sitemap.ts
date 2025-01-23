@@ -1,5 +1,6 @@
 import { TypePaquete } from "./_types/contentful/Paquete";
 import { TypePublicacion } from "./_types/contentful/Publicacion";
+import { escapeXML } from "./_utils/escapeSitemap";
 import { getAllTrips } from "./lib/getAllTrips";
 import { getBlogPosts } from "./lib/getBlogPosts";
 
@@ -37,7 +38,7 @@ export default async function sitemap() {
     const trips = await getAllTrips();
 
     const tripUrls = trips?.map((trip: TypePaquete) => ({
-        url: `https://www.aliworld.mx/paquetes/${trip.fields?.destino.fields.id}/${trip.fields.slug}`,
+        url: escapeXML(`https://www.aliworld.mx/paquetes/${trip.fields?.destino.fields.id}/${trip.fields.slug}`),
         lastModified: trip.sys.updatedAt,
         priority: 0.60,
     })) as { url: string, lastModified: string, priority: number }[];
