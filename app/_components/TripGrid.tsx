@@ -138,7 +138,7 @@ export const TripGrid = ({ header, trips }: Readonly<{ header: string, trips: Ty
                         {/* Filters */}
                         <form className="mt-4 border-t border-gray-200">
                             <div className="space-y-8 p-4">
-                                <ComboBox name="pais" label="Paises" options={filters.ciudades} value={country} onChange={setCountry} multiple={true} />
+                                <ComboBox name="pais" label="Paises" options={filters.paises} value={country} onChange={setCountry} multiple={true} />
                                 <ComboBox name="ciudad" label="Ciudades" options={filters.ciudades} value={city} onChange={setCity} multiple={true} />
                             </div>
                         </form>
