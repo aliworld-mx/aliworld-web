@@ -16,8 +16,8 @@ import { QuotationButton } from '@/app/_components/QuotationButton'
 export const revalidate = 36000;
 
 export const generateMetadata = async ({ params }: PageProps): Promise<Metadata> => {
-    const { experiencia } = await params;
-    const experience = await getTrip(experiencia);
+    const { paquete } = await params;
+    const experience = await getTrip(paquete);
     const { nombre, imagen, destino, slug } = experience.fields;
     const { url } = imagen.fields.file!;
     const imageUrl = `https:${url}`;
