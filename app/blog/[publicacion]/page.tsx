@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     } = post.fields;
 
     return {
-        title: titulo,
+        title: `${titulo} | Aliworld`,
         description: descripcion,
         openGraph: {
             siteName: 'Aliworld',

@@ -10,7 +10,7 @@ import { Breadcrumbs } from '../_components/Breadcrumbs';
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-    title: 'Paquetes | Aliworld',
+    title: 'Paquetes de Viaje | Aliworld',
     description: 'Descubre los mejores paquetes de viaje a todo el mundo al mejor precio. ¡Reserva ya!',
     openGraph: {
         type: 'website',
@@ -34,7 +34,7 @@ const breadcrumbs = [
     },
 
     {
-        name: 'Destinos',
+        name: 'Paquetes',
         href: '/paquetes',
     },
 ]
@@ -45,7 +45,7 @@ export default async function PaquetesPage() {
     const structuredData: WithContext<ItemList> = {
         '@context': 'https://schema.org',
         '@type': 'ItemList',
-        name: "Listado de Destinos de Viaje",
+        name: "Listado de Destinos de Paquetes de Viaje",
         url: 'https://www.aliworld.mx/paquetes',
         itemListElement: destinations.map((destination, index) => {
             const { id, nombre, imagen, descripcion } = destination.fields;

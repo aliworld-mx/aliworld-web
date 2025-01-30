@@ -23,7 +23,7 @@ export const generateMetadata = async ({ params }: PageProps): Promise<Metadata>
     const imageUrl = `https:${url}`;
 
     return {
-        title: `${nombre} - Paquetes de Viaje a ${destino.fields.nombre} | Aliworld`,
+        title: `${nombre} - ${destino.fields.nombre} | Aliworld`,
         description: `Descubre ${destino.fields.nombre} en un paquete de viaje con Aliworld. Incluye vuelo, hotel y tours. ¡Reserva ahora!`,
         openGraph: {
             type: 'website',
@@ -80,7 +80,11 @@ export default async function PaquetePage({ params }: PageProps) {
             price: precio,
             priceCurrency: moneda,
             validFrom: '2024-12-01',
-            availability: 'InStock',
+            category: 'Travel',
+            mainEntityOfPage: {
+                '@type': 'WebPage',
+                '@id': `https://www.aliworld.mx/paquetes/${destino.fields.id}/${slug}`,
+            },
             url: `https://www.aliworld.mx/paquetes/${destino.fields.id}/${slug}`,
         }
     };

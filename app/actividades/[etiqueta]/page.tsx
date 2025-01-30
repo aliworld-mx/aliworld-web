@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     const { etiqueta } = await params;
 
     return {
-        title: `${humanize(etiqueta)} | Actividades`,
+        title: `${humanize(etiqueta)} | Actividades | Aliworld`,
         description: `Encuentra las mejores actividades en ${humanize(etiqueta)} con Aliworld.`,
         alternates: {
             canonical: `https://www.aliworld.mx/actividades/${etiqueta}`,

@@ -59,7 +59,7 @@ export default async function DestinosPage({ params }: PageProps) {
                     image: imageUrl as string,
                     price: precio as number,
                     priceCurrency: moneda as string,
-                    validFrom: '2024-12-01',
+                    validFrom: '2025-01-01',
                     duration: `P${dias}D`,
                     destination: ciudades?.map((ciudad) => ({
                         '@type': 'City',
@@ -77,7 +77,7 @@ export default async function DestinosPage({ params }: PageProps) {
         },
 
         {
-            name: 'Destinos',
+            name: 'Paquetes',
             href: '/paquetes',
         },
         {

@@ -20,14 +20,14 @@ import { ExpediaBenefits } from './_components/Expedia/ExpediaBenefits';
 export const revalidate = 36000;
 
 export const metadata: Metadata = {
-  title: 'Aliworld - Paquetes de viaje a todo el mundo al mejor precio',
-  description: 'Descubre los mejores destinos y vive una gran aventura con Aliworld.',
+  title: 'Aliworld - Paquetes de viaje, hoteles y vuelos al mejor precio',
+  description: 'Reserva ya paquetes de viaje, hoteles y vuelos a todo el mundo al mejor precio. ¡Vive la mejor experiencia con Aliworld!',
   openGraph: {
     type: 'website',
     url: 'https://www.aliworld.mx',
-    title: "Aliworld - Paquetes de viaje a todo el mundo al mejor precio",
+    title: "Aliworld - Paquetes de viaje, hoteles y vuelos al mejor precio",
     siteName: 'Aliworld',
-    description: "Encuentra los mejores paquetes de viaje a todo el mundo al mejor precio. ¡Reserva ya!",
+    description: 'Reserva ya paquetes de viaje, hoteles y vuelos a todo el mundo al mejor precio. ¡Vive la mejor experiencia con Aliworld!',
   },
   alternates: {
     canonical: 'https://www.aliworld.mx',
@@ -83,7 +83,7 @@ export default async function InicioPage() {
           itemOffered: {
             '@type': 'Trip',
             name: paquete.fields?.nombre,
-            url: `https://www.aliworld.mx/paquetes/${paquete.fields?.destino.fields.nombre}/${paquete.fields?.slug}`,
+            url: `https://www.aliworld.mx/paquetes/${paquete.fields?.destino.fields.id}/${paquete.fields?.slug}`,
             image: paquete.fields?.imagen?.fields.file?.url,
             price: paquete.fields?.precio,
             priceCurrency: paquete.fields?.moneda,
@@ -104,8 +104,11 @@ export default async function InicioPage() {
               '@type': 'Offer',
               price: paquete.fields?.precio,
               priceCurrency: paquete.fields?.moneda,
-              availability: 'InStock',
-              url: `https://www.aliworld.mx/paquetes/${paquete.fields?.destino.fields.nombre}/${paquete.fields?.slug}`,
+              mainEntityOfPage: {
+                '@type': 'WebPage',
+                '@id': `https://www.aliworld.mx/paquetes/${paquete.fields?.destino.fields.id}/${paquete.fields?.slug}`,
+              },
+              url: `https://www.aliworld.mx/paquetes/${paquete.fields?.destino.fields.id}/${paquete.fields?.slug}`,
             },
           },
         })),
