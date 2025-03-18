@@ -17,15 +17,6 @@ export const DollarPrice = () => {
     if (!dollarPrice) return null;
 
     return (
-        <>
-            <Image
-                width={20}
-                height={20}
-                alt="Bandera de Estados Unidos"
-                src="https://tailwindui.com/plus/img/flags/flag-united-states.svg"
-                className="block h-auto w-5 shrink-0"
-            />
-            <span className="ml-3 block text-sm font-medium text-gray-800">1 USD = ${dollarPrice}MXN</span>
-        </>
+        <span className="ml-3 block text-sm font-medium text-gray-800">1 USD = ${dollarPrice}MXN</span>
     );
 };
