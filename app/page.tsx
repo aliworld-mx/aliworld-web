@@ -57,7 +57,7 @@ export default async function InicioPage() {
       'https://www.facebook.com/aliworld.viajes/',
       'https://www.instagram.com/aliworld.viajes/',
       'https://www.tiktok.com/@aliworld.viajes',
-      'https://www.threads.net/@aliworld.viajes'
+      'https://www.youtube.com/@aliworld.viajes'
     ],
     email: 'contacto@aliworld.mx',
     address: {

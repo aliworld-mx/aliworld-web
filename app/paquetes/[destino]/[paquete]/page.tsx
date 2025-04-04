@@ -24,7 +24,7 @@ export const generateMetadata = async ({ params }: PageProps): Promise<Metadata>
 
     return {
         title: `${nombre} - ${destino.fields.nombre} | Aliworld`,
-        description: `Descubre ${destino.fields.nombre} en un paquete de viaje con Aliworld. Incluye vuelo, hotel y tours. ¡Reserva ahora!`,
+        description: `Descubre ${destino.fields.nombre} en el paquete de viaje ${nombre} de Aliworld. Incluye vuelo, hotel y tours. ¡Reserva ahora!`,
         openGraph: {
             type: 'website',
             url: `https://www.aliworld.mx/paquetes/${destino.fields.id}/${slug}`,
@@ -36,7 +36,7 @@ export const generateMetadata = async ({ params }: PageProps): Promise<Metadata>
                 },
             ],
             siteName: 'Aliworld',
-            description: `Descubre ${destino.fields.nombre} en un paquete de viaje con Aliworld. Incluye vuelo, hotel y tours. ¡Reserva ahora!`,
+            description: `Descubre ${destino.fields.nombre} en el paquete de viaje ${nombre} de Aliworld. Incluye vuelo, hotel y tours. ¡Reserva ahora!`,
         },
         alternates: {
             canonical: `https://www.aliworld.mx/paquetes/${destino.fields.id}/${slug}`,
