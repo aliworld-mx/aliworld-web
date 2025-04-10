@@ -3,6 +3,7 @@ import { contentfulClient } from "../_utils/contentful";
 import { TypePaquete } from "../_types/contentful/Paquete";
 
 export async function getTrip(id: string) {
+    console.log('ID:', id);
     try {
         const response = await contentfulClient.getEntries({
             content_type: 'paquete',

@@ -79,7 +79,7 @@ export default async function FavoritosPage() {
             <div className="bg-white">
                 <Breadcrumbs breadcrumbs={breadcrumbs} />
                 <Suspense>
-                    <TripGrid header='Nuestros paquetes favoritos' trips={favorites?.fields.paquetes ?? []} />
+                    <TripGrid header='Paquetes de viajes seleccionados por nuestro equipo' trips={favorites?.fields.paquetes ?? []} />
                 </Suspense>
             </div>
             <HotelQuotation />

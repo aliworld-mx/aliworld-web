@@ -12,13 +12,13 @@ export const revalidate = 3600;
 
 export const metadata: Metadata = {
     title: `Promociones de Paquetes de Viaje | Aliworld`,
-    description: `Descubre los paquetes de viaje con el mejor precio`,
+    description: `Descubre los paquetes de viaje con el mejor precio en Aliworld`,
     openGraph: {
         type: 'website',
         url: `https://www.aliworld.mx/promociones`,
         title: `Promociones de Paquetes de Viaje | Aliworld`,
         siteName: 'Aliworld',
-        description: `Descubre los paquetes de viaje con el mejor precio`,
+        description: `Descubre los paquetes de viaje con el mejor precio en Aliworld`,
     },
     alternates: {
         canonical: `https://www.aliworld.mx/promociones`,
@@ -79,7 +79,7 @@ export default async function PromosPage() {
             <div className="bg-white">
                 <Breadcrumbs breadcrumbs={breadcrumbs} />
                 <Suspense>
-                    <TripGrid header='Nuestros paquetes con descuento' trips={promos?.fields.paquetes ?? []} />
+                    <TripGrid header='Paquetes de viaje con promociones' trips={promos?.fields.paquetes ?? []} />
                 </Suspense>
             </div>
             <HotelQuotation />

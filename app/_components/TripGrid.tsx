@@ -2,7 +2,7 @@
 
 import { Dialog, DialogBackdrop, DialogPanel, Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/react"
 import { XMarkIcon, ChevronDownIcon, FunnelIcon } from "@heroicons/react/24/outline"
-import { useEffect, useMemo, useState } from "react"
+import { useCallback, useEffect, useMemo, useState } from "react"
 import { TripGridItem } from "./TripGridItem"
 import { classNames } from "../_utils/classNames"
 import { TypePaquete } from "../_types/contentful/Paquete"
@@ -50,7 +50,7 @@ export const TripGrid = ({ header, trips }: Readonly<{ header: string, trips: Ty
 
     const filters = useMemo(() => generateFilters(trips), [trips]);
 
-    const orderBy = (tripsArray: TypePaquete[], orderValue: string = order) => {
+    const orderBy = useCallback((tripsArray: TypePaquete[], orderValue: string = order) => {
         const tripsArrayCopy = [...tripsArray];
         switch (orderValue) {
             case 'Precio - Menor a Mayor':
@@ -86,7 +86,7 @@ export const TripGrid = ({ header, trips }: Readonly<{ header: string, trips: Ty
         }
         setOrder(orderValue);
         setFilteredTrips(tripsArrayCopy);
-    };
+    }, [order]);
 
     useEffect(() => {
         if (countryParam) {
@@ -107,7 +107,7 @@ export const TripGrid = ({ header, trips }: Readonly<{ header: string, trips: Ty
         filtered = filtered.filter((trip) => country.length === 0 || country.some((option) => trip.fields.paises.some((pais) => pais.fields.nombre === option.id)));
         filtered = filtered.filter((trip) => city.length === 0 || city.some((option) => trip.fields.ciudades.some((ciudad) => ciudad.fields?.nombre === option.id)));
         orderBy(filtered);
-    }, [country, city, trips]);
+    }, [country, city, trips, orderBy]);
 
     return (
         <div>
