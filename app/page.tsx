@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image';
 import heroImage from '../public/hero.jpg';
 import promoImage from '../public/promo.jpg';
-import { PercentBadgeIcon } from '@heroicons/react/20/solid';
+import { ArrowRightIcon, PercentBadgeIcon } from '@heroicons/react/20/solid';
 import Benefits from './_components/Benefits';
 import { WithContext, TravelAgency } from 'schema-dts';
 import { getMetadata } from './lib/getMetadata';
@@ -149,8 +149,8 @@ export default async function InicioPage() {
                   >
                     Ver Paquetes de Viaje
                   </Link>
-                  <Link href="https://reservas.aliworld.mx" className="text-sm/6 font-semibold text-gray-900">
-                    Reservar Hoteles y Vuelos <span aria-hidden="true">→</span>
+                  <Link href="https://reservas.aliworld.mx" className="text-sm/6 font-semibold text-gray-900 group hover:underline">
+                    Reservar Hoteles y Vuelos <ArrowRightIcon className="h-4 w-4 ml-2 inline-block transition group-hover:translate-x-1" />
                   </Link>
                 </div>
               </div>
@@ -161,8 +161,8 @@ export default async function InicioPage() {
           <Image
             alt="El Pabellon Dorado en Kyoto, Japón"
             src={heroImage}
-            width={1920}
-            height={1080}
+            width={953}
+            height={768}
             className="aspect-[3/2] object-cover lg:aspect-auto lg:size-full"
           />
         </div>
@@ -173,9 +173,9 @@ export default async function InicioPage() {
             <h2 id="category-heading" className="text-2xl font-bold tracking-tight text-gray-900">
               Buscar por Destino
             </h2>
-            <Link href="/paquetes" className="hidden text-sm font-semibold text-sky-600 hover:text-sky-500 sm:block">
+            <Link href="/paquetes" className="hidden text-sm font-semibold group text-sky-600 hover:text-sky-500 sm:block">
               Ver todos los destinos
-              <span aria-hidden="true"> &rarr;</span>
+              <ArrowRightIcon className="h-4 w-4 ml-2 inline-block transition group-hover:translate-x-1" />
             </Link>
           </div>
 
@@ -205,9 +205,9 @@ export default async function InicioPage() {
           </div>
 
           <div className="mt-6 px-4 sm:hidden">
-            <Link href="/paquetes" className="block text-sm font-semibold text-sky-600 hover:text-sky-500">
+            <Link href="/paquetes" className="block text-sm font-semibold group text-sky-600 hover:text-sky-500">
               Ver todos los destinos
-              <span aria-hidden="true"> &rarr;</span>
+              <ArrowRightIcon className="h-4 w-4 ml-2 inline-block transition group-hover:translate-x-1" />
             </Link>
           </div>
         </section>
@@ -217,9 +217,9 @@ export default async function InicioPage() {
               <h2 id="favorites-heading" className="text-2xl font-bold tracking-tight text-gray-900">
                 Nuestros favoritos
               </h2>
-              <Link href="/favoritos" className="hidden text-sm font-semibold text-sky-600 hover:text-sky-500 sm:block">
+              <Link href="/favoritos" className="hidden text-sm font-semibold group text-sky-600 hover:text-sky-500 sm:block">
                 Ver todos los favoritos
-                <span aria-hidden="true"> &rarr;</span>
+                <ArrowRightIcon className="h-4 w-4 ml-2 inline-block transition group-hover:translate-x-1" />
               </Link>
             </div>
 
@@ -245,9 +245,9 @@ export default async function InicioPage() {
             </div>
 
             <div className="mt-6 sm:hidden">
-              <Link href="/favoritos" className="block text-sm font-semibold text-sky-600 hover:text-sky-500">
+              <Link href="/favoritos" className="block text-sm font-semibold group text-sky-600 hover:text-sky-500">
                 Ver todos los favoritos
-                <span aria-hidden="true"> &rarr;</span>
+                <ArrowRightIcon className="h-4 w-4 ml-2 inline-block transition group-hover:translate-x-1" />
               </Link>
             </div>
           </div>
