@@ -1,6 +1,8 @@
+import { TypeGuiaDeCiudad } from "./_types/contentful/GuiaDeCiudad";
 import { TypePaquete } from "./_types/contentful/Paquete";
 import { TypePublicacion } from "./_types/contentful/Publicacion";
 import { escapeXML } from "./_utils/escapeSitemap";
+import { getAllGuides } from "./lib/getAllGuides";
 import { getAllTrips } from "./lib/getAllTrips";
 import { getBlogPosts } from "./lib/getBlogPosts";
 
@@ -43,6 +45,13 @@ export default async function sitemap() {
         priority: 0.60,
     })) as { url: string, lastModified: string, priority: number }[];
 
+    const guides = await getAllGuides();
+    const guideUrls = guides?.map((guide: TypeGuiaDeCiudad) => ({
+        url: escapeXML(`https://www.aliworld.mx/ciudad/${guide.fields.slug}`),
+        lastModified: guide.sys.updatedAt,
+        priority: 0.50,
+    })) as { url: string, lastModified: string, priority: number }[];
+
     const posts = await getBlogPosts();
 
     const postUrl = posts?.map((post: TypePublicacion) => ({
@@ -63,6 +72,7 @@ export default async function sitemap() {
             priority: 0.80
         })),
         ...tripUrls,
+        ...guideUrls,
         ...postUrl,
     ];
 }
