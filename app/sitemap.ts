@@ -47,7 +47,7 @@ export default async function sitemap() {
 
     const guides = await getAllGuides();
     const guideUrls = guides?.map((guide: TypeGuiaDeCiudad) => ({
-        url: escapeXML(`https://www.aliworld.mx/ciudad/${guide.fields.slug}`),
+        url: escapeXML(`https://www.aliworld.mx/ciudades/${guide.fields.slug}`),
         lastModified: guide.sys.updatedAt,
         priority: 0.50,
     })) as { url: string, lastModified: string, priority: number }[];
