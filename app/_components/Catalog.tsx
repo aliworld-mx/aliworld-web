@@ -11,7 +11,7 @@ const features = [
         description: 'Paquetes en tour con guía, vuelos, hospedaje y transporte incluido.',
         href: '/paquetes',
         imageSrc: paquetesImage,
-        imageAlt: 'Fotografía de la Torre Eiffel en París.',
+        imageAlt: 'Fotografía de un templo budista en Japón.',
     },
     {
         name: 'Hoteles',
@@ -38,28 +38,28 @@ const features = [
 
 export const Catalog = () => {
     return (
-        <div className="bg-white">
+        <div className="bg-gray-100">
             <div className="mx-auto max-w-2xl px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:px-8">
                 <div className="max-w-3xl">
-                    <h2 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Somos tu mejor opción para cualquier plan</h2>
-                    <p className="mt-4 text-gray-500">
+                    <h2 className="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl">Tenemos todo para tu viaje</h2>
+                    <p className="mt-4 text-gray-700">
                         Paquetes de viaje completos alrededor del mundo, hospedaje en los mejores hoteles, vuelos nacionales e internacionales y actividades para toda la familia.
                     </p>
                 </div>
 
                 <div className="mt-11 grid grid-cols-1 items-start gap-x-6 gap-y-16 sm:mt-16 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-8">
                     {features.map((feature) => (
-                        <Link href={feature.href} key={feature.name} className="flex flex-col-reverse">
+                        <Link href={feature.href} key={feature.name} className="flex flex-col-reverse group">
                             <div className="mt-6">
-                                <h3 className="text-lg font-bold text-gray-900">{feature.name}</h3>
-                                <p className="mt-2 text-sm text-gray-500">{feature.description}</p>
+                                <h3 className="text-lg font-bold text-gray-900 group-hover:underline">{feature.name}</h3>
+                                <p className="mt-2 text-sm text-gray-700">{feature.description}</p>
                             </div>
                             <Image
                                 alt={feature.imageAlt}
                                 src={feature.imageSrc}
                                 width={400}
                                 height={400}
-                                className="aspect-square w-full rounded-lg bg-gray-100 object-cover object-bottom"
+                                className="aspect-square w-full rounded-lg bg-gray-100 object-cover object-bottom group-hover:opacity-75"
                             />
                         </Link>
                     ))}

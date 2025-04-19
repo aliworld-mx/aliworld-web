@@ -8,6 +8,10 @@ import Socials from '@/app/_components/Socials'
 import { getGuide } from '@/app/lib/getGuide'
 import Link from 'next/link'
 import { Metadata } from 'next'
+import { getTripsByCity } from '@/app/lib/getTripsByCity'
+import { toMoney } from '@/app/_utils/toMoney'
+import { Catalog } from '@/app/_components/Catalog'
+import { getBlogPostsByCity } from '@/app/lib/getBlogPostsByCity'
 
 export const generateMetadata = async ({ params }: PageProps): Promise<Metadata> => {
     const { ciudad } = await params;
@@ -60,6 +64,8 @@ export default async function CiudadPage({ params }: PageProps) {
         slug,
         preguntasFrecuentes,
     } = guia.fields;
+    const trips = await getTripsByCity(slug);
+    const posts = await getBlogPostsByCity(slug);
 
     const headerImage = `https:${imagenEncabezado?.fields?.file?.url}`;
     const contentImage = `https:${imagenContenido?.fields?.file?.url}`;
@@ -166,7 +172,7 @@ export default async function CiudadPage({ params }: PageProps) {
 
                             return (
                                 <li key={actividad.sys.id} className='m-0'>
-                                    <Image alt={actividad.fields.imagen.fields.description ?? ""} src={activityImage} className="aspect-3/2 w-full h-[202px] rounded-2xl object-cover lg:h-[242px]"  width={384} height={242} />
+                                    <Image alt={actividad.fields.imagen.fields.description ?? ""} src={activityImage} className="aspect-3/2 w-full h-[202px] rounded-2xl object-cover lg:h-[242px]" width={384} height={242} />
                                     <h3 className="mt-6 text-lg/8 font-semibold text-gray-900">{actividad.fields.titulo}</h3>
                                     <p className="text-base/7 mb-4 text-gray-600">{actividad.fields.contenido}</p>
                                     {actividad.fields.url && (
@@ -196,7 +202,7 @@ export default async function CiudadPage({ params }: PageProps) {
                             const foodImage = `https:${platillo.fields.imagen?.fields?.file?.url}`;
                             return (
                                 <li key={platillo.sys.id}>
-                                    <Image alt={platillo.fields.imagen.fields.description ?? ""} src={foodImage} className="aspect-3/2 w-full max-h-[202px] rounded-2xl object-cover" width={384} height={242} />
+                                    <Image alt={platillo.fields.imagen.fields.description ?? ""} src={foodImage} className="aspect-3/2 w-full h-[202px] rounded-2xl object-cover lg:h-[242px]" width={384} height={242} />
                                     <h3 className="mt-6 text-lg/8 font-semibold tracking-tight text-gray-900">{platillo.fields.titulo}</h3>
                                     <p className="text-base/7 text-gray-600">{platillo.fields.descripcion}</p>
                                 </li>
@@ -205,7 +211,46 @@ export default async function CiudadPage({ params }: PageProps) {
                     </ul>
                 </div>
             </div>
-            <div className="bg-white">
+            <section className='bg-white py-24 sm:py-32'>
+                <div className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 sm:pb-24 lg:px-8">
+                    <div className="sm:flex sm:items-baseline sm:justify-between">
+                        <h2 className="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl">Nuestros paquetes a {nombreDeCiudad}</h2>
+                        <Link href={url} className="hidden text-sm font-semibold group text-sky-600 hover:text-sky-500 sm:block">
+                            Ver todos los paquetes
+                            <ArrowRightIcon className="h-4 w-4 ml-2 inline-block transition group-hover:translate-x-1" />
+                        </Link>
+                    </div>
+
+                    <div className="grid grid-cols-1 mt-12 gap-y-10 sm:grid-cols-3 sm:gap-x-6 sm:gap-y-0 lg:gap-x-8">
+                        {trips?.map((trip) => (
+                            <div key={trip.fields?.id} className="group relative">
+                                <Image
+                                    alt={trip.fields?.imagen?.fields?.description ?? trip.fields?.nombre}
+                                    src={`https:${trip.fields?.imagen?.fields?.file?.url}`}
+                                    width={300}
+                                    height={300}
+                                    className="w-full rounded-lg object-fit group-hover:opacity-75"
+                                />
+                                <h3 className="mt-4 text-base font-semibold text-gray-900">
+                                    <Link href={`/paquetes/${trip.fields.destino.fields.id}/${trip.fields.slug}`}>
+                                        <span className="absolute inset-0" />
+                                        {trip.fields?.nombre}
+                                    </Link>
+                                </h3>
+                                <p className="mt-1 text-sm text-gray-500">Desde: {toMoney(trip?.fields?.precio)} {trip?.fields?.moneda} + Impuestos y Suplementos</p>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="mt-6 sm:hidden">
+                        <Link href={url} className="block text-sm font-semibold group text-sky-600 hover:text-sky-500">
+                            Ver todos los paquetes
+                            <ArrowRightIcon className="h-4 w-4 ml-2 inline-block transition group-hover:translate-x-1" />
+                        </Link>
+                    </div>
+                </div>
+            </section>
+            <div className="bg-gray-100">
                 <div className="mx-auto max-w-7xl px-6 py-24 sm:pt-32 lg:px-8 lg:py-40">
                     <div className="lg:grid lg:grid-cols-12 lg:gap-8">
                         <div className="lg:col-span-5">
@@ -247,6 +292,56 @@ export default async function CiudadPage({ params }: PageProps) {
                 </div>
             </div>
             <Socials />
+            <Catalog />
+            <section className='bg-white py-24 sm:py-32'>
+                <div className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 sm:pb-24 lg:px-8">
+                    <div className="sm:flex sm:items-baseline sm:justify-between">
+                        <h2 className="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl">Conoce más sobre {nombreDeCiudad}</h2>
+                    </div>
+                    <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+                        {posts?.map((post) => {
+                            const {
+                                titulo,
+                                descripcion,
+                                fecha,
+                                portada,
+                                slug,
+                            } = post.fields;
+
+                            return (
+                                <Link href={`/blog/${slug}`} key={slug} className="group">
+                                    <article key={slug} className="flex flex-col items-start justify-between">
+                                        <div className="relative w-full">
+                                            <Image
+                                                alt={descripcion}
+                                                src={`https:${portada.fields?.file?.url}`}
+                                                width={800}
+                                                height={450}
+                                                className="aspect-video w-full rounded-2xl bg-gray-100 object-cover sm:aspect-[2/1] lg:aspect-[3/2] group-hover:opacity-75"
+                                            />
+                                            <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10" />
+                                        </div>
+                                        <div className="max-w-xl">
+                                            <div className="mt-8 flex items-center gap-x-4 text-xs">
+                                                <time dateTime={fecha} className="text-gray-500">
+                                                    {fecha}
+                                                </time>
+                                            </div>
+                                            <div className="relative">
+                                                <h3 className="mt-3 text-lg/6 font-semibold text-gray-900 group-hover:underline">
+                                                    <span className="absolute inset-0" />
+                                                    {titulo}
+                                                </h3>
+                                                <p className="mt-5 line-clamp-3 text-sm/6 text-gray-600">{descripcion}</p>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </Link>
+                            )
+                        })}
+                    </div>
+                </div>
+            </section>
         </div>
     )
 }
