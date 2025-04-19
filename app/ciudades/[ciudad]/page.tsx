@@ -165,7 +165,7 @@ export default async function CiudadPage({ params }: PageProps) {
                     </div>
                     <ul
                         role="list"
-                        className="mx-auto mt-20 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3"
+                        className="mx-auto mt-20 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 list-none lg:mx-0 lg:max-w-none lg:grid-cols-3"
                     >
                         {actividades.map((actividad) => {
                             const activityImage = `https:${actividad.fields.imagen?.fields?.file?.url}`;
@@ -196,7 +196,7 @@ export default async function CiudadPage({ params }: PageProps) {
                     </div>
                     <ul
                         role="list"
-                        className="mx-auto mt-20 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3"
+                        className="mx-auto mt-20 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 list-none lg:mx-0 lg:max-w-none lg:grid-cols-3"
                     >
                         {platillos.map((platillo) => {
                             const foodImage = `https:${platillo.fields.imagen?.fields?.file?.url}`;
