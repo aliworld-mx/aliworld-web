@@ -88,6 +88,7 @@ export const Navigation = ({ navigationData }: NavigationProps) => {
             { name: 'Vuelos', href: 'https://reservas.aliworld.mx' },
             { name: 'Actividades', href: '/actividades' },
             { name: 'Blog', href: '/blog' },
+            { name: 'Guías de Ciudades', href: '/ciudades' },
             { name: 'Contacto', href: '/contacto' },
         ],
     };

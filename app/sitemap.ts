@@ -30,7 +30,8 @@ export default async function sitemap() {
         '/hoteles',
         '/actividades',
         '/vuelos',
-        '/blog'
+        '/blog',
+        '/ciudades'
     ]
 
     function getUrl(key: string) {

@@ -23,7 +23,8 @@ const footerNavigation = {
         { name: 'Actividades', href: '/actividades' },
     ],
     empresa: [
-        { name: 'Blog', href: '#' },
+        { name: 'Blog', href: '/blog' },
+        { name: 'Guías de Ciudades', href: '/ciudades' },
     ],
     sociales: [
         {
