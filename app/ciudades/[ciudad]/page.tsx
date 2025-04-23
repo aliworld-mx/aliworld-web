@@ -171,7 +171,7 @@ export default async function CiudadPage({ params }: PageProps) {
                             const activityImage = `https:${actividad.fields.imagen?.fields?.file?.url}`;
 
                             return (
-                                <li key={actividad.sys.id} className='m-0'>
+                                <li key={actividad.sys.id} className='m-0 list-none'>
                                     <Image alt={actividad.fields.imagen.fields.description ?? ""} src={activityImage} className="aspect-3/2 w-full h-[202px] rounded-2xl object-cover lg:h-[242px]" width={384} height={242} />
                                     <h3 className="mt-6 text-lg/8 font-semibold text-gray-900">{actividad.fields.titulo}</h3>
                                     <p className="text-base/7 mb-4 text-gray-600">{actividad.fields.contenido}</p>
@@ -201,7 +201,7 @@ export default async function CiudadPage({ params }: PageProps) {
                         {platillos.map((platillo) => {
                             const foodImage = `https:${platillo.fields.imagen?.fields?.file?.url}`;
                             return (
-                                <li key={platillo.sys.id}>
+                                <li key={platillo.sys.id} className='m-0 list-none'>
                                     <Image alt={platillo.fields.imagen.fields.description ?? ""} src={foodImage} className="aspect-3/2 w-full h-[202px] rounded-2xl object-cover lg:h-[242px]" width={384} height={242} />
                                     <h3 className="mt-6 text-lg/8 font-semibold tracking-tight text-gray-900">{platillo.fields.titulo}</h3>
                                     <p className="text-base/7 text-gray-600">{platillo.fields.descripcion}</p>
