@@ -47,8 +47,6 @@ export default async function CitiesPage() {
                                 slug,
                             } = guide.fields;
 
-                            console.log(guide.fields);
-
                             return (
                                 <Link href={`/ciudades/${slug}`} key={slug} className="group">
                                     <article key={slug} className="flex flex-col items-start justify-between">
