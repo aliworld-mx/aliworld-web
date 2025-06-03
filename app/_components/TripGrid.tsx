@@ -47,6 +47,10 @@ export const TripGrid = ({ header, trips }: Readonly<{ header: string, trips: Ty
     const [order, setOrder] = useState('Reciente');
     const [country, setCountry] = useState<ComboBoxOption[]>([]);
     const [city, setCity] = useState<ComboBoxOption[]>([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 12;
+    const totalPages = Math.ceil(filteredTrips.length / itemsPerPage);
+    const paginatedTrips = filteredTrips.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
     const filters = useMemo(() => generateFilters(trips), [trips]);
 
@@ -109,10 +113,14 @@ export const TripGrid = ({ header, trips }: Readonly<{ header: string, trips: Ty
         orderBy(filtered);
     }, [country, city, trips, orderBy]);
 
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [country, city, order]);
+
     return (
         <div>
             {/* Mobile filter dialog */}
-            <Dialog open={mobileFiltersOpen} onClose={setMobileFiltersOpen} className="relative z-40 lg:hidden">
+            <Dialog open={mobileFiltersOpen} onClose={setMobileFiltersOpen} className="relative z-40">
                 <DialogBackdrop
                     transition
                     className="fixed inset-0 bg-black/25 transition-opacity duration-300 ease-linear data-closed:opacity-0"
@@ -152,7 +160,7 @@ export const TripGrid = ({ header, trips }: Readonly<{ header: string, trips: Ty
                     <div className="flex items-center">
                         <Menu as="div" className="relative inline-block text-left">
                             <div>
-                                <MenuButton className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
+                                <MenuButton className="group inline-flex justify-center text-sm font-medium cursor-pointer text-gray-700 hover:text-gray-900">
                                     Ordenar: {order}
                                     <ChevronDownIcon
                                         aria-hidden="true"
@@ -163,7 +171,7 @@ export const TripGrid = ({ header, trips }: Readonly<{ header: string, trips: Ty
 
                             <MenuItems
                                 transition
-                                className="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-2xl ring-1 ring-black/5 transition focus:outline-none data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-leave:duration-75 data-enter:ease-out data-leave:ease-in"
+                                className="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md cursor-pointer bg-white shadow-2xl ring-1 ring-black/5 transition focus:outline-none data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-leave:duration-75 data-enter:ease-out data-leave:ease-in"
                             >
                                 <div className="py-1">
                                     {sortOptions.map((option) => (
@@ -183,17 +191,13 @@ export const TripGrid = ({ header, trips }: Readonly<{ header: string, trips: Ty
                             </MenuItems>
                         </Menu>
 
-                        {/*<button type="button" className="-m-2 ml-5 p-2 text-gray-400 hover:text-gray-500 sm:ml-7">
-                <span className="sr-only">Ver cuadricula</span>
-                <Squares2X2Icon aria-hidden="true" className="size-5" />
-              </button>*/}
                         <button
                             type="button"
                             onClick={() => setMobileFiltersOpen(true)}
-                            className="-m-2 ml-4 p-2 text-gray-400 hover:text-gray-500 sm:ml-6 lg:hidden"
+                            className="-m-2 ml-4 p-2 text-gray-400 hover:text-gray-500 sm:ml-6"
                         >
                             <span className="sr-only">Filtros</span>
-                            <FunnelIcon aria-hidden="true" className="size-5" />
+                            <FunnelIcon aria-hidden="true" className="size-5 cursor-pointer" />
                         </button>
                     </div>
                 </div>
@@ -203,17 +207,73 @@ export const TripGrid = ({ header, trips }: Readonly<{ header: string, trips: Ty
                         Paquetes
                     </h2>
 
-                    <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
-                        {/* Filters */}
-                        <form className="hidden lg:block">
-                            <div className="space-y-4 gap-y-4">
-                                <ComboBox name="pais" label="Paises" options={filters.paises} value={country} onChange={setCountry} multiple={true} />
-                                <ComboBox name="ciudad" label="Ciudades" options={filters.ciudades} value={city} onChange={setCity} multiple={true} />
-                            </div>
-                        </form>
-
-                        <div className="lg:col-span-3 grid grid-cols-1 gap-3 sm:grid-cols-3">{filteredTrips.map((trip) => <TripGridItem key={trip.fields.id} trip={trip} />)}</div>
+                    <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-3">
+                        <div className="lg:col-span-3 grid grid-cols-1 gap-3 sm:grid-cols-3">
+                            {paginatedTrips.length > 0 ? (
+                                paginatedTrips.map((trip) => <TripGridItem key={trip.fields.id} trip={trip} />)
+                            ) : (
+                                <div className="col-span-full text-center text-gray-500 py-12">No hay paquetes que coincidan con los filtros seleccionados.</div>
+                            )}
+                        </div>
                     </div>
+
+                    {/* Pagination */}
+                    {totalPages > 1 && (
+                        <nav className="flex justify-center mt-10" aria-label="Paginación">
+                            <ul className="flex items-center gap-1">
+                                <li>
+                                    <button
+                                        onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                                        disabled={currentPage === 1}
+                                        className="flex items-center justify-center size-10 cursor-pointer rounded-full border border-gray-200 bg-white text-gray-400 hover:bg-sky-100 hover:text-sky-700 transition disabled:opacity-40 disabled:cursor-not-allowed shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-400"
+                                        aria-label="Página anterior"
+                                    >
+                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
+                                    </button>
+                                </li>
+                                {Array.from({ length: totalPages }, (_, i) => {
+                                    // Mostrar siempre la primera, la última, la actual y las adyacentes
+                                    if (
+                                        i === 0 ||
+                                        i === totalPages - 1 ||
+                                        Math.abs(i + 1 - currentPage) <= 1
+                                    ) {
+                                        return (
+                                            <li key={i + 1}>
+                                                <button
+                                                    onClick={() => setCurrentPage(i + 1)}
+                                                    className={`flex items-center justify-center size-10 cursor-pointer rounded-full border border-gray-200 transition font-semibold shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-400 ${currentPage === i + 1 ? 'bg-sky-600 text-white shadow-lg' : 'bg-white text-gray-700 hover:bg-sky-100 hover:text-sky-700'}`}
+                                                    aria-current={currentPage === i + 1 ? 'page' : undefined}
+                                                >
+                                                    {i + 1}
+                                                </button>
+                                            </li>
+                                        );
+                                    }
+                                    // Mostrar puntos suspensivos solo una vez entre saltos
+                                    if (
+                                        (i === 1 && currentPage > 3) ||
+                                        (i === totalPages - 2 && currentPage < totalPages - 2)
+                                    ) {
+                                        return (
+                                            <li key={`ellipsis-${i}`} className="w-10 h-10 flex items-center justify-center text-gray-400 text-xl select-none">…</li>
+                                        );
+                                    }
+                                    return null;
+                                })}
+                                <li>
+                                    <button
+                                        onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                                        disabled={currentPage === totalPages}
+                                        className="flex items-center justify-center size-10 cursor-pointer rounded-full border border-gray-200 bg-white text-gray-400 hover:bg-sky-100 hover:text-sky-700 transition disabled:opacity-40 disabled:cursor-not-allowed shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-400"
+                                        aria-label="Página siguiente"
+                                    >
+                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+                                    </button>
+                                </li>
+                            </ul>
+                        </nav>
+                    )}
                 </section>
             </main>
         </div>

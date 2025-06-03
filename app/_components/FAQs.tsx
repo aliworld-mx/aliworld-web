@@ -40,29 +40,35 @@ const faqs = [
 ]
 
 export const FAQs = () => (
-    <div className="bg-gray-900">
+    <section className="bg-gray-900" aria-labelledby="faqs-heading">
         <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8 lg:py-40">
-            <div className="mx-auto max-w-4xl divide-y divide-white/10">
-                <h2 className="text-4xl font-semibold tracking-tight text-white sm:text-5xl">Preguntas Frecuentes</h2>
+            <div className="mx-auto max-w-4xl">
+                <h2 id="faqs-heading" className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl text-center mb-8">
+                    Preguntas Frecuentes
+                </h2>
                 <dl className="mt-10 space-y-6 divide-y divide-white/10">
                     {faqs.map((faq) => (
                         <Disclosure key={faq.question} as="div" className="pt-6">
                             <dt>
-                                <DisclosureButton className="group flex w-full items-start justify-between text-left text-white">
-                                    <span className="text-base/7 font-semibold  text-white">{faq.question}</span>
+                                <DisclosureButton className="group flex w-full items-start justify-between text-left text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 rounded transition">
+                                    <span className="text-base font-semibold text-white flex-1 text-left">
+                                        {faq.question}
+                                    </span>
                                     <span className="ml-6 flex h-7 items-center">
-                                        <PlusIcon aria-hidden="true" className="size-6 text-white group-data-open:hidden" />
-                                        <MinusIcon aria-hidden="true" className="size-6 text-white [.group:not([data-open])_&]:hidden" />
+                                        <PlusIcon aria-hidden="true" className="size-6 text-white cursor-pointer group-data-open:hidden transition-transform duration-200 group-hover:scale-110" />
+                                        <MinusIcon aria-hidden="true" className="size-6 text-white cursor-pointer [.group:not([data-open])_&]:hidden transition-transform duration-200 group-hover:scale-110" />
                                     </span>
                                 </DisclosureButton>
                             </dt>
-                            <DisclosurePanel as="dd" className="mt-2 pr-12">
-                                <p className="text-base/7 text-gray-300">{faq.answer}</p>
+                            <DisclosurePanel as="dd" className="mt-2 pr-0 sm:pr-12">
+                                <p className="text-base text-gray-300 leading-relaxed">
+                                    {faq.answer}
+                                </p>
                             </DisclosurePanel>
                         </Disclosure>
                     ))}
                 </dl>
             </div>
         </div>
-    </div>
+    </section>
 )

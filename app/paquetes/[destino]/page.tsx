@@ -1,4 +1,3 @@
-
 import { Breadcrumbs } from '@/app/_components/Breadcrumbs';
 import { FAQs } from '@/app/_components/FAQs';
 import { TripGrid } from '@/app/_components/TripGrid'
@@ -89,9 +88,26 @@ export default async function DestinosPage({ params }: PageProps) {
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
             <div className="bg-white">
                 <Breadcrumbs breadcrumbs={breadcrumbs} />
-                <Suspense>
-                    <TripGrid header={`Nuestros Paquetes a ${getDestinationNameBySlug(destino)}`} trips={trips} />
-                </Suspense>
+                <main className="mx-auto max-w-2xl px-4 pb-16 sm:px-6 lg:max-w-7xl lg:px-8">
+                    <header className="mb-10 text-center">
+                        <h1 className="text-4xl font-extrabold tracking-tight text-pretty text-gray-900 sm:text-5xl">
+                            Paquetes de Viaje a {formattedDestination}
+                        </h1>
+                        <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
+                            Explora nuestros paquetes cuidadosamente seleccionados para {formattedDestination}. Vive experiencias únicas, reserva con flexibilidad y recibe atención personalizada en cada paso de tu viaje.
+                        </p>
+                    </header>
+                    <section aria-label={`Paquetes de viaje disponibles para ${formattedDestination}`}>
+                        <Suspense>
+                            <TripGrid header="" trips={trips} />
+                        </Suspense>
+                        {trips.length === 0 && (
+                            <div className="text-center py-16 text-gray-500 text-lg">
+                                No hay paquetes disponibles para este destino en este momento. ¡Contáctanos para una cotización personalizada!
+                            </div>
+                        )}
+                    </section>
+                </main>
             </div>
             <HotelQuotation />
             <FAQs />

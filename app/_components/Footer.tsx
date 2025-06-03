@@ -131,16 +131,23 @@ export const Footer = () => (
             </div>
 
             <div className="border-t border-gray-200 py-10 md:flex md:items-center md:justify-between">
-                    <p className="text-sm text-gray-500">2025, Aliworld.</p>
-                    <div className="flex space-x-6 md:order-2">
-                        {footerNavigation.sociales.map((item) => (
-                            <a key={item.name} href={item.href} className="text-gray-500 hover:text-gray-400">
-                                <span className="sr-only">{item.name}</span>
-                                <item.icon aria-hidden="true" className="h-6 w-6" />
-                            </a>
-                        ))}
-                    </div>
+                <p className="text-sm text-gray-500 md:order-1">2025 Aliworld. Todos los derechos reservados.</p>
+                <div className="flex space-x-6 md:order-2">
+                    {footerNavigation.sociales.map((item) => (
+                        <a
+                            key={item.name}
+                            href={item.href}
+                            className="text-gray-500 hover:text-sky-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-sky-500 rounded"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`Aliworld en ${item.name} (se abre en nueva pestaña)`}
+                        >
+                            <span className="sr-only">{item.name}</span>
+                            <item.icon aria-hidden="true" className="h-6 w-6" />
+                        </a>
+                    ))}
                 </div>
             </div>
+        </div>
     </footer>
 )
