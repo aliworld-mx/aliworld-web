@@ -1,6 +1,6 @@
 'use client';
 
-import { PopoverGroup, Popover, PopoverButton, PopoverPanel, Dialog, DialogPanel, Disclosure, DisclosureButton, DisclosurePanel, Transition } from "@headlessui/react";
+import { PopoverGroup, Popover, PopoverButton, PopoverPanel, Dialog, DialogPanel, Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/react";
 import { Bars3Icon, ChevronDownIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { useState } from "react";

@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { Newsletter } from "./Newsletter";
-import { SVGProps } from "react";
+import { JSX, SVGProps } from "react";
 
 const footerNavigation = {
     destinos: [
