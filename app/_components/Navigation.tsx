@@ -1,314 +1,184 @@
 'use client';
 
-import { PopoverGroup, Popover, PopoverButton, PopoverPanel, Dialog, DialogBackdrop, DialogPanel, CloseButton } from "@headlessui/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { PopoverGroup, Popover, PopoverButton, PopoverPanel, Dialog, DialogPanel, Disclosure, DisclosureButton, DisclosurePanel, Transition } from "@headlessui/react";
+import { Bars3Icon, ChevronDownIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { useState } from "react";
-import { DollarPrice } from "./DollarPrice";
-import { TypeNavegacion } from "../_types/contentful/Navegacion";
 import Image from "next/image";
 import AliworldLogo from '../../public/aliworld-color.svg';
+import { BanknotesIcon, PhoneIcon } from "@heroicons/react/20/solid";
+import { DollarPrice } from "./DollarPrice";
 
-interface NavigationProps {
-    navigationData?: TypeNavegacion;
-}
+const callsToAction = [
+    { name: 'Cotizar', href: 'https://wa.me/523314331600?text=Quiero Cotizar', icon: BanknotesIcon },
+    { name: 'Contactar', href: '/contacto', icon: PhoneIcon },
+]
 
-export const Navigation = ({ navigationData }: NavigationProps) => {
-    const [open, setOpen] = useState(false);
+const sections = [
+    { name: 'Paquetes', href: '/paquetes', description: 'Explora nuestros paquetes turísticos a destinos increíbles.' },
+    { name: 'Hoteles', href: 'https://reservas.aliworld.mx', description: 'Reserva hoteles en todo el mundo con las mejores tarifas.' },
+    { name: 'Vuelos', href: 'https://reservas.aliworld.mx', description: 'Encuentra vuelos a destinos nacionales e internacionales.' },
+    { name: 'Actividades', href: '/actividades', description: 'Descubre actividades emocionantes en tus destinos favoritos.' },
+    { name: 'Promociones', href: '/promociones', description: 'Aprovecha nuestras ofertas especiales y descuentos exclusivos.' },
+    { name: 'Favoritos', href: '/favoritos', description: 'Conoce la selección de nuestros expertos.' },
+]
 
-    const navigation = {
-        categories: [
-            {
-                id: 'paquetes',
-                name: 'Paquetes',
-                href: '/paquetes',
-                featured: [
-                    {
-                        name: 'Promociones',
-                        href: '/promociones',
-                        imageSrc: `https:${navigationData?.fields.promocion?.fields?.file?.url}`,
-                        imageAlt: navigationData?.fields.promocion.fields?.description,
-                    },
-                    {
-                        name: 'Favoritos',
-                        href: '/favoritos',
-                        imageSrc: `https:${navigationData?.fields.favorito?.fields?.file?.url}`,
-                        imageAlt: navigationData?.fields.favorito.fields?.description,
-                    },
-                ],
-                sections: [
-                    {
-                        id: 'destinos',
-                        name: 'Destinos',
-                        items: [
-                            { name: 'Europa', href: '/paquetes/europa' },
-                            { name: 'Asia', href: '/paquetes/asia' },
-                            { name: 'Caribe', href: '/paquetes/caribe' },
-                            { name: 'África', href: '/paquetes/africa' },
-                            { name: 'México', href: '/paquetes/mexico' },
-                            { name: 'Sudamérica', href: '/paquetes/sudamerica' },
-                            { name: 'Centroamérica', href: '/paquetes/centroamerica' },
-                            { name: 'Medio Oriente', href: '/paquetes/medio-oriente' },
-                            { name: 'Estados Unidos', href: '/paquetes/estados-unidos' },
-                            { name: 'Canadá', href: '/paquetes/canada' },
-                            { name: 'Pacífico', href: '/paquetes/pacifico' },
-                            { name: 'Cruceros', href: '/paquetes/cruceros' },
-                            { name: 'Ver todos', href: '/paquetes' },
-                        ],
-                    },
-                    {
-                        id: 'paises',
-                        name: 'Paises',
-                        items: [
-                            { name: 'Francia', href: '/paquetes/europa?pais=Francia' },
-                            { name: 'Japón', href: '/paquetes/asia?pais=Japon' },
-                            { name: 'España', href: '/paquetes/europa?pais=España' },
-                            { name: 'Belgica', href: '/paquetes/europa?pais=Belgica' },
-                            { name: 'Italia', href: '/paquetes/europa?pais=Italia' },
-                            { name: 'Inglaterra', href: '/paquetes/europa?pais=Inglaterra' },
-                        ],
-                    },
-                    {
-                        id: 'ciudades',
-                        name: 'Ciudades',
-                        items: [
-                            { name: 'París', href: '/paquetes/europa?ciudad=París' },
-                            { name: 'Tokio', href: '/paquetes/asia?ciudad=Tokio' },
-                            { name: 'Madrid', href: '/paquetes/europa?ciudad=Madrid' },
-                            { name: 'Amsterdam', href: '/paquetes/europa?ciudad=Ámsterdam' },
-                            { name: 'Londres', href: '/paquetes/europa?ciudad=Londres' },
-                            { name: 'Cancún', href: '/paquetes/europa?ciudad=Cancún' },
-                        ],
-                    },
-                ],
-            },
-        ],
-        pages: [
-            { name: 'Hoteles', href: 'https://reservas.aliworld.mx' },
-            { name: 'Vuelos', href: 'https://reservas.aliworld.mx' },
-            { name: 'Actividades', href: '/actividades' },
-            { name: 'Blog', href: '/blog' },
-            { name: 'Guías de Ciudades', href: '/ciudades' },
-            { name: 'Contacto', href: '/contacto' },
-        ],
-    };
+export const Navigation = () => {
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+    
+    const onLinkClick = () => {
+        if (mobileMenuOpen) {
+            setMobileMenuOpen(false);
+        }
+    }
 
     return (
-        <>
-            <Dialog open={open} onClose={setOpen} className="relative z-40 lg:hidden">
-                <DialogBackdrop
-                    transition
-                    className="fixed inset-0 bg-black/25 transition-opacity duration-300 ease-linear data-[closed]:opacity-0"
-                />
-
-                <div className="fixed inset-0 z-40 flex">
-                    <DialogPanel
-                        transition
-                        className="relative flex w-full max-w-xs transform flex-col overflow-y-auto bg-white pb-12 shadow-xl transition duration-300 ease-in-out data-[closed]:-translate-x-full"
-                    >
-                        <div className="flex px-4 pb-2 pt-5">
-                            <button
-                                type="button"
-                                onClick={() => setOpen(false)}
-                                className="relative -m-2 inline-flex items-center justify-center rounded-md p-2 text-gray-400"
-                            >
-                                <span className="absolute -inset-0.5" />
-                                <span className="sr-only">Cerrar menu</span>
-                                <XMarkIcon aria-hidden="true" className="size-6" />
-                            </button>
-                        </div>
-                        <div className="px-4 py-6 flex flex-row">
-                            <DollarPrice />
-                        </div>
-                        <div className="space-y-6 border-t border-gray-200 px-4 py-6">
-                            {navigation.categories.map((category) => (
-                                <CloseButton
-                                    key={category.name}
-                                    as={Link} href={category.href} className="-m-2 block p-2 font-medium text-gray-900"
-                                >
-                                    {category.name}
-                                </CloseButton>
-                            ))}
-                            {navigation.pages.map((page) => (
-                                <div key={page.name} className="flow-root">
-                                    <CloseButton as={Link} href={page.href} className="-m-2 block p-2 font-medium text-gray-900">
-                                        {page.name}
-                                    </CloseButton>
-                                </div>
-                            ))}
-                        </div>
-                        {navigation.categories.map((category) => (
-                            <div key={category.name} className="space-y-10 px-4 pb-8 pt-10">
-                                <div className="grid grid-cols-1 gap-y-4">
-                                    {category.featured?.map((item) => (
-                                        <div key={item.name} className="group relative text-sm">
-                                            <Image
-                                                alt={item.imageAlt ?? item.name}
-                                                src={item.imageSrc}
-                                                width={300}
-                                                height={300}
-                                                className="w-full rounded-lg bg-gray-100 object-cover group-hover:opacity-75"
-                                            />
-                                            <CloseButton as={Link} href={item.href} className="mt-6 block font-medium text-gray-900">
-                                                <span aria-hidden="true" className="absolute inset-0 z-10" />
-                                                {item.name}
-                                            </CloseButton>
-                                            <p aria-hidden="true" className="mt-1 text-sky-600">
-                                                Ver todo
-                                            </p>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        ))}
-                        {/* <div className="space-y-6 border-t border-gray-200 px-4 py-6">
-                            <div className="flow-root">
-                                <a href="#" className="-m-2 block p-2 font-medium text-gray-900">
-                                    Iniciar Sesión
-                                </a>
-                            </div>
-                            <div className="flow-root">
-                                <a href="#" className="-m-2 block p-2 font-medium text-gray-900">
-                                    Crear Cuenta
-                                </a>
-                            </div>
-                        </div> */}
-
-
-                    </DialogPanel>
+        <header className="bg-white">
+            <nav aria-label="Navegación principal" role="navigation" className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-8">
+                <div className="flex lg:flex-1">
+                    <Link href="/" className="-m-1.5 p-1.5">
+                        <span className="sr-only">Aliworld</span>
+                        <Image
+                            alt="Logo de Aliworld"
+                            src={AliworldLogo}
+                            width={224}
+                            height={112}
+                            className="h-24 sm:h-28 w-auto"
+                        />
+                    </Link>
                 </div>
-            </Dialog>
-            <nav aria-label="Top" className="sticky top-0 z-20 bg-white shadow-lg backdrop-blur-xl backdrop-filter">
-                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                    <div className="flex h-16 items-center">
-                        <button
-                            type="button"
-                            onClick={() => setOpen(true)}
-                            className="relative rounded-md bg-white p-2 text-gray-400 lg:hidden"
+                <div className="flex lg:hidden">
+                    <button
+                        type="button"
+                        onClick={() => setMobileMenuOpen(true)}
+                        className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+                        aria-label="Abrir menú principal"
+                    >
+                        <span className="sr-only">Abrir menú principal</span>
+                        <Bars3Icon aria-hidden="true" className="size-6" />
+                    </button>
+                </div>
+                <PopoverGroup className="hidden lg:flex lg:gap-x-12">
+                    <Popover className="relative">
+                        <PopoverButton className="flex items-center gap-x-1 text-md font-semibold text-gray-900">
+                            Reserva
+                            <ChevronDownIcon aria-hidden="true" className="size-5 flex-none text-gray-400" />
+                        </PopoverButton>
+                        <PopoverPanel
+                            transition
+                            className="absolute top-full -left-8 mt-3 w-screen max-w-md overflow-hidden rounded-3xl z-50 bg-white shadow-lg ring-1 ring-gray-900/5 transition data-closed:translate-y-1 data-closed:opacity-0 data-enter:duration-200 data-enter:ease-out data-leave:duration-150 data-leave:ease-in"
                         >
-                            <span className="absolute -inset-0.5" />
-                            <span className="sr-only">Abrir menu</span>
-                            <Bars3Icon aria-hidden="true" className="size-6" />
-                        </button>
-
-                        {/* Logo */}
-                        <div className="ml-4 flex lg:ml-0">
-                            <Link href="/">
+                            <div className="p-4">
+                                {sections.map((item) => (
+                                    <div
+                                        key={item.name}
+                                        className="group relative flex gap-x-6 rounded-lg p-4 text-md hover:bg-gray-50"
+                                    >
+                                        <div className="flex-auto">
+                                            <Link href={item.href} className="block font-semibold text-gray-900">
+                                                {item.name}
+                                                <span className="absolute inset-0" />
+                                            </Link>
+                                            <p className="mt-1 text-gray-600">{item.description}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                            <div className="grid grid-cols-2 divide-x divide-gray-900/5 bg-gray-50">
+                                {callsToAction.map((item) => (
+                                    <Link
+                                        key={item.name}
+                                        href={item.href}
+                                        className="flex items-center justify-center gap-x-2.5 p-3 text-sm/6 font-semibold text-gray-900 hover:bg-gray-100"
+                                        aria-label={item.name}
+                                    >
+                                        <item.icon aria-hidden="true" className="size-5 flex-none text-gray-400" />
+                                        {item.name}
+                                    </Link>
+                                ))}
+                            </div>
+                        </PopoverPanel>
+                    </Popover>
+                    <Link href="/ciudades" className="text-md font-semibold text-gray-900" aria-current={typeof window !== 'undefined' && window.location.pathname === '/ciudades' ? 'page' : undefined}>
+                        Guías de Ciudades
+                    </Link>
+                    <Link href="/blog" className="text-md font-semibold text-gray-900" aria-current={typeof window !== 'undefined' && window.location.pathname === '/blog' ? 'page' : undefined}>
+                        Blog
+                    </Link>
+                    <DollarPrice />
+                </PopoverGroup>
+            </nav>
+            <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
+                    <div className="fixed inset-0 z-10 bg-black/30 transition-opacity duration-300" aria-hidden="true" />
+                    <DialogPanel
+                        className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 pb-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10"
+                    >
+                        <div className="flex items-center justify-between">
+                            <Link href="/" className="-m-1.5 p-1.5" >
                                 <span className="sr-only">Aliworld</span>
                                 <Image
                                     alt="Logo de Aliworld"
                                     src={AliworldLogo}
-                                    width={224}
-                                    height={112}
+                                    width={192}
+                                    height={96}
                                     className="h-24 sm:h-28 w-auto"
                                 />
                             </Link>
+                            <button
+                                type="button"
+                                onClick={() => setMobileMenuOpen(false)}
+                                className="-m-2.5 rounded-md p-2.5 text-gray-700"
+                                aria-label="Cerrar menú"
+                            >
+                                <span className="sr-only">Cerrar menú</span>
+                                <XMarkIcon aria-hidden="true" className="size-6" />
+                            </button>
                         </div>
+                        <div className="mt-6 flow-root">
+                            <div className="-my-6 divide-y divide-gray-500/10">
+                                <div className="space-y-2 py-6">
+                                    <Disclosure as="div" className="-mx-3">
+                                        <DisclosureButton className="group flex w-full items-center justify-between rounded-lg py-2 pr-3.5 pl-3 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">
+                                            Reserva
+                                            <ChevronDownIcon aria-hidden="true" className="size-5 flex-none group-data-open:rotate-180" />
+                                        </DisclosureButton>
+                                        <DisclosurePanel className="mt-2 space-y-2">
+                                            {[...sections, ...callsToAction].map((item) => (
+                                                <DisclosureButton
+                                                    key={item.name}
+                                                    as="a"
+                                                    href={item.href}
+                                                    onClick={onLinkClick}
+                                                    className="block rounded-lg py-2 pr-3 pl-6 text-sm/7 font-semibold text-gray-900 hover:bg-gray-50"
+                                                >
+                                                    {item.name}
+                                                </DisclosureButton>
+                                            ))}
+                                        </DisclosurePanel>
+                                    </Disclosure>
 
-                        {/* Flyout menus */}
-                        <PopoverGroup className="hidden lg:ml-8 lg:block lg:self-stretch">
-                            <div className="flex h-full space-x-8">
-                                {navigation.categories.map((category) => (
-                                    <Popover key={category.name} className="flex">
-                                        <div className="relative flex">
-                                            <PopoverButton className="relative z-10 -mb-px flex items-center border-b-2 border-transparent pt-px text-sm font-medium text-gray-700 transition-colors duration-200 ease-out hover:text-gray-800 data-[open]:border-sky-600 data-[open]:text-sky-600">
-                                                {category.name}
-                                            </PopoverButton>
-                                        </div>
-
-                                        <PopoverPanel
-                                            transition
-                                            className="group absolute inset-x-0 top-full bg-white text-sm text-gray-500 transition data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in"
-                                        >
-                                            <div aria-hidden="true" className="absolute inset-0 top-1/2 bg-white shadow" />
-                                            <div aria-hidden="true" className="absolute inset-0 top-0 mx-auto h-px max-w-7xl px-8">
-                                                <div className="h-px w-full bg-transparent transition-colors duration-200 ease-out group-data-[open]:bg-gray-200" />
-                                            </div>
-
-                                            <div className="relative">
-                                                <div className="mx-auto max-w-7xl px-8">
-                                                    <div className="grid grid-cols-2 gap-x-8 gap-y-10 py-16">
-                                                        <div className="col-start-2 grid grid-cols-2 gap-x-8">
-                                                            {category.featured?.map((item) => (
-                                                                <div key={item.name} className="group relative text-base sm:text-sm">
-                                                                    <Image
-                                                                        alt={item.imageAlt ?? item.name}
-                                                                        src={item.imageSrc}
-                                                                        width={300}
-                                                                        height={300}
-                                                                        className="w-full rounded-lg bg-gray-100 object-cover group-hover:opacity-75"
-                                                                    />
-                                                                    <CloseButton as={Link} href={item.href} className="mt-6 block font-medium text-gray-900">
-                                                                        <span aria-hidden="true" className="absolute inset-0 z-10" />
-                                                                        {item.name}
-                                                                    </CloseButton>
-                                                                    <p aria-hidden="true" className="mt-1 text-sky-600">
-                                                                        Ver Todo
-                                                                    </p>
-                                                                </div>
-                                                            ))}
-                                                        </div>
-                                                        <div className="row-start-1 grid grid-cols-3 gap-x-8 gap-y-10 text-sm">
-                                                            {category.sections.map((section) => (
-                                                                <div key={section.name}>
-                                                                    <p id={`${section.name}-heading`} className="font-medium text-gray-900">
-                                                                        {section.name}
-                                                                    </p>
-                                                                    <ul
-                                                                        role="list"
-                                                                        aria-labelledby={`${section.name}-heading`}
-                                                                        className="mt-6 space-y-6 sm:mt-4 sm:space-y-4"
-                                                                    >
-                                                                        {section.items.map((item) => (
-                                                                            <li key={item.name} className="flex">
-                                                                                <CloseButton as={Link} href={item.href} className="hover:text-gray-800">
-                                                                                    {item.name}
-                                                                                </CloseButton>
-                                                                            </li>
-                                                                        ))}
-                                                                    </ul>
-                                                                </div>
-                                                            ))}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </PopoverPanel>
-                                    </Popover>
-                                ))}
-
-                                {navigation.pages.map((page) => (
                                     <Link
-                                        key={page.name}
-                                        href={page.href}
-                                        className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
+                                    onClick={onLinkClick}
+                                        href="/ciudades"
+                                        className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
                                     >
-                                        {page.name}
+                                        Guías de Ciudades
                                     </Link>
-                                ))}
-                            </div>
-                        </PopoverGroup>
-
-                        <div className="ml-auto flex items-center">
-                            {/*}
-                            <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                                <a href="#" className="text-sm font-medium text-gray-700 hover:text-gray-800">
-                                    Iniciar sesión
-                                </a>
-                                <span aria-hidden="true" className="h-6 w-px bg-gray-200" />
-                                <a href="#" className="text-sm font-medium text-gray-700 hover:text-gray-800">
-                                    Crear cuenta
-                                </a>
-                            </div>
-                            */}
-
-                            <div className="hidden items-center text-gray-700 hover:text-gray-800 lg:ml-8 lg:flex">
-                                <DollarPrice />
+                                    <Link
+                                        onClick={onLinkClick}
+                                        href="/blog"
+                                        className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+                                    >
+                                        Blog
+                                    </Link>
+                                </div>
+                                <div className="py-6">
+                                    <DollarPrice />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </nav>
-        </>
-    );
+                    </DialogPanel>
+            </Dialog>
+        </header>
+    )
 };

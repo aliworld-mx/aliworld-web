@@ -10,8 +10,6 @@ import { OfferCatalog, WithContext } from 'schema-dts';
 import { Suspense } from 'react';
 import HotelQuotation from '@/app/_components/HotelQuotation';
 
-export const revalidate = 3600;
-
 export const generateMetadata = async ({ params }: PageProps): Promise<Metadata> => {
     const { destino } = await params;
     const formattedDestination = getDestinationNameBySlug(destino);

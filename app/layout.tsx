@@ -1,24 +1,13 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { League_Spartan } from "next/font/google";
 import "./globals.css";
 import { Footer } from "./_components/Footer";
 import { Navigation } from "./_components/Navigation";
 import { Analytics } from "@vercel/analytics/react"
-import { getNavigation } from "./lib/getNavigation";
 import Scroll from "./_components/Scroll";
 import Script from "next/script";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+const font = League_Spartan({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Aliworld - Paquetes de viaje a todo el mundo al mejor precio",
@@ -43,8 +32,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const navigationData = await getNavigation();
-
   return (
     <html lang="es">
       <head>
@@ -59,13 +46,13 @@ export default async function RootLayout({
         </script>
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${font.className} antialiased`}
       >
         <Scroll />
-        <Navigation navigationData={navigationData} />
+        <Navigation />
         {children}
         <Footer />
-        <Analytics />
+        <Analytics  mode="production"/>
       </body>
     </html>
   );

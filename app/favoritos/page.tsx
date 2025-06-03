@@ -8,8 +8,6 @@ import { getFavorites } from '../lib/getFavorites';
 import { Suspense } from 'react';
 import HotelQuotation from '../_components/HotelQuotation';
 
-export const revalidate = 3600;
-
 export const metadata: Metadata = {
     title: `Paquetes Favoritos | Aliworld`,
     description: `Descubre los paquetes de viaje favoritos`,

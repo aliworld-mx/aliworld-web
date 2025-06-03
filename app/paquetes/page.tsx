@@ -7,8 +7,6 @@ import { ItemList, WithContext } from 'schema-dts';
 import { Metadata } from 'next';
 import { Breadcrumbs } from '../_components/Breadcrumbs';
 
-export const revalidate = 3600;
-
 export const metadata: Metadata = {
     title: 'Paquetes de Viaje | Aliworld',
     description: 'Descubre los mejores paquetes de viaje a todo el mundo al mejor precio. ¡Reserva ya!',

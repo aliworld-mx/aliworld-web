@@ -16,6 +16,6 @@ export const DollarPrice = () => {
     if (!dollarPrice) return null;
 
     return (
-        <span className="ml-3 block text-sm font-medium text-gray-800">1 USD = ${dollarPrice}MXN</span>
+        <span className="block text-md font-semibold text-gray-800">1 USD = ${dollarPrice}MXN</span>
     );
 };
