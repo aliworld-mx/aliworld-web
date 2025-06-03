@@ -39,7 +39,7 @@ export default async function ActividadesPage() {
                     height={1200}
                     className="h-96 w-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-white" />
+                <div className="absolute inset-0 bg-linear-to-t from-white" />
             </div>
 
             <div className="relative mx-auto -mt-12 max-w-7xl px-4 pb-16 sm:px-6 sm:pb-24 lg:px-8">

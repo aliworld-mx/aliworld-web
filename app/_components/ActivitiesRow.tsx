@@ -39,7 +39,7 @@ export default async function ActivitiesRow({ header, tag, show = -1 }: Activiti
                                 className="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl bg-gray-900 px-8 pb-8 pt-80 sm:pt-48 lg:pt-80"
                             >
                                 <Image alt={imagen.fields.description ?? ""} src={imageUrl} width={640} height={360} className="absolute inset-0 -z-10 size-full object-cover" />
-                                <div className="absolute inset-0 -z-10 bg-gradient-to-t from-gray-900 via-gray-900/10" />
+                                <div className="absolute inset-0 -z-10 bg-linear-to-t from-gray-900 via-gray-900/10" />
                                 <div className="absolute inset-0 -z-10 rounded-2xl ring-1 ring-inset ring-gray-900/10" />
                                 <h4 className="mt-3 text-lg/6 font-semibold text-white">
                                     <span className="absolute inset-0" />

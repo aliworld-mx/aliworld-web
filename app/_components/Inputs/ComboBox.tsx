@@ -69,12 +69,12 @@ const ComboBox = ({
                             aria-hidden="true"
                         />
                     </ComboboxButton>
-                    <ComboboxOptions transition className="origin-top border transition duration-200 ease-out empty:invisible data-[closed]:scale-95 data-[closed]:opacity-0 absolute z-10 mt-1 max-h-30 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                    <ComboboxOptions transition className="origin-top border transition duration-200 ease-out empty:invisible data-closed:scale-95 data-closed:opacity-0 absolute z-10 mt-1 max-h-30 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
                         {filteredOptions.map((option) => (
                             <ComboboxOption
                                 key={option.id}
                                 value={option}
-                                className="relative select-none py-2 px-4 cursor-pointer text-gray-900 data-[selected]:bg-sky-100 hover:bg-sky-100"
+                                className="relative select-none py-2 px-4 cursor-pointer text-gray-900 data-selected:bg-sky-100 hover:bg-sky-100"
                             >
                                 {({ selected }) => (
                                     <>

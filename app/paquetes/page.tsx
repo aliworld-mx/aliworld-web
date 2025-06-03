@@ -87,7 +87,7 @@ export default async function PaquetesPage() {
                                         src={imageUrl}
                                         width={400}
                                         height={800}
-                                        className="aspect-square w-full overflow-hidden rounded-lg object-cover sm:aspect-[2/3] filter-none lg:filter lg:grayscale hover:filter-none "
+                                        className="aspect-square w-full overflow-hidden rounded-lg object-cover sm:aspect-2/3 filter-none lg:filter lg:grayscale hover:filter-none "
                                     />
 
                                     <div className="mt-4 flex items-center justify-between text-base font-medium text-gray-900">

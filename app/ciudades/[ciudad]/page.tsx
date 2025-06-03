@@ -107,7 +107,7 @@ export default async function CiudadPage({ params }: PageProps) {
                         </div>
                     </div>
                     <div className="mt-16 sm:mt-24 lg:mt-0 lg:shrink-0 lg:grow">
-                        <svg role="img" viewBox="0 0 366 729" className="mx-auto w-[22.875rem] max-w-full drop-shadow-2xl">
+                        <svg role="img" viewBox="0 0 366 729" className="mx-auto w-91.5 max-w-full drop-shadow-2xl">
                             <title>{imagenEncabezado.fields.description}</title>
                             <defs>
                                 <clipPath id="2ade4387-9c63-4fc4-b754-10e687a0d332">
@@ -177,7 +177,7 @@ export default async function CiudadPage({ params }: PageProps) {
                                     <p className="text-base/7 mb-4 text-gray-600">{actividad.fields.contenido}</p>
                                     {actividad.fields.url && (
                                         <Link href={actividad.fields.url} className="cursor-pointer font-semibold text-sky-600 hover:text-sky-700 group">
-                                            Comprar Entradas <ArrowRightIcon className="h-4 w-4 inline-block transition flex-shrink-0 text-sky-600 group-hover:text-sky-700 group-hover:translate-x-1" aria-hidden="true" />
+                                            Comprar Entradas <ArrowRightIcon className="h-4 w-4 inline-block transition shrink-0 text-sky-600 group-hover:text-sky-700 group-hover:translate-x-1" aria-hidden="true" />
                                         </Link>
                                     )}
                                 </li>
@@ -317,7 +317,7 @@ export default async function CiudadPage({ params }: PageProps) {
                                                 src={`https:${portada.fields?.file?.url}`}
                                                 width={800}
                                                 height={450}
-                                                className="aspect-video w-full rounded-2xl bg-gray-100 object-cover sm:aspect-[2/1] lg:aspect-[3/2] group-hover:opacity-75"
+                                                className="aspect-video w-full rounded-2xl bg-gray-100 object-cover sm:aspect-2/1 lg:aspect-3/2 group-hover:opacity-75"
                                             />
                                             <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10" />
                                         </div>

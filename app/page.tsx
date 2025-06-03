@@ -163,7 +163,7 @@ export default async function InicioPage() {
             src={heroImage}
             width={953}
             height={768}
-            className="aspect-[3/2] object-cover lg:aspect-auto lg:size-full"
+            className="aspect-3/2 object-cover lg:aspect-auto lg:size-full"
           />
         </div>
       </div>
@@ -194,7 +194,7 @@ export default async function InicioPage() {
                       </span>
                       <span
                         aria-hidden="true"
-                        className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-gray-800 opacity-50"
+                        className="absolute inset-x-0 bottom-0 h-2/3 bg-linear-to-t from-gray-800 opacity-50"
                       />
                       <span className="relative mt-auto text-center text-xl font-bold text-white">{destination.fields.nombre}</span>
                     </Link>

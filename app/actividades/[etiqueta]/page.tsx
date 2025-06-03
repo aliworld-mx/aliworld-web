@@ -37,7 +37,7 @@ export default async function ActividadesEtiquetaPage({ params }: PageProps) {
                     height={1200}
                     className="h-96 w-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-white" />
+                <div className="absolute inset-0 bg-linear-to-t from-white" />
             </div>
 
             <div className="relative mx-auto -mt-12 max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">

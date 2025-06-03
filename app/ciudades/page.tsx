@@ -76,7 +76,7 @@ export default async function CitiesPage() {
                                             src={`https:${imagenContenido.fields?.file?.url}`}
                                             width={800}
                                             height={450}
-                                            className="aspect-video w-full rounded-2xl shadow-lg bg-gray-100 object-cover sm:aspect-[2/1] lg:aspect-[3/2] group-hover:opacity-75 transition duration-300 ease-in-out"
+                                            className="aspect-video w-full rounded-2xl shadow-lg bg-gray-100 object-cover sm:aspect-2/1 lg:aspect-3/2 group-hover:opacity-75 transition duration-300 ease-in-out"
                                             loading="lazy"
                                         />
                                         <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10" />

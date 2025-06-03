@@ -122,7 +122,7 @@ export default async function BlogPage() {
                                                 src={`https:${portada.fields?.file?.url}`}
                                                 width={800}
                                                 height={450}
-                                                className="aspect-video w-full rounded-2xl bg-gray-100 object-cover sm:aspect-[2/1] lg:aspect-[3/2] group-hover:opacity-75 transition duration-300 ease-in-out"
+                                                className="aspect-video w-full rounded-2xl bg-gray-100 object-cover sm:aspect-2/1 lg:aspect-3/2 group-hover:opacity-75 transition duration-300 ease-in-out"
                                             />
                                             <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10" />
                                         </div>

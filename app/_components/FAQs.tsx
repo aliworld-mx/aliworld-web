@@ -51,7 +51,7 @@ export const FAQs = () => (
                                 <DisclosureButton className="group flex w-full items-start justify-between text-left text-white">
                                     <span className="text-base/7 font-semibold  text-white">{faq.question}</span>
                                     <span className="ml-6 flex h-7 items-center">
-                                        <PlusIcon aria-hidden="true" className="size-6 text-white group-data-[open]:hidden" />
+                                        <PlusIcon aria-hidden="true" className="size-6 text-white group-data-open:hidden" />
                                         <MinusIcon aria-hidden="true" className="size-6 text-white [.group:not([data-open])_&]:hidden" />
                                     </span>
                                 </DisclosureButton>
