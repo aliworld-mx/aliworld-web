@@ -7,7 +7,6 @@ import { Prices } from './Prices'
 import { Itinerary } from './Itinerary'
 import { Hotels } from './Hotels'
 import { Notes } from './Notes'
-import { OptionalTours } from './OptionalTours'
 import { Visa } from './Visa'
 
 interface ExperienceTabsProps {
@@ -31,7 +30,6 @@ export default function ExperienceTabs({ experience }: ExperienceTabsProps) {
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const [underlineProps, setUnderlineProps] = useState({ left: 0, width: 0 });
 
-  // Update underline position/width on tab or window resize
   useLayoutEffect(() => {
     const activeEl = tabRefs.current[activeIdx];
     if (activeEl) {
@@ -51,7 +49,6 @@ export default function ExperienceTabs({ experience }: ExperienceTabsProps) {
     return () => window.removeEventListener('resize', handleResize);
   }, [activeIdx, tabs.length]);
 
-  // Keyboard navigation for tabs
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.target instanceof HTMLButtonElement && e.target.getAttribute('role') === 'tab') {
@@ -72,16 +69,8 @@ export default function ExperienceTabs({ experience }: ExperienceTabsProps) {
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [tabs.length]);
 
-  // Animated underline
-  const underlineStyle = {
-    transform: `translateX(${activeIdx * 100}%)`,
-    transition: 'transform 0.3s cubic-bezier(.4,1,.4,1)',
-    width: `calc(100% / ${tabs.length})`,
-  };
-
   return (
     <div className="mx-auto mt-10 max-w-7xl pb-24 px-4 sm:pb-32">
-      {/* Mobile: pill/square content switcher */}
       <div className="sm:hidden mb-4">
         <div role="tablist" aria-label="Opciones" className="flex gap-2 justify-center">
           {tabs.map((tab, i) => (
@@ -106,7 +95,6 @@ export default function ExperienceTabs({ experience }: ExperienceTabsProps) {
           ))}
         </div>
       </div>
-      {/* Desktop: animated tab bar */}
       <div className="relative border-b border-gray-200 overflow-x-auto scrollbar-hide hidden sm:block">
         <nav
           aria-label="Tabs"
