@@ -29,79 +29,77 @@ export default async function CitiesPage() {
     const guides = await getGuideList();
 
     return (
-        <section
-            aria-labelledby="ciudades-heading"
-            className="bg-white py-12 sm:py-24"
-        >
-            <div className="mx-auto max-w-7xl px-6 lg:px-8">
-                <header className="mx-auto max-w-2xl text-center">
-                    <h1
-                        id="ciudades-heading"
-                        className="text-balance text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl"
+        <>
+            <main id="ciudades-main" tabIndex={-1} className="bg-white py-12 sm:py-24">
+                <div className="mx-auto max-w-7xl px-6 lg:px-8">
+                    <header className="mx-auto max-w-2xl text-center">
+                        <h1
+                            id="ciudades-heading"
+                            className="text-4xl font-extrabold tracking-tight text-pretty text-gray-900 sm:text-5xl"
+                        >
+                            Guías de Ciudades
+                        </h1>
+                        <p className="mt-2 text-lg/8 text-gray-600">
+                            Conoce todo sobre la ciudad de tus sueños y prepárate para tu siguiente aventura.
+                        </p>
+                    </header>
+                    <ul
+                        className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3"
+                        aria-label="Listado de guías de ciudades"
                     >
-                        Guías de Ciudades
-                    </h1>
-                    <p className="mt-2 text-lg/8 text-gray-600">
-                        Conoce todo sobre la ciudad de tus sueños y prepárate para tu siguiente aventura.
-                    </p>
-                </header>
-                <div
-                    className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3"
-                    role="list"
-                    aria-label="Listado de guías de ciudades"
-                >
-                    {guides?.map((guide) => {
-                        const {
-                            nombreDeCiudad,
-                            descripcion,
-                            imagenContenido,
-                            slug,
-                        } = guide.fields;
+                        {guides?.map((guide) => {
+                            const {
+                                nombreDeCiudad,
+                                descripcion,
+                                imagenContenido,
+                                slug,
+                            } = guide.fields;
 
-                        return (
-                            <Link
-                                href={`/ciudades/${slug}`}
-                                key={slug}
-                                className="group"
-                                aria-label={`Ver guía de ${nombreDeCiudad}`}
-                            >
-                                <article
-                                    className="flex flex-col items-start justify-between"
-                                    role="listitem"
-                                    aria-labelledby={`ciudad-title-${slug}`}
-                                >
-                                    <div className="relative w-full">
-                                        <Image
-                                            alt={`Vista de ${nombreDeCiudad}. ${descripcion}`}
-                                            src={`https:${imagenContenido.fields?.file?.url}`}
-                                            width={800}
-                                            height={450}
-                                            className="aspect-video w-full rounded-2xl shadow-lg bg-gray-100 object-cover sm:aspect-2/1 lg:aspect-3/2 group-hover:opacity-75 transition duration-300 ease-in-out"
-                                            loading="lazy"
-                                        />
-                                        <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10" />
-                                    </div>
-                                    <div className="max-w-xl">
-                                        <div className="relative">
-                                            <h2
-                                                id={`ciudad-title-${slug}`}
-                                                className="mt-3 text-lg/6 font-semibold text-gray-900 group-hover:underline"
-                                            >
-                                                {nombreDeCiudad}
-                                            </h2>
-                                            <p className="mt-5 line-clamp-3 text-sm/6 text-gray-600">
-                                                {descripcion}
-                                            </p>
-                                        </div>
-                                    </div>
-                                </article>
-                            </Link>
-                        );
-                    })}
+                            return (
+                                <li key={slug} className="group outline-none focus-within:ring-2 focus-within:ring-sky-600 rounded-2xl transition">
+                                    <Link
+                                        href={`/ciudades/${slug}`}
+                                        className="block h-full"
+                                        aria-label={`Ver guía de ${nombreDeCiudad}`}
+                                    >
+                                        <article
+                                            className="flex flex-col items-start justify-between h-full"
+                                            aria-labelledby={`ciudad-title-${slug}`}
+                                        >
+                                            <div className="relative w-full">
+                                                <Image
+                                                    alt={`Vista de ${nombreDeCiudad}. ${descripcion}`}
+                                                    src={`https:${imagenContenido.fields?.file?.url}`}
+                                                    width={800}
+                                                    height={450}
+                                                    className="aspect-video w-full rounded-2xl shadow-lg bg-gray-100 object-cover sm:aspect-2/1 lg:aspect-3/2 group-hover:opacity-80 group-focus-visible:opacity-80 transition duration-300 ease-in-out"
+                                                    loading="lazy"
+                                                />
+                                                <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10 pointer-events-none" />
+                                            </div>
+                                            <div className="max-w-xl">
+                                                <div className="relative">
+                                                    <h2
+                                                        id={`ciudad-title-${slug}`}
+                                                        className="mt-3 text-lg/6 font-semibold text-gray-900 group-hover:underline group-focus-visible:underline"
+                                                    >
+                                                        {nombreDeCiudad}
+                                                    </h2>
+                                                    <p className="mt-5 line-clamp-3 text-sm/6 text-gray-600">
+                                                        {descripcion}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </Link>
+                                </li>
+                            );
+                        })}
+                    </ul>
                 </div>
-            </div>
-            <Socials />
-            <Catalog />
-        </section>
+                <Socials />
+                <Catalog />
+            </main>
+        </>
     )
 }

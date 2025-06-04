@@ -38,33 +38,45 @@ const features = [
 
 export const Catalog = () => {
     return (
-        <div className="bg-gray-100">
+        <section className="bg-gray-100" aria-labelledby="catalog-heading">
             <div className="mx-auto max-w-2xl px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:px-8">
-                <div className="max-w-3xl">
-                    <h2 className="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl">Tenemos todo para tu viaje</h2>
-                    <p className="mt-4 text-gray-700">
+                <header className="max-w-3xl mx-auto text-center">
+                    <h2 id="catalog-heading" className="text-4xl font-extrabold tracking-tight text-pretty text-gray-900 sm:text-5xl">
+                        Tenemos todo para tu viaje
+                    </h2>
+                    <p className="mt-4 text-lg text-gray-700">
                         Paquetes de viaje completos alrededor del mundo, hospedaje en los mejores hoteles, vuelos nacionales e internacionales y actividades para toda la familia.
                     </p>
-                </div>
-
-                <div className="mt-11 grid grid-cols-1 items-start gap-x-6 gap-y-16 sm:mt-16 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-8">
+                </header>
+                <div className="mt-14 grid grid-cols-1 items-start gap-x-8 gap-y-16 sm:mt-16 sm:grid-cols-2 lg:grid-cols-4">
                     {features.map((feature) => (
-                        <Link href={feature.href} key={feature.name} className="flex flex-col-reverse group">
-                            <div className="mt-6">
-                                <h3 className="text-lg font-bold text-gray-900 group-hover:underline">{feature.name}</h3>
-                                <p className="mt-2 text-sm text-gray-700">{feature.description}</p>
+                        <Link
+                            href={feature.href}
+                            key={feature.name}
+                            className="flex flex-col-reverse group rounded-2xl shadow-md bg-white hover:shadow-xl transition-shadow duration-300 focus:outline-none focus:ring-2 focus:ring-sky-500 hover:shadow-sky-500/50"
+                            target={feature.href.startsWith('http') ? '_blank' : undefined}
+                            rel={feature.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                            aria-label={feature.name}
+                        >
+                            <div className="mt-6 px-2 pb-4 text-center">
+                                <h3 className="text-lg font-bold text-gray-900 group-hover:underline mb-2">{feature.name}</h3>
+                                <p className="text-sm text-gray-700 min-h-[48px]">{feature.description}</p>
                             </div>
-                            <Image
-                                alt={feature.imageAlt}
-                                src={feature.imageSrc}
-                                width={400}
-                                height={400}
-                                className="aspect-square w-full rounded-lg bg-gray-100 object-cover object-bottom group-hover:opacity-75"
-                            />
+                            <div className="relative">
+                                <Image
+                                    alt={feature.imageAlt}
+                                    src={feature.imageSrc}
+                                    width={400}
+                                    height={400}
+                                    className="aspect-square w-full rounded-t-2xl object-cover object-bottom group-hover:opacity-90 transition duration-300"
+                                    loading="lazy"
+                                />
+                                <div className="absolute inset-0 rounded-t-2xl ring-1 ring-inset ring-gray-900/10 pointer-events-none" />
+                            </div>
                         </Link>
                     ))}
                 </div>
             </div>
-        </div>
+        </section>
     )
 }

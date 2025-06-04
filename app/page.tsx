@@ -16,6 +16,7 @@ import { Partners } from './_components/Partners';
 import Socials from './_components/Socials';
 import { Catalog } from './_components/Catalog';
 import { ExpediaBenefits } from './_components/Expedia/ExpediaBenefits';
+import { TripGridItem } from './_components/TripGridItem';
 
 export const revalidate = 36000;
 
@@ -145,12 +146,13 @@ export default async function InicioPage() {
                 <div className="mt-10 flex flex-col sm:flex-row items-center gap-6">
                   <Link
                     href="/paquetes"
-                    className="rounded-md bg-sky-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600"
+                    className="rounded-md bg-sky-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600 transition"
                   >
                     Ver Paquetes de Viaje
                   </Link>
-                  <Link href="https://reservas.aliworld.mx" className="text-sm/6 font-semibold text-gray-900 group hover:underline">
-                    Reservar Hoteles y Vuelos <ArrowRightIcon className="h-4 w-4 ml-2 inline-block transition group-hover:translate-x-1" />
+                  <Link href="https://reservas.aliworld.mx" target="_blank" rel="noopener noreferrer" className="text-sm/6 font-semibold text-gray-900 group hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600 transition">
+                    Reservar Hoteles y Vuelos <ArrowRightIcon className="h-4 w-4 ml-2 inline-block transition group-hover:translate-x-1" aria-hidden="true" />
+                    <span className="sr-only">(Enlace externo)</span>
                   </Link>
                 </div>
               </div>
@@ -164,39 +166,43 @@ export default async function InicioPage() {
             width={953}
             height={768}
             className="aspect-3/2 object-cover lg:aspect-auto lg:size-full"
+            priority
           />
         </div>
       </div>
-      <main className='bg-white'>
-        <section aria-labelledby="category-heading" className="py-12 sm:py-24 xl:mx-auto xl:max-w-7xl xl:px-8">
+      <main id="main-content" className='bg-white'>
+        <section aria-labelledby="category-heading" role="region" className="py-12 sm:py-24 xl:mx-auto xl:max-w-7xl xl:px-8">
           <div className="px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 xl:px-0">
             <h2 id="category-heading" className="text-2xl font-bold tracking-tight text-gray-900">
               Buscar por Destino
             </h2>
-            <Link href="/paquetes" className="hidden text-sm font-semibold group text-sky-600 hover:text-sky-500 sm:block">
+            <Link href="/paquetes" className="hidden text-sm font-semibold group text-sky-600 hover:text-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600 transition sm:block">
               Ver todos los destinos
-              <ArrowRightIcon className="h-4 w-4 ml-2 inline-block transition group-hover:translate-x-1" />
+              <ArrowRightIcon className="h-4 w-4 ml-2 inline-block transition group-hover:translate-x-1" aria-hidden="true" />
             </Link>
           </div>
 
           <div className="mt-4 flow-root">
             <div className="-my-2">
-              <div className="relative box-content h-80 overflow-x-auto py-2 xl:overflow-visible overflow-y-hidden">
+              <div className="relative box-content h-80 overflow-x-auto py-2 xl:overflow-visible overflow-y-hidden" role="list" aria-label="Destinos destacados">
                 <div className="absolute flex space-x-8 px-4 sm:px-6 lg:px-8 xl:relative xl:grid xl:grid-cols-5 xl:gap-x-8 xl:space-x-0 xl:px-0">
                   {destinations?.slice(0, 5).map((destination) => (
                     <Link
                       key={destination.fields.nombre}
                       href={`/paquetes/${destination.fields.id}`}
-                      className="relative flex h-80 w-56 flex-col overflow-hidden rounded-lg p-6 hover:opacity-75 xl:w-auto"
+                      className="relative flex h-80 w-56 flex-col overflow-hidden rounded-lg p-6 hover:opacity-80 focus-visible:ring-4 focus-visible:ring-sky-400 focus-visible:outline-none transition xl:w-auto shadow-md bg-white/80 backdrop-blur"
+                      aria-label={`Ver paquetes para ${destination.fields.nombre}`}
                     >
                       <span aria-hidden="true" className="absolute inset-0">
-                        <Image width={220} height={320} alt={destination?.fields?.imagen?.fields?.description ?? "Destino"} src={`https:${destination?.fields.imagen?.fields?.file?.url}`} className="size-full object-cover" />
+                        <Image width={220} height={320} alt={destination?.fields?.imagen?.fields?.description ?? `Imagen de ${destination.fields.nombre}`} src={`https:${destination?.fields.imagen?.fields?.file?.url}`} className="size-full object-cover" />
                       </span>
                       <span
                         aria-hidden="true"
-                        className="absolute inset-x-0 bottom-0 h-2/3 bg-linear-to-t from-gray-800 opacity-50"
+                        className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-gray-900/80 to-transparent opacity-80"
                       />
-                      <span className="relative mt-auto text-center text-xl font-bold text-white">{destination.fields.nombre}</span>
+                      <span className="relative mt-auto text-center text-xl font-bold text-white drop-shadow-lg">
+                        {destination.fields.nombre}
+                      </span>
                     </Link>
                   ))}
                 </div>
@@ -205,55 +211,40 @@ export default async function InicioPage() {
           </div>
 
           <div className="mt-6 px-4 sm:hidden">
-            <Link href="/paquetes" className="block text-sm font-semibold group text-sky-600 hover:text-sky-500">
+            <Link href="/paquetes" className="block text-sm font-semibold group text-sky-600 hover:text-sky-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600 transition">
               Ver todos los destinos
-              <ArrowRightIcon className="h-4 w-4 ml-2 inline-block transition group-hover:translate-x-1" />
+              <ArrowRightIcon className="h-4 w-4 ml-2 inline-block transition group-hover:translate-x-1" aria-hidden="true" />
             </Link>
           </div>
         </section>
-        <section aria-labelledby="favorites-heading" className='bg-white'>
+        <section aria-labelledby="favorites-heading" role="region" className='bg-white'>
           <div className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 sm:pb-24 lg:px-8">
             <div className="sm:flex sm:items-baseline sm:justify-between">
               <h2 id="favorites-heading" className="text-2xl font-bold tracking-tight text-gray-900">
                 Nuestros favoritos
               </h2>
-              <Link href="/favoritos" className="hidden text-sm font-semibold group text-sky-600 hover:text-sky-500 sm:block">
+              <Link href="/favoritos" className="hidden text-sm font-semibold group text-sky-600 hover:text-sky-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600 transition sm:block">
                 Ver todos los favoritos
-                <ArrowRightIcon className="h-4 w-4 ml-2 inline-block transition group-hover:translate-x-1" />
+                <ArrowRightIcon className="h-4 w-4 ml-2 inline-block transition group-hover:translate-x-1" aria-hidden="true" />
               </Link>
             </div>
 
-            <div className="mt-6 grid grid-cols-1 gap-y-10 sm:grid-cols-3 sm:gap-x-6 sm:gap-y-0 lg:gap-x-8">
+            <div className="mt-6 grid grid-cols-1 gap-y-10 sm:grid-cols-3 sm:gap-x-6 sm:gap-y-0 lg:gap-x-8" role="list" aria-label="Paquetes favoritos">
               {favorites?.fields?.paquetes?.slice(0, 3).map((favorite) => (
-                <div key={favorite.fields?.id} className="group relative">
-                  <Image
-                    alt={favorite.fields?.imagen?.fields?.description ?? favorite.fields?.nombre}
-                    src={`https:${favorite.fields?.imagen?.fields?.file?.url}`}
-                    width={300}
-                    height={300}
-                    className="w-full rounded-lg object-fit group-hover:opacity-75"
-                  />
-                  <h3 className="mt-4 text-base font-semibold text-gray-900">
-                    <Link href={`/paquetes/${favorite.fields.destino.fields.id}/${favorite.fields.slug}`}>
-                      <span className="absolute inset-0" />
-                      {favorite.fields?.nombre}
-                    </Link>
-                  </h3>
-                  <p className="mt-1 text-sm text-gray-500">Desde: {toMoney(favorite?.fields?.precio)} {favorite?.fields?.moneda} + Impuestos y Suplementos</p>
-                </div>
+                <TripGridItem trip={favorite} key={favorite.fields.slug} /> 
               ))}
             </div>
 
             <div className="mt-6 sm:hidden">
-              <Link href="/favoritos" className="block text-sm font-semibold group text-sky-600 hover:text-sky-500">
+              <Link href="/favoritos" className="block text-sm font-semibold group text-sky-600 hover:text-sky-500  focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600 transition">
                 Ver todos los favoritos
-                <ArrowRightIcon className="h-4 w-4 ml-2 inline-block transition group-hover:translate-x-1" />
+                <ArrowRightIcon className="h-4 w-4 ml-2 inline-block transition group-hover:translate-x-1" aria-hidden="true" />
               </Link>
             </div>
           </div>
         </section>
 
-        <div className="relative bg-gray-800 px-6 py-32 sm:px-12 sm:py-40 lg:px-16">
+        <section aria-labelledby="promo-heading" role="region" className="relative bg-gray-800 px-6 py-32 sm:px-12 sm:py-40 lg:px-16">
           <div className="absolute inset-0 overflow-hidden">
             <Image
               alt="Paisaje en Brujas, Bélgica"
@@ -261,22 +252,25 @@ export default async function InicioPage() {
               width={1920}
               height={1080}
               className="size-full object-cover"
+              priority
             />
           </div>
-          <div aria-hidden="true" className="absolute inset-0 bg-gray-900/60" />
+          <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/60 to-transparent" />
           <div className="relative mx-auto flex max-w-3xl flex-col items-center text-center">
-            <PercentBadgeIcon className="h-12 w-12 text-white" />
-            <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Promociones</h2>
+            <span className="inline-flex animate-bounce mb-2" aria-hidden="true">
+              <PercentBadgeIcon className="h-12 w-12 text-white drop-shadow-lg" />
+            </span>
+            <h2 id="promo-heading" className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Promociones</h2>
             <p className="mt-3 text-xl text-white">
               No hay nada mejor que conocer la ciudad de tus sueños, y que mejor que con un descuento. Visita nuestra sección de promociones y encuentra el viaje de tus sueños al mejor precio.
             </p>
             <Link href="/promociones"
-              className="mt-8 block w-full rounded-md border border-transparent bg-white px-8 py-3 text-base font-medium text-gray-900 hover:bg-gray-100 sm:w-auto"
+              className="mt-8 block w-full rounded-md border border-transparent bg-white px-8 py-3 text-base font-medium text-gray-900 hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600 transition sm:w-auto"
             >
               Ver todas las promociones
             </Link>
           </div>
-        </div>
+        </section>
         <Catalog />
         <ExpediaBenefits />
         <Socials />
