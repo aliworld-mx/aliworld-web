@@ -105,68 +105,78 @@ export default async function PaquetePage({ params }: PageProps) {
     ]
 
     return (
-        <div className="bg-white">
-            <Breadcrumbs breadcrumbs={breadcrumbs} />
-            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
-            <div className="mx-auto max-w-2xl px-4 pt-6 pb-12 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
-                <div className="lg:max-w-lg lg:self-start">
-                    <div className='ml-auto flex items-center justify-around rounded-full w-60 bg-sky-600 text-white px-2 py-3'>
-                        <div className="flex items-center">
-                            <SunIcon aria-hidden="true" className="size-5 shrink-0 text-yellow-200" />
-                            <p className="ml-2 text-sm text-gray-100">{dias} Días</p>
+        <>
+            <main id="paquete-main" tabIndex={-1} className="bg-gradient-to-br from-sky-50 via-white to-sky-100 min-h-screen">
+                <div className="bg-white">
+                    <Breadcrumbs breadcrumbs={breadcrumbs} />
+                    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
+                    <div className="mx-auto max-w-2xl px-4 pt-6 pb-12 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-12 lg:px-8">
+                        <div className="lg:max-w-lg lg:self-start">
+                            <div className="ml-auto flex items-center justify-around rounded-full w-64 bg-sky-600 text-white px-4 py-3 shadow-lg ring-1 ring-sky-100/60">
+                                <div className="flex items-center">
+                                    <SunIcon aria-hidden="true" className="size-5 shrink-0 text-white" />
+                                    <span className="ml-2 text-base font-medium text-white">{dias} Días</span>
+                                </div>
+                                <div className="flex items-center">
+                                    <MoonIcon aria-hidden="true" className="size-5 shrink-0 text-white" />
+                                    <span className="ml-2 text-base font-medium text-white">{noches} Noches</span>
+                                </div>
+                            </div>
+                            <div className="mt-8">
+                                <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl mb-2">{nombre}</h1>
+                                <div className="h-1 w-16 bg-sky-600 rounded mb-4" aria-hidden="true" />
+                            </div>
+                            <section aria-labelledby="information-heading" className="mt-6">
+                                <h2 id="information-heading" className="sr-only">
+                                    Información del paquete
+                                </h2>
+                                <div className="flex items-center gap-2 mb-2">
+                                    <span className="inline-block rounded bg-sky-100 px-3 py-1 text-sky-700 font-semibold text-lg shadow-sm">
+                                        {toMoney(precio)} {moneda}
+                                    </span>
+                                    <span className="text-sm text-gray-700 ml-2">+ Impuestos</span>
+                                </div>
+                                <div className='space-y-3 mt-4 text-base'>
+                                    <p className="text-gray-600 text-sm">Por adulto</p>
+                                    {(salidasDiarias && !diasDeSalidas) && <p className="text-sky-700 font-bold">Salidas Diarias</p>}
+                                    {diasDeSalidas && <p className="text-sky-700 font-bold">{diasDeSalidas}</p>}
+                                    <p className="text-gray-700">Países: <span className="font-medium text-gray-900">{paises.map(pais => pais.fields?.nombre ?? '').join(', ')}</span></p>
+                                    <p className="text-gray-700">Ciudades: <span className="font-medium text-gray-900">{ciudades.map(ciudad => ciudad.fields?.nombre).join(', ')}</span></p>
+                                </div>
+                            </section>
                         </div>
-                        <div className="flex items-center">
-                            <MoonIcon aria-hidden="true" className="size-5 shrink-0 text-purple-200" />
-                            <p className="ml-2 text-sm text-gray-100">{noches} Noches</p>
+                        <div className="mt-10 lg:col-start-2 lg:row-span-2 lg:mt-0 lg:self-center relative">
+                            <div className="relative rounded-2xl shadow-2xl overflow-hidden">
+                                <Image
+                                    alt={imagen.fields.description ?? nombre}
+                                    priority={true}
+                                    src={imageUrl}
+                                    width={592}
+                                    height={332}
+                                    className="w-full h-auto rounded-2xl object-cover transition group-hover:scale-105 duration-300"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-sky-900/30 via-transparent to-transparent pointer-events-none" aria-hidden="true" />
+                            </div>
+                        </div>
+                        <div className="mt-10 lg:col-start-1 lg:row-start-2 lg:max-w-lg lg:self-start">
+                            <section aria-labelledby="options-heading">
+                                <h2 id="options-heading" className="sr-only">
+                                    Información del paquete
+                                </h2>
+                                <div className="mt-10">
+                                    <QuotationButton slug={slug} destination={destino.fields.id} />
+                                </div>
+                            </section>
                         </div>
                     </div>
-                    <div className="mt-6">
-                        <h1 className="text-3xl underline decoration-sky-600 font-bold tracking-tight text-gray-900 sm:text-4xl">{nombre}</h1>
-                    </div>
-                    <section aria-labelledby="information-heading" className="mt-4">
-                        <h2 id="information-heading" className="sr-only">
-                            Información del paquete
-                        </h2>
-                        <div className="flex items-center">
-                            <p className="text-lg text-gray-900 sm:text-xl">{toMoney(precio)} {moneda} + Impuestos</p>
-                        </div>
-                        <div className='space-y-4'>
-                            <p className="text-gray-600 text-sm">Por adulto</p>
-                            {(salidasDiarias && !diasDeSalidas) && <p className="text-gray-700 font-bold text-base">Salidas Diarias</p>}
-                            {diasDeSalidas && <p className="text-gray-700 font-bold text-base">{diasDeSalidas}</p>}
-                            <p className="text-gray-700 text-base">Países que se visitan: {paises.map(pais => pais.fields?.nombre ?? '').join(', ')}</p>
-                            <p className="text-gray-700 text-base">Ciudades que se visitan: {ciudades.map(ciudad => ciudad.fields?.nombre).join(', ')}</p>
-                        </div>
-                    </section>
+                    <ExperienceTabs experience={experience} />
+                    <Benefits />
+                    <Partners />
+                    <HotelQuotation />
+                    <FAQs />
                 </div>
-
-                <div className="mt-10 lg:col-start-2 lg:row-span-2 lg:mt-0 lg:self-center">
-                    <Image
-                        alt={imagen.fields.description ?? nombre}
-                        priority={true}
-                        src={imageUrl}
-                        width={592}
-                        height={332}
-                        className="w-full rounded-lg object-cover" />
-                </div>
-
-                <div className="mt-10 lg:col-start-1 lg:row-start-2 lg:max-w-lg lg:self-start">
-                    <section aria-labelledby="options-heading">
-                        <h2 id="options-heading" className="sr-only">
-                            Información del paquete
-                        </h2>
-                        <div className="mt-10">
-                            <QuotationButton slug={slug} destination={destino.fields.id} />
-                        </div>
-                    </section>
-                </div>
-            </div>
-            <ExperienceTabs experience={experience} />
-            <Benefits />
-            <Partners />
-            <HotelQuotation />
-            <FAQs />
-        </div>
+            </main>
+        </>
     )
 }
 
