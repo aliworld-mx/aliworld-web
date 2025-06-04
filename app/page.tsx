@@ -9,7 +9,6 @@ import { getMetadata } from './lib/getMetadata';
 import { TypePaquete } from './_types/contentful/Paquete';
 import { Metadata } from 'next';
 import { getFavorites } from './lib/getFavorites';
-import { toMoney } from './_utils/toMoney';
 import { getDestinations } from './lib/getDestinations';
 import { FAQs } from './_components/FAQs';
 import { Partners } from './_components/Partners';

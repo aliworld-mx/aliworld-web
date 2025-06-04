@@ -131,7 +131,7 @@ export const Footer = () => (
             </div>
 
             <div className="border-t border-gray-200 py-10 md:flex md:items-center md:justify-between">
-                <p className="text-sm text-gray-500 md:order-1">2025 Aliworld. Todos los derechos reservados.</p>
+                <p className="text-sm text-gray-500 mb-5 md:mb-0 md:order-1">2025 Aliworld. Todos los derechos reservados.</p>
                 <div className="flex space-x-6 md:order-2">
                     {footerNavigation.sociales.map((item) => (
                         <a

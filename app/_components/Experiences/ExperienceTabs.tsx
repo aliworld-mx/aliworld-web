@@ -14,7 +14,7 @@ interface ExperienceTabsProps {
 }
 
 export default function ExperienceTabs({ experience }: ExperienceTabsProps) {
-  const { moneda, precios, itinerario, incluye, noIncluye, hoteles, notas, visas, toursOpcionales } = experience.fields;
+  const { moneda, precios, itinerario, incluye, noIncluye, hoteles, notas, visas } = experience.fields;
   const [activeTab, setActiveTab] = useState('Precios');
   const tabs = useMemo(() => {
     const tabsArray = []
@@ -24,7 +24,7 @@ export default function ExperienceTabs({ experience }: ExperienceTabsProps) {
     if (notas) tabsArray.push('Notas');
     if (visas) tabsArray.push('Visas');
     return tabsArray
-  }, [precios, hoteles, notas, visas, toursOpcionales])
+  }, [precios, hoteles, notas, visas])
 
   const activeIdx = tabs.findIndex((t) => t === activeTab);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
@@ -122,7 +122,6 @@ export default function ExperienceTabs({ experience }: ExperienceTabsProps) {
               {tab}
             </button>
           ))}
-          {/* Animated underline that matches active tab width/position */}
           <span
             aria-hidden="true"
             className="absolute bottom-0 h-0.5 bg-sky-500 rounded transition-all duration-300"
