@@ -8,7 +8,7 @@ const incentives = [
         description: "Aliworld te permite buscar y reservar vuelos, hoteles, alquileres de autos y paquetes vacacionales en un solo lugar. Su extensa red de socios garantiza opciones para todos los presupuestos y destinos.",
     },
     {
-        name: '¿Cambios de planes? Sin problema',
+        name: '¿Cambio de planes? Sin problema',
         icon: CalendarDaysIcon,
         description: "La mayoría de las reservaciones de hoteles en Aliworld son reembolsables y no tienen cargos por cancelación. Además, puedes modificar tu reservación en línea o comunicarte con el equipo de soporte para obtener ayuda. *Ver términos y condiciones en la página de reservación al escoger su hotel.",
     },
