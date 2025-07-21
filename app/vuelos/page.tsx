@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import Image from "next/image";
 import vuelosImage from "../../public/vuelos.jpg";
-import { Partners } from "../_components/Partners";
 import { ExpediaBenefits } from "../_components/Expedia/ExpediaBenefits";
 import Link from "next/link";
 
@@ -41,7 +40,7 @@ export default function VuelosPage() {
                                     </p>
                                     <div className="mt-12 flex justify-center">
                                         <Link href="https://reservas.aliworld.mx/" className="inline-block px-6 py-3 text-sm font-medium text-white bg-sky-600 rounded-lg hover:bg-sky-700">
-                                            Reservar ahora
+                                            Cotizar ahora
                                         </Link>
                                     </div>
                                 </div>
@@ -60,7 +59,6 @@ export default function VuelosPage() {
                 </div>
             </div>
             <ExpediaBenefits />
-            <Partners />
         </div>
     )
 }

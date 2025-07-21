@@ -11,7 +11,6 @@ import { Metadata } from 'next';
 import { getFavorites } from './lib/getFavorites';
 import { getDestinations } from './lib/getDestinations';
 import { FAQs } from './_components/FAQs';
-import { Partners } from './_components/Partners';
 import Socials from './_components/Socials';
 import { Catalog } from './_components/Catalog';
 import { ExpediaBenefits } from './_components/Expedia/ExpediaBenefits';
@@ -149,10 +148,6 @@ export default async function InicioPage() {
                   >
                     Ver Paquetes de Viaje
                   </Link>
-                  <Link href="https://reservas.aliworld.mx" target="_blank" rel="noopener noreferrer" className="text-sm/6 font-semibold text-gray-900 group hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600 transition">
-                    Reservar Hoteles y Vuelos <ArrowRightIcon className="h-4 w-4 ml-2 inline-block transition group-hover:translate-x-1" aria-hidden="true" />
-                    <span className="sr-only">(Enlace externo)</span>
-                  </Link>
                 </div>
               </div>
             </div>
@@ -274,7 +269,6 @@ export default async function InicioPage() {
         <ExpediaBenefits />
         <Socials />
         <Benefits />
-        <Partners />
         <FAQs />
       </main>
     </>

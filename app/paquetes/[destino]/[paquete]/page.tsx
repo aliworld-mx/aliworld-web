@@ -9,7 +9,6 @@ import { Metadata } from 'next'
 import { PageProps } from '@/.next/types/app/page'
 import { FAQs } from '@/app/_components/FAQs'
 import ExperienceTabs from '@/app/_components/Experiences/ExperienceTabs'
-import { Partners } from '@/app/_components/Partners'
 import HotelQuotation from '@/app/_components/HotelQuotation'
 import { QuotationButton } from '@/app/_components/QuotationButton'
 
@@ -171,7 +170,6 @@ export default async function PaquetePage({ params }: PageProps) {
                     </div>
                     <ExperienceTabs experience={experience} />
                     <Benefits />
-                    <Partners />
                     <HotelQuotation />
                     <FAQs />
                 </div>

@@ -4,7 +4,6 @@ import actividadesImage from "../../../public/actividades.jpg";
 import klookAliworldLogo from "../../../public/klookAli.png";
 import ActivitiesRow from "@/app/_components/ActivitiesRow";
 import { KlookBenefits } from "@/app/_components/Klook/KlookBenefits";
-import { Partners } from "@/app/_components/Partners";
 import { PageProps } from "@/.next/types/app/actividades/[etiqueta]/page";
 import { humanize } from "@/app/_utils/humanize";
 
@@ -59,7 +58,6 @@ export default async function ActividadesEtiquetaPage({ params }: PageProps) {
                 />
             </div>
             <KlookBenefits />
-            <Partners />
         </div>
     )
 }

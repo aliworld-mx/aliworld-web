@@ -13,13 +13,13 @@ export default function HotelQuotation() {
                             ¿Quieres un hotel con todo incluido? ¿O prefieres un hotel boutique? Accede a nuestro portal de reservas y encuentra el hotel que mejor se adapte a tus necesidades. Con un extenso catálogo de hoteles, podrás elegir entre una amplia variedad de opciones y las mejores ofertas. ¡Reserva ya!
                         </p>
                         <Link
-                            href="https://reservas.aliworld.mx"
+                            href="https://wa.me/+523314331600"
                             className="flex mt-6 w-max mx-auto items-center justify-center rounded-md border border-transparent bg-white px-8 py-3 text-base font-medium text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 focus:ring-offset-sky-700 shadow-lg transition"
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label="Ir al portal de reservas de hoteles Aliworld (se abre en una nueva pestaña)"
                         >
-                            Reservar ahora
+                            Cotizar ahora
                         </Link>
                     </div>
                 </div>

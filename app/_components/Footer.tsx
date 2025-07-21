@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { Newsletter } from "./Newsletter";
 import { JSX, SVGProps } from "react";
+import { MapPinIcon, PhoneIcon, EnvelopeIcon, GlobeAltIcon } from '@heroicons/react/24/outline';
 
 const footerNavigation = {
     destinos: [
@@ -17,14 +18,19 @@ const footerNavigation = {
         { name: 'Pacífico', href: '/paquetes/pacifico' },
         { name: 'Cruceros', href: '/paquetes/cruceros' },
     ],
-    reservaciones: [
-        { name: 'Hoteles', href: 'https://reservas.aliworld.mx/' },
-        { name: 'Vuelos', href: 'https://reservas.aliworld.mx/' },
+    servicios: [
+        { name: 'Hoteles', href: '/hoteles',  },
+        { name: 'Vuelos', href: '/vuelos',  },
         { name: 'Actividades', href: '/actividades' },
+        { name: 'Paquetes de Viaje', href: '/paquetes' },
+        { name: 'Promociones', href: '/promociones' },
     ],
     empresa: [
-        { name: 'Blog', href: '/blog' },
+        { name: 'Blog de Viajes', href: '/blog' },
         { name: 'Guías de Ciudades', href: '/ciudades' },
+        { name: 'Contacto', href: '/contacto' },
+        { name: 'Términos y Condiciones', href: '/terminos', external: true },
+        { name: 'Política de Privacidad', href: '/privacidad', external: true },
     ],
     sociales: [
         {
@@ -79,73 +85,146 @@ const footerNavigation = {
 }
 
 export const Footer = () => (
-    <footer aria-labelledby="footer-heading" className="bg-white">
+    <footer aria-labelledby="footer-heading" className="bg-gradient-to-br from-gray-900 via-gray-800 to-sky-900 text-white">
         <h2 id="footer-heading" className="sr-only">
-            Footer
+            Información del sitio
         </h2>
+        
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="py-20 xl:grid xl:grid-cols-3 xl:gap-8">
-                <div className="grid grid-cols-2 gap-8 xl:col-span-2">
-                    <div className="space-y-16 md:grid md:grid-cols-2 md:gap-8 md:space-y-0">
-                        <div className="md:col-span-2">
-                            <h3 className="text-sm font-medium text-gray-900 underline decoration-sky-600">Destinos</h3>
-                            <ul role="list" className="mt-6 flex flex-wrap">
-                                {footerNavigation.destinos.map((item) => (
-                                    <li key={item.name} className="text-sm w-full md:w-1/2 mb-6 list-none">
-                                        <Link href={item.href} className="text-gray-500 hover:text-gray-600">
-                                            {item.name}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
+            <div className="py-16 lg:py-20">
+                <div className="xl:grid xl:grid-cols-4 xl:gap-8">
+                    {/* Company Info */}
+                    <div className="xl:col-span-1 mb-12 xl:mb-0">
+                        <div className="space-y-6">
+                            <div>
+                                <h3 className="text-2xl font-bold text-white mb-4">
+                                    Aliworld
+                                </h3>
+                                <p className="text-gray-300 text-sm leading-relaxed">
+                                    Tu agencia de viajes de confianza. Descubre el mundo con nuestros paquetes de viaje, 
+                                    hoteles exclusivos y experiencias únicas.
+                                </p>
+                            </div>
+                            
+                            <div className="space-y-3">
+                                <div className="flex items-center space-x-3 text-sm text-gray-300">
+                                    <PhoneIcon className="h-5 w-5 text-sky-400 flex-shrink-0" />
+                                    <a href="https://wa.me/+523314331600" className="hover:text-sky-400 transition-colors">
+                                        +52 33 1433 1600
+                                    </a>
+                                </div>
+                                <div className="flex items-center space-x-3 text-sm text-gray-300">
+                                    <EnvelopeIcon className="h-5 w-5 text-sky-400 flex-shrink-0" />
+                                    <a href="mailto:contacto@aliworld.mx" className="hover:text-sky-400 transition-colors">
+                                        contacto@aliworld.mx
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div className="space-y-16 md:grid md:grid-cols-2 md:gap-8 md:space-y-0">
-                        <div>
-                            <h3 className="text-sm font-medium text-gray-900 underline decoration-sky-600">Reservaciones</h3>
-                            <ul role="list" className="mt-6 space-y-6">
-                                {footerNavigation.reservaciones.map((item) => (
-                                    <li key={item.name} className="text-sm list-none">
-                                        <Link href={item.href} target="_blank" className="text-gray-500 hover:text-gray-600">
-                                            {item.name}
+
+                    {/* Navigation Links */}
+                    <div className="xl:col-span-3">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+                            
+                            {/* Destinos */}
+                            <div>
+                                <h3 className="text-lg font-semibold text-sky-400 mb-6 flex items-center">
+                                    Destinos Populares
+                                </h3>
+                                <ul role="list" className="space-y-3">
+                                    {footerNavigation.destinos.slice(0, 8).map((item) => (
+                                        <li key={item.name}>
+                                            <Link 
+                                                href={item.href} 
+                                                className="text-gray-300 hover:text-sky-400 transition-colors duration-200 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-sky-500 rounded"
+                                            >
+                                                {item.name}
+                                            </Link>
+                                        </li>
+                                    ))}
+                                    <li>
+                                        <Link 
+                                            href="/paquetes" 
+                                            className="text-gray-300 hover:text-sky-400 transition-colors text-sm font-semibold"
+                                        >
+                                            Ver todos los destinos →
                                         </Link>
                                     </li>
-                                ))}
-                            </ul>
-                        </div>
-                        <div>
-                            <h3 className="text-sm font-medium text-gray-900 underline decoration-sky-600">Nosotros</h3>
-                            <ul role="list" className="mt-6 space-y-6">
-                                {footerNavigation.empresa.map((item) => (
-                                    <li key={item.name} className="text-sm list-none">
-                                        <Link href={item.href} target="_blank" className="text-gray-500 hover:text-gray-600">
-                                            {item.name}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
+                                </ul>
+                            </div>
+
+                            {/* Servicios */}
+                            <div>
+                                <h3 className="text-lg font-semibold text-sky-400 mb-6 flex items-center">
+                                    Nuestros Servicios
+                                </h3>
+                                <ul role="list" className="space-y-3">
+                                    {footerNavigation.servicios.map((item) => (
+                                        <li key={item.name}>
+                                            <Link 
+                                                href={item.href} 
+                                                className="text-gray-300 hover:text-sky-400 transition-colors duration-200 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-sky-500 rounded"
+                                            >
+                                                {item.name}
+                                            </Link>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+
+                            {/* Empresa */}
+                            <div>
+                                <h3 className="text-lg font-semibold text-sky-400 mb-6 flex items-center">
+                                    Información
+                                </h3>
+                                <ul role="list" className="space-y-3">
+                                    {footerNavigation.empresa.map((item) => (
+                                        <li key={item.name}>
+                                            <Link 
+                                                href={item.href} 
+                                                target={item.external ? "_blank" : undefined}
+                                                rel={item.external ? "noopener noreferrer" : undefined}
+                                                className="text-gray-300 hover:text-sky-400 transition-colors duration-200 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-sky-500 rounded"
+                                            >
+                                                {item.name}
+                                                {item.external && (
+                                                    <span className="sr-only"> (se abre en nueva pestaña)</span>
+                                                )}
+                                            </Link>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <Newsletter />
             </div>
 
-            <div className="border-t border-gray-200 py-10 md:flex md:items-center md:justify-between">
-                <p className="text-sm text-gray-500 mb-5 md:mb-0 md:order-1">2025 Aliworld. Todos los derechos reservados.</p>
-                <div className="flex space-x-6 md:order-2">
-                    {footerNavigation.sociales.map((item) => (
-                        <a
-                            key={item.name}
-                            href={item.href}
-                            className="text-gray-500 hover:text-sky-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-sky-500 rounded"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label={`Aliworld en ${item.name} (se abre en nueva pestaña)`}
-                        >
-                            <span className="sr-only">{item.name}</span>
-                            <item.icon aria-hidden="true" className="h-6 w-6" />
-                        </a>
-                    ))}
+            <div className="border-t border-gray-700/50 py-8 md:flex md:items-center md:justify-between">
+                <div className="md:order-1 mb-6 md:mb-0">
+                    <p className="text-sm text-gray-400">
+                        2025 Aliworld. Todos los derechos reservados. 
+                    </p>
+                </div>
+                
+                <div className="md:order-2">
+                    <div className="flex space-x-4 items-center">
+                        <span className="text-sm text-gray-400 mr-3 hidden sm:block">Síguenos:</span>
+                        {footerNavigation.sociales.map((item) => (
+                            <a
+                                key={item.name}
+                                href={item.href}
+                                className="text-gray-400 hover:text-sky-400 transition-all duration-200 transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-sky-500 rounded p-1"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label={`Síguenos en ${item.name} (se abre en nueva pestaña)`}
+                            >
+                                <span className="sr-only">{item.name}</span>
+                                <item.icon aria-hidden="true" className="h-6 w-6" />
+                            </a>
+                        ))}
+                    </div>
                 </div>
             </div>
         </div>

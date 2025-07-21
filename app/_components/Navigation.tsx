@@ -16,8 +16,8 @@ const callsToAction = [
 
 const sections = [
     { name: 'Paquetes', href: '/paquetes', description: 'Explora nuestros paquetes turísticos a destinos increíbles.' },
-    { name: 'Hoteles', href: 'https://reservas.aliworld.mx', description: 'Reserva hoteles en todo el mundo con las mejores tarifas.' },
-    { name: 'Vuelos', href: 'https://reservas.aliworld.mx', description: 'Encuentra vuelos a destinos nacionales e internacionales.' },
+    { name: 'Hoteles', href: '/hoteles', description: 'Reserva hoteles en todo el mundo con las mejores tarifas.' },
+    { name: 'Vuelos', href: '/vuelos', description: 'Encuentra vuelos a destinos nacionales e internacionales.' },
     { name: 'Actividades', href: '/actividades', description: 'Descubre actividades emocionantes en tus destinos favoritos.' },
     { name: 'Promociones', href: '/promociones', description: 'Aprovecha nuestras ofertas especiales y descuentos exclusivos.' },
     { name: 'Favoritos', href: '/favoritos', description: 'Conoce la selección de nuestros expertos.' },
@@ -60,44 +60,53 @@ export const Navigation = () => {
                 </div>
                 <PopoverGroup className="hidden lg:flex lg:gap-x-12">
                     <Popover className="relative">
-                        <PopoverButton className="flex items-center gap-x-1 text-md font-semibold text-gray-900">
-                            Reserva
-                            <ChevronDownIcon aria-hidden="true" className="size-5 flex-none text-gray-400" />
-                        </PopoverButton>
-                        <PopoverPanel
-                            transition
-                            className="absolute top-full -left-8 mt-3 w-screen max-w-md overflow-hidden rounded-3xl z-50 bg-white shadow-lg ring-1 ring-gray-900/5 transition data-closed:translate-y-1 data-closed:opacity-0 data-enter:duration-200 data-enter:ease-out data-leave:duration-150 data-leave:ease-in"
-                        >
-                            <div className="p-4">
-                                {sections.map((item) => (
-                                    <div
-                                        key={item.name}
-                                        className="group relative flex gap-x-6 rounded-lg p-4 text-md hover:bg-gray-50"
-                                    >
-                                        <div className="flex-auto">
-                                            <Link href={item.href} className="block font-semibold text-gray-900">
-                                                {item.name}
-                                                <span className="absolute inset-0" />
-                                            </Link>
-                                            <p className="mt-1 text-gray-600">{item.description}</p>
-                                        </div>
+                        {({ close }) => (
+                            <>
+                                <PopoverButton className="flex items-center gap-x-1 text-md font-semibold text-gray-900">
+                                    Reserva
+                                    <ChevronDownIcon aria-hidden="true" className="size-5 flex-none text-gray-400" />
+                                </PopoverButton>
+                                <PopoverPanel
+                                    transition
+                                    className="absolute top-full -left-8 mt-3 w-screen max-w-md overflow-hidden rounded-3xl z-50 bg-white shadow-lg ring-1 ring-gray-900/5 transition data-closed:translate-y-1 data-closed:opacity-0 data-enter:duration-200 data-enter:ease-out data-leave:duration-150 data-leave:ease-in"
+                                >
+                                    <div className="p-4">
+                                        {sections.map((item) => (
+                                            <div
+                                                key={item.name}
+                                                className="group relative flex gap-x-6 rounded-lg p-4 text-md hover:bg-gray-50"
+                                            >
+                                                <div className="flex-auto">
+                                                    <Link 
+                                                        href={item.href} 
+                                                        className="block font-semibold text-gray-900"
+                                                        onClick={() => close()}
+                                                    >
+                                                        {item.name}
+                                                        <span className="absolute inset-0" />
+                                                    </Link>
+                                                    <p className="mt-1 text-gray-600">{item.description}</p>
+                                                </div>
+                                            </div>
+                                        ))}
                                     </div>
-                                ))}
-                            </div>
-                            <div className="grid grid-cols-2 divide-x divide-gray-900/5 bg-gray-50">
-                                {callsToAction.map((item) => (
-                                    <Link
-                                        key={item.name}
-                                        href={item.href}
-                                        className="flex items-center justify-center gap-x-2.5 p-3 text-sm/6 font-semibold text-gray-900 hover:bg-gray-100"
-                                        aria-label={item.name}
-                                    >
-                                        <item.icon aria-hidden="true" className="size-5 flex-none text-gray-400" />
-                                        {item.name}
-                                    </Link>
-                                ))}
-                            </div>
-                        </PopoverPanel>
+                                    <div className="grid grid-cols-2 divide-x divide-gray-900/5 bg-gray-50">
+                                        {callsToAction.map((item) => (
+                                            <Link
+                                                key={item.name}
+                                                href={item.href}
+                                                className="flex items-center justify-center gap-x-2.5 p-3 text-sm/6 font-semibold text-gray-900 hover:bg-gray-100"
+                                                aria-label={item.name}
+                                                onClick={() => close()}
+                                            >
+                                                <item.icon aria-hidden="true" className="size-5 flex-none text-gray-400" />
+                                                {item.name}
+                                            </Link>
+                                        ))}
+                                    </div>
+                                </PopoverPanel>
+                            </>
+                        )}
                     </Popover>
                     <Link href="/ciudades" className="text-md font-semibold text-gray-900" aria-current={typeof window !== 'undefined' && window.location.pathname === '/ciudades' ? 'page' : undefined}>
                         Guías de Ciudades
@@ -138,7 +147,7 @@ export const Navigation = () => {
                             <div className="-my-6 divide-y divide-gray-500/10">
                                 <div className="space-y-2 py-6">
                                     <Disclosure as="div" className="-mx-3">
-                                        <DisclosureButton className="group flex w-full items-center justify-between rounded-lg py-2 pr-3.5 pl-3 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">
+                                        <DisclosureButton className="group flex cursor-pointer w-full items-center justify-between rounded-lg py-2 pr-3.5 pl-3 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">
                                             Reserva
                                             <ChevronDownIcon aria-hidden="true" className="size-5 flex-none group-data-open:rotate-180" />
                                         </DisclosureButton>

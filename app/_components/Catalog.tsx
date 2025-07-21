@@ -16,14 +16,14 @@ const features = [
     {
         name: 'Hoteles',
         description: 'Reserva tu hotel con beneficios exclusivos. ¡Encuentra el mejor precio!',
-        href: 'https://reservas.aliworld.mx/',
+        href: '/hoteles',
         imageSrc: hotelesImage,
         imageAlt: 'Fotografía del hotel Park Inn en Berlín.',
     },
     {
         name: 'Vuelos',
         description: 'Busca entre la mayor variedad de vuelos nacionales e internacionales.',
-        href: 'https://reservas.aliworld.mx/',
+        href: '/vuelos',
         imageSrc: vuelosImage,
         imageAlt: 'Fotografía del océano desde un avión.',
     },

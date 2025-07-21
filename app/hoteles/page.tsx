@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import Image from "next/image";
 import hotelesImage from "../../public/hoteles.jpg";
-import { Partners } from "../_components/Partners";
 import { ExpediaBenefits } from "../_components/Expedia/ExpediaBenefits";
 import Link from "next/link";
 
@@ -40,8 +39,8 @@ export default function HotelesPage() {
                                         Aliworld cuenta con un amplio catálogo de hoteles alrededor del mundo. Encuentra el mejor precio y beneficios exclusivos en tu próxima reservación. Además, puedes pagar con criptomonedas o tarjetas de crédito y débito. ¡Reserva ahora y disfruta de beneficios exclusivos!
                                     </p>
                                     <div className="mt-12 flex justify-center">
-                                        <Link href="https://reservas.aliworld.mx/" className="inline-block px-6 py-3 text-sm font-medium text-white bg-sky-600 rounded-lg hover:bg-sky-700">
-                                            Reservar ahora
+                                        <Link href="https://wa.me/+523314331600" className="inline-block px-6 py-3 text-sm font-medium text-white bg-sky-600 rounded-lg hover:bg-sky-700">
+                                            Cotizar ahora
                                         </Link>
                                     </div>
                                 </div>
@@ -59,7 +58,6 @@ export default function HotelesPage() {
                     </div>
                 </div>
             </div>
-            <Partners />
             <ExpediaBenefits />
         </div>
     )

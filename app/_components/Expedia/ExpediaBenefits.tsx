@@ -5,18 +5,18 @@ const incentives = [
     {
         name: 'Gran variedad de opciones de viaje',
         icon: GlobeAmericasIcon,
-        description: "Aliworld te permite buscar y reservar vuelos, hoteles, alquileres de autos y paquetes vacacionales en un solo lugar. Su extensa red de socios garantiza opciones para todos los presupuestos y destinos.",
+        description: "Nuestros asesores encontraran todo lo que necesites para unas vacaciones maravillosas. Nuestra extensa red de socios garantiza opciones para todos los presupuestos y destinos.",
     },
     {
         name: '¿Cambio de planes? Sin problema',
         icon: CalendarDaysIcon,
-        description: "La mayoría de las reservaciones de hoteles en Aliworld son reembolsables y no tienen cargos por cancelación. Además, puedes modificar tu reservación en línea o comunicarte con el equipo de soporte para obtener ayuda. *Ver términos y condiciones en la página de reservación al escoger su hotel.",
+        description: "La mayoría de las reservaciones de hoteles en Aliworld son reembolsables y no tienen cargos por cancelación. Si necesitas cambiar tus planes, puedes hacerlo sin preocupaciones. Pregunta a tu asesor sobre las políticas de cancelación y cambios de fecha.",
     },
     {
-        name: 'Paga en tu moneda local o con criptomonedas*',
+        name: 'Pagos flexibles',
         icon: BanknotesIcon,
         description:
-            "Aliworld permite pagar con criptomonedas o tarjetas de crédito y débito. Además, puedes ver los precios en tu moneda local para evitar sorpresas en el tipo de cambio. *Solo para reservaciones de hoteles.",
+            "Tu asesor puede crearte un plan de pagos para ir abonando a tu reservación, tu elijes el monto y la frecuencia de los pagos. *No aplica en vuelos.",
     },
 ]
 

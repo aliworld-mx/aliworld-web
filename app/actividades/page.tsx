@@ -3,7 +3,6 @@ import Image from "next/image";
 import actividadesImage from "../../public/actividades.jpg";
 import klookAliworldLogo from "../../public/klookAli.png";
 import { KlookSearchWidget } from "../_components/Klook/KlookSearchWidget";
-import { Partners } from "../_components/Partners";
 import { KlookBenefits } from "../_components/Klook/KlookBenefits";
 import ActivitiesRow from "../_components/ActivitiesRow";
 import HotelQuotation from "../_components/HotelQuotation";
@@ -65,7 +64,6 @@ export default async function ActividadesPage() {
                 <KlookSearchWidget />
             </div>
             <KlookBenefits />
-            <Partners />
             <HotelQuotation />
         </div>
     )
