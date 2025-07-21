@@ -173,7 +173,6 @@ export const Footer = () => (
                                 </ul>
                             </div>
 
-                            {/* Empresa */}
                             <div>
                                 <h3 className="text-lg font-semibold text-sky-400 mb-6 flex items-center">
                                     Información
