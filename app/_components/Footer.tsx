@@ -1,7 +1,6 @@
 import Link from "next/link"
-import { Newsletter } from "./Newsletter";
 import { JSX, SVGProps } from "react";
-import { MapPinIcon, PhoneIcon, EnvelopeIcon, GlobeAltIcon } from '@heroicons/react/24/outline';
+import { PhoneIcon, EnvelopeIcon } from '@heroicons/react/24/outline';
 
 const footerNavigation = {
     destinos: [
