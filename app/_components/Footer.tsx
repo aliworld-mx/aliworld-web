@@ -179,14 +179,9 @@ export const Footer = () => (
                                         <li key={item.name}>
                                             <Link 
                                                 href={item.href} 
-                                                target={item.external ? "_blank" : undefined}
-                                                rel={item.external ? "noopener noreferrer" : undefined}
                                                 className="text-gray-300 hover:text-sky-400 transition-colors duration-200 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-sky-500 rounded"
                                             >
                                                 {item.name}
-                                                {item.external && (
-                                                    <span className="sr-only"> (se abre en nueva pestaña)</span>
-                                                )}
                                             </Link>
                                         </li>
                                     ))}

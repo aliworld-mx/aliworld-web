@@ -117,6 +117,9 @@ export default async function BlogPost({ params }: PageProps) {
                     <Link href={uri} className='text-sky-600 underline'>{node.content[0].value}</Link>
                 );
             },
+            [BLOCKS.HR]: () => {
+                return <hr className='my-8 border-gray-200' />;
+            }
         }
     }
 
