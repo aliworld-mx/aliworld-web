@@ -28,8 +28,6 @@ const footerNavigation = {
         { name: 'Blog de Viajes', href: '/blog' },
         { name: 'Guías de Ciudades', href: '/ciudades' },
         { name: 'Contacto', href: '/contacto' },
-        { name: 'Términos y Condiciones', href: '/terminos', external: true },
-        { name: 'Política de Privacidad', href: '/privacidad', external: true },
     ],
     sociales: [
         {
