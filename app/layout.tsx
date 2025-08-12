@@ -35,6 +35,7 @@ export default async function RootLayout({
   return (
     <html lang="es">
       <head>
+        <meta name="getlinko-verify-code" content="getlinko-verify-fd26931048659d5934369ae8c5c993a84631d69e"/>
         <Script id='google-analytics' async src="https://www.googletagmanager.com/gtag/js?id=AW-11526773841">
         </Script>
         <script>
@@ -52,7 +53,7 @@ export default async function RootLayout({
         <Navigation />
         {children}
         <Footer />
-        <Analytics  mode="production"/>
+        <Analytics />
       </body>
     </html>
   );
