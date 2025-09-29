@@ -19,12 +19,12 @@ export const generateMetadata = async ({ params }: PageProps): Promise<Metadata>
     const imageUrl = `https:${url}`;
 
     return {
-        title: `Guia de Ciudad - ${nombreDeCiudad} - Actividades, Comida y Consejos | Aliworld`,
+        title: `¿Qué hacer en ${nombreDeCiudad}? - Actividades, Comida y Consejos | Aliworld`,
         description: `Descubre la guía completa de ${nombreDeCiudad} con actividades, comida y consejos útiles. Explora los mejores lugares y experiencias en esta increíble ciudad con Aliworld.`,
         openGraph: {
             type: 'website',
             url: `https://www.aliworld.mx/ciudades/${slug}`,
-            title: `Guia de Ciudad - ${nombreDeCiudad} - Actividades, Comida y Consejos | Aliworld`,
+            title: `¿Qué hacer en ${nombreDeCiudad}? - Actividades, Comida y Consejos | Aliworld`,
             images: [
                 {
                     url: imageUrl,
@@ -74,7 +74,7 @@ export default async function CiudadPage({ params }: PageProps) {
             href: '/',
         },
         {
-            name: 'Guías de Ciudades',
+            name: 'Ciudades',
             href: '/ciudades',
         },
         {

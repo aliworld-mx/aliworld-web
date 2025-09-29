@@ -1,51 +1,118 @@
-import Image from 'next/image'
-import Link from 'next/link';
 import { getDestinations } from '../lib/getDestinations';
 import Benefits from '../_components/Benefits';
 import { FAQs } from '../_components/FAQs';
-import { ItemList, WithContext } from 'schema-dts';
+import { ItemList, WithContext, Organization, WebSite } from 'schema-dts';
 import { Metadata } from 'next';
 import { Breadcrumbs } from '../_components/Breadcrumbs';
+import { Suspense } from 'react';
+import DestinationsList from './_components/DestinationsList';
 
-export const metadata: Metadata = {
-    title: 'Paquetes de Viaje | Aliworld',
-    description: 'Descubre los mejores paquetes de viaje a todo el mundo al mejor precio. ¡Reserva ya!',
-    openGraph: {
-        type: 'website',
-        url: 'https://www.aliworld.mx/paquetes',
-        title: "Aliworld - Paquetes de viaje a todo el mundo al mejor precio",
-        siteName: 'Aliworld',
-        description: "Encuentra los mejores paquetes de viaje a todo el mundo al mejor precio. ¡Reserva ya!",
-    },
-    alternates: {
-        canonical: 'https://www.aliworld.mx/paquetes',
-    },
-    generator: 'Next.js',
-    keywords: ['viajes', 'paquetes', 'cruceros', 'hoteles', 'reservaciones', 'aliworld'],
-    robots: 'index, follow',
+export const revalidate = 2629746;
+
+export const dynamic = 'force-static';
+
+export async function generateMetadata(): Promise<Metadata> {
+    const destinations = await getDestinations();
+    const destinationCount = destinations?.length || 0;
+    
+    return {
+        title: `Paquetes de Viaje a ${destinationCount} Destinos | Aliworld`,
+        description: `Descubre los mejores paquetes de viaje a ${destinationCount} destinos únicos en todo el mundo. Ofertas exclusivas, reserva fácil y experiencias inolvidables al mejor precio.`,
+        keywords: [
+            'viajes', 'paquetes de viaje', 'cruceros', 'hoteles', 'reservaciones', 
+            'aliworld', 'turismo', 'vacaciones', 'ofertas de viaje', 'destinos internacionales',
+            'paquetes todo incluido', 'viajes organizados', 'tours', 'escapadas'
+        ],
+        authors: [{ name: 'Aliworld' }],
+        creator: 'Aliworld',
+        publisher: 'Aliworld',
+        robots: {
+            index: true,
+            follow: true,
+            googleBot: {
+                index: true,
+                follow: true,
+                'max-video-preview': -1,
+                'max-image-preview': 'large',
+                'max-snippet': -1,
+            },
+        },
+        openGraph: {
+            type: 'website',
+            url: 'https://www.aliworld.mx/paquetes',
+            title: `Paquetes de Viaje a ${destinationCount} Destinos | Aliworld`,
+            siteName: 'Aliworld',
+            description: `Encuentra los mejores paquetes de viaje a ${destinationCount} destinos únicos. ¡Reserva tu próxima aventura con ofertas exclusivas!`,
+            images: [
+                {
+                    url: 'https://www.aliworld.mx/paquetes.jpg',
+                    width: 1200,
+                    height: 630,
+                    alt: 'Paquetes de Viaje - Aliworld',
+                }
+            ],
+        },
+        twitter: {
+            card: 'summary_large_image',
+            site: '@aliworld_mx',
+            creator: '@aliworld_mx',
+            title: `Paquetes de Viaje a ${destinationCount} Destinos | Aliworld`,
+            description: `Descubre ${destinationCount} destinos únicos con nuestros paquetes de viaje. ¡Ofertas exclusivas te esperan!`,
+            images: ['https://www.aliworld.mx/paquetes.jpg'],
+        },
+        alternates: {
+            canonical: 'https://www.aliworld.mx/paquetes',
+        },
+        category: 'Travel',
+        classification: 'Travel Packages and Tours',
+    };
 }
-
-const breadcrumbs = [
-    {
-        name: 'Inicio',
-        href: '/',
-    },
-
-    {
-        name: 'Paquetes',
-        href: '/paquetes',
-    },
-]
 
 export default async function PaquetesPage() {
     const destinations = await getDestinations();
 
-    const structuredData: WithContext<ItemList> = {
+    const organizationStructuredData: WithContext<Organization> = {
+        '@context': 'https://schema.org',
+        '@type': 'Organization',
+        name: 'Aliworld',
+        url: 'https://www.aliworld.mx',
+        logo: 'https://www.aliworld.mx/aliworld-color.svg',
+        description: 'Agencia de viajes especializada en paquetes turísticos a los mejores destinos del mundo',
+        sameAs: [
+            'https://twitter.com/aliworld_mx',
+            'https://facebook.com/aliworld.mx',
+            'https://instagram.com/aliworld_mx'
+        ],
+        contactPoint: {
+            '@type': 'ContactPoint',
+            contactType: 'Customer Service',
+            availableLanguage: 'Spanish'
+        }
+    };
+
+    const websiteStructuredData: WithContext<WebSite> = {
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: 'Aliworld',
+        url: 'https://www.aliworld.mx',
+        potentialAction: {
+            '@type': 'SearchAction',
+            target: {
+                '@type': 'EntryPoint',
+                urlTemplate: 'https://www.aliworld.mx/paquetes?search={search_term_string}'
+            },
+            query: 'required name=search_term_string'
+        }
+    };
+
+    const itemListStructuredData: WithContext<ItemList> = {
         '@context': 'https://schema.org',
         '@type': 'ItemList',
-        name: "Listado de Destinos de Paquetes de Viaje",
+        name: "Paquetes de Viaje - Destinos Disponibles",
+        description: `Catálogo completo de ${destinations?.length || 0} destinos turísticos con paquetes de viaje disponibles`,
         url: 'https://www.aliworld.mx/paquetes',
-        itemListElement: destinations.map((destination, index) => {
+        numberOfItems: destinations?.length || 0,
+        itemListElement: destinations?.map((destination, index) => {
             const { id, nombre, imagen, descripcion } = destination.fields;
             const { url } = imagen.fields.file!;
             const imageUrl = `https:${url}`;
@@ -54,24 +121,34 @@ export default async function PaquetesPage() {
                 '@type': 'ListItem',
                 position: index + 1,
                 item: {
-                    "@type": "Place",
-                    "name": nombre as string,
-                    "url": `https://www.aliworld.mx/paquetes/${id}`,
-                    "image": imageUrl as string,
-                    "description": descripcion as string
+                    '@type': 'TouristDestination',
+                    name: nombre as string,
+                    url: `https://www.aliworld.mx/paquetes/${id}`,
+                    image: imageUrl as string,
+                    description: descripcion as string,
+                    identifier: id as string
                 }
             }
-        })
+        }) || []
     };
+
+    const allStructuredData = [
+        organizationStructuredData,
+        websiteStructuredData,
+        itemListStructuredData
+    ];
 
     return (
         <>
             <script
                 type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(allStructuredData) }}
             />
             <div className="bg-white">
-                <Breadcrumbs breadcrumbs={breadcrumbs} />
+                <Breadcrumbs breadcrumbs={[
+                    { name: 'Inicio', href: '/' },
+                    { name: 'Paquetes', href: '/paquetes' }
+                ]} />
                 <div className="mx-auto max-w-2xl px-4 pb-16 sm:px-6 lg:max-w-7xl lg:px-8">
                     <header className="mb-10 text-center">
                         <h1 className="text-4xl font-extrabold tracking-tight text-pretty text-gray-900 sm:text-5xl">
@@ -82,32 +159,23 @@ export default async function PaquetesPage() {
                         </p>
                     </header>
                     <section aria-label="Listado de destinos de viaje">
-                        <div className="grid grid-cols-1 gap-x-6 gap-y-10 mt-8 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-                            {destinations?.map((destination) => {
-                                const { id, nombre, descripcion, imagen } = destination.fields;
-                                const { url } = imagen.fields.file!;
-                                const imageUrl = `https:${url}`;
-
-                                return (
-                                    <Link key={id} href={`paquetes/${id}`} className="group block rounded-lg shadow-sm hover:shadow-lg transition-all duration-200 bg-white border border-gray-100 hover:border-sky-400 focus:outline-none focus:ring-2 focus:ring-sky-400">
-                                        <div className="relative">
-                                            <Image
-                                                alt={imagen.fields.description ?? nombre}
-                                                src={imageUrl}
-                                                width={400}
-                                                height={800}
-                                                className="aspect-square w-full overflow-hidden rounded-t-lg object-cover sm:aspect-2/3 transition duration-300"
-                                                loading="lazy"
-                                            />
+                        <Suspense fallback={
+                            <div className="animate-pulse">
+                                <div className="grid grid-cols-1 gap-x-6 gap-y-10 mt-8 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+                                    {Array.from({ length: 8 }).map((_, index) => (
+                                        <div key={index} className="bg-white rounded-lg shadow-sm border border-gray-100">
+                                            <div className="aspect-square w-full bg-gray-200 rounded-t-lg sm:aspect-2/3"></div>
+                                            <div className="p-4 space-y-2">
+                                                <div className="h-6 bg-gray-200 rounded-md"></div>
+                                                <div className="h-4 bg-gray-200 rounded-md w-3/4"></div>
+                                            </div>
                                         </div>
-                                        <div className="p-4 flex flex-col gap-2">
-                                            <h2 className="text-lg font-semibold text-gray-900 group-hover:text-sky-700 line-clamp-2">{nombre}</h2>
-                                            <p className="text-sm italic text-gray-500 line-clamp-3">{descripcion}</p>
-                                        </div>
-                                    </Link>
-                                )
-                            })}
-                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        }>
+                            <DestinationsList destinations={destinations} />
+                        </Suspense>
                     </section>
                 </div>
             </div>

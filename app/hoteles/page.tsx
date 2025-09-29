@@ -36,7 +36,7 @@ export default function HotelesPage() {
                                         Reserva tu hotel al mejor precio
                                     </h1>
                                     <p className="mt-4 text-xl text-gray-600">
-                                        Aliworld cuenta con un amplio catálogo de hoteles alrededor del mundo. Encuentra el mejor precio y beneficios exclusivos en tu próxima reservación. Además, puedes pagar con criptomonedas o tarjetas de crédito y débito. ¡Reserva ahora y disfruta de beneficios exclusivos!
+                                        Aliworld cuenta con un amplio catálogo de hoteles alrededor del mundo. Encuentra el mejor precio y beneficios exclusivos en tu próxima reservación. ¡Reserva ahora!
                                     </p>
                                     <div className="mt-12 flex justify-center">
                                         <Link href="https://wa.me/+523314331600" className="inline-block px-6 py-3 text-sm font-medium text-white bg-sky-600 rounded-lg hover:bg-sky-700">

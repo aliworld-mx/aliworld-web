@@ -37,6 +37,7 @@ export default async function ActividadesPage() {
                     width={1900}
                     height={1200}
                     className="h-96 w-full object-cover"
+                    priority={true}
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-white" />
             </div>
@@ -53,6 +54,7 @@ export default async function ActividadesPage() {
                     src={klookAliworldLogo}
                     width={800}
                     height={200}
+                    priority={true}
                     className="w-full mt-12 sm:w-1/2 object-cover mx-auto"
                 />
             </div>
