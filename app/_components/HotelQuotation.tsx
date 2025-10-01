@@ -7,19 +7,19 @@ export default function HotelQuotation() {
                 <div className="mx-auto max-w-2xl px-4 lg:max-w-none">
                     <div className="max-w-3xl mx-auto text-center">
                         <h2 id="hotel-quotation-heading" className="text-4xl font-bold tracking-tight text-white">
-                            ¿Buscas solo el hotel o vuelo? ¡Reserva con nosotros!
+                            ¿Necesitas vuelos y/o hoteles? ¡Escríbenos tus planes!
                         </h2>
                         <p className="mt-4 text-gray-100">
-                            ¿Quieres un hotel con todo incluido? ¿O prefieres un hotel boutique? Accede a nuestro portal de reservas y encuentra el hotel que mejor se adapte a tus necesidades. Con un extenso catálogo de hoteles, podrás elegir entre una amplia variedad de opciones y las mejores ofertas. ¡Reserva ya!
+                            Compártenos los detalles de tu viaje y te cotizaremos las mejores opciones. Ya sea que busques vuelos, hoteles, o ambos, nuestros expertos encontrarán las mejores tarifas y opciones que se adapten perfectamente a tu presupuesto y preferencias. ¡Escríbenos ahora!
                         </p>
                         <Link
-                            href="https://wa.me/+523314331600"
+                            href="https://wa.me/+523314331600?text=Hola,%20quiero%20cotizar%20mi%20viaje.%20Mis%20planes%20son:"
                             className="flex mt-6 w-max mx-auto items-center justify-center rounded-md border border-transparent bg-white px-8 py-3 text-base font-medium text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 focus:ring-offset-sky-700 shadow-lg transition"
                             target="_blank"
                             rel="noopener noreferrer"
-                            aria-label="Ir al portal de reservas de hoteles Aliworld (se abre en una nueva pestaña)"
+                            aria-label="Escribir por WhatsApp para cotizar vuelos y hoteles (se abre en una nueva pestaña)"
                         >
-                            Cotizar ahora
+                            Cotizar
                         </Link>
                     </div>
                 </div>
