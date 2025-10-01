@@ -1,10 +1,8 @@
 
 import { Breadcrumbs } from '@/app/_components/Breadcrumbs';
 import { FAQs } from '@/app/_components/FAQs';
-import { TripGrid } from '@/app/_components/TripGrid'
+import { FavoritesGrid } from '@/app/_components/FavoritesGrid';
 import { Metadata } from 'next';
-import { OfferCatalog, WithContext } from 'schema-dts';
-import { getFavorites } from '../lib/getFavorites';
 import { Suspense } from 'react';
 import HotelQuotation from '../_components/HotelQuotation';
 
@@ -38,37 +36,18 @@ const breadcrumbs = [
     },
 ]
 
-export default async function FavoritosPage() {
-    const favorites = await getFavorites();
-
-    const structuredData: WithContext<OfferCatalog> = {
+export default function FavoritosPage() {
+    const structuredData = {
         '@context': 'https://schema.org',
-        '@type': 'OfferCatalog',
-        name: `Paquetes de viaje favoritos`,
-        url: `https://www.aliworld.mx/favoritos`,
-        itemListElement: favorites?.fields?.paquetes.map((trip) => {
-            const { slug, destino, nombre, imagen, precio, moneda, dias, ciudades } = trip.fields;
-            const { url } = imagen.fields.file!;
-            const imageUrl = `https:${url}`;
-
-            return {
-                '@type': 'Offer',
-                itemOffered: {
-                    '@type': 'Trip',
-                    name: nombre as string,
-                    url: `https://www.aliworld.mx/paquetes/${destino.fields.id}/${slug}`,
-                    image: imageUrl as string,
-                    price: precio as number,
-                    priceCurrency: moneda as string,
-                    validFrom: '2024-12-01',
-                    duration: `P${dias}D`,
-                    destination: ciudades?.map((ciudad) => ({
-                        '@type': 'City',
-                        name: ciudad.fields?.nombre
-                    }))
-                }
-            }
-        })
+        '@type': 'WebPage',
+        name: 'Paquetes Favoritos - Aliworld',
+        description: 'Tus paquetes de viaje favoritos guardados para consulta rápida',
+        url: 'https://www.aliworld.mx/favoritos',
+        mainEntity: {
+            '@type': 'ItemList',
+            name: 'Lista de Favoritos',
+            description: 'Paquetes de viaje guardados como favoritos'
+        }
     };
 
     return (
@@ -76,8 +55,19 @@ export default async function FavoritosPage() {
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
             <div className="bg-white">
                 <Breadcrumbs breadcrumbs={breadcrumbs} />
-                <Suspense>
-                    <TripGrid header='Paquetes de viajes seleccionados por nuestro equipo' trips={favorites?.fields.paquetes ?? []} />
+                <Suspense fallback={
+                    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
+                        <div className="animate-pulse">
+                            <div className="h-8 bg-gray-200 rounded w-64 mb-6"></div>
+                            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                                {Array.from({ length: 6 }).map((_, i) => (
+                                    <div key={i} className="bg-gray-200 rounded-xl h-96"></div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                }>
+                    <FavoritesGrid />
                 </Suspense>
             </div>
             <HotelQuotation />

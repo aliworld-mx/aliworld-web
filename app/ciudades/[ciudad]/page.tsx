@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import { Breadcrumbs } from '@/app/_components/Breadcrumbs'
-import { PageProps } from '@/.next/types/app/page'
 import { ArrowRightIcon } from '@heroicons/react/20/solid'
 import Socials from '@/app/_components/Socials'
 import { getGuide } from '@/app/lib/getGuide'
@@ -11,35 +10,105 @@ import { Catalog } from '@/app/_components/Catalog'
 import { getBlogPostsByCity } from '@/app/lib/getBlogPostsByCity'
 import { TripGridItem } from '@/app/_components/TripGridItem'
 
+export const revalidate = 2629746; // 1 mes en segundos
+
+interface PageProps {
+    params: Promise<{ ciudad: string }>;
+}
+
 export const generateMetadata = async ({ params }: PageProps): Promise<Metadata> => {
     const { ciudad } = await params;
     const guia = await getGuide(ciudad);
-    const { nombreDeCiudad, imagenContenido, slug } = guia.fields;
+    const { nombreDeCiudad, imagenContenido, slug, encabezado, descripcion, actividades, platillos } = guia.fields;
     const url = imagenContenido.fields.file?.url;
     const imageUrl = `https:${url}`;
+    
+    // Keywords dinámicas basadas en contenido
+    const activityKeywords = actividades.map(a => a.fields.titulo.toLowerCase()).slice(0, 5);
+    const foodKeywords = platillos.map(p => p.fields.titulo.toLowerCase()).slice(0, 5);
+    
+    const dynamicKeywords = [
+        'viajes', 'turismo', 'qué hacer', 'guía de viaje', 'destinos',
+        nombreDeCiudad.toLowerCase(), 
+        slug,
+        'actividades', 'comida típica', 'lugares turísticos',
+        'paquetes de viaje', 'tours', 'hoteles', 'reservaciones',
+        'consejos de viaje', 'itinerario', 'atracciones',
+        ...activityKeywords,
+        ...foodKeywords,
+        'aliworld'
+    ];
+    
+    // Descripción enriquecida para SEO
+    const enhancedDescription = `Guía completa de ${nombreDeCiudad}: ¿Qué hacer, dónde comer y qué visitar? Descubre las mejores actividades, platillos típicos y consejos para tu viaje. Encuentra paquetes turísticos desde ${nombreDeCiudad} con Aliworld.`;
 
     return {
-        title: `¿Qué hacer en ${nombreDeCiudad}? - Actividades, Comida y Consejos | Aliworld`,
-        description: `Descubre la guía completa de ${nombreDeCiudad} con actividades, comida y consejos útiles. Explora los mejores lugares y experiencias en esta increíble ciudad con Aliworld.`,
+        title: `¿Qué hacer en ${nombreDeCiudad}? Guía Completa 2025 | Actividades y Tours | Aliworld`,
+        description: enhancedDescription,
+        keywords: dynamicKeywords.filter((keyword, index, self) => self.indexOf(keyword) === index),
+        authors: [{ name: 'Aliworld', url: 'https://www.aliworld.mx' }],
+        creator: 'Aliworld - Guía de Viajes',
+        publisher: 'Aliworld',
+        formatDetection: {
+            email: false,
+            address: false,
+            telephone: false,
+        },
+        robots: {
+            index: true,
+            follow: true,
+            nocache: false,
+            googleBot: {
+                index: true,
+                follow: true,
+                noimageindex: false,
+                'max-video-preview': -1,
+                'max-image-preview': 'large',
+                'max-snippet': -1,
+            },
+        },
         openGraph: {
             type: 'website',
             url: `https://www.aliworld.mx/ciudades/${slug}`,
-            title: `¿Qué hacer en ${nombreDeCiudad}? - Actividades, Comida y Consejos | Aliworld`,
+            title: `Guía de ${nombreDeCiudad} 2025 - Qué hacer, Dónde Comer y Tours | Aliworld`,
+            siteName: 'Aliworld',
+            description: enhancedDescription,
+            locale: 'es_MX',
             images: [
                 {
                     url: imageUrl,
-                    alt: nombreDeCiudad,
+                    width: 1200,
+                    height: 630,
+                    alt: `Guía turística de ${nombreDeCiudad} - Mejores lugares para visitar`,
+                    type: 'image/jpeg',
                 },
             ],
-            siteName: 'Aliworld',
-            description: `Descubre la guía completa de ${nombreDeCiudad} con actividades, comida y consejos útiles. Explora los mejores lugares y experiencias en esta increíble ciudad con Aliworld.`,
+        },
+        twitter: {
+            card: 'summary_large_image',
+            site: '@aliworld_mx',
+            creator: '@aliworld_mx',
+            title: `¿Qué hacer en ${nombreDeCiudad}? Guía 2025`,
+            description: `Descubre las mejores actividades, comida y lugares en ${nombreDeCiudad}. Guía completa + paquetes de viaje.`,
+            images: [imageUrl],
         },
         alternates: {
             canonical: `https://www.aliworld.mx/ciudades/${slug}`,
+            languages: {
+                'es-MX': `https://www.aliworld.mx/ciudades/${slug}`,
+                'es': `https://www.aliworld.mx/ciudades/${slug}`,
+            },
         },
+        category: 'Travel Guide',
+        classification: 'Travel Information',
+        referrer: 'origin-when-cross-origin',
         generator: 'Next.js',
-        keywords: ['viajes', 'paquetes de viaje', slug, 'cruceros', 'hoteles', 'reservaciones', 'aliworld'],
-        robots: 'index, follow',
+        applicationName: 'Aliworld',
+        other: {
+            'travel:destination': nombreDeCiudad,
+            'travel:type': 'city-guide',
+            'geo:placename': nombreDeCiudad,
+        },
     }
 }
 
@@ -83,8 +152,129 @@ export default async function CiudadPage({ params }: PageProps) {
         },
     ]
 
+    // Structured Data para SEO avanzado
+    const structuredData = {
+        '@context': 'https://schema.org',
+        '@graph': [
+            // TravelGuide principal
+            {
+                '@type': 'TravelGuide',
+                '@id': `https://www.aliworld.mx/ciudades/${slug}#guide`,
+                name: `Guía de ${nombreDeCiudad}`,
+                description: `Guía completa de viaje a ${nombreDeCiudad} con actividades, comida típica y consejos útiles.`,
+                url: `https://www.aliworld.mx/ciudades/${slug}`,
+                image: {
+                    '@type': 'ImageObject',
+                    url: contentImage,
+                    width: '1216',
+                    height: '676',
+                    caption: `Vista de ${nombreDeCiudad}`
+                },
+                inLanguage: 'es-MX',
+                author: {
+                    '@type': 'Organization',
+                    name: 'Aliworld',
+                    url: 'https://www.aliworld.mx'
+                },
+                publisher: {
+                    '@type': 'Organization',
+                    name: 'Aliworld',
+                    url: 'https://www.aliworld.mx',
+                    logo: {
+                        '@type': 'ImageObject',
+                        url: 'https://www.aliworld.mx/aliworld-color.svg'
+                    }
+                },
+                about: {
+                    '@type': 'Place',
+                    '@id': `https://www.aliworld.mx/ciudades/${slug}#place`,
+                    name: nombreDeCiudad,
+                    description: descripcion,
+                    image: contentImage
+                },
+                mentions: actividades.map(actividad => ({
+                    '@type': 'TouristAttraction',
+                    name: actividad.fields.titulo,
+                    description: actividad.fields.contenido,
+                    image: `https:${actividad.fields.imagen?.fields?.file?.url}`
+                }))
+            },
+            // Place schema
+            {
+                '@type': 'Place',
+                '@id': `https://www.aliworld.mx/ciudades/${slug}#place`,
+                name: nombreDeCiudad,
+                description: descripcion,
+                image: [contentImage, headerImage],
+                hasMap: `https://www.google.com/maps/search/${encodeURIComponent(nombreDeCiudad)}`,
+                touristType: 'Leisure'
+            },
+            // FAQPage
+            {
+                '@type': 'FAQPage',
+                '@id': `https://www.aliworld.mx/ciudades/${slug}#faq`,
+                mainEntity: preguntasFrecuentes.map(faq => ({
+                    '@type': 'Question',
+                    name: faq.fields.pregunta,
+                    acceptedAnswer: {
+                        '@type': 'Answer',
+                        text: faq.fields.respuesta
+                    }
+                }))
+            },
+            // Organization
+            {
+                '@type': 'Organization',
+                '@id': 'https://www.aliworld.mx#organization',
+                name: 'Aliworld',
+                url: 'https://www.aliworld.mx',
+                logo: {
+                    '@type': 'ImageObject',
+                    url: 'https://www.aliworld.mx/aliworld-color.svg'
+                },
+                contactPoint: {
+                    '@type': 'ContactPoint',
+                    telephone: '+52-33-1433-1600',
+                    contactType: 'customer service',
+                    areaServed: 'MX',
+                    availableLanguage: 'Spanish'
+                },
+                sameAs: [
+                    'https://www.facebook.com/aliworld.mx',
+                    'https://www.instagram.com/aliworld.mx'
+                ]
+            },
+            // WebPage
+            {
+                '@type': 'WebPage',
+                '@id': `https://www.aliworld.mx/ciudades/${slug}`,
+                url: `https://www.aliworld.mx/ciudades/${slug}`,
+                name: `¿Qué hacer en ${nombreDeCiudad}? Guía Completa 2025`,
+                description: `Guía completa de ${nombreDeCiudad}: ¿Qué hacer, dónde comer y qué visitar? Descubre las mejores actividades, platillos típicos y consejos.`,
+                inLanguage: 'es-MX',
+                isPartOf: {
+                    '@type': 'WebSite',
+                    '@id': 'https://www.aliworld.mx',
+                    name: 'Aliworld',
+                    url: 'https://www.aliworld.mx'
+                },
+                breadcrumb: {
+                    '@type': 'BreadcrumbList',
+                    itemListElement: breadcrumbs.map((crumb, index) => ({
+                        '@type': 'ListItem',
+                        position: index + 1,
+                        name: crumb.name,
+                        item: `https://www.aliworld.mx${crumb.href}`
+                    }))
+                }
+            }
+        ]
+    };
+
     return (
         <>
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
+            
             <main id="ciudad-main" tabIndex={-1} className="bg-white">
                 <Breadcrumbs breadcrumbs={breadcrumbs} />
                 <div className="relative isolate">
@@ -94,7 +284,7 @@ export default async function CiudadPage({ params }: PageProps) {
                                 {encabezado}
                             </h1>
                             <p className="mt-8 text-lg font-medium text-pretty text-gray-500 sm:text-xl/8">
-                                {descripcion}
+                                {descripcion} <Link href="/ciudades" className="text-sky-600 hover:text-sky-700 underline">Explora más destinos</Link> en nuestra guía completa de viajes.
                             </p>
                             <div className="mt-10 flex items-center gap-x-6">
                                 <Link
@@ -124,7 +314,15 @@ export default async function CiudadPage({ params }: PageProps) {
                                     clipPath="url(#2ade4387-9c63-4fc4-b754-10e687a0d332)"
                                     transform="translate(24 24)"
                                 >
-                                    <Image alt={imagenEncabezado.fields.description ?? ""} src={headerImage} width={316} height={685} priority={true} />
+                                    <Image 
+                                        alt={`Guía turística de ${nombreDeCiudad} - ${imagenEncabezado.fields.description || 'Lugares imperdibles para visitar'}`} 
+                                        src={headerImage} 
+                                        width={316} 
+                                        height={685} 
+                                        priority={true}
+                                        className="object-cover w-full h-full"
+                                        sizes="(max-width: 768px) 316px, 316px"
+                                    />
                                 </foreignObject>
                             </svg>
                         </div>
@@ -133,7 +331,7 @@ export default async function CiudadPage({ params }: PageProps) {
                 <section className="bg-gray-100 py-24 sm:py-32" aria-labelledby="experiencias-heading" role="region">
                     <div className="mx-auto max-w-7xl px-6 lg:px-8">
                         <div className="mx-auto max-w-2xl sm:text-center">
-                            <h2 id="experiencias-heading" className="text-base/7 font-semibold text-sky-600">Experimenta {nombreDeCiudad}</h2>
+                            <h2 id="experiencias-heading" className="text-base/7 font-semibold text-sky-600">Guía Turística de {nombreDeCiudad}</h2>
                             <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl sm:text-balance">
                                 {subEncabezado}
                             </p>
@@ -145,11 +343,13 @@ export default async function CiudadPage({ params }: PageProps) {
                     <div className="relative pt-16">
                         <div className="mx-auto max-w-7xl px-6 lg:px-8">
                             <Image
-                                alt={imagenContenido.fields.description ?? `Imagen de ${nombreDeCiudad}`}
+                                alt={`${nombreDeCiudad} - ${imagenContenido.fields.description || 'Panorama de la ciudad y sus principales atracciones turísticas'}`}
                                 src={contentImage}
                                 width={1216}
                                 height={676}
                                 className="rounded-xl shadow-2xl ring-1 ring-gray-900/10"
+                                loading="lazy"
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1216px"
                             />
                         </div>
                     </div>
@@ -157,7 +357,7 @@ export default async function CiudadPage({ params }: PageProps) {
                 <section className="bg-white py-24 sm:py-32" aria-labelledby="actividades-heading" role="region">
                     <div className="mx-auto max-w-7xl px-6 lg:px-8">
                         <div className="mx-auto max-w-2xl lg:mx-0">
-                            <h2 id="actividades-heading" className="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl">¿Qué hacer en {nombreDeCiudad}?</h2>
+                            <h2 id="actividades-heading" className="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl">Las 10 Mejores Cosas que Hacer en {nombreDeCiudad} | Actividades Imperdibles</h2>
                             <p className="mt-6 text-lg/8 text-gray-600">
                                 {contenidoActividades}
                             </p>
@@ -174,7 +374,7 @@ export default async function CiudadPage({ params }: PageProps) {
                                         <h3 className="mt-6 text-lg/8 font-semibold text-gray-900 group-hover:underline group-focus-visible:underline">{actividad.fields.titulo}</h3>
                                         <p className="text-base/7 mb-4 text-gray-600">{actividad.fields.contenido}</p>
                                         {actividad.fields.url && (
-                                            <Link href={actividad.fields.url} className="cursor-pointer font-semibold text-sky-600 hover:text-sky-700 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600">
+                                            <Link href={actividad.fields.url} className="cursor-pointer font-semibold text-sky-600 hover:text-sky-700 group focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600">
                                                 Comprar Entradas <ArrowRightIcon className="h-4 w-4 inline-block transition shrink-0 text-sky-600 group-hover:text-sky-700 group-hover:translate-x-1" aria-hidden="true" />
                                             </Link>
                                         )}
@@ -187,7 +387,7 @@ export default async function CiudadPage({ params }: PageProps) {
                 <section className="bg-gray-100 py-24 sm:py-32" aria-labelledby="platillos-heading" role="region">
                     <div className="mx-auto max-w-7xl px-6 lg:px-8">
                         <div className="mx-auto max-w-2xl lg:mx-0">
-                            <h2 id="platillos-heading" className="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl">¿Qué comer en {nombreDeCiudad}?</h2>
+                            <h2 id="platillos-heading" className="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl">Gastronomía de {nombreDeCiudad}: Platillos Típicos y Dónde Comer</h2>
                             <p className="mt-6 text-lg/8 text-gray-600">
                                 {contenidoPlatillos}
                             </p>
@@ -212,8 +412,8 @@ export default async function CiudadPage({ params }: PageProps) {
                 <section className='bg-white py-24 sm:py-32' aria-labelledby="paquetes-heading" role="region">
                     <div className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 sm:pb-24 lg:px-8">
                         <div className="sm:flex sm:items-baseline sm:justify-between">
-                            <h2 id="paquetes-heading" className="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl">Nuestros paquetes a {nombreDeCiudad}</h2>
-                            <Link href={url} className="hidden text-sm font-semibold group text-sky-600 hover:text-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600 sm:block">
+                            <h2 id="paquetes-heading" className="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl">Paquetes de Viaje a {nombreDeCiudad} | Tours Todo Incluido</h2>
+                            <Link href={url} className="hidden text-sm font-semibold group text-sky-600 hover:text-sky-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600 sm:block">
                                 Ver todos los paquetes
                                 <ArrowRightIcon className="h-4 w-4 ml-2 inline-block transition group-hover:translate-x-1" aria-hidden="true" />
                             </Link>
@@ -224,7 +424,7 @@ export default async function CiudadPage({ params }: PageProps) {
                             ))}
                         </div>
                         <div className="mt-6 sm:hidden">
-                            <Link href={url} className="block text-sm font-semibold group text-sky-600 hover:text-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600">
+                            <Link href={url} className="block text-sm font-semibold group text-sky-600 hover:text-sky-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600">
                                 Ver todos los paquetes
                                 <ArrowRightIcon className="h-4 w-4 ml-2 inline-block transition group-hover:translate-x-1" aria-hidden="true" />
                             </Link>

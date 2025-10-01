@@ -5,7 +5,7 @@ const faqs = [
     {
         question: "¿Cómo puedo reservar un paquete?",
         answer:
-            "Para reservar un paquete, puedes hacerlo directamente en nuestra página web o via WhatsApp. En la página de cada paquete encontrarás un botón para cotizar. Si tienes alguna duda, no dudes en contactarnos.",
+            "Para reservar un paquete, puedes hacerlo via WhatsApp. En la página de cada paquete encontrarás un botón para cotizar. Si tienes alguna duda, no dudes en contactarnos.",
     },
     {
         question: "¿Qué incluyen los paquetes?",
