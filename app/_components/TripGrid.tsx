@@ -9,7 +9,6 @@ import { TypePaquete } from "../_types/contentful/Paquete"
 import ComboBox from "./Inputs/ComboBox"
 import { ComboBoxOption } from "../_types/input/ComboBoxOption"
 import { useSearchParams } from "next/navigation"
-import { toMoney } from "../_utils/toMoney"
 
 const sortOptions = [
     { name: 'Reciente' },

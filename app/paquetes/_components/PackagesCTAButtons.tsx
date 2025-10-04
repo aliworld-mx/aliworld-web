@@ -1,6 +1,6 @@
 'use client'
 
-import { ChatBubbleLeftEllipsisIcon, GlobeAmericasIcon } from '@heroicons/react/24/outline'
+import { GlobeAmericasIcon } from '@heroicons/react/24/outline'
 
 export default function PackagesCTAButtons() {
   return (

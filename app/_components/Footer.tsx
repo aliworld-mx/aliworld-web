@@ -1,6 +1,8 @@
 import Link from "next/link"
 import { JSX, SVGProps } from "react";
 import { PhoneIcon, EnvelopeIcon } from '@heroicons/react/24/outline';
+import Image from "next/image";
+import AliworldLogo from '../../public/aliworld-color.svg';
 
 const footerNavigation = {
     destinos: [
@@ -18,8 +20,8 @@ const footerNavigation = {
         { name: 'Cruceros', href: '/paquetes/cruceros' },
     ],
     servicios: [
-        { name: 'Hoteles', href: '/hoteles',  },
-        { name: 'Vuelos', href: '/vuelos',  },
+        { name: 'Hoteles', href: '/hoteles', },
+        { name: 'Vuelos', href: '/vuelos', },
         { name: 'Actividades', href: '/actividades' },
         { name: 'Paquetes de Viaje', href: '/paquetes' },
         { name: 'Promociones', href: '/promociones' },
@@ -82,70 +84,172 @@ const footerNavigation = {
 }
 
 export const Footer = () => (
-    <footer aria-labelledby="footer-heading" className="bg-gradient-to-br from-gray-900 via-gray-800 to-sky-900 text-white">
+    <footer aria-labelledby="footer-heading" className="relative bg-gradient-to-br from-neutral-900 via-neutral-800 to-primary-900 text-white overflow-hidden">
         <h2 id="footer-heading" className="sr-only">
             Información del sitio
         </h2>
-        
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="py-16 lg:py-20">
-                <div className="xl:grid xl:grid-cols-4 xl:gap-8">
-                    {/* Company Info */}
-                    <div className="xl:col-span-1 mb-12 xl:mb-0">
-                        <div className="space-y-6">
-                            <div>
-                                <h3 className="text-2xl font-bold text-white mb-4">
-                                    Aliworld
-                                </h3>
-                                <p className="text-gray-300 text-sm leading-relaxed">
-                                    Tu agencia de viajes de confianza. Descubre el mundo con nuestros paquetes de viaje, 
-                                    hoteles exclusivos y experiencias únicas.
-                                </p>
-                            </div>
-                            
-                            <div className="space-y-3">
-                                <div className="flex items-center space-x-3 text-sm text-gray-300">
-                                    <PhoneIcon className="h-5 w-5 text-sky-400 flex-shrink-0" />
-                                    <a href="https://wa.me/+523314331600" className="hover:text-sky-400 transition-colors">
-                                        +52 33 1433 1600
-                                    </a>
+
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-[0.03]">
+            <svg className="absolute inset-0 h-full w-full" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <pattern id="footer-pattern" x="0" y="0" width="120" height="120" patternUnits="userSpaceOnUse">
+                        <circle cx="60" cy="60" r="4" fill="currentColor" className="text-primary-400" />
+                        <circle cx="30" cy="30" r="3" fill="currentColor" className="text-secondary-400" />
+                        <circle cx="90" cy="30" r="2.5" fill="currentColor" className="text-accent-400" />
+                        <circle cx="30" cy="90" r="3.5" fill="currentColor" className="text-purple-400" />
+                        <circle cx="90" cy="90" r="2" fill="currentColor" className="text-primary-300" />
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#footer-pattern)" />
+            </svg>
+        </div>
+
+        {/* Floating Elements */}
+        <div className="absolute top-20 right-20 w-32 h-32 bg-gradient-to-br from-primary-500/20 to-secondary-500/20 rounded-full blur-xl animate-pulse"></div>
+        <div className="absolute bottom-20 left-20 w-40 h-40 bg-gradient-to-br from-accent-500/20 to-purple-500/20 rounded-full blur-xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 right-1/3 w-24 h-24 bg-gradient-to-br from-secondary-500/20 to-accent-500/20 rounded-full blur-xl animate-pulse delay-500"></div>
+
+        <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+            {/* Newsletter Section */}
+            <div className="py-12 border-b border-white/10">
+                <div className="bg-white/5 backdrop-blur-sm rounded-3xl p-8 lg:p-12">
+                    <div className="lg:flex lg:items-center lg:justify-between">
+                        <div className="lg:flex-1">
+                            <div className="flex items-center gap-3 mb-4">
+                                <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-secondary-600 rounded-xl flex items-center justify-center shadow-lg">
+                                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                    </svg>
                                 </div>
-                                <div className="flex items-center space-x-3 text-sm text-gray-300">
-                                    <EnvelopeIcon className="h-5 w-5 text-sky-400 flex-shrink-0" />
-                                    <a href="mailto:contacto@aliworld.mx" className="hover:text-sky-400 transition-colors">
-                                        contacto@aliworld.mx
-                                    </a>
+                                <div>
+                                    <h3 className="text-2xl font-bold bg-gradient-to-r from-white to-neutral-200 bg-clip-text text-transparent">
+                                        ¿Listo para tu próxima aventura?
+                                    </h3>
+                                    <p className="text-neutral-300 mt-1">
+                                        Recibe ofertas exclusivas y las mejores promociones de viaje
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="mt-6 lg:mt-0 lg:ml-8">
+                            <Link
+                                href="/contacto"
+                                className="inline-flex items-center gap-3 bg-gradient-to-r from-primary-600 to-secondary-600 hover:from-primary-700 hover:to-secondary-700 text-white font-semibold px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-primary-500/50"
+                            >
+                                <span>Contáctanos</span>
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                </svg>
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="py-20">
+                <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
+                    {/* Company Info */}
+                    <div className="lg:col-span-2 space-y-8">
+                        <div>
+                            <div className="flex items-center gap-3 mb-6 bg-white mx-auto backdrop-blur-sm rounded-xl px-4 py-2 border border-white/10 w-max">
+                                <Image
+                                    alt="Logo de Aliworld"
+                                    src={AliworldLogo}
+                                    width={224}
+                                    height={112}
+                                    className="h-20 sm:h-24 w-auto transition-transform duration-300"
+                                />
+                            </div>
+                            <p className="text-neutral-300 text-lg leading-relaxed mb-8">
+                                Tu agencia de viajes de confianza. Descubre el mundo con nuestros paquetes de viaje premium,
+                                hoteles exclusivos y experiencias únicas que transformarán tus vacaciones en recuerdos inolvidables.
+                            </p>
+                        </div>
+
+                        {/* Contact Info */}
+                        <div className="space-y-4">
+                            <div className="flex items-center gap-4 group">
+                                <div className="w-10 h-10 bg-gradient-to-br from-primary-500/20 to-secondary-500/20 backdrop-blur-sm rounded-xl flex items-center justify-center border border-white/10 group-hover:border-primary-400/50 transition-colors duration-300">
+                                    <PhoneIcon className="h-5 w-5 text-primary-400 group-hover:text-primary-300 transition-colors duration-300" />
+                                </div>
+                                <a
+                                    href="https://wa.me/+523314331600"
+                                    className="text-neutral-300 hover:text-primary-400 transition-colors duration-300 font-medium group-hover:text-primary-300"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    +52 33 1433 1600
+                                </a>
+                            </div>
+                            <div className="flex items-center gap-4 group">
+                                <div className="w-10 h-10 bg-gradient-to-br from-primary-500/20 to-secondary-500/20 backdrop-blur-sm rounded-xl flex items-center justify-center border border-white/10 group-hover:border-primary-400/50 transition-colors duration-300">
+                                    <EnvelopeIcon className="h-5 w-5 text-primary-400 group-hover:text-primary-300 transition-colors duration-300" />
+                                </div>
+                                <a
+                                    href="mailto:contacto@aliworld.mx"
+                                    className="text-neutral-300 hover:text-primary-400 transition-colors duration-300 font-medium group-hover:text-primary-300"
+                                >
+                                    contacto@aliworld.mx
+                                </a>
+                            </div>
+                        </div>
+
+                        {/* Trust Badges */}
+                        <div className="flex flex-wrap gap-4 pt-6">
+                            <div className="bg-white/5 backdrop-blur-sm rounded-xl px-4 py-2 border border-white/10">
+                                <div className="flex items-center gap-2">
+                                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                                    <span className="text-sm font-medium text-neutral-300">Disponible 24/7</span>
+                                </div>
+                            </div>
+                            <div className="bg-white/5 backdrop-blur-sm rounded-xl px-4 py-2 border border-white/10">
+                                <div className="flex items-center gap-2">
+                                    <svg className="w-4 h-4 text-primary-400" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                                    </svg>
+                                    <span className="text-sm font-medium text-neutral-300">Mejor precio garantizado</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     {/* Navigation Links */}
-                    <div className="xl:col-span-3">
+                    <div className="lg:col-span-3">
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
-                            
+
                             {/* Destinos */}
                             <div>
-                                <h3 className="text-lg font-semibold text-sky-400 mb-6 flex items-center">
-                                    Destinos Populares
-                                </h3>
+                                <div className="flex items-center gap-3 mb-8">
+                                    <div className="w-8 h-8 bg-gradient-to-br from-primary-500 to-secondary-600 rounded-lg flex items-center justify-center">
+                                        <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                    </div>
+                                    <h3 className="text-lg font-bold text-white">
+                                        Destinos Populares
+                                    </h3>
+                                </div>
                                 <ul role="list" className="space-y-3">
                                     {footerNavigation.destinos.slice(0, 8).map((item) => (
                                         <li key={item.name}>
-                                            <Link 
-                                                href={item.href} 
-                                                className="text-gray-300 hover:text-sky-400 transition-colors duration-200 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-sky-500 rounded"
+                                            <Link
+                                                href={item.href}
+                                                className="text-neutral-300 hover:text-primary-400 transition-colors duration-300 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary-500/50 rounded px-2 py-1 -mx-2 hover:bg-white/5"
                                             >
                                                 {item.name}
                                             </Link>
                                         </li>
                                     ))}
-                                    <li>
-                                        <Link 
-                                            href="/paquetes" 
-                                            className="text-gray-300 hover:text-sky-400 transition-colors text-sm font-semibold"
+                                    <li className="pt-2">
+                                        <Link
+                                            href="/paquetes"
+                                            className="inline-flex items-center gap-2 text-primary-400 hover:text-primary-300 transition-colors text-sm font-semibold group"
                                         >
-                                            Ver todos los destinos →
+                                            <span>Ver todos los destinos</span>
+                                            <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                            </svg>
                                         </Link>
                                     </li>
                                 </ul>
@@ -153,15 +257,22 @@ export const Footer = () => (
 
                             {/* Servicios */}
                             <div>
-                                <h3 className="text-lg font-semibold text-sky-400 mb-6 flex items-center">
-                                    Nuestros Servicios
-                                </h3>
+                                <div className="flex items-center gap-3 mb-8">
+                                    <div className="w-8 h-8 bg-gradient-to-br from-secondary-500 to-accent-600 rounded-lg flex items-center justify-center">
+                                        <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                                        </svg>
+                                    </div>
+                                    <h3 className="text-lg font-bold text-white">
+                                        Nuestros Servicios
+                                    </h3>
+                                </div>
                                 <ul role="list" className="space-y-3">
                                     {footerNavigation.servicios.map((item) => (
                                         <li key={item.name}>
-                                            <Link 
-                                                href={item.href} 
-                                                className="text-gray-300 hover:text-sky-400 transition-colors duration-200 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-sky-500 rounded"
+                                            <Link
+                                                href={item.href}
+                                                className="text-neutral-300 hover:text-secondary-400 transition-colors duration-300 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-secondary-500/50 rounded px-2 py-1 -mx-2 hover:bg-white/5"
                                             >
                                                 {item.name}
                                             </Link>
@@ -170,16 +281,24 @@ export const Footer = () => (
                                 </ul>
                             </div>
 
+                            {/* Información */}
                             <div>
-                                <h3 className="text-lg font-semibold text-sky-400 mb-6 flex items-center">
-                                    Información
-                                </h3>
+                                <div className="flex items-center gap-3 mb-8">
+                                    <div className="w-8 h-8 bg-gradient-to-br from-accent-500 to-purple-600 rounded-lg flex items-center justify-center">
+                                        <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                    </div>
+                                    <h3 className="text-lg font-bold text-white">
+                                        Información
+                                    </h3>
+                                </div>
                                 <ul role="list" className="space-y-3">
                                     {footerNavigation.empresa.map((item) => (
                                         <li key={item.name}>
-                                            <Link 
-                                                href={item.href} 
-                                                className="text-gray-300 hover:text-sky-400 transition-colors duration-200 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-sky-500 rounded"
+                                            <Link
+                                                href={item.href}
+                                                className="text-neutral-300 hover:text-accent-400 transition-colors duration-300 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-accent-500/50 rounded px-2 py-1 -mx-2 hover:bg-white/5"
                                             >
                                                 {item.name}
                                             </Link>
@@ -192,29 +311,35 @@ export const Footer = () => (
                 </div>
             </div>
 
-            <div className="border-t border-gray-700/50 py-8 md:flex md:items-center md:justify-between">
-                <div className="md:order-1 mb-6 md:mb-0">
-                    <p className="text-sm text-gray-400">
-                        2025 Aliworld. Todos los derechos reservados. 
-                    </p>
-                </div>
-                
-                <div className="md:order-2">
-                    <div className="flex space-x-4 items-center">
-                        <span className="text-sm text-gray-400 mr-3 hidden sm:block">Síguenos:</span>
-                        {footerNavigation.sociales.map((item) => (
-                            <a
-                                key={item.name}
-                                href={item.href}
-                                className="text-gray-400 hover:text-sky-400 transition-all duration-200 transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-sky-500 rounded p-1"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                aria-label={`Síguenos en ${item.name} (se abre en nueva pestaña)`}
-                            >
-                                <span className="sr-only">{item.name}</span>
-                                <item.icon aria-hidden="true" className="h-6 w-6" />
-                            </a>
-                        ))}
+            {/* Bottom Section */}
+            <div className="border-t border-white/10 py-8">
+                <div className="lg:flex lg:items-center lg:justify-between">
+                    <div className="mb-6 lg:mb-0">
+                        <p className="text-sm text-neutral-400">
+                            © 2025 Aliworld. Todos los derechos reservados.
+                        </p>
+                        <p className="text-xs text-neutral-500 mt-1">
+                            Hecho con ❤️ para viajeros apasionados
+                        </p>
+                    </div>
+
+                    <div className="flex items-center gap-6">
+                        <span className="text-sm text-neutral-400 hidden sm:block">Síguenos:</span>
+                        <div className="flex gap-3">
+                            {footerNavigation.sociales.map((item) => (
+                                <a
+                                    key={item.name}
+                                    href={item.href}
+                                    className="group relative w-10 h-10 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 hover:border-primary-400/50 flex items-center justify-center transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary-500/50"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label={`Síguenos en ${item.name} (se abre en nueva pestaña)`}
+                                >
+                                    <span className="sr-only">{item.name}</span>
+                                    <item.icon aria-hidden="true" className="h-5 w-5 text-neutral-400 group-hover:text-primary-400 transition-colors duration-300" />
+                                </a>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>

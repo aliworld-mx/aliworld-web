@@ -112,7 +112,7 @@ const ComboBox = ({
                                     value={option}
                                     className="group relative cursor-pointer select-none py-3 px-4 text-neutral-900 hover:bg-primary-50 data-selected:bg-primary-100 data-focus:bg-primary-50 transition-colors duration-150"
                                 >
-                                    {({ focus, selected }) => (
+                                    {({ focus }) => (
                                         <div className="flex items-center justify-between">
                                             <span
                                                 className={classNames(

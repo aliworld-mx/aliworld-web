@@ -1,4 +1,4 @@
-import { SunIcon, MoonIcon, MapPinIcon, GlobeAmericasIcon, CalendarDaysIcon, CheckBadgeIcon, StarIcon } from '@heroicons/react/20/solid'
+import { SunIcon, MoonIcon, MapPinIcon, GlobeAmericasIcon, CalendarDaysIcon, CheckBadgeIcon } from '@heroicons/react/20/solid'
 import { ClockIcon } from '@heroicons/react/24/outline'
 import { getTrip } from '@/app/lib/getTrip'
 import { toMoney } from '@/app/_utils/toMoney'

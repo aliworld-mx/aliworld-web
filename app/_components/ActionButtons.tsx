@@ -36,8 +36,7 @@ export const ActionButtons = ({ experience }: ActionButtonsProps) => {
                 setShowShareTooltip(true)
                 setTimeout(() => setShowShareTooltip(false), 2000)
             }
-        } catch (error) {
-            // Si falla, intentar copiar al clipboard
+        } catch {
             try {
                 await navigator.clipboard.writeText(shareData.url)
                 setShowShareTooltip(true)

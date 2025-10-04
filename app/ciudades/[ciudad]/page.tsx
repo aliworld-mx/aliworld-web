@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { Breadcrumbs } from '@/app/_components/Breadcrumbs'
-import { ArrowRightIcon } from '@heroicons/react/20/solid'
+import { LockClosedIcon, MapPinIcon, StarIcon, HeartIcon } from '@heroicons/react/20/solid'
 import Socials from '@/app/_components/Socials'
 import { getGuide } from '@/app/lib/getGuide'
 import Link from 'next/link'
@@ -9,6 +9,7 @@ import { getTripsByCity } from '@/app/lib/getTripsByCity'
 import { Catalog } from '@/app/_components/Catalog'
 import { getBlogPostsByCity } from '@/app/lib/getBlogPostsByCity'
 import { TripGridItem } from '@/app/_components/TripGridItem'
+import { ChatBubbleBottomCenterIcon } from '@heroicons/react/24/solid'
 
 export const revalidate = 2629746; // 1 mes en segundos
 
@@ -19,17 +20,17 @@ interface PageProps {
 export const generateMetadata = async ({ params }: PageProps): Promise<Metadata> => {
     const { ciudad } = await params;
     const guia = await getGuide(ciudad);
-    const { nombreDeCiudad, imagenContenido, slug, encabezado, descripcion, actividades, platillos } = guia.fields;
+    const { nombreDeCiudad, imagenContenido, slug, actividades, platillos } = guia.fields;
     const url = imagenContenido.fields.file?.url;
     const imageUrl = `https:${url}`;
-    
+
     // Keywords dinámicas basadas en contenido
     const activityKeywords = actividades.map(a => a.fields.titulo.toLowerCase()).slice(0, 5);
     const foodKeywords = platillos.map(p => p.fields.titulo.toLowerCase()).slice(0, 5);
-    
+
     const dynamicKeywords = [
         'viajes', 'turismo', 'qué hacer', 'guía de viaje', 'destinos',
-        nombreDeCiudad.toLowerCase(), 
+        nombreDeCiudad.toLowerCase(),
         slug,
         'actividades', 'comida típica', 'lugares turísticos',
         'paquetes de viaje', 'tours', 'hoteles', 'reservaciones',
@@ -38,7 +39,7 @@ export const generateMetadata = async ({ params }: PageProps): Promise<Metadata>
         ...foodKeywords,
         'aliworld'
     ];
-    
+
     // Descripción enriquecida para SEO
     const enhancedDescription = `Guía completa de ${nombreDeCiudad}: ¿Qué hacer, dónde comer y qué visitar? Descubre las mejores actividades, platillos típicos y consejos para tu viaje. Encuentra paquetes turísticos desde ${nombreDeCiudad} con Aliworld.`;
 
@@ -274,254 +275,746 @@ export default async function CiudadPage({ params }: PageProps) {
     return (
         <>
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
-            
+
             <main id="ciudad-main" tabIndex={-1} className="bg-white">
-                <Breadcrumbs breadcrumbs={breadcrumbs} />
-                <div className="relative isolate">
-                    <div className="mx-auto max-w-7xl px-6 pb-16 pt-4 lg:flex lg:items-center lg:gap-x-10 lg:px-8">
-                        <div className="mx-auto max-w-2xl lg:mx-0 lg:flex-auto">
-                            <h1 className="mt-10 text-5xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-7xl">
-                                {encabezado}
-                            </h1>
-                            <p className="mt-8 text-lg font-medium text-pretty text-gray-500 sm:text-xl/8">
-                                {descripcion} <Link href="/ciudades" className="text-sky-600 hover:text-sky-700 underline">Explora más destinos</Link> en nuestra guía completa de viajes.
-                            </p>
-                            <div className="mt-10 flex items-center gap-x-6">
-                                <Link
-                                    href={url}
-                                    className="rounded-md bg-sky-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-sky-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600"
-                                >
-                                    Ver Paquetes de Viaje a {nombreDeCiudad}
-                                </Link>
+                {/* Hero Section Moderno */}
+                <section className="relative overflow-hidden bg-gradient-to-br from-primary-50 via-secondary-50 to-accent-50 min-h-screen flex items-center">
+                    {/* Background Pattern */}
+                    <div className="absolute inset-0 opacity-[0.03]">
+                        <svg className="absolute inset-0 h-full w-full" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <pattern id="city-pattern" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
+                                    <circle cx="40" cy="40" r="3" fill="currentColor" className="text-primary-600" />
+                                    <circle cx="20" cy="20" r="1.5" fill="currentColor" className="text-secondary-600" />
+                                    <circle cx="60" cy="20" r="2" fill="currentColor" className="text-accent-600" />
+                                    <circle cx="20" cy="60" r="1" fill="currentColor" className="text-primary-500" />
+                                    <circle cx="60" cy="60" r="2.5" fill="currentColor" className="text-secondary-500" />
+                                </pattern>
+                            </defs>
+                            <rect width="100%" height="100%" fill="url(#city-pattern)" />
+                        </svg>
+                    </div>
+
+                    {/* Floating Elements */}
+                    <div className="absolute top-20 right-20 w-32 h-32 bg-gradient-to-br from-secondary-400 to-secondary-500 rounded-full opacity-10 animate-pulse"></div>
+                    <div className="absolute bottom-20 left-20 w-24 h-24 bg-gradient-to-br from-accent-400 to-accent-500 rounded-full opacity-10 animate-pulse delay-1000"></div>
+                    <div className="absolute top-1/3 left-10 w-16 h-16 bg-gradient-to-br from-primary-400 to-primary-500 rounded-full opacity-10 animate-pulse delay-500"></div>
+
+                    <div className="relative z-10 mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                            {/* Content Column */}
+                            <header className="text-center lg:text-left">
+                                {/* City Badge */}
+                                <Breadcrumbs breadcrumbs={breadcrumbs} />
+                                <div className="inline-flex items-center gap-3 bg-white/90 backdrop-blur-sm rounded-full px-6 py-3 shadow-lg border border-white/50 mb-8">
+                                    <div className="w-8 h-8 bg-gradient-to-br from-primary-500 to-primary-600 rounded-full flex items-center justify-center">
+                                        <MapPinIcon className="w-4 h-4 text-white" />
+                                    </div>
+                                    <span className="text-primary-600 font-semibold text-lg">Guía de {nombreDeCiudad}</span>
+                                </div>
+
+                                {/* Main Title */}
+                                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight text-neutral-900 mb-8 leading-[0.9]">
+                                    <span className="bg-gradient-to-r from-primary-600 via-secondary-600 to-accent-600 bg-clip-text text-transparent">
+                                        {encabezado}
+                                    </span>
+                                </h1>
+
+                                {/* Decorative Line */}
+                                <div className="h-1 w-24 bg-gradient-to-r from-primary-500 via-secondary-500 to-accent-500 rounded-full mx-auto lg:mx-0 mb-8"></div>
+
+                                {/* Description */}
+                                <p className="text-xl text-neutral-600 mb-10 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                                    {descripcion}
+                                </p>
+
+                                {/* CTA Buttons */}
+                                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                                    <Link
+                                        href={url}
+                                        className="group inline-flex items-center justify-center gap-3 bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-bold py-4 px-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                                    >
+                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                                        </svg>
+                                        <span>Explorar Paquetes de Viaje</span>
+                                        <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                        </svg>
+                                    </Link>
+
+                                    <Link
+                                        href="/ciudades"
+                                        className="group inline-flex items-center justify-center gap-3 bg-white/90 backdrop-blur-sm hover:bg-white text-neutral-700 hover:text-primary-600 font-semibold py-4 px-8 rounded-2xl shadow-lg hover:shadow-xl border border-white/50 transition-all duration-300"
+                                    >
+                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                        <span>Más Destinos</span>
+                                    </Link>
+                                </div>
+                            </header>
+
+                            {/* Image Column */}
+                            <div className="relative">
+                                {/* Decorative Elements */}
+                                <div className="absolute -top-8 -right-8 w-32 h-32 bg-gradient-to-br from-accent-200 to-accent-300 rounded-full opacity-50 blur-xl"></div>
+                                <div className="absolute -bottom-8 -left-8 w-24 h-24 bg-gradient-to-br from-secondary-200 to-secondary-300 rounded-full opacity-50 blur-xl"></div>
+
+                                {/* Main Image Container */}
+                                <div className="relative bg-white/80 backdrop-blur-sm rounded-3xl p-3 shadow-2xl border border-white/50">
+                                    <div className="relative rounded-2xl overflow-hidden">
+                                        <Image
+                                            alt={`Guía turística de ${nombreDeCiudad} - ${imagenEncabezado.fields.description || 'Lugares imperdibles para visitar'}`}
+                                            src={headerImage}
+                                            width={600}
+                                            height={400}
+                                            priority={true}
+                                            className="object-cover w-full h-[400px] lg:h-[500px]"
+                                            sizes="(max-width: 768px) 100vw, 50vw"
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
+
+                                        {/* Image Overlay Badge */}
+                                        <div className="absolute bottom-6 left-6 right-6">
+                                            <div className="bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-lg">
+                                                <div className="flex items-center justify-between">
+                                                    <div className="flex items-center gap-3">
+                                                        <div className="flex items-center">
+                                                            {[...Array(5)].map((_, i) => (
+                                                                <svg key={i} className="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                                                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                                                </svg>
+                                                            ))}
+                                                        </div>
+                                                        <span className="text-sm font-medium text-neutral-700">Destino Recomendado</span>
+                                                    </div>
+                                                    <div className="text-right">
+                                                        <p className="text-xs text-neutral-600">Guía Completa</p>
+                                                        <p className="text-sm font-bold text-primary-600">2025</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div className="mt-16 sm:mt-24 lg:mt-0 lg:shrink-0 lg:grow">
-                            <svg role="img" viewBox="0 0 366 729" className="mx-auto w-91.5 max-w-full drop-shadow-2xl">
-                                <title>{imagenEncabezado.fields.description}</title>
-                                <defs>
-                                    <clipPath id="2ade4387-9c63-4fc4-b754-10e687a0d332">
-                                        <rect rx={36} width={316} height={684} />
-                                    </clipPath>
-                                </defs>
-                                <path
-                                    d="M363.315 64.213C363.315 22.99 341.312 1 300.092 1H66.751C25.53 1 3.528 22.99 3.528 64.213v44.68l-.857.143A2 2 0 0 0 1 111.009v24.611a2 2 0 0 0 1.671 1.973l.95.158a2.26 2.26 0 0 1-.093.236v26.173c.212.1.398.296.541.643l-1.398.233A2 2 0 0 0 1 167.009v47.611a2 2 0 0 0 1.671 1.973l1.368.228c-.139.319-.314.533-.511.653v16.637c.221.104.414.313.56.689l-1.417.236A2 2 0 0 0 1 237.009v47.611a2 2 0 0 0 1.671 1.973l1.347.225c-.135.294-.302.493-.49.607v377.681c0 41.213 22 63.208 63.223 63.208h95.074c.947-.504 2.717-.843 4.745-.843l.141.001h.194l.086-.001 33.704.005c1.849.043 3.442.37 4.323.838h95.074c41.222 0 63.223-21.999 63.223-63.212v-394.63c-.259-.275-.48-.796-.63-1.47l-.011-.133 1.655-.276A2 2 0 0 0 366 266.62v-77.611a2 2 0 0 0-1.671-1.973l-1.712-.285c.148-.839.396-1.491.698-1.811V64.213Z"
-                                    fill="#4B5563"
-                                />
-
-                                <foreignObject
-                                    width={316}
-                                    height={685}
-                                    clipPath="url(#2ade4387-9c63-4fc4-b754-10e687a0d332)"
-                                    transform="translate(24 24)"
-                                >
-                                    <Image 
-                                        alt={`Guía turística de ${nombreDeCiudad} - ${imagenEncabezado.fields.description || 'Lugares imperdibles para visitar'}`} 
-                                        src={headerImage} 
-                                        width={316} 
-                                        height={685} 
-                                        priority={true}
-                                        className="object-cover w-full h-full"
-                                        sizes="(max-width: 768px) 316px, 316px"
-                                    />
-                                </foreignObject>
-                            </svg>
-                        </div>
                     </div>
-                </div>
-                <section className="bg-gray-100 py-24 sm:py-32" aria-labelledby="experiencias-heading" role="region">
-                    <div className="mx-auto max-w-7xl px-6 lg:px-8">
-                        <div className="mx-auto max-w-2xl sm:text-center">
-                            <h2 id="experiencias-heading" className="text-base/7 font-semibold text-sky-600">Guía Turística de {nombreDeCiudad}</h2>
-                            <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl sm:text-balance">
-                                {subEncabezado}
-                            </p>
-                            <p className="mt-6 text-lg/8 text-gray-600">
+                </section>
+                {/* Experience Section con diseño mejorado */}
+                <section className="relative py-24 sm:py-32 bg-gradient-to-br from-neutral-50 to-neutral-100 overflow-hidden" aria-labelledby="experiencias-heading" role="region">
+                    {/* Background Elements */}
+                    <div className="absolute inset-0 opacity-[0.02]">
+                        <svg className="absolute inset-0 h-full w-full" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <pattern id="experience-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+                                    <circle cx="50" cy="50" r="4" fill="currentColor" className="text-primary-600" />
+                                    <circle cx="25" cy="25" r="2" fill="currentColor" className="text-secondary-600" />
+                                    <circle cx="75" cy="25" r="3" fill="currentColor" className="text-accent-600" />
+                                </pattern>
+                            </defs>
+                            <rect width="100%" height="100%" fill="url(#experience-pattern)" />
+                        </svg>
+                    </div>
+
+                    <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+                        {/* Header mejorado */}
+                        <header className="mx-auto max-w-4xl text-center mb-20">
+                            {/* Badge */}
+                            <div className="inline-flex items-center gap-3 bg-white/90 backdrop-blur-sm rounded-full px-6 py-3 shadow-lg border border-white/50 mb-8">
+                                <div className="w-8 h-8 bg-gradient-to-br from-accent-500 to-accent-600 rounded-full flex items-center justify-center">
+                                    <HeartIcon className="w-4 h-4 text-white" />
+                                </div>
+                                <span className="text-accent-600 font-semibold text-lg">Guía Turística de {nombreDeCiudad}</span>
+                            </div>
+
+                            <h2 id="experiencias-heading" className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-neutral-900 mb-8 leading-tight">
+                                <span className="bg-gradient-to-r from-accent-600 via-primary-600 to-secondary-600 bg-clip-text text-transparent">
+                                    {subEncabezado}
+                                </span>
+                            </h2>
+
+                            <div className="h-1 w-24 bg-gradient-to-r from-accent-500 via-primary-500 to-secondary-500 rounded-full mx-auto mb-8"></div>
+
+                            <p className="text-xl text-neutral-600 leading-relaxed">
                                 {contenido}
                             </p>
-                        </div>
-                    </div>
-                    <div className="relative pt-16">
-                        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-                            <Image
-                                alt={`${nombreDeCiudad} - ${imagenContenido.fields.description || 'Panorama de la ciudad y sus principales atracciones turísticas'}`}
-                                src={contentImage}
-                                width={1216}
-                                height={676}
-                                className="rounded-xl shadow-2xl ring-1 ring-gray-900/10"
-                                loading="lazy"
-                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1216px"
-                            />
+                        </header>
+
+                        {/* Enhanced Image Section */}
+                        <div className="relative mb-20">
+                            {/* Decorative Elements */}
+                            <div className="absolute -top-10 -left-10 w-40 h-40 bg-gradient-to-br from-primary-200 to-primary-300 rounded-full opacity-30 blur-2xl"></div>
+                            <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-gradient-to-br from-secondary-200 to-secondary-300 rounded-full opacity-30 blur-2xl"></div>
+
+                            <div className="relative mx-auto max-w-5xl">
+                                <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-4 shadow-2xl border border-white/50">
+                                    <div className="relative rounded-2xl overflow-hidden">
+                                        <Image
+                                            alt={`${nombreDeCiudad} - ${imagenContenido.fields.description || 'Panorama de la ciudad y sus principales atracciones turísticas'}`}
+                                            src={contentImage}
+                                            width={1216}
+                                            height={676}
+                                            className="w-full h-[300px] sm:h-[400px] lg:h-[500px] object-cover"
+                                            loading="lazy"
+                                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1216px"
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>
-                <section className="bg-white py-24 sm:py-32" aria-labelledby="actividades-heading" role="region">
+                {/* Activities Section Rediseñada */}
+                <section className="relative py-24 sm:py-32 bg-white overflow-hidden" aria-labelledby="actividades-heading" role="region">
                     <div className="mx-auto max-w-7xl px-6 lg:px-8">
-                        <div className="mx-auto max-w-2xl lg:mx-0">
-                            <h2 id="actividades-heading" className="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl">Las 10 Mejores Cosas que Hacer en {nombreDeCiudad} | Actividades Imperdibles</h2>
-                            <p className="mt-6 text-lg/8 text-gray-600">
+                        {/* Header Section */}
+                        <header className="mx-auto max-w-4xl text-center mb-20">
+                            {/* Activity Badge */}
+                            <div className="inline-flex items-center gap-3 bg-gradient-to-r from-primary-50 to-secondary-50 rounded-full px-6 py-3 shadow-lg border border-primary-200/50 mb-8">
+                                <div className="w-8 h-8 bg-gradient-to-br from-primary-500 to-primary-600 rounded-full flex items-center justify-center">
+                                    <MapPinIcon className="w-4 h-4 text-white" />
+                                </div>
+                                <span className="text-primary-700 font-semibold text-lg">Actividades Imperdibles</span>
+                            </div>
+
+                            <h2 id="actividades-heading" className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-neutral-900 mb-8 leading-tight">
+                                Las <span className="bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">Mejores Experiencias</span> en {nombreDeCiudad}
+                            </h2>
+
+                            <div className="h-1 w-24 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full mx-auto mb-8"></div>
+
+                            <p className="text-xl text-neutral-600 leading-relaxed">
                                 {contenidoActividades}
                             </p>
-                        </div>
-                        <ul
-                            className="mx-auto mt-20 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 list-none lg:mx-0 lg:max-w-none lg:grid-cols-3"
-                            aria-label={`Actividades recomendadas en ${nombreDeCiudad}`}
-                        >
-                            {actividades.map((actividad) => {
+                        </header>
+
+                        {/* Enhanced Activities Grid */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" aria-label={`Actividades recomendadas en ${nombreDeCiudad}`}>
+                            {actividades.map((actividad, index) => {
                                 const activityImage = `https:${actividad.fields.imagen?.fields?.file?.url}`;
                                 return (
-                                    <li key={actividad.sys.id} className='m-0 list-none group outline-none focus-within:ring-2 focus-within:ring-sky-600 rounded-2xl transition'>
-                                        <Image alt={actividad.fields.imagen.fields.description ?? `Actividad en ${nombreDeCiudad}`} src={activityImage} className="aspect-3/2 w-full h-[202px] rounded-2xl object-cover lg:h-[242px] group-hover:opacity-80 group-focus-visible:opacity-80 transition duration-300" width={384} height={242} />
-                                        <h3 className="mt-6 text-lg/8 font-semibold text-gray-900 group-hover:underline group-focus-visible:underline">{actividad.fields.titulo}</h3>
-                                        <p className="text-base/7 mb-4 text-gray-600">{actividad.fields.contenido}</p>
-                                        {actividad.fields.url && (
-                                            <Link href={actividad.fields.url} className="cursor-pointer font-semibold text-sky-600 hover:text-sky-700 group focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600">
-                                                Comprar Entradas <ArrowRightIcon className="h-4 w-4 inline-block transition shrink-0 text-sky-600 group-hover:text-sky-700 group-hover:translate-x-1" aria-hidden="true" />
-                                            </Link>
-                                        )}
-                                    </li>
+                                    <article key={actividad.sys.id} className="group relative bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-neutral-100 hover:border-primary-200 transform hover:-translate-y-2">
+                                        {/* Activity Number Badge */}
+                                        <div className="absolute top-4 left-4 z-20 w-10 h-10 bg-gradient-to-br from-primary-600 to-primary-700 rounded-full flex items-center justify-center shadow-lg">
+                                            <span className="text-white font-bold text-sm">{index + 1}</span>
+                                        </div>
+
+                                        {/* Image Container */}
+                                        <div className="relative overflow-hidden">
+                                            <Image
+                                                alt={`${actividad.fields.titulo} - ${actividad.fields.imagen.fields.description ?? `Actividad en ${nombreDeCiudad}`}`}
+                                                src={activityImage}
+                                                className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700"
+                                                width={400}
+                                                height={256}
+                                                loading="lazy"
+                                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                            />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                        </div>
+
+                                        {/* Content */}
+                                        <div className="p-6">
+                                            <h3 className="text-xl font-bold text-neutral-900 mb-3 group-hover:text-primary-600 transition-colors duration-300">
+                                                {actividad.fields.titulo}
+                                            </h3>
+                                            <p className="text-neutral-600 mb-6 leading-relaxed line-clamp-3">
+                                                {actividad.fields.contenido}
+                                            </p>
+
+                                            {actividad.fields.url && (
+                                                <Link
+                                                    href={actividad.fields.url}
+                                                    className="inline-flex items-center gap-2 bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-semibold px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 group/button"
+                                                >
+                                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" />
+                                                    </svg>
+                                                    <span>Reservar Ahora</span>
+                                                    <svg className="w-4 h-4 group-hover/button:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                                    </svg>
+                                                </Link>
+                                            )}
+                                        </div>
+
+                                        {/* Decorative Elements */}
+                                        <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-secondary-200 to-secondary-300 rounded-full -translate-y-10 translate-x-10 opacity-20 group-hover:opacity-40 transition-opacity duration-500"></div>
+                                    </article>
                                 )
                             })}
-                        </ul>
+                        </div>
                     </div>
                 </section>
-                <section className="bg-gray-100 py-24 sm:py-32" aria-labelledby="platillos-heading" role="region">
-                    <div className="mx-auto max-w-7xl px-6 lg:px-8">
-                        <div className="mx-auto max-w-2xl lg:mx-0">
-                            <h2 id="platillos-heading" className="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl">Gastronomía de {nombreDeCiudad}: Platillos Típicos y Dónde Comer</h2>
-                            <p className="mt-6 text-lg/8 text-gray-600">
+                {/* Gastronomy Section Rediseñada */}
+                <section className="relative py-24 sm:py-32 bg-gradient-to-br from-secondary-50 to-accent-50 overflow-hidden" aria-labelledby="platillos-heading" role="region">
+                    {/* Background Pattern */}
+                    <div className="absolute inset-0 opacity-[0.02]">
+                        <svg className="absolute inset-0 h-full w-full" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <pattern id="food-pattern" x="0" y="0" width="120" height="120" patternUnits="userSpaceOnUse">
+                                    <circle cx="60" cy="60" r="5" fill="currentColor" className="text-secondary-600" />
+                                    <circle cx="30" cy="30" r="3" fill="currentColor" className="text-accent-600" />
+                                    <circle cx="90" cy="30" r="2" fill="currentColor" className="text-primary-600" />
+                                    <circle cx="30" cy="90" r="4" fill="currentColor" className="text-secondary-500" />
+                                    <circle cx="90" cy="90" r="2.5" fill="currentColor" className="text-accent-500" />
+                                </pattern>
+                            </defs>
+                            <rect width="100%" height="100%" fill="url(#food-pattern)" />
+                        </svg>
+                    </div>
+
+                    <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+                        {/* Header Section */}
+                        <header className="mx-auto max-w-4xl text-center mb-20">
+                            {/* Food Badge */}
+                            <div className="inline-flex items-center gap-3 bg-white/90 backdrop-blur-sm rounded-full px-6 py-3 shadow-lg border border-white/50 mb-8">
+                                <div className="w-8 h-8 bg-gradient-to-br from-secondary-500 to-secondary-600 rounded-full flex items-center justify-center">
+                                    <StarIcon className="w-4 h-4 text-white" />
+                                </div>
+                                <span className="text-secondary-700 font-semibold text-lg">Sabores Auténticos</span>
+                            </div>
+
+                            <h2 id="platillos-heading" className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-neutral-900 mb-8 leading-tight">
+                                <span className="bg-gradient-to-r from-secondary-600 to-accent-600 bg-clip-text text-transparent">Gastronomía</span> de {nombreDeCiudad}
+                            </h2>
+
+                            <div className="h-1 w-24 bg-gradient-to-r from-secondary-500 to-accent-500 rounded-full mx-auto mb-8"></div>
+
+                            <p className="text-xl text-neutral-600 leading-relaxed">
                                 {contenidoPlatillos}
                             </p>
-                        </div>
-                        <ul
-                            className="mx-auto mt-20 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 list-none lg:mx-0 lg:max-w-none lg:grid-cols-3"
-                            aria-label={`Platillos típicos de ${nombreDeCiudad}`}
-                        >
-                            {platillos.map((platillo) => {
+                        </header>
+
+                        {/* Enhanced Food Grid */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" aria-label={`Platillos típicos de ${nombreDeCiudad}`}>
+                            {platillos.map((platillo, index) => {
                                 const foodImage = `https:${platillo.fields.imagen?.fields?.file?.url}`;
                                 return (
-                                    <li key={platillo.sys.id} className='m-0 list-none group outline-none focus-within:ring-2 focus-within:ring-sky-600 rounded-2xl transition'>
-                                        <Image alt={platillo.fields.imagen.fields.description ?? `Platillo típico de ${nombreDeCiudad}`} src={foodImage} className="aspect-3/2 w-full h-[202px] rounded-2xl object-cover lg:h-[242px] group-hover:opacity-80 group-focus-visible:opacity-80 transition duration-300" width={384} height={242} />
-                                        <h3 className="mt-6 text-lg/8 font-semibold tracking-tight text-gray-900 group-hover:underline group-focus-visible:underline">{platillo.fields.titulo}</h3>
-                                        <p className="text-base/7 text-gray-600">{platillo.fields.descripcion}</p>
-                                    </li>
+                                    <article key={platillo.sys.id} className="group relative bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-neutral-100 hover:border-secondary-200 transform hover:-translate-y-2">
+                                        {/* Dish Number Badge */}
+                                        <div className="absolute top-4 left-4 z-20 w-10 h-10 bg-gradient-to-br from-secondary-600 to-accent-600 rounded-full flex items-center justify-center shadow-lg">
+                                            <span className="text-white font-bold text-sm">{index + 1}</span>
+                                        </div>
+
+                                        {/* Image Container */}
+                                        <div className="relative overflow-hidden">
+                                            <Image
+                                                alt={`${platillo.fields.titulo} - ${platillo.fields.imagen.fields.description ?? `Platillo típico de ${nombreDeCiudad}`}`}
+                                                src={foodImage}
+                                                className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700"
+                                                width={400}
+                                                height={256}
+                                                loading="lazy"
+                                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                            />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                                        </div>
+
+                                        {/* Content */}
+                                        <div className="p-6">
+                                            <h3 className="text-xl font-bold text-neutral-900 mb-3 group-hover:text-secondary-600 transition-colors duration-300">
+                                                {platillo.fields.titulo}
+                                            </h3>
+                                            <p className="text-neutral-600 mb-6 leading-relaxed">
+                                                {platillo.fields.descripcion}
+                                            </p>
+                                        </div>
+
+                                        {/* Decorative Elements */}
+                                        <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-accent-200 to-accent-300 rounded-full -translate-y-10 translate-x-10 opacity-20 group-hover:opacity-40 transition-opacity duration-500"></div>
+                                    </article>
                                 )
                             })}
-                        </ul>
+                        </div>
                     </div>
                 </section>
-                <section className='bg-white py-24 sm:py-32' aria-labelledby="paquetes-heading" role="region">
-                    <div className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 sm:pb-24 lg:px-8">
-                        <div className="sm:flex sm:items-baseline sm:justify-between">
-                            <h2 id="paquetes-heading" className="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl">Paquetes de Viaje a {nombreDeCiudad} | Tours Todo Incluido</h2>
-                            <Link href={url} className="hidden text-sm font-semibold group text-sky-600 hover:text-sky-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600 sm:block">
-                                Ver todos los paquetes
-                                <ArrowRightIcon className="h-4 w-4 ml-2 inline-block transition group-hover:translate-x-1" aria-hidden="true" />
+                {/* Packages Section Rediseñada */}
+                <section className="relative py-24 sm:py-32 bg-gradient-to-br from-primary-50 to-secondary-50 overflow-hidden" aria-labelledby="paquetes-heading" role="region">
+                    {/* Background Pattern */}
+                    <div className="absolute inset-0 opacity-[0.02]">
+                        <svg className="absolute inset-0 h-full w-full" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <pattern id="packages-pattern" x="0" y="0" width="150" height="150" patternUnits="userSpaceOnUse">
+                                    <circle cx="75" cy="75" r="6" fill="currentColor" className="text-primary-600" />
+                                    <circle cx="37" cy="37" r="4" fill="currentColor" className="text-secondary-600" />
+                                    <circle cx="113" cy="37" r="3" fill="currentColor" className="text-accent-600" />
+                                    <circle cx="37" cy="113" r="5" fill="currentColor" className="text-primary-500" />
+                                    <circle cx="113" cy="113" r="3.5" fill="currentColor" className="text-secondary-500" />
+                                </pattern>
+                            </defs>
+                            <rect width="100%" height="100%" fill="url(#packages-pattern)" />
+                        </svg>
+                    </div>
+
+                    <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+                        {/* Header Section */}
+                        <header className="mx-auto max-w-4xl text-center mb-20">
+                            {/* Packages Badge */}
+                            <div className="inline-flex items-center gap-3 bg-white/90 backdrop-blur-sm rounded-full px-6 py-3 shadow-lg border border-white/50 mb-8">
+                                <div className="w-8 h-8 bg-gradient-to-br from-primary-500 to-secondary-600 rounded-full flex items-center justify-center">
+                                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                                    </svg>
+                                </div>
+                                <span className="text-primary-700 font-semibold text-lg">Paquetes de Viaje</span>
+                            </div>
+
+                            <h2 id="paquetes-heading" className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-neutral-900 mb-8 leading-tight">
+                                <span className="bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">Tours Todo Incluido</span> a {nombreDeCiudad}
+                            </h2>
+
+                            <div className="h-1 w-24 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full mx-auto mb-8"></div>
+
+                            <p className="text-xl text-neutral-600 leading-relaxed mb-10">
+                                Descubre {nombreDeCiudad} con nuestros paquetes completos que incluyen vuelo, hotel, tours y asistencia 24/7.
+                            </p>
+
+                            {/* CTA Link mejorado */}
+                            <Link
+                                href={url}
+                                className="group inline-flex items-center gap-3 bg-gradient-to-r from-secondary-600 to-accent-600 hover:from-secondary-700 hover:to-accent-700 text-white font-bold py-4 px-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                            >
+                                <span>Ver Todos los Paquetes</span>
+                                <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                </svg>
                             </Link>
-                        </div>
-                        <div className="grid grid-cols-1 mt-12 gap-y-10 sm:grid-cols-3 sm:gap-x-6 sm:gap-y-0 lg:gap-x-8">
+                        </header>
+
+                        {/* Enhanced Packages Grid */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
                             {trips?.map((trip) => (
-                                <TripGridItem trip={trip} key={trip.sys.id} />
+                                <div key={trip.sys.id} className="group relative bg-white/90 backdrop-blur-sm rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-white/50 hover:border-primary-200 transform hover:-translate-y-2">
+                                    <TripGridItem trip={trip} />
+
+                                    {/* Decorative Elements */}
+                                    <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-primary-200 to-primary-300 rounded-full -translate-y-10 translate-x-10 opacity-20 group-hover:opacity-40 transition-opacity duration-500"></div>
+                                </div>
                             ))}
                         </div>
-                        <div className="mt-6 sm:hidden">
-                            <Link href={url} className="block text-sm font-semibold group text-sky-600 hover:text-sky-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600">
-                                Ver todos los paquetes
-                                <ArrowRightIcon className="h-4 w-4 ml-2 inline-block transition group-hover:translate-x-1" aria-hidden="true" />
+
+                        {/* Mobile CTA */}
+                        <div className="text-center">
+                            <Link
+                                href={url}
+                                className="md:hidden group inline-flex items-center gap-3 bg-white/90 backdrop-blur-sm hover:bg-white text-primary-600 hover:text-primary-700 font-semibold py-4 px-8 rounded-2xl shadow-lg hover:shadow-xl border border-white/50 transition-all duration-300"
+                            >
+                                <span>Ver Todos los Paquetes</span>
+                                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                </svg>
                             </Link>
                         </div>
                     </div>
                 </section>
-                <section className="bg-gray-100" aria-labelledby="faq-heading" role="region">
-                    <div className="mx-auto max-w-7xl px-6 py-24 sm:pt-32 lg:px-8 lg:py-40">
-                        <div className="lg:grid lg:grid-cols-12 lg:gap-8">
+                {/* FAQs Section Rediseñada */}
+                <section className="relative py-24 sm:py-32 bg-white overflow-hidden" aria-labelledby="faq-heading" role="region">
+                    {/* Background Elements */}
+                    <div className="absolute inset-0 opacity-[0.02]">
+                        <svg className="absolute inset-0 h-full w-full" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <pattern id="faq-pattern" x="0" y="0" width="180" height="180" patternUnits="userSpaceOnUse">
+                                    <circle cx="90" cy="90" r="7" fill="currentColor" className="text-accent-600" />
+                                    <circle cx="45" cy="45" r="5" fill="currentColor" className="text-primary-600" />
+                                    <circle cx="135" cy="45" r="4" fill="currentColor" className="text-secondary-600" />
+                                    <circle cx="45" cy="135" r="6" fill="currentColor" className="text-accent-500" />
+                                    <circle cx="135" cy="135" r="4.5" fill="currentColor" className="text-primary-500" />
+                                </pattern>
+                            </defs>
+                            <rect width="100%" height="100%" fill="url(#faq-pattern)" />
+                        </svg>
+                    </div>
+
+                    <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+                            {/* Left Column - Header */}
                             <div className="lg:col-span-5">
-                                <h2 id="faq-heading" className="text-3xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-4xl">
-                                    Preguntas Frecuentes sobre {nombreDeCiudad}
+                                {/* FAQ Badge */}
+                                <div className="inline-flex items-center gap-3 bg-gradient-to-r from-accent-50 to-primary-50 rounded-full px-6 py-3 shadow-lg border border-accent-200/50 mb-8">
+                                    <div className="w-8 h-8 bg-gradient-to-br from-accent-500 to-accent-600 rounded-full flex items-center justify-center">
+                                        <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                    </div>
+                                    <span className="text-accent-700 font-semibold text-lg">Preguntas Frecuentes</span>
+                                </div>
+
+                                <h2 id="faq-heading" className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-neutral-900 mb-8 leading-tight">
+                                    Todo lo que necesitas saber sobre <span className="bg-gradient-to-r from-accent-600 to-primary-600 bg-clip-text text-transparent">{nombreDeCiudad}</span>
                                 </h2>
+
+                                <div className="h-1 w-24 bg-gradient-to-r from-accent-500 to-primary-500 rounded-full mb-8"></div>
+
+                                <p className="text-xl text-neutral-600 leading-relaxed mb-10">
+                                    Resolvemos las dudas más comunes sobre tu viaje a {nombreDeCiudad} para que tengas la mejor experiencia.
+                                </p>
+
+                                {/* Trust Elements */}
+                                <div className="space-y-4">
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-6 h-6 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center">
+                                            <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                            </svg>
+                                        </div>
+                                        <span className="text-neutral-700 font-medium">Información actualizada 2025</span>
+                                    </div>
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-6 h-6 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center">
+                                            <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                            </svg>
+                                        </div>
+                                        <span className="text-neutral-700 font-medium">Asistencia 24/7 disponible</span>
+                                    </div>
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-6 h-6 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center">
+                                            <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                            </svg>
+                                        </div>
+                                        <span className="text-neutral-700 font-medium">Expertos locales certificados</span>
+                                    </div>
+                                </div>
                             </div>
-                            <div className="mt-10 lg:col-span-7 lg:mt-0">
-                                <dl className="space-y-10">
-                                    {preguntasFrecuentes.map((faq) => (
-                                        <div key={faq.sys.id}>
-                                            <dt className="text-base/7 font-semibold text-gray-900">{faq.fields.pregunta}</dt>
-                                            <dd className="mt-2 text-base/7 text-gray-600">{faq.fields.respuesta}</dd>
+
+                            {/* Right Column - FAQs */}
+                            <div className="lg:col-span-7">
+                                <div className="space-y-6">
+                                    {preguntasFrecuentes.map((faq, index) => (
+                                        <div key={faq.sys.id} className="group bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-xl border border-white/50 hover:border-accent-200 transition-all duration-300">
+                                            {/* Question */}
+                                            <div className="flex items-start gap-4 mb-4">
+                                                <div className="w-8 h-8 bg-gradient-to-br from-accent-500 to-primary-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                                    <span className="text-white font-bold text-sm">{index + 1}</span>
+                                                </div>
+                                                <h3 className="text-lg font-bold text-neutral-900 group-hover:text-accent-600 transition-colors duration-300">
+                                                    {faq.fields.pregunta}
+                                                </h3>
+                                            </div>
+
+                                            {/* Answer */}
+                                            <div className="ml-12">
+                                                <p className="text-neutral-600 leading-relaxed">
+                                                    {faq.fields.respuesta}
+                                                </p>
+                                            </div>
+
+                                            {/* Decorative Element */}
+                                            <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-accent-200 to-primary-200 rounded-full -translate-y-8 translate-x-8 opacity-0 group-hover:opacity-30 transition-opacity duration-500"></div>
                                         </div>
                                     ))}
-                                </dl>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </section>
-                <section className="bg-sky-700" aria-labelledby="cta-heading" role="region">
-                    <div className="px-6 py-24 sm:px-6 sm:py-32 lg:px-8">
-                        <div className="mx-auto max-w-2xl text-center">
-                            <h2 id="cta-heading" className="text-4xl font-semibold tracking-tight text-balance text-white sm:text-5xl">
-                                ¿Listo para viajar a {nombreDeCiudad}?
-                            </h2>
-                            <p className="mx-auto mt-6 max-w-xl text-lg/8 text-pretty text-sky-200">
-                                Reserva tu paquete de viaje a {nombreDeCiudad} que incluye vuelo, hotel y tours. ¡No te pierdas la oportunidad de explorar esta increíble ciudad!
-                            </p>
-                            <div className="mt-10 flex items-center justify-center gap-x-6">
-                                <Link
-                                    href={url}
-                                    className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-sky-600 shadow-xs hover:bg-sky-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-                                >
-                                    Ver Paquetes de Viaje a {nombreDeCiudad}
-                                </Link>
+                {/* Enhanced CTA Section */}
+                <section className="relative py-24 sm:py-32 bg-gradient-to-br from-primary-900 via-primary-800 to-secondary-800 overflow-hidden" aria-labelledby="cta-heading" role="region">
+                    {/* Background Pattern */}
+                    <div className="absolute inset-0 opacity-10">
+                        <svg className="absolute inset-0 h-full w-full" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <pattern id="cta-pattern" x="0" y="0" width="200" height="200" patternUnits="userSpaceOnUse">
+                                    <circle cx="100" cy="100" r="8" fill="currentColor" className="text-white" />
+                                    <circle cx="50" cy="50" r="6" fill="currentColor" className="text-secondary-300" />
+                                    <circle cx="150" cy="50" r="5" fill="currentColor" className="text-accent-300" />
+                                    <circle cx="50" cy="150" r="7" fill="currentColor" className="text-white" />
+                                    <circle cx="150" cy="150" r="5.5" fill="currentColor" className="text-secondary-300" />
+                                </pattern>
+                            </defs>
+                            <rect width="100%" height="100%" fill="url(#cta-pattern)" />
+                        </svg>
+                    </div>
+
+                    {/* Floating Elements */}
+                    <div className="absolute top-10 left-10 w-40 h-40 bg-gradient-to-br from-secondary-400 to-accent-400 rounded-full opacity-20 animate-pulse"></div>
+                    <div className="absolute bottom-10 right-10 w-32 h-32 bg-gradient-to-br from-accent-400 to-primary-400 rounded-full opacity-20 animate-pulse delay-1000"></div>
+                    <div className="absolute top-1/2 right-20 w-24 h-24 bg-gradient-to-br from-white to-secondary-300 rounded-full opacity-20 animate-pulse delay-500"></div>
+
+                    <div className="relative mx-auto max-w-4xl px-6 lg:px-8 text-center">
+                        {/* CTA Badge */}
+                        <div className="inline-flex items-center gap-3 bg-white/20 backdrop-blur-sm rounded-full px-6 py-3 shadow-lg border border-white/30 mb-8">
+                            <div className="w-8 h-8 bg-gradient-to-br from-secondary-500 to-accent-500 rounded-full flex items-center justify-center">
+                                <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                                </svg>
+                            </div>
+                            <span className="text-white font-semibold text-lg">¡Tu Aventura Te Espera!</span>
+                        </div>
+
+                        {/* Main CTA */}
+                        <h2 id="cta-heading" className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white mb-8 leading-tight">
+                            ¿Listo para <span className="bg-gradient-to-r from-secondary-300 to-accent-300 bg-clip-text text-transparent">explorar</span> {nombreDeCiudad}?
+                        </h2>
+
+                        <div className="h-1 w-24 bg-gradient-to-r from-secondary-400 to-accent-400 rounded-full mx-auto mb-8"></div>
+
+                        <p className="text-xl text-primary-100 leading-relaxed mb-12 max-w-3xl mx-auto">
+                            Reserva tu paquete de viaje completo que incluye vuelo, hotel y tours guíados. ¡No te pierdas la oportunidad de vivir una experiencia única en {nombreDeCiudad}!
+                        </p>
+
+                        {/* Enhanced CTA Buttons */}
+                        <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                            <Link
+                                href={url}
+                                className="group inline-flex items-center justify-center gap-3 bg-white hover:bg-secondary-50 text-primary-700 hover:text-primary-800 font-bold py-5 px-10 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+                            >
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                                </svg>
+                                <span>Ver Paquetes a {nombreDeCiudad}</span>
+                                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                </svg>
+                            </Link>
+
+                            <Link
+                                href="https://wa.me/+523314331600"
+                                className="group inline-flex items-center justify-center gap-3 bg-transparent hover:bg-white/10 text-white border-2 border-white/50 hover:border-white font-semibold py-5 px-8 rounded-2xl transition-all duration-300"
+                            >
+                                <ChatBubbleBottomCenterIcon className="w-5 h-5 text-white" />
+                                <span>Cotizar Ahora</span>
+                            </Link>
+                        </div>
+
+                        {/* Trust Indicators */}
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-16 pt-12 border-t border-white/20">
+                            <div className="text-center">
+                                <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                                    </svg>
+                                </div>
+                                <h3 className="text-white font-bold mb-2">Mejor Precio</h3>
+                                <p className="text-primary-200 text-sm">Garantizado</p>
+                            </div>
+                            <div className="text-center">
+                                <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+                                    </svg>
+                                </div>
+                                <h3 className="text-white font-bold mb-2">Asistencia 24/7</h3>
+                                <p className="text-primary-200 text-sm">Siempre disponible</p>
+                            </div>
+                            <div className="text-center">
+                                <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <LockClosedIcon className="w-6 h-6 text-white" />
+                                </div>
+                                <h3 className="text-white font-bold mb-2">Pago Seguro</h3>
+                                <p className="text-primary-200 text-sm">100% protegido</p>
                             </div>
                         </div>
                     </div>
                 </section>
                 <Socials />
                 <Catalog />
-                <section className='bg-white py-24 sm:py-32' aria-labelledby="blog-heading" role="region">
-                    <div className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 sm:pb-24 lg:px-8">
-                        <div className="sm:flex sm:items-baseline sm:justify-between">
-                            <h2 id="blog-heading" className="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl">Conoce más sobre {nombreDeCiudad}</h2>
-                        </div>
-                        <ul className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3" aria-label={`Artículos de blog sobre ${nombreDeCiudad}`}>
-                            {posts?.map((post) => {
+                {/* Enhanced Blog Section */}
+                <section className="relative py-24 sm:py-32 bg-gradient-to-br from-neutral-50 to-neutral-100 overflow-hidden" aria-labelledby="blog-heading" role="region">
+                    {/* Background Pattern */}
+                    <div className="absolute inset-0 opacity-[0.02]">
+                        <svg className="absolute inset-0 h-full w-full" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <pattern id="blog-pattern" x="0" y="0" width="160" height="160" patternUnits="userSpaceOnUse">
+                                    <circle cx="80" cy="80" r="6" fill="currentColor" className="text-primary-600" />
+                                    <circle cx="40" cy="40" r="4" fill="currentColor" className="text-secondary-600" />
+                                    <circle cx="120" cy="40" r="5" fill="currentColor" className="text-accent-600" />
+                                    <circle cx="40" cy="120" r="5.5" fill="currentColor" className="text-primary-500" />
+                                    <circle cx="120" cy="120" r="4.5" fill="currentColor" className="text-secondary-500" />
+                                </pattern>
+                            </defs>
+                            <rect width="100%" height="100%" fill="url(#blog-pattern)" />
+                        </svg>
+                    </div>
+
+                    <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+                        {/* Header Section */}
+                        <header className="mx-auto max-w-4xl text-center mb-20">
+                            {/* Blog Badge */}
+                            <div className="inline-flex items-center gap-3 bg-white/90 backdrop-blur-sm rounded-full px-6 py-3 shadow-lg border border-white/50 mb-8">
+                                <div className="w-8 h-8 bg-gradient-to-br from-primary-500 to-accent-600 rounded-full flex items-center justify-center">
+                                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                                    </svg>
+                                </div>
+                                <span className="text-primary-700 font-semibold text-lg">Artículos y Guías</span>
+                            </div>
+
+                            <h2 id="blog-heading" className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-neutral-900 mb-8 leading-tight">
+                                Descubre más sobre <span className="bg-gradient-to-r from-primary-600 to-accent-600 bg-clip-text text-transparent">{nombreDeCiudad}</span>
+                            </h2>
+
+                            <div className="h-1 w-24 bg-gradient-to-r from-primary-500 to-accent-500 rounded-full mx-auto mb-8"></div>
+
+                            <p className="text-xl text-neutral-600 leading-relaxed">
+                                Explora artículos detallados, consejos de expertos y guías completas para aprovechar al máximo tu viaje.
+                            </p>
+                        </header>
+
+                        {/* Enhanced Blog Grid */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" aria-label={`Artículos de blog sobre ${nombreDeCiudad}`}>
+                            {posts?.map((post, index) => {
                                 const {
                                     titulo,
                                     descripcion,
-                                    fecha,
                                     portada,
                                     slug,
                                 } = post.fields;
                                 return (
-                                    <li key={slug} className="group outline-none focus-within:ring-2 focus-within:ring-sky-600 rounded-2xl transition">
-                                        <Link href={`/blog/${slug}`} className="block h-full" aria-label={`Leer artículo: ${titulo}`}> 
-                                            <article className="flex flex-col items-start justify-between h-full">
-                                                <div className="relative w-full">
-                                                    <Image
-                                                        alt={descripcion}
-                                                        src={`https:${portada.fields?.file?.url}`}
-                                                        width={800}
-                                                        height={450}
-                                                        className="aspect-video w-full rounded-2xl bg-gray-100 object-cover sm:aspect-2/1 lg:aspect-3/2 group-hover:opacity-80 group-focus-visible:opacity-80 transition duration-300"
-                                                    />
-                                                    <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10 pointer-events-none" />
+                                    <article key={slug} className="group relative bg-white/90 backdrop-blur-sm rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-white/50 hover:border-primary-200 transform hover:-translate-y-2">
+                                        {/* Article Number Badge */}
+                                        <div className="absolute top-4 left-4 z-20 w-10 h-10 bg-gradient-to-br from-primary-600 to-accent-600 rounded-full flex items-center justify-center shadow-lg">
+                                            <span className="text-white font-bold text-sm">{index + 1}</span>
+                                        </div>
+
+                                        <Link href={`/blog/${slug}`} className="block h-full" aria-label={`Leer artículo: ${titulo}`}>
+                                            {/* Image Container */}
+                                            <div className="relative overflow-hidden">
+                                                <Image
+                                                    alt={`${titulo} - ${descripcion}`}
+                                                    src={`https:${portada.fields?.file?.url}`}
+                                                    width={400}
+                                                    height={225}
+                                                    className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700"
+                                                    loading="lazy"
+                                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                                />
+                                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                                            </div>
+
+                                            {/* Content */}
+                                            <div className="p-6">
+                                                <h3 className="text-xl font-bold text-neutral-900 mb-3 group-hover:text-primary-600 transition-colors duration-300 line-clamp-2">
+                                                    {titulo}
+                                                </h3>
+
+                                                <p className="text-neutral-600 mb-6 leading-relaxed line-clamp-3">
+                                                    {descripcion}
+                                                </p>
+
+                                                {/* Read More */}
+                                                <div className="inline-flex items-center gap-2 text-primary-600 hover:text-primary-700 font-semibold text-sm group/button">
+                                                    <span>Leer más</span>
+                                                    <svg className="w-4 h-4 group-hover/button:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                                    </svg>
                                                 </div>
-                                                <div className="max-w-xl">
-                                                    <div className="mt-8 flex items-center gap-x-4 text-xs">
-                                                        <time dateTime={fecha} className="text-gray-500">
-                                                            {fecha}
-                                                        </time>
-                                                    </div>
-                                                    <div className="relative">
-                                                        <h3 className="mt-3 text-lg/6 font-semibold text-gray-900 group-hover:underline group-focus-visible:underline">
-                                                            <span className="absolute inset-0" />
-                                                            {titulo}
-                                                        </h3>
-                                                        <p className="mt-5 line-clamp-3 text-sm/6 text-gray-600">{descripcion}</p>
-                                                    </div>
-                                                </div>
-                                            </article>
+                                            </div>
+
+                                            {/* Decorative Elements */}
+                                            <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-accent-200 to-primary-200 rounded-full -translate-y-10 translate-x-10 opacity-20 group-hover:opacity-40 transition-opacity duration-500"></div>
                                         </Link>
-                                    </li>
+                                    </article>
                                 )
                             })}
-                        </ul>
+                        </div>
                     </div>
                 </section>
             </main>

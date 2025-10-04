@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { TypeDestino } from '../../_types/contentful/Destino';
 import { memo } from 'react';
-import { ArrowRightIcon, MapPinIcon, SparklesIcon } from '@heroicons/react/24/outline';
+import { ArrowRightIcon , SparklesIcon } from '@heroicons/react/24/outline';
 
 interface DestinationsListProps {
     destinations: TypeDestino[];
