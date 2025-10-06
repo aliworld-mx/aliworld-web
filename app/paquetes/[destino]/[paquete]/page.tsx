@@ -203,28 +203,6 @@ export default async function PaquetePage({ params }: PageProps) {
             name: `${nombre} - Paquete de viaje | Aliworld`,
             description: `Reserva tu paquete de viaje ${nombre} a ${destino.fields.nombre}. ${dias} días y ${noches} noches desde ${precio} ${moneda}.`
         },
-        aggregateRating: {
-            '@type': 'AggregateRating',
-            ratingValue: '4.8',
-            reviewCount: '127',
-            bestRating: '5',
-            worstRating: '1'
-        },
-        review: [
-            {
-                '@type': 'Review',
-                author: {
-                    '@type': 'Person',
-                    name: 'Cliente Verificado'
-                },
-                reviewRating: {
-                    '@type': 'Rating',
-                    ratingValue: '5',
-                    bestRating: '5'
-                },
-                reviewBody: `Excelente paquete de viaje a ${destino.fields.nombre}. Todo muy bien organizado y el precio es muy competitivo.`
-            }
-        ],
         additionalProperty: [
             {
                 '@type': 'PropertyValue',
