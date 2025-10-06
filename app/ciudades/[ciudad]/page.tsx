@@ -153,11 +153,9 @@ export default async function CiudadPage({ params }: PageProps) {
         },
     ]
 
-    // Structured Data para SEO avanzado
     const structuredData = {
         '@context': 'https://schema.org',
         '@graph': [
-            // TravelGuide principal
             {
                 '@type': 'TravelGuide',
                 '@id': `https://www.aliworld.mx/ciudades/${slug}#guide`,
@@ -186,13 +184,6 @@ export default async function CiudadPage({ params }: PageProps) {
                         url: 'https://www.aliworld.mx/aliworld-color.svg'
                     }
                 },
-                about: {
-                    '@type': 'Place',
-                    '@id': `https://www.aliworld.mx/ciudades/${slug}#place`,
-                    name: nombreDeCiudad,
-                    description: descripcion,
-                    image: contentImage
-                },
                 mentions: actividades.map(actividad => ({
                     '@type': 'TouristAttraction',
                     name: actividad.fields.titulo,
@@ -200,17 +191,6 @@ export default async function CiudadPage({ params }: PageProps) {
                     image: `https:${actividad.fields.imagen?.fields?.file?.url}`
                 }))
             },
-            // Place schema
-            {
-                '@type': 'Place',
-                '@id': `https://www.aliworld.mx/ciudades/${slug}#place`,
-                name: nombreDeCiudad,
-                description: descripcion,
-                image: [contentImage, headerImage],
-                hasMap: `https://www.google.com/maps/search/${encodeURIComponent(nombreDeCiudad)}`,
-                touristType: 'Leisure'
-            },
-            // FAQPage
             {
                 '@type': 'FAQPage',
                 '@id': `https://www.aliworld.mx/ciudades/${slug}#faq`,
@@ -223,29 +203,6 @@ export default async function CiudadPage({ params }: PageProps) {
                     }
                 }))
             },
-            // Organization
-            {
-                '@type': 'Organization',
-                '@id': 'https://www.aliworld.mx#organization',
-                name: 'Aliworld',
-                url: 'https://www.aliworld.mx',
-                logo: {
-                    '@type': 'ImageObject',
-                    url: 'https://www.aliworld.mx/aliworld-color.svg'
-                },
-                contactPoint: {
-                    '@type': 'ContactPoint',
-                    telephone: '+52-33-1433-1600',
-                    contactType: 'customer service',
-                    areaServed: 'MX',
-                    availableLanguage: 'Spanish'
-                },
-                sameAs: [
-                    'https://www.facebook.com/aliworld.mx',
-                    'https://www.instagram.com/aliworld.mx'
-                ]
-            },
-            // WebPage
             {
                 '@type': 'WebPage',
                 '@id': `https://www.aliworld.mx/ciudades/${slug}`,
@@ -259,15 +216,6 @@ export default async function CiudadPage({ params }: PageProps) {
                     name: 'Aliworld',
                     url: 'https://www.aliworld.mx'
                 },
-                breadcrumb: {
-                    '@type': 'BreadcrumbList',
-                    itemListElement: breadcrumbs.map((crumb, index) => ({
-                        '@type': 'ListItem',
-                        position: index + 1,
-                        name: crumb.name,
-                        item: `https://www.aliworld.mx${crumb.href}`
-                    }))
-                }
             }
         ]
     };
