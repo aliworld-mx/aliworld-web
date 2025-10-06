@@ -29,11 +29,6 @@ export const TripGridItem = ({ trip, priority = false }: TripGridItemProps) => {
         description: `Paquete de viaje de ${dias} días y ${noches} noches a ${paises.map(p => p.fields?.nombre).join(', ')}`,
         image: imageUrl,
         url: `https://www.aliworld.mx/paquetes/${destino.fields.id}/${slug}`,
-        provider: {
-            '@type': 'TravelAgency',
-            name: 'Aliworld',
-            url: 'https://www.aliworld.mx'
-        },
         offers: {
             '@type': 'Offer',
             price: precio,

@@ -60,6 +60,10 @@ export default async function InicioPage() {
       'https://www.youtube.com/@aliworld.viajes'
     ],
     email: 'contacto@aliworld.mx',
+    address: {
+      '@type': 'PostalAddress',
+      postalCode: '44130',
+    },
     areaServed: [
       {
         '@type': 'Country',
