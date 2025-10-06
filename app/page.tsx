@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image';
 import heroImage from '../public/hero.jpg';
 import promoImage from '../public/promo.jpg';
-import { ArrowRightIcon, PercentBadgeIcon } from '@heroicons/react/20/solid';
+import { ArrowRightIcon, ChatBubbleBottomCenterIcon, GlobeAmericasIcon, PercentBadgeIcon } from '@heroicons/react/20/solid';
 import Benefits from './_components/Benefits';
 import { WithContext, TravelAgency } from 'schema-dts';
 import { getMetadata } from './lib/getMetadata';
@@ -15,6 +15,7 @@ import Socials from './_components/Socials';
 import { Catalog } from './_components/Catalog';
 import { ExpediaBenefits } from './_components/Expedia/ExpediaBenefits';
 import { TripGridItem } from './_components/TripGridItem';
+import DestinationsCarousel from './_components/DestinationsCarousel';
 
 export const revalidate = 36000;
 
@@ -59,14 +60,6 @@ export default async function InicioPage() {
       'https://www.youtube.com/@aliworld.viajes'
     ],
     email: 'contacto@aliworld.mx',
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: 'Rinconada Del Camichin',
-      addressLocality: 'Zapopan',
-      addressRegion: 'Jalisco',
-      postalCode: '45130',
-      addressCountry: 'MX',
-    },
     areaServed: [
       {
         '@type': 'Country',
@@ -121,103 +114,130 @@ export default async function InicioPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <div className="relative bg-white">
-        <div className="mx-auto max-w-7xl">
-          <div className="relative z-10 pt-14 lg:w-full lg:max-w-2xl">
-            <svg
-              viewBox="0 0 100 100"
-              preserveAspectRatio="none"
-              aria-hidden="true"
-              className="absolute inset-y-0 right-8 hidden h-full w-80 translate-x-1/2 transform fill-white lg:block"
-            >
-              <polygon points="0,0 90,0 50,100 0,100" />
-            </svg>
-
-            <div className="relative px-6 pb-32 pt-6 sm:py-32 lg:px-8 lg:pr-0">
-              <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-xl">
-                <h1 className="text-pretty text-5xl font-semibold tracking-tight text-gray-900 sm:text-7xl">
-                  Reserva tu próximo viaje con Aliworld
-                </h1>
-                <p className="mt-8 text-pretty text-lg font-medium text-gray-500 sm:text-xl/8">
-                  Descubre los mejores destinos y vive una gran aventura con Aliworld. Desde entradas a parques temáticos hasta paquetes de viaje completos, tenemos todo lo que necesitas para tu próximo viaje.
-                </p>
-                <div className="mt-10 flex flex-col sm:flex-row items-center gap-6">
-                  <Link
-                    href="/paquetes"
-                    className="rounded-md bg-sky-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600 transition"
-                  >
-                    Ver Paquetes de Viaje
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="bg-gray-50 lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
+      {/* Hero Section with Image Focus */}
+      <div className="relative min-h-screen overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0">
           <Image
             alt="El Pabellon Dorado en Kyoto, Japón"
             src={heroImage}
-            width={953}
-            height={768}
-            className="aspect-3/2 object-cover lg:aspect-auto lg:size-full"
+            width={1920}
+            height={1080}
+            className="w-full h-full object-cover"
             priority
           />
+          {/* Overlay with gradient */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent"></div>
         </div>
-      </div>
-      <main id="main-content" className='bg-white'>
-        <section aria-labelledby="category-heading" role="region" className="py-12 sm:py-24 xl:mx-auto xl:max-w-7xl xl:px-8">
-          <div className="px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 xl:px-0">
-            <h2 id="category-heading" className="text-2xl font-bold tracking-tight text-gray-900">
-              Buscar por Destino
-            </h2>
-            <Link href="/paquetes" className="hidden text-sm font-semibold group text-sky-600 hover:text-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600 transition sm:block">
-              Ver todos los destinos
-              <ArrowRightIcon className="h-4 w-4 ml-2 inline-block transition group-hover:translate-x-1" aria-hidden="true" />
-            </Link>
-          </div>
 
-          <div className="mt-4 flow-root">
-            <div className="-my-2">
-              <div className="relative box-content h-80 overflow-x-auto py-2 xl:overflow-visible overflow-y-hidden" role="list" aria-label="Destinos destacados">
-                <div className="absolute flex space-x-8 px-4 sm:px-6 lg:px-8 xl:relative xl:grid xl:grid-cols-5 xl:gap-x-8 xl:space-x-0 xl:px-0">
-                  {destinations?.slice(0, 5).map((destination) => (
-                    <Link
-                      key={destination.fields.nombre}
-                      href={`/paquetes/${destination.fields.id}`}
-                      className="relative flex h-80 w-56 flex-col overflow-hidden rounded-lg p-6 hover:opacity-80 focus-visible:ring-4 focus-visible:ring-sky-400 focus-visible:outline-none transition xl:w-auto shadow-md bg-white/80 backdrop-blur"
-                      aria-label={`Ver paquetes para ${destination.fields.nombre}`}
-                    >
-                      <span aria-hidden="true" className="absolute inset-0">
-                        <Image width={220} height={320} alt={destination?.fields?.imagen?.fields?.description ?? `Imagen de ${destination.fields.nombre}`} src={`https:${destination?.fields.imagen?.fields?.file?.url}`} className="size-full object-cover" />
-                      </span>
-                      <span
-                        aria-hidden="true"
-                        className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-gray-900/80 to-transparent opacity-80"
-                      />
-                      <span className="relative mt-auto text-center text-xl font-bold text-white drop-shadow-lg">
-                        {destination.fields.nombre}
-                      </span>
-                    </Link>
-                  ))}
+        {/* Content */}
+        <div className="relative z-10 flex items-center min-h-screen">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8 w-full">
+            <div className="max-w-3xl">
+              {/* Badge */}
+              <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm rounded-full px-6 py-3 border border-white/30 mb-8 animate-bounce">
+                <div className="w-6 h-6 bg-gradient-to-br from-primary-400 to-accent-500 rounded-full flex items-center justify-center">
+                  <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                  </svg>
                 </div>
+                <span className="font-semibold text-sm text-white">Más de 10,000 viajeros felices</span>
+              </div>
+
+              {/* Main Heading */}
+              <h1 className="text-5xl sm:text-7xl lg:text-8xl font-black tracking-tight text-white mb-8 leading-tight">
+                Descubre
+                <span className="block bg-gradient-to-r from-primary-400 via-accent-400 to-secondary-400 bg-clip-text text-transparent">
+                  el mundo
+                </span>
+                <span className="block text-4xl sm:text-5xl lg:text-6xl font-bold mt-2">con Aliworld</span>
+              </h1>
+
+              {/* Description */}
+              <p className="text-xl sm:text-2xl text-white/90 mb-12 leading-relaxed max-w-2xl">
+                Vive experiencias únicas y descubre destinos increíbles. Desde parques temáticos hasta aventuras culturales, tu próximo viaje te está esperando.
+              </p>
+
+              {/* Features */}
+              <div className="flex flex-wrap gap-4 mb-12">
+                {[
+                  { icon: '🎯', text: 'Mejor precio garantizado' },
+                  { icon: '🌟', text: 'Experiencias únicas' },
+                  { icon: '🔒', text: 'Pago 100% seguro' }
+                ].map((feature, index) => (
+                  <div key={index} className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 border border-white/20">
+                    <span className="text-xl">{feature.icon}</span>
+                    <span className="text-white font-medium">{feature.text}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-6">
+                <Link
+                  href="/paquetes"
+                  className="group relative bg-gradient-to-r from-primary-600 to-accent-600 text-white font-bold py-4 px-8 rounded-2xl shadow-2xl hover:shadow-primary-500/50 transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white overflow-hidden"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary-700 to-accent-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <span className="relative flex items-center justify-center gap-2">
+                    <GlobeAmericasIcon className="w-5 h-5" />
+                    Explorar Paquetes
+                    <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                  </span>
+                </Link>
+                
+                <Link
+                  href="/contacto"
+                  className="group inline-flex items-center justify-center gap-2 text-white hover:text-primary-300 font-semibold transition-colors duration-200 py-4 px-8 border-2 border-white/30 rounded-2xl hover:border-primary-300 hover:bg-white/10 backdrop-blur-sm"
+                >
+                  <ChatBubbleBottomCenterIcon className="w-5 h-5" />
+                  Hablar con un experto
+                </Link>
               </div>
             </div>
           </div>
-
-          <div className="mt-6 px-4 sm:hidden">
-            <Link href="/paquetes" className="block text-sm font-semibold group text-sky-600 hover:text-sky-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600 transition">
-              Ver todos los destinos
-              <ArrowRightIcon className="h-4 w-4 ml-2 inline-block transition group-hover:translate-x-1" aria-hidden="true" />
-            </Link>
+        </div>
+      </div>
+      <main id="main-content" className='bg-white'>
+        <DestinationsCarousel destinations={destinations} />
+        <section aria-labelledby="favorites-heading" role="region" className='bg-gradient-to-br from-white via-accent-50/30 to-secondary-50/30 py-24 sm:py-32 relative overflow-hidden'>
+          {/* Background Pattern */}
+          <div className="absolute inset-0 opacity-[0.01]">
+            <svg className="absolute inset-0 h-full w-full" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <pattern id="favorites-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+                  <circle cx="50" cy="50" r="2" fill="currentColor" className="text-accent-600" />
+                  <circle cx="25" cy="25" r="1.5" fill="currentColor" className="text-secondary-600" />
+                  <circle cx="75" cy="25" r="1" fill="currentColor" className="text-primary-600" />
+                  <circle cx="25" cy="75" r="1.5" fill="currentColor" className="text-accent-500" />
+                  <circle cx="75" cy="75" r="0.5" fill="currentColor" className="text-secondary-500" />
+                </pattern>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#favorites-pattern)" />
+            </svg>
           </div>
-        </section>
-        <section aria-labelledby="favorites-heading" role="region" className='bg-white'>
-          <div className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 sm:pb-24 lg:px-8">
-            <div className="sm:flex sm:items-baseline sm:justify-between">
-              <h2 id="favorites-heading" className="text-2xl font-bold tracking-tight text-gray-900">
-                Nuestros favoritos
-              </h2>
-              <Link href="/favoritos" className="hidden text-sm font-semibold group text-sky-600 hover:text-sky-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600 transition sm:block">
+          
+          <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="sm:flex sm:items-center sm:justify-between mb-16">
+              <div className="flex items-center gap-4">
+                {/* Heart Badge */}
+                <div className="inline-flex items-center gap-2 bg-gradient-to-r from-secondary-500/20 to-accent-500/30 backdrop-blur-sm rounded-full px-4 py-2 border border-secondary-200">
+                  <div className="w-6 h-6 bg-gradient-to-br from-secondary-500 to-accent-600 rounded-full flex items-center justify-center">
+                    <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                    </svg>
+                  </div>
+                  <span className="font-semibold text-sm text-secondary-700">Favoritos</span>
+                </div>
+                
+                <h2 id="favorites-heading" className="text-3xl sm:text-4xl font-black tracking-tight text-neutral-900">
+                  Nuestros favoritos
+                </h2>
+              </div>
+              
+              <Link href="/favoritos" className="hidden text-sm font-semibold group text-secondary-600 hover:text-secondary-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary-600 transition sm:block">
                 Ver todos los favoritos
                 <ArrowRightIcon className="h-4 w-4 ml-2 inline-block transition group-hover:translate-x-1" aria-hidden="true" />
               </Link>
@@ -238,7 +258,7 @@ export default async function InicioPage() {
           </div>
         </section>
 
-        <section aria-labelledby="promo-heading" role="region" className="relative bg-gray-800 px-6 py-32 sm:px-12 sm:py-40 lg:px-16">
+        <section aria-labelledby="promo-heading" role="region" className="relative bg-neutral-900 px-6 py-32 sm:px-12 sm:py-40 lg:px-16 overflow-hidden">
           <div className="absolute inset-0 overflow-hidden">
             <Image
               alt="Paisaje en Brujas, Bélgica"
@@ -249,20 +269,75 @@ export default async function InicioPage() {
               priority
             />
           </div>
-          <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/60 to-transparent" />
-          <div className="relative mx-auto flex max-w-3xl flex-col items-center text-center">
-            <span className="inline-flex animate-bounce mb-2" aria-hidden="true">
-              <PercentBadgeIcon className="h-12 w-12 text-white drop-shadow-lg" />
-            </span>
-            <h2 id="promo-heading" className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Promociones</h2>
-            <p className="mt-3 text-xl text-white">
+          <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-neutral-900/90 via-neutral-900/70 to-neutral-900/50" />
+          
+          {/* Floating Elements */}
+          <div className="absolute top-20 left-10 opacity-20 animate-float">
+            <div className="w-32 h-32 bg-gradient-to-br from-secondary-500 to-accent-600 rounded-full blur-xl"></div>
+          </div>
+          <div className="absolute bottom-20 right-10 opacity-20 animate-float-delayed">
+            <div className="w-24 h-24 bg-gradient-to-br from-primary-500 to-secondary-600 rounded-full blur-xl"></div>
+          </div>
+          
+          <div className="relative mx-auto flex max-w-4xl flex-col items-center text-center">
+            {/* Animated Icon */}
+            <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-secondary-500 to-accent-600 rounded-full mb-8 animate-pulse shadow-2xl shadow-secondary-500/50">
+              <PercentBadgeIcon className="h-10 w-10 text-white" />
+            </div>
+            
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm rounded-full px-6 py-2 border border-white/30 mb-8">
+              <span className="w-2 h-2 bg-secondary-400 rounded-full animate-pulse"></span>
+              <span className="text-white font-semibold text-sm">Ofertas limitadas</span>
+            </div>
+            
+            <h2 id="promo-heading" className="text-4xl sm:text-6xl font-black tracking-tight text-white mb-6">
+              <span className="bg-gradient-to-r from-secondary-400 via-accent-400 to-primary-400 bg-clip-text text-transparent">
+                Promociones
+              </span>
+              <br />especiales
+            </h2>
+            
+            <p className="mt-6 text-xl sm:text-2xl text-white/90 max-w-3xl leading-relaxed">
               No hay nada mejor que conocer la ciudad de tus sueños, y que mejor que con un descuento. Visita nuestra sección de promociones y encuentra el viaje de tus sueños al mejor precio.
             </p>
-            <Link href="/promociones"
-              className="mt-8 block w-full rounded-md border border-transparent bg-white px-8 py-3 text-base font-medium text-gray-900 hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600 transition sm:w-auto"
-            >
-              Ver todas las promociones
-            </Link>
+            
+            {/* Features */}
+            <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-2xl">
+              {[
+                { icon: '💰', text: 'Hasta 50% OFF' },
+                { icon: '⏰', text: 'Tiempo limitado' },
+                { icon: '🎁', text: 'Beneficios extras' }
+              ].map((feature, index) => (
+                <div key={index} className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-2xl px-4 py-3 border border-white/20">
+                  <span className="text-2xl">{feature.icon}</span>
+                  <span className="text-white font-medium">{feature.text}</span>
+                </div>
+              ))}
+            </div>
+            
+            <div className="mt-12 flex flex-col sm:flex-row gap-6">
+              <Link href="/promociones"
+                className="group relative bg-gradient-to-r from-secondary-600 to-accent-600 text-white font-bold py-4 px-8 rounded-2xl shadow-2xl hover:shadow-secondary-500/50 transition-all duration-300 transform hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary-600 overflow-hidden"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-secondary-700 to-accent-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <span className="relative flex items-center gap-2">
+                  Ver todas las promociones
+                  <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                </span>
+              </Link>
+              
+              <Link href="/contacto"
+                className="group inline-flex items-center gap-2 text-white hover:text-secondary-300 font-semibold transition-colors duration-200 py-4 px-6"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Consultar disponibilidad
+              </Link>
+            </div>
           </div>
         </section>
         <Catalog />
