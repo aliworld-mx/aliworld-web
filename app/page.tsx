@@ -136,7 +136,7 @@ export default async function InicioPage() {
 
         {/* Content */}
         <div className="relative z-10 flex items-center min-h-screen">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8 w-full">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8 py-12 w-full">
             <div className="max-w-3xl">
               {/* Badge */}
               <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm rounded-full px-6 py-3 border border-white/30 mb-8 animate-bounce">

@@ -187,14 +187,14 @@ export const Catalog = () => {
                 <div className="mt-20 text-center">
                     <div className="inline-flex items-center gap-3 bg-white/90 backdrop-blur-sm rounded-2xl px-8 py-4 shadow-lg border border-white/50">
                         <div className="flex items-center gap-2">
-                            <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                            <div className="w-3 h-3 bg-green-500 rounded-full hidden sm:flex animate-pulse"></div>
                             <span className="text-sm font-semibold text-neutral-700">Disponible 24/7</span>
                         </div>
                         <div className="w-px h-6 bg-neutral-200"></div>
                         <span className="text-sm text-neutral-600">Asistencia personalizada para tu viaje</span>
                         <div className="w-px h-6 bg-neutral-200"></div>
                         <div className="flex items-center gap-2">
-                            <svg className="w-4 h-4 text-primary-600" fill="currentColor" viewBox="0 0 20 20">
+                            <svg className="w-4 h-4 text-primary-600 hidden sm:flex" fill="currentColor" viewBox="0 0 20 20">
                                 <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                             </svg>
                             <span className="text-sm font-medium text-primary-700">Mejor precio garantizado</span>

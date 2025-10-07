@@ -174,7 +174,6 @@ const Socials = () => (
                 <div className="mt-16 text-center">
                     <div className="inline-flex items-center gap-3 bg-white/90 backdrop-blur-sm rounded-2xl px-8 py-4 shadow-lg border border-white/50">
                         <div className="flex items-center gap-2">
-                            <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
                             <span className="text-sm font-semibold text-neutral-700">¡Únete a nuestra comunidad de viajeros!</span>
                         </div>
                         <div className="w-px h-6 bg-neutral-200"></div>
