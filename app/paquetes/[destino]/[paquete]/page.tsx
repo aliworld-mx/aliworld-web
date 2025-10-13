@@ -352,8 +352,8 @@ export default async function PaquetePage({ params }: PageProps) {
                                             priority={true}
                                             src={urlImagen}
                                             width={800}
-                                            height={400}
-                                            className="w-full h-64 sm:h-80 lg:h-96 object-cover"
+                                            height={449}
+                                            className="w-full object-contain"
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
                                     </div>
