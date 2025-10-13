@@ -4,10 +4,6 @@ export const getDestinationNameBySlug = (slug: string) => {
             return 'Europa';
         case 'asia':
             return 'Asia';
-        case 'caribe':
-            return 'Caribe';
-        case 'africa':
-            return 'África';
         case 'mexico':
             return 'México';
         case 'sudamerica':

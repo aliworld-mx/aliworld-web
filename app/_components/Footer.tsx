@@ -8,8 +8,6 @@ const footerNavigation = {
     destinos: [
         { name: 'Europa', href: '/paquetes/europa' },
         { name: 'Asia', href: '/paquetes/asia' },
-        { name: 'Caribe', href: '/paquetes/caribe' },
-        { name: 'África', href: '/paquetes/africa' },
         { name: 'México', href: '/paquetes/mexico' },
         { name: 'Sudamérica', href: '/paquetes/sudamerica' },
         { name: 'Centroamérica', href: '/paquetes/centroamerica' },
@@ -111,42 +109,6 @@ export const Footer = () => (
         <div className="absolute top-1/2 right-1/3 w-24 h-24 bg-gradient-to-br from-secondary-500/20 to-accent-500/20 rounded-full blur-xl animate-pulse delay-500"></div>
 
         <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
-            {/* Newsletter Section */}
-            <div className="py-12 border-b border-white/10">
-                <div className="bg-white/5 backdrop-blur-sm rounded-3xl p-8 lg:p-12">
-                    <div className="lg:flex lg:items-center lg:justify-between">
-                        <div className="lg:flex-1">
-                            <div className="flex items-center gap-3 mb-4">
-                                <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-secondary-600 rounded-xl flex items-center justify-center shadow-lg">
-                                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                                    </svg>
-                                </div>
-                                <div>
-                                    <h3 className="text-2xl font-bold bg-gradient-to-r from-white to-neutral-200 bg-clip-text text-transparent">
-                                        ¿Listo para tu próxima aventura?
-                                    </h3>
-                                    <p className="text-neutral-300 mt-1">
-                                        Recibe ofertas exclusivas y las mejores promociones de viaje
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="mt-6 lg:mt-0 lg:ml-8">
-                            <Link
-                                href="/contacto"
-                                className="inline-flex items-center gap-3 bg-gradient-to-r from-primary-600 to-secondary-600 hover:from-primary-700 hover:to-secondary-700 text-white font-semibold px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-primary-500/50"
-                            >
-                                <span>Contáctanos</span>
-                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                </svg>
-                            </Link>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <div className="py-20">
                 <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
                     {/* Company Info */}
