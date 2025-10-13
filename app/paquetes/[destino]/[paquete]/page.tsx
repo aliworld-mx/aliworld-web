@@ -364,12 +364,10 @@ export default async function PaquetePage({ params }: PageProps) {
                 </div>
             </div>
 
-            {/* Content Sections - Sin separación */}
             <div className="bg-white">
                 <ExperienceTabs experience={experience} />
             </div>
 
-            {/* Marquee with promotions */}
             <Marquee
                 texts={[
                     "✈️ Incluye vuelo + hotel + tours*",
