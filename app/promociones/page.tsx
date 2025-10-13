@@ -49,9 +49,7 @@ export default async function PromosPage() {
         name: `Paquetes de viaje en promoción`,
         url: `https://www.aliworld.mx/promociones`,
         itemListElement: promos?.fields?.paquetes.map((trip) => {
-            const { destino, slug, nombre, imagen, precio, moneda, dias, ciudades } = trip.fields;
-            const { url } = imagen.fields.file!;
-            const imageUrl = `https:${url}`;
+            const { destino, slug, nombre, urlImagen, precio, moneda, dias, ciudades } = trip.fields;
 
             return {
                 '@type': 'Offer',
@@ -59,7 +57,7 @@ export default async function PromosPage() {
                     '@type': 'Trip',
                     name: nombre as string,
                     url: `https://www.aliworld.mx/paquetes/${destino.fields.id}/${slug}`,
-                    image: imageUrl as string,
+                    image: urlImagen as string,
                     price: precio as number,
                     priceCurrency: moneda as string,
                     validFrom: '2024-12-01',

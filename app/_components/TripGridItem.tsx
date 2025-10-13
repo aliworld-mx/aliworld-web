@@ -14,11 +14,7 @@ interface TripGridItemProps {
 };
 
 export const TripGridItem = ({ trip, priority = false }: TripGridItemProps) => {
-    const { slug, imagen, nombre, paises, precio, dias, ciudades, moneda, destino, noches } = trip.fields;
-    const { url } = imagen.fields.file!;
-    const imageUrl = `https:${url}`;
-    
-    // Hook de favoritos
+    const { slug, imagen, nombre, paises, precio, dias, ciudades, moneda, destino, noches, urlImagen } = trip.fields;
     const { isFavorite, toggleFavorite, isLoaded } = useFavorites();
     const isFavorited = isLoaded && isFavorite(trip.fields.id);
     
@@ -27,7 +23,7 @@ export const TripGridItem = ({ trip, priority = false }: TripGridItemProps) => {
         '@type': 'TouristTrip',
         name: nombre,
         description: `Paquete de viaje de ${dias} días y ${noches} noches a ${paises.map(p => p.fields?.nombre).join(', ')}`,
-        image: imageUrl,
+        image: urlImagen,
         url: `https://www.aliworld.mx/paquetes/${destino.fields.id}/${slug}`,
         offers: {
             '@type': 'Offer',
@@ -83,8 +79,8 @@ export const TripGridItem = ({ trip, priority = false }: TripGridItemProps) => {
                 >
                     <div className="relative overflow-hidden">
                         <Image
-                            alt={imagen.fields.description ?? `Paquete de viaje ${nombre} - ${paises.map(p => p.fields?.nombre).join(', ')}`}
-                            src={imageUrl}
+                            alt={`Paquete de viaje ${nombre} - ${paises.map(p => p.fields?.nombre).join(', ')}`}
+                            src={urlImagen}
                             width={400}
                             height={250}
                             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"

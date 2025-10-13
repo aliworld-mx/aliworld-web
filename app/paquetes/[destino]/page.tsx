@@ -61,7 +61,7 @@ export const generateMetadata = async ({ params }: PageProps): Promise<Metadata>
             locale: 'es_MX',
             images: trips.length > 0 ? [
                 {
-                    url: `https:${trips[0].fields.imagen.fields.file!.url}`,
+                    url: `https:${trips[0].fields.urlImagen}`,
                     width: 1200,
                     height: 630,
                     alt: `Paquetes de viaje a ${formattedDestination} - Aliworld`,
@@ -75,7 +75,7 @@ export const generateMetadata = async ({ params }: PageProps): Promise<Metadata>
             description: `Explora nuestros paquetes exclusivos a ${formattedDestination}. Mejor precio garantizado y asistencia 24/7.`,
             site: '@aliworld_mx',
             creator: '@aliworld_mx',
-            images: trips.length > 0 ? [`https:${trips[0].fields.imagen.fields.file!.url}`] : [],
+            images: trips.length > 0 ? [`https:${trips[0].fields.urlImagen}`] : [],
         },
         alternates: {
             canonical: `https://www.aliworld.mx/paquetes/${destino}`,

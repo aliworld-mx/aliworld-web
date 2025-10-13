@@ -23,9 +23,7 @@ export const revalidate = 36000;
 export const generateMetadata = async ({ params }: PageProps): Promise<Metadata> => {
     const { paquete } = await params;
     const experience = await getTrip(paquete);
-    const { nombre, imagen, destino, slug, precio, moneda, dias, noches, ciudades, paises } = experience.fields;
-    const { url } = imagen.fields.file!;
-    const imageUrl = `https:${url}`;
+    const { nombre, destino, slug, precio, moneda, dias, noches, ciudades, paises, urlImagen } = experience.fields;
 
     const countries = paises.map(p => p.fields?.nombre).filter(Boolean).join(', ');
     const cities = ciudades.map(c => c.fields?.nombre).filter(Boolean).slice(0, 3).join(', ');
@@ -79,7 +77,7 @@ export const generateMetadata = async ({ params }: PageProps): Promise<Metadata>
             locale: 'es_MX',
             images: [
                 {
-                    url: imageUrl,
+                    url: urlImagen,
                     width: 1200,
                     height: 630,
                     alt: `${nombre} - Paquete de viaje a ${destino.fields.nombre}`,
@@ -93,7 +91,7 @@ export const generateMetadata = async ({ params }: PageProps): Promise<Metadata>
             creator: '@aliworld_mx',
             title: `${nombre} - ${duration}`,
             description: `Explora ${destino.fields.nombre} ${priceInfo}. Incluye vuelo, hotel y tours. ¡Reserva ahora!`,
-            images: [imageUrl],
+            images: [urlImagen],
         },
         alternates: {
             canonical: `https://www.aliworld.mx/paquetes/${destino.fields.id}/${slug}`,
@@ -121,9 +119,7 @@ export const generateMetadata = async ({ params }: PageProps): Promise<Metadata>
 export default async function PaquetePage({ params }: PageProps) {
     const { paquete } = await params;
     const experience = await getTrip(paquete);
-    const { nombre, slug, precio, dias, noches, imagen, moneda, destino, ciudades, paises, salidasDiarias, diasDeSalidas } = experience.fields;
-    const { url } = imagen.fields.file!;
-    const imageUrl = `https:${url}`;
+    const { nombre, slug, precio, dias, noches, moneda, destino, ciudades, paises, salidasDiarias, diasDeSalidas, urlImagen } = experience.fields;
 
     const structuredData = {
         '@context': 'https://schema.org',
@@ -134,7 +130,7 @@ export default async function PaquetePage({ params }: PageProps) {
         image: [
             {
                 '@type': 'ImageObject',
-                url: imageUrl,
+                url: urlImagen,
                 width: '800',
                 height: '400',
                 caption: `${nombre} - Paquete de viaje a ${destino.fields.nombre}`
@@ -241,9 +237,7 @@ export default async function PaquetePage({ params }: PageProps) {
         <>
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
 
-            {/* Enhanced Hero Section */}
             <div className="relative overflow-hidden bg-gradient-to-br from-primary-50 via-secondary-50 to-accent-50">
-                {/* Background Pattern */}
                 <div className="absolute inset-0 opacity-[0.02]">
                     <svg className="absolute inset-0 h-full w-full" xmlns="http://www.w3.org/2000/svg">
                         <defs>
@@ -257,13 +251,11 @@ export default async function PaquetePage({ params }: PageProps) {
                     </svg>
                 </div>
 
-                {/* Floating Elements */}
                 <div className="absolute top-10 right-10 w-20 h-20 bg-gradient-to-br from-secondary-400 to-secondary-500 rounded-full opacity-10 animate-pulse"></div>
                 <div className="absolute bottom-10 left-10 w-16 h-16 bg-gradient-to-br from-accent-400 to-accent-500 rounded-full opacity-10 animate-pulse delay-1000"></div>
 
                 <div className="relative">
                     <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-                        {/* Header Section */}
                         <Breadcrumbs breadcrumbs={breadcrumbs} />
                         <div className="text-center mb-12">
                             <div className="flex items-center justify-center gap-3 mb-4">
@@ -275,9 +267,7 @@ export default async function PaquetePage({ params }: PageProps) {
                             </h1>
                             <div className="h-1 w-20 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full mx-auto mb-8"></div>
 
-                            {/* Duration and Price Row */}
                             <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-8">
-                                {/* Duration Badge */}
                                 <div className="inline-flex items-center gap-4 bg-white/90 backdrop-blur-sm rounded-2xl px-6 py-4 shadow-lg border border-white/50">
                                     <div className="flex items-center gap-2">
                                         <div className="w-10 h-10 bg-gradient-to-br from-secondary-500 to-secondary-600 rounded-xl flex items-center justify-center">
@@ -294,7 +284,6 @@ export default async function PaquetePage({ params }: PageProps) {
                                     </div>
                                 </div>
 
-                                {/* Price Badge */}
                                 <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-6 py-4 shadow-lg border border-white/50">
                                     <div className="text-center">
                                         <div className="flex items-baseline justify-center gap-2 mb-1">
@@ -307,17 +296,13 @@ export default async function PaquetePage({ params }: PageProps) {
                                 </div>
                             </div>
                             
-                            {/* CTA Button */}
                             <div className="flex justify-center mt-8">
                                 <CTAButton slug={slug} destination={destino.fields.id} variant="primary" size="lg" />
                             </div>
                         </div>
 
-                        {/* Main Content Grid - 3 Columns */}
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-                            {/* Left Column - Details (1 column) */}
                             <div className="lg:col-span-1 space-y-6">
-                                {/* Departure Info */}
                                 {(salidasDiarias || diasDeSalidas) && (
                                     <div className="flex items-center gap-3 bg-accent-50 rounded-xl p-4 border border-accent-200">
                                         <CalendarDaysIcon className="w-5 h-5 text-accent-600" />
@@ -327,7 +312,6 @@ export default async function PaquetePage({ params }: PageProps) {
                                     </div>
                                 )}
 
-                                {/* Location Info */}
                                 <div className="space-y-3">
                                     <div className="flex items-start gap-3 bg-white/90 backdrop-blur-sm rounded-xl p-4 border border-white/50">
                                         <GlobeAmericasIcon className="w-5 h-5 text-primary-500 mt-0.5" />
@@ -346,7 +330,6 @@ export default async function PaquetePage({ params }: PageProps) {
                                     </div>
                                 </div>
 
-                                {/* Trust Signals */}
                                 <div className="space-y-3">
                                     <div className="flex items-center gap-2 bg-accent-100 text-accent-800 px-4 py-3 rounded-xl text-sm font-medium">
                                         <CheckBadgeIcon className="w-4 h-4" />
@@ -359,18 +342,15 @@ export default async function PaquetePage({ params }: PageProps) {
                                 </div>
                             </div>
 
-                            {/* Right Columns - Image and CTA (2 columns) */}
                             <div className="lg:col-span-2">
                                 <div className="relative">
-                                    {/* Action Buttons */}
                                     <ActionButtons experience={experience} />
 
-                                    {/* Main Image */}
                                     <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                                         <Image
-                                            alt={imagen.fields.description ?? `${nombre} - Paquete de viaje a ${destino.fields.nombre}`}
+                                            alt={`${nombre} - Paquete de viaje a ${destino.fields.nombre}`}
                                             priority={true}
-                                            src={imageUrl}
+                                            src={urlImagen}
                                             width={800}
                                             height={400}
                                             className="w-full h-64 sm:h-80 lg:h-96 object-cover"

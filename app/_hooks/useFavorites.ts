@@ -56,7 +56,7 @@ export const useFavorites = () => {
       id: trip.fields.id,
       slug: trip.fields.slug,
       nombre: trip.fields.nombre,
-      imagen: `https:${trip.fields.imagen.fields.file!.url}`,
+      imagen: trip.fields.urlImagen,
       precio: trip.fields.precio,
       moneda: trip.fields.moneda,
       destino: trip.fields.destino.fields.id,
