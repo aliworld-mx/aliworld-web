@@ -73,8 +73,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const destinationCategoryPages: SitemapEntry[] = [
         '/paquetes/asia',
         '/paquetes/europa', 
-        '/paquetes/caribe',
-        '/paquetes/africa',
         '/paquetes/mexico',
         '/paquetes/sudamerica',
         '/paquetes/centroamerica',
