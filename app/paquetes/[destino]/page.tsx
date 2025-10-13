@@ -124,9 +124,7 @@ export default async function DestinosPage({ params }: PageProps) {
         name: `Paquetes de Viaje a ${formattedDestination}`,
         url: `https://www.aliworld.mx/paquetes/${destino}`,
         itemListElement: trips.map((trip) => {
-            const { slug, nombre, imagen, precio, moneda, dias, ciudades } = trip.fields;
-            const { url } = imagen.fields.file!;
-            const imageUrl = `https:${url}`;
+            const { slug, nombre, precio, moneda, dias, ciudades, urlImagen } = trip.fields;
 
             return {
                 '@type': 'Offer',
@@ -134,7 +132,7 @@ export default async function DestinosPage({ params }: PageProps) {
                     '@type': 'Trip',
                     name: nombre as string,
                     url: `https://www.aliworld.mx/paquetes/${destino}/${slug}`,
-                    image: imageUrl as string,
+                    image: urlImagen as string,
                     price: precio as number,
                     priceCurrency: moneda as string,
                     validFrom: '2025-01-01',

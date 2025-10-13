@@ -7,6 +7,11 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "images.ctfassets.net",
         pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "one.cdnmega.com",
+        pathname: "/**",
       }
     ]
   },
