@@ -14,7 +14,7 @@ interface TripGridItemProps {
 };
 
 export const TripGridItem = ({ trip, priority = false }: TripGridItemProps) => {
-    const { slug, imagen, nombre, paises, precio, dias, ciudades, moneda, destino, noches, urlImagen } = trip.fields;
+    const { slug, nombre, paises, precio, dias, ciudades, moneda, destino, noches, urlImagen } = trip.fields;
     const { isFavorite, toggleFavorite, isLoaded } = useFavorites();
     const isFavorited = isLoaded && isFavorite(trip.fields.id);
     
