@@ -42,19 +42,7 @@ export async function generateMetadata(): Promise<Metadata> {
             address: false,
             telephone: false,
         },
-        robots: {
-            index: true,
-            follow: true,
-            nocache: false,
-            googleBot: {
-                index: true,
-                follow: true,
-                noimageindex: false,
-                'max-video-preview': -1,
-                'max-image-preview': 'large',
-                'max-snippet': -1,
-            },
-        },
+        robots: 'index, follow',
         openGraph: {
             type: 'website',
             url: 'https://www.aliworld.mx/paquetes',
