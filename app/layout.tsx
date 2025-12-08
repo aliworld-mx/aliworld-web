@@ -10,7 +10,7 @@ import Script from "next/script";
 const font = League_Spartan({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Aliworld - Paquetes de viaje a todo el mundo al mejor precio",
+  title: "Aliworld - Paquetes de viaje a todo el mundo al mejor precio desde México",
   description: "Encuentra los mejores paquetes de viaje a todo el mundo al mejor precio. ¡Reserva ya!",
   openGraph: {
     type: 'website',
