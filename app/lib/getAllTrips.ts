@@ -1,17 +1,25 @@
+import { unstable_cache } from "next/cache";
 import { TypePaquete } from "../_types/contentful/Paquete";
 import { contentfulClient } from "../_utils/contentful";
 
-export async function getAllTrips() {
-    try {
-        const entries = await contentfulClient.getEntries({
-            content_type: 'paquete',
-            limit: 600,
-            include: 1,
-            select: ['fields.slug', 'fields.destino', 'sys.updatedAt'],
-        });
+export const getAllTrips = unstable_cache(
+    async () => {
+        try {
+            const entries = await contentfulClient.getEntries({
+                content_type: 'paquete',
+                limit: 600,
+                include: 1,
+                select: ['fields.slug', 'fields.destino', 'sys.updatedAt'],
+            });
 
-        return entries.items as unknown as TypePaquete[];
-    } catch (error) {
-        console.error(error);
+            return entries.items as unknown as TypePaquete[];
+        } catch (error) {
+            console.error(error);
+        }
+    },
+    ['all-trips'],
+    {
+        revalidate: 259200, // 3 días
+        tags: ['all-trips']
     }
-}
+);
