@@ -114,7 +114,7 @@ export default async function BlogPost({ params }: PageProps) {
             [INLINES.HYPERLINK]: (node: any) => {
                 const { uri } = node.data;
                 return (
-                    <Link follow={true} href={uri} className='text-sky-600 underline'>{node.content[0].value}</Link>
+                    <Link href={uri} className='text-sky-600 underline'>{node.content[0].value}</Link>
                 );
             },
             [BLOCKS.HR]: () => {
