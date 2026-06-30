@@ -96,7 +96,7 @@ export default async function BlogPage() {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
             />
-            
+
             {/* Hero Section */}
             <section className="relative bg-gradient-to-br from-neutral-50 via-primary-50/30 to-secondary-50/30 overflow-hidden">
                 {/* Background Pattern */}
@@ -124,52 +124,25 @@ export default async function BlogPage() {
                     <div className="mx-auto max-w-4xl text-center">
                         {/* Blog Badge */}
                         <div className="inline-flex items-center gap-3 bg-white/90 backdrop-blur-sm rounded-full px-6 py-3 shadow-lg border border-white/50 mb-8">
-                            <div className="w-8 h-8 bg-gradient-to-br from-primary-500 to-secondary-600 rounded-full flex items-center justify-center">
-                                <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                                </svg>
-                            </div>
                             <span className="text-primary-700 font-semibold text-lg">Blog de Viajes</span>
                         </div>
 
                         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-neutral-900 mb-8 leading-tight">
                             Descubre el mundo a través de <span className="bg-gradient-to-r from-primary-600 via-secondary-600 to-accent-600 bg-clip-text text-transparent">nuestras experiencias</span>
                         </h1>
-                        
+
                         <div className="h-1 w-24 bg-gradient-to-r from-primary-500 via-secondary-500 to-accent-500 rounded-full mx-auto mb-8"></div>
-                        
+
                         <p className="text-xl text-neutral-600 leading-relaxed mb-12 max-w-3xl mx-auto">
-                            Encuentra inspiración, consejos de expertos y guías detalladas para planear tu próxima aventura. 
+                            Encuentra inspiración, consejos de expertos y guías detalladas para planear tu próxima aventura.
                             Desde destinos exóticos hasta experiencias únicas, te compartimos todo lo que necesitas saber.
                         </p>
-
-                        {/* Stats */}
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-2xl mx-auto">
-                            <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/50">
-                                <div className="text-3xl font-bold bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent mb-2">
-                                    {posts?.length || 0}+
-                                </div>
-                                <div className="text-sm font-medium text-neutral-600">Artículos de Viaje</div>
-                            </div>
-                            <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/50">
-                                <div className="text-3xl font-bold bg-gradient-to-r from-secondary-600 to-accent-600 bg-clip-text text-transparent mb-2">
-                                    50+
-                                </div>
-                                <div className="text-sm font-medium text-neutral-600">Destinos Cubiertos</div>
-                            </div>
-                            <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/50">
-                                <div className="text-3xl font-bold bg-gradient-to-r from-accent-600 to-purple-600 bg-clip-text text-transparent mb-2">
-                                    1K+
-                                </div>
-                                <div className="text-sm font-medium text-neutral-600">Lectores Mensuales</div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </section>
 
             {/* Blog Posts Grid */}
-            <section className="py-24 sm:py-32 bg-gradient-to-br from-white to-neutral-50">
+            <section className="py-24bg-gradient-to-br from-white to-neutral-50">
                 <div className="mx-auto max-w-7xl px-6 lg:px-8">
                     {posts && posts.length > 0 ? (
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
@@ -183,17 +156,12 @@ export default async function BlogPage() {
                                 } = post.fields;
 
                                 return (
-                                    <Link 
-                                        href={`/blog/${slug}`} 
-                                        key={slug} 
+                                    <Link
+                                        href={`/blog/${slug}`}
+                                        key={slug}
                                         className="group block"
                                     >
                                         <article className="relative bg-white/90 backdrop-blur-sm rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-white/50 hover:border-primary-200 transform hover:-translate-y-3 focus:outline-none focus:ring-4 focus:ring-primary-500/50">
-                                            {/* Article Number Badge */}
-                                            <div className="absolute top-4 left-4 z-20 w-10 h-10 bg-gradient-to-br from-neutral-800 to-neutral-900 rounded-full flex items-center justify-center shadow-lg">
-                                                <span className="text-white font-bold text-sm">{index + 1}</span>
-                                            </div>
-
                                             {/* Category Badge */}
                                             {etiquetas && etiquetas.length > 0 && (
                                                 <div className="absolute top-4 right-4 z-20 bg-white/95 backdrop-blur-sm rounded-full px-3 py-1 shadow-lg">
@@ -213,7 +181,7 @@ export default async function BlogPage() {
                                                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                                 />
                                                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                                                
+
                                             </div>
 
                                             {/* Content */}
@@ -224,27 +192,27 @@ export default async function BlogPage() {
                                                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                                         </svg>
-                                                        <span>{new Date(post.sys.createdAt).toLocaleDateString('es-ES', { 
-                                                            day: 'numeric', 
+                                                        <span>{new Date(post.sys.createdAt).toLocaleDateString('es-ES', {
+                                                            day: 'numeric',
                                                             month: 'short',
                                                             year: 'numeric'
                                                         })}</span>
                                                     </div>
                                                 </div>
-                                                
+
                                                 <h3 className="text-xl font-bold text-neutral-900 mb-3 line-clamp-2 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:bg-clip-text group-hover:from-primary-600 group-hover:to-secondary-600 transition-all duration-300">
                                                     {titulo}
                                                 </h3>
-                                                
+
                                                 <p className="text-neutral-600 leading-relaxed mb-6 line-clamp-3">
                                                     {descripcion}
                                                 </p>
-                                                
+
                                                 {/* Tags */}
                                                 {etiquetas && etiquetas.length > 0 && (
                                                     <div className="flex flex-wrap gap-2 mb-6">
                                                         {etiquetas.slice(0, 3).map((etiqueta) => (
-                                                            <span 
+                                                            <span
                                                                 key={etiqueta}
                                                                 className="px-3 py-1 bg-primary-50 text-primary-700 rounded-full text-xs font-medium border border-primary-100"
                                                             >
@@ -253,7 +221,7 @@ export default async function BlogPage() {
                                                         ))}
                                                     </div>
                                                 )}
-                                                
+
                                                 {/* CTA */}
                                                 <div className="inline-flex items-center gap-2 text-primary-600 hover:text-primary-700 font-semibold text-sm group/button">
                                                     <span>Leer más</span>

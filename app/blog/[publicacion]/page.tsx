@@ -114,7 +114,7 @@ export default async function BlogPost({ params }: PageProps) {
             [INLINES.HYPERLINK]: (node: any) => {
                 const { uri } = node.data;
                 return (
-                    <Link href={uri} className='text-sky-600 underline'>{node.content[0].value}</Link>
+                    <Link follow={true} href={uri} className='text-sky-600 underline'>{node.content[0].value}</Link>
                 );
             },
             [BLOCKS.HR]: () => {
@@ -129,7 +129,7 @@ export default async function BlogPost({ params }: PageProps) {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
             />
-            <div className='bg-white pt-12 pb-24 sm:pb-32'>
+            <div className='bg-white pt-12'>
                 <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                     <BackButton />
                     <div className="flex flex-col lg:flex-row lg:order-first">

@@ -57,22 +57,17 @@ export default function Benefits() {
                     <header className="text-center mb-20">
                         {/* Benefits Badge */}
                         <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 shadow-lg border border-white/20 mb-8">
-                            <div className="w-8 h-8 bg-gradient-to-br from-white to-secondary-200 rounded-full flex items-center justify-center">
-                                <svg className="w-4 h-4 text-primary-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-                                </svg>
-                            </div>
                             <span className="text-white font-semibold text-lg">Nuestros Beneficios</span>
                         </div>
 
                         <h2 id="benefits-heading" className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white mb-8 leading-tight">
                             ¿Qué nos hace <span className="bg-gradient-to-r from-secondary-300 via-accent-300 to-white bg-clip-text text-transparent">diferentes</span>?
                         </h2>
-                        
+
                         <div className="h-1 w-24 bg-gradient-to-r from-secondary-400 via-accent-400 to-white rounded-full mx-auto mb-8"></div>
-                        
+
                         <p className="text-xl text-white/90 leading-relaxed max-w-3xl mx-auto">
-                            Nuestra misión es hacer de cada viaje una experiencia inolvidable. 
+                            Nuestra misión es hacer de cada viaje una experiencia inolvidable.
                             Que tu corazón se quede en cada lugar que visites y que cada recuerdo sea un momento mágico.
                         </p>
                     </header>
@@ -87,34 +82,29 @@ export default function Benefits() {
                                 aria-label={incentive.name}
                             >
                                 <div className="relative bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20 hover:border-white/40 transition-all duration-500 overflow-hidden transform hover:-translate-y-3 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-white/50">
-                                    {/* Benefit Number Badge */}
-                                    <div className="absolute top-4 right-4 w-12 h-12 bg-gradient-to-br from-white/20 to-white/10 rounded-full flex items-center justify-center border border-white/30">
-                                        <span className="text-white font-black text-sm">{incentive.number}</span>
-                                    </div>
-
                                     {/* Icon Container */}
                                     <div className="relative mb-8">
-                                        <div className={`w-20 h-20 bg-gradient-to-br ${incentive.bgColor} rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300 border border-white/20`}>
+                                        <div className={`w-20 h-20 mx-auto bg-gradient-to-br ${incentive.bgColor} rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300 border border-white/20`}>
                                             <div className={`w-16 h-16 bg-gradient-to-br ${incentive.color} rounded-xl flex items-center justify-center shadow-inner`}>
                                                 <incentive.icon className="w-8 h-8 text-white" aria-hidden="true" />
                                             </div>
                                         </div>
-                                        
+
                                         {/* Decorative ring */}
                                         <div className={`absolute -inset-2 bg-gradient-to-br ${incentive.color} rounded-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-300 -z-10`}></div>
                                     </div>
 
                                     {/* Content */}
                                     <div className="text-center">
-                                        <h3 
-                                            className="text-xl font-bold text-white mb-4 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:bg-clip-text group-hover:from-white group-hover:to-secondary-200 transition-all duration-300" 
+                                        <h3
+                                            className="text-xl font-bold text-white mb-4 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:bg-clip-text group-hover:from-white group-hover:to-secondary-200 transition-all duration-300"
                                             id={`benefit-title-${incentive.name.replace(/\s+/g, '-')}`}
                                         >
                                             {incentive.name}
                                         </h3>
-                                        
-                                        <p 
-                                            className="text-white/90 leading-relaxed line-clamp-4 group-hover:text-white transition-colors duration-300" 
+
+                                        <p
+                                            className="text-white/90 leading-relaxed group-hover:text-white transition-colors duration-300"
                                             aria-describedby={`benefit-title-${incentive.name.replace(/\s+/g, '-')}`}
                                         >
                                             {incentive.description}
@@ -145,14 +135,14 @@ export default function Benefits() {
                                     Cada viaje es una oportunidad única de crear experiencias que durarán toda la vida
                                 </p>
                             </div>
-                            
+
                             <div className="flex items-center justify-center gap-6 text-white/70 text-sm">
                                 <div className="flex items-center gap-2">
-                                    <span>Servicio 24/7</span>
+                                    <span>Servicio atento</span>
                                 </div>
                                 <div className="w-px h-4 bg-white/30"></div>
                                 <div className="flex items-center gap-2">
-                                    <span>Mejor precio garantizado</span>
+                                    <span>Mejor precio</span>
                                 </div>
                                 <div className="w-px h-4 bg-white/30"></div>
                                 <div className="flex items-center gap-2">

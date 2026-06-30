@@ -28,11 +28,6 @@ const Socials = () => (
             <header className="mx-auto max-w-4xl text-center mb-20">
                 {/* Social Badge */}
                 <div className="inline-flex items-center gap-3 bg-white/90 backdrop-blur-sm rounded-full px-6 py-3 shadow-lg border border-white/50 mb-8">
-                    <div className="w-8 h-8 bg-gradient-to-br from-secondary-500 to-accent-600 rounded-full flex items-center justify-center">
-                        <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
-                        </svg>
-                    </div>
                     <span className="text-secondary-700 font-semibold text-lg">Síguenos</span>
                 </div>
 
@@ -176,8 +171,6 @@ const Socials = () => (
                         <div className="flex items-center gap-2">
                             <span className="text-sm font-semibold text-neutral-700">¡Únete a nuestra comunidad de viajeros!</span>
                         </div>
-                        <div className="w-px h-6 bg-neutral-200"></div>
-                        <span className="text-sm text-neutral-600">Ofertas exclusivas cada semana</span>
                     </div>
                 </div>
             </header>

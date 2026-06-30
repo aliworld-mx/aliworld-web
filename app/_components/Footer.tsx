@@ -278,7 +278,7 @@ export const Footer = () => (
                 <div className="lg:flex lg:items-center lg:justify-between">
                     <div className="mb-6 lg:mb-0">
                         <p className="text-sm text-neutral-400">
-                            © 2025 Aliworld. Todos los derechos reservados.
+                            © 2026 Aliworld. Todos los derechos reservados.
                         </p>
                         <p className="text-xs text-neutral-500 mt-1">
                             Hecho con ❤️ para viajeros apasionados

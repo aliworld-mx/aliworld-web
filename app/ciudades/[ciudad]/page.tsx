@@ -44,7 +44,7 @@ export const generateMetadata = async ({ params }: PageProps): Promise<Metadata>
     const enhancedDescription = `Guía completa de ${nombreDeCiudad}: ¿Qué hacer, dónde comer y qué visitar? Descubre las mejores actividades, platillos típicos y consejos para tu viaje. Encuentra paquetes turísticos desde ${nombreDeCiudad} con Aliworld.`;
 
     return {
-        title: `¿Qué hacer en ${nombreDeCiudad}? Guía Completa 2025 | Actividades y Tours | Aliworld`,
+        title: `¿Qué hacer en ${nombreDeCiudad}? Guía Completa 2026 | Actividades y Tours | Aliworld`,
         description: enhancedDescription,
         keywords: dynamicKeywords.filter((keyword, index, self) => self.indexOf(keyword) === index),
         authors: [{ name: 'Aliworld', url: 'https://www.aliworld.mx' }],
@@ -59,7 +59,7 @@ export const generateMetadata = async ({ params }: PageProps): Promise<Metadata>
         openGraph: {
             type: 'website',
             url: `https://www.aliworld.mx/ciudades/${slug}`,
-            title: `Guía de ${nombreDeCiudad} 2025 - Qué hacer, Dónde Comer y Tours | Aliworld`,
+            title: `Guía de ${nombreDeCiudad} 2026 - Qué hacer, Dónde Comer y Tours | Aliworld`,
             siteName: 'Aliworld',
             description: enhancedDescription,
             locale: 'es_MX',
