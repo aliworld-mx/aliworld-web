@@ -50,11 +50,10 @@ export default async function RootLayout({
       >
         <Scroll />
         <Navigation />
-        <main className="pt-24 sm:pt-28 bg-white">
+        <main className="pt-20 sm:pt-24 bg-white">
           {children}
         </main>
         <Footer />
-        <Analytics />
       </body>
     </html>
   );

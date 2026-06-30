@@ -1,8 +1,8 @@
 import { Metadata } from "next";
 import Image from "next/image";
 import hotelesImage from "../../public/hoteles.jpg";
-import { ExpediaBenefits } from "../_components/Expedia/ExpediaBenefits";
 import Link from "next/link";
+import Benefits from "../_components/Benefits";
 
 export const metadata: Metadata = {
     title: 'Reserva Hoteles | Aliworld',
@@ -140,8 +140,7 @@ export default function HotelesPage() {
                     </div>
                 </div>
             </section>
-
-            <ExpediaBenefits />
+            <Benefits />
         </div>
     )
 }

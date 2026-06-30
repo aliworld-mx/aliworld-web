@@ -1,9 +1,9 @@
 import { Metadata } from "next";
 import Image from "next/image";
 import vuelosImage from "../../public/vuelos.jpg";
-import { ExpediaBenefits } from "../_components/Expedia/ExpediaBenefits";
 import Link from "next/link";
 import { BoltIcon, CheckBadgeIcon, CurrencyDollarIcon, GlobeAmericasIcon } from "@heroicons/react/20/solid";
+import Benefits from "../_components/Benefits";
 
 export const metadata: Metadata = {
     title: 'Reserva Vuelos | Aliworld',
@@ -132,8 +132,7 @@ export default function VuelosPage() {
                     </div>
                 </div>
             </section>
-
-            <ExpediaBenefits />
+            <Benefits />
         </div>
     )
 }

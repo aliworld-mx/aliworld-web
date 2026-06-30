@@ -18,7 +18,6 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import AliworldLogo from '../../public/aliworld-color.svg';
-import { DollarPrice } from "./DollarPrice";
 
 const callsToAction = [
     { 
@@ -105,7 +104,7 @@ export const Navigation = () => {
                 ? 'bg-white/90 backdrop-blur-md border-b border-gray-200/50 shadow-lg' 
                 : 'bg-white/95 backdrop-blur-sm'
         }`}>
-            <nav aria-label="Navegación principal" role="navigation" className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
+            <nav aria-label="Navegación principal" role="navigation" className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-8">
                 <div className="flex lg:flex-1">
                     <Link href="/" className="-m-1.5 p-1.5 group">
                         <span className="sr-only">Aliworld</span>
@@ -220,17 +219,11 @@ export const Navigation = () => {
                         <NewspaperIcon className="h-4 w-4 text-gray-400" />
                         Blog
                     </Link>
-                    
-                    <div className="border-l border-gray-200 pl-6">
-                        <DollarPrice />
-                    </div>
-                    
                     <div className="flex items-center gap-x-3">
                         <Link
                             href="https://wa.me/523314331600?text=Quiero Cotizar"
                             className="inline-flex items-center gap-x-2 rounded-full bg-gradient-to-r from-sky-600 to-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-lg hover:from-sky-700 hover:to-blue-700 hover:shadow-xl transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-sky-500/50 focus:ring-offset-2"
                         >
-                            <BanknotesIcon className="h-4 w-4" />
                             Cotizar Ahora
                         </Link>
                     </div>
@@ -342,15 +335,12 @@ export const Navigation = () => {
                             </div>
                             
                             <div className="py-6 space-y-4">
-                                <DollarPrice />
-                                
                                 <div className="pt-4 border-t border-gray-200/30">
                                     <Link
                                         href="https://wa.me/523314331600?text=Quiero Cotizar"
                                         onClick={onLinkClick}
                                         className="flex items-center justify-center gap-x-2 w-full rounded-full bg-gradient-to-r from-sky-600 to-blue-600 px-6 py-3 text-base font-semibold text-white shadow-lg hover:from-sky-700 hover:to-blue-700 hover:shadow-xl transition-all duration-200"
                                     >
-                                        <BanknotesIcon className="h-5 w-5" />
                                         Cotizar Ahora
                                     </Link>
                                 </div>

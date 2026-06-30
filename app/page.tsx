@@ -13,7 +13,6 @@ import { getDestinations } from './lib/getDestinations';
 import { FAQs } from './_components/FAQs';
 import Socials from './_components/Socials';
 import { Catalog } from './_components/Catalog';
-import { ExpediaBenefits } from './_components/Expedia/ExpediaBenefits';
 import { TripGridItem } from './_components/TripGridItem';
 import DestinationsCarousel from './_components/DestinationsCarousel';
 
@@ -345,7 +344,6 @@ export default async function InicioPage() {
           </div>
         </section>
         <Catalog />
-        <ExpediaBenefits />
         <Socials />
         <Benefits />
         <FAQs />
