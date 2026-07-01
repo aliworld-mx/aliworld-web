@@ -146,7 +146,7 @@ export default async function PaquetePage({ params }: PageProps) {
             price: precio.toString(),
             priceCurrency: moneda,
             availability: 'https://schema.org/InStock',
-            priceValidUntil: '2025-12-31',
+            priceValidUntil: '2029-12-31',
             seller: {
                 '@type': 'Organization',
                 name: 'Aliworld'

@@ -78,7 +78,7 @@ export const generateMetadata = async ({ params }: PageProps): Promise<Metadata>
             card: 'summary_large_image',
             site: '@aliworld_mx',
             creator: '@aliworld_mx',
-            title: `¿Qué hacer en ${nombreDeCiudad}? Guía 2025`,
+            title: `¿Qué hacer en ${nombreDeCiudad}? Guía 2026`,
             description: `Descubre las mejores actividades, comida y lugares en ${nombreDeCiudad}. Guía completa + paquetes de viaje.`,
             images: [imageUrl],
         },
@@ -196,7 +196,7 @@ export default async function CiudadPage({ params }: PageProps) {
                 '@type': 'WebPage',
                 '@id': `https://www.aliworld.mx/ciudades/${slug}`,
                 url: `https://www.aliworld.mx/ciudades/${slug}`,
-                name: `¿Qué hacer en ${nombreDeCiudad}? Guía Completa 2025`,
+                name: `¿Qué hacer en ${nombreDeCiudad}? Guía Completa 2026`,
                 description: `Guía completa de ${nombreDeCiudad}: ¿Qué hacer, dónde comer y qué visitar? Descubre las mejores actividades, platillos típicos y consejos.`,
                 inLanguage: 'es-MX',
                 isPartOf: {
@@ -302,28 +302,6 @@ export default async function CiudadPage({ params }: PageProps) {
                                             sizes="(max-width: 768px) 100vw, 50vw"
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
-
-                                        {/* Image Overlay Badge */}
-                                        <div className="absolute bottom-6 left-6 right-6">
-                                            <div className="bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-lg">
-                                                <div className="flex items-center justify-between">
-                                                    <div className="flex items-center gap-3">
-                                                        <div className="flex items-center">
-                                                            {[...Array(5)].map((_, i) => (
-                                                                <svg key={i} className="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
-                                                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                                                </svg>
-                                                            ))}
-                                                        </div>
-                                                        <span className="text-sm font-medium text-neutral-700">Destino Recomendado</span>
-                                                    </div>
-                                                    <div className="text-right">
-                                                        <p className="text-xs text-neutral-600">Guía Completa</p>
-                                                        <p className="text-sm font-bold text-primary-600">2025</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -673,34 +651,6 @@ export default async function CiudadPage({ params }: PageProps) {
                                 <p className="text-xl text-neutral-600 leading-relaxed mb-10">
                                     Resolvemos las dudas más comunes sobre tu viaje a {nombreDeCiudad} para que tengas la mejor experiencia.
                                 </p>
-
-                                {/* Trust Elements */}
-                                <div className="space-y-4">
-                                    <div className="flex items-center gap-3">
-                                        <div className="w-6 h-6 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center">
-                                            <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                            </svg>
-                                        </div>
-                                        <span className="text-neutral-700 font-medium">Información actualizada 2025</span>
-                                    </div>
-                                    <div className="flex items-center gap-3">
-                                        <div className="w-6 h-6 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center">
-                                            <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                            </svg>
-                                        </div>
-                                        <span className="text-neutral-700 font-medium">Asistencia 24/7 disponible</span>
-                                    </div>
-                                    <div className="flex items-center gap-3">
-                                        <div className="w-6 h-6 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center">
-                                            <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                            </svg>
-                                        </div>
-                                        <span className="text-neutral-700 font-medium">Expertos locales certificados</span>
-                                    </div>
-                                </div>
                             </div>
 
                             {/* Right Column - FAQs */}
