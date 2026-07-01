@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { Breadcrumbs } from '@/app/_components/Breadcrumbs'
-import { LockClosedIcon, MapPinIcon, StarIcon, HeartIcon } from '@heroicons/react/20/solid'
+import { LockClosedIcon, MapPinIcon, StarIcon } from '@heroicons/react/20/solid'
 import Socials from '@/app/_components/Socials'
 import { getGuide } from '@/app/lib/getGuide'
 import Link from 'next/link'
