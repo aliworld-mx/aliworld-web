@@ -55,11 +55,6 @@ export default async function CitiesPage() {
 
                 <div className="relative mx-auto max-w-7xl px-6 lg:px-8 py-24 sm:py-32">
                     <div className="mx-auto max-w-4xl text-center">
-                        {/* Cities Badge */}
-                        <div className="inline-flex items-center gap-3 bg-white/90 backdrop-blur-sm rounded-full px-6 py-3 shadow-lg border border-white/50 mb-8">
-                            <span className="text-primary-700 font-semibold text-lg">Guías de Ciudades</span>
-                        </div>
-
                         <h1 
                             id="ciudades-heading"
                             className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-neutral-900 mb-8 leading-tight"

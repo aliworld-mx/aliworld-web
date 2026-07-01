@@ -241,12 +241,7 @@ export default async function CiudadPage({ params }: PageProps) {
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                             {/* Content Column */}
                             <header className="text-center lg:text-left">
-                                {/* City Badge */}
                                 <Breadcrumbs breadcrumbs={breadcrumbs} />
-                                <div className="inline-flex items-center gap-3 bg-white/90 backdrop-blur-sm rounded-full px-6 py-3 shadow-lg border border-white/50 mb-8">
-                                    <span className="text-primary-600 font-semibold text-lg">Guía de {nombreDeCiudad}</span>
-                                </div>
-
                                 {/* Main Title */}
                                 <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight text-neutral-900 mb-8 leading-[0.9]">
                                     <span className="bg-gradient-to-r from-primary-600 via-secondary-600 to-accent-600 bg-clip-text text-transparent">
@@ -288,7 +283,6 @@ export default async function CiudadPage({ params }: PageProps) {
                                     </Link>
                                 </div>
                             </header>
-                            <GYGAutoWidget />
                             {/* Image Column */}
                             <div className="relative">
                                 {/* Decorative Elements */}
@@ -353,16 +347,7 @@ export default async function CiudadPage({ params }: PageProps) {
                     </div>
 
                     <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
-                        {/* Header mejorado */}
                         <header className="mx-auto max-w-4xl text-center mb-20">
-                            {/* Badge */}
-                            <div className="inline-flex items-center gap-3 bg-white/90 backdrop-blur-sm rounded-full px-6 py-3 shadow-lg border border-white/50 mb-8">
-                                <div className="w-8 h-8 bg-gradient-to-br from-accent-500 to-accent-600 rounded-full flex items-center justify-center">
-                                    <HeartIcon className="w-4 h-4 text-white" />
-                                </div>
-                                <span className="text-accent-600 font-semibold text-lg">Guía Turística de {nombreDeCiudad}</span>
-                            </div>
-
                             <h2 id="experiencias-heading" className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-neutral-900 mb-8 leading-tight">
                                 <span className="bg-gradient-to-r from-accent-600 via-primary-600 to-secondary-600 bg-clip-text text-transparent">
                                     {subEncabezado}
@@ -374,6 +359,7 @@ export default async function CiudadPage({ params }: PageProps) {
                             <p className="text-xl text-neutral-600 leading-relaxed">
                                 {contenido}
                             </p>
+                            <GYGAutoWidget />
                         </header>
 
                         {/* Enhanced Image Section */}
