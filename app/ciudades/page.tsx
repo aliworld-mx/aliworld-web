@@ -57,11 +57,6 @@ export default async function CitiesPage() {
                     <div className="mx-auto max-w-4xl text-center">
                         {/* Cities Badge */}
                         <div className="inline-flex items-center gap-3 bg-white/90 backdrop-blur-sm rounded-full px-6 py-3 shadow-lg border border-white/50 mb-8">
-                            <div className="w-8 h-8 bg-gradient-to-br from-primary-500 to-secondary-600 rounded-full flex items-center justify-center">
-                                <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                                </svg>
-                            </div>
                             <span className="text-primary-700 font-semibold text-lg">Guías de Ciudades</span>
                         </div>
 
@@ -78,28 +73,6 @@ export default async function CitiesPage() {
                             Descubre guías completas y detalladas para planear tu próxima aventura urbana. 
                             Desde destinos icónicos hasta gemas ocultas, tenemos toda la información que necesitas.
                         </p>
-
-                        {/* Stats */}
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-2xl mx-auto">
-                            <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/50">
-                                <div className="text-3xl font-bold bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent mb-2">
-                                    {guides?.length || 0}+
-                                </div>
-                                <div className="text-sm font-medium text-neutral-600">Ciudades Cubiertas</div>
-                            </div>
-                            <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/50">
-                                <div className="text-3xl font-bold bg-gradient-to-r from-secondary-600 to-accent-600 bg-clip-text text-transparent mb-2">
-                                    100+
-                                </div>
-                                <div className="text-sm font-medium text-neutral-600">Atracciones Incluidas</div>
-                            </div>
-                            <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/50">
-                                <div className="text-3xl font-bold bg-gradient-to-r from-accent-600 to-purple-600 bg-clip-text text-transparent mb-2">
-                                    24/7
-                                </div>
-                                <div className="text-sm font-medium text-neutral-600">Información Actualizada</div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </section>

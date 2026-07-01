@@ -10,6 +10,7 @@ import { Catalog } from '@/app/_components/Catalog'
 import { getBlogPostsByCity } from '@/app/lib/getBlogPostsByCity'
 import { TripGridItem } from '@/app/_components/TripGridItem'
 import { ChatBubbleBottomCenterIcon } from '@heroicons/react/24/solid'
+import { GYGAutoWidget } from '@/app/_components/GetYourGuide/GYGAutoWidget'
 
 export const revalidate = 2629746; // 1 mes en segundos
 
@@ -243,9 +244,6 @@ export default async function CiudadPage({ params }: PageProps) {
                                 {/* City Badge */}
                                 <Breadcrumbs breadcrumbs={breadcrumbs} />
                                 <div className="inline-flex items-center gap-3 bg-white/90 backdrop-blur-sm rounded-full px-6 py-3 shadow-lg border border-white/50 mb-8">
-                                    <div className="w-8 h-8 bg-gradient-to-br from-primary-500 to-primary-600 rounded-full flex items-center justify-center">
-                                        <MapPinIcon className="w-4 h-4 text-white" />
-                                    </div>
                                     <span className="text-primary-600 font-semibold text-lg">Guía de {nombreDeCiudad}</span>
                                 </div>
 
@@ -290,7 +288,7 @@ export default async function CiudadPage({ params }: PageProps) {
                                     </Link>
                                 </div>
                             </header>
-
+                            <GYGAutoWidget />
                             {/* Image Column */}
                             <div className="relative">
                                 {/* Decorative Elements */}

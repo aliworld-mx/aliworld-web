@@ -44,6 +44,7 @@ export default async function RootLayout({
 
           gtag('config', 'AW-11526773841');`}
         </script>
+        <script async defer src="https://widget.getyourguide.com/dist/pa.umd.production.min.js" data-gyg-partner-id="NMAGYEQ"></script>
       </head>
       <body
         className={`${font.className} antialiased`}

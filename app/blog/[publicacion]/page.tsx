@@ -2,6 +2,7 @@ import { PageProps } from '@/.next/types/app/blog/[publicacion]/page';
 import Benefits from '@/app/_components/Benefits';
 import BackButton from '@/app/_components/Buttons/BackButton';
 import { Catalog } from '@/app/_components/Catalog';
+import { GYGAutoWidget } from '@/app/_components/GetYourGuide/GYGAutoWidget';
 import HotelQuotation from '@/app/_components/HotelQuotation';
 import Socials from '@/app/_components/Socials';
 import { getBlogPost } from '@/app/lib/getBlogPost';
@@ -138,6 +139,7 @@ export default async function BlogPost({ params }: PageProps) {
                         </article>
                     </div>
                 </div>
+                <GYGAutoWidget />
                 <Benefits />
                 <Socials />
                 <HotelQuotation />
